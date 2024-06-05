@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import styles from './NavBar.module.css';
 
-interface NavBarProps {}
+interface NavBarProps { }
 
 const NavBar: FC<NavBarProps> = () => (
-  <div className={styles.NavBar}>
+  <div className={styles.NavBar} id="NavBar">
     NavBar Component
   </div>
 );
