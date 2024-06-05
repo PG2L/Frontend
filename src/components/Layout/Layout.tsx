@@ -16,7 +16,7 @@ interface LayoutProps {
  * @returns The rendered layout component.
  */
 const Layout: FC<LayoutProps> = ({ children }) => (
-    <div className={styles.Layout} id="layout" data-testid="layout">
+    <div className="layout flex flex-col" id="layout" data-testid="layout">
         <Header />
         <main className={styles.MainContent}>
             {children}
