@@ -1,9 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import Layout from './Layout';
 
-it('It should mount', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Layout />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('Layout', () => {
+    it('should render without crashing', () => {
+        const { getByTestId } = render(<Layout>{undefined}</Layout>);
+        expect(getByTestId('layout')).toBeInTheDocument();
+    });
 });

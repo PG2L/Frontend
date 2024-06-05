@@ -2,11 +2,11 @@
 import NavBar from './NavBar';
 
 export default {
-  title: "NavBar",
+    title: "NavBar",
 };
 
 export const Default = () => <NavBar />;
 
 Default.story = {
-  name: 'default',
+    name: 'default',
 };

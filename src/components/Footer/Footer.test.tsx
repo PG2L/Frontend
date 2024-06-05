@@ -1,9 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import Footer from './Footer';
 
-it('It should mount', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Footer />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('Footer', () => {
+    it('should render without crashing', () => {
+        const { getByTestId } = render(<Footer />);
+        expect(getByTestId('footer')).toBeInTheDocument();
+    });
 });

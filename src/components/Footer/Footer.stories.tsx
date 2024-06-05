@@ -2,11 +2,11 @@
 import Footer from './Footer';
 
 export default {
-  title: "Footer",
+    title: "Footer",
 };
 
 export const Default = () => <Footer />;
 
 Default.story = {
-  name: 'default',
+    name: 'default',
 };

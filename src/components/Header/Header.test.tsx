@@ -1,9 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import Header from './Header';
 
-it('It should mount', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Header />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('Header', () => {
+	it('should render without crashing', () => {
+		const { getByTestId } = render(<Header />);
+		expect(getByTestId('header')).toBeInTheDocument();
+	});
 });
