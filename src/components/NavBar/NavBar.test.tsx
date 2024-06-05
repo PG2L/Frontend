@@ -1,9 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import NavBar from './NavBar';
 
 it('It should mount', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<NavBar />, div);
-  ReactDOM.unmountComponentAtNode(div);
+  const root = createRoot(div);
+  root.render(<NavBar />);
+  root.unmount();
 });
