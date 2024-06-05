@@ -1,18 +1,13 @@
 "use client"
 
 import React, { FC } from 'react';
-import styles from './Header.module.css';
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import {
     NavigationMenu,
-    NavigationMenuContent,
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
-    NavigationMenuTrigger,
-    navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Input } from '../ui/input';
 
