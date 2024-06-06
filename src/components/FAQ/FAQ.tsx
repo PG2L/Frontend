@@ -47,7 +47,7 @@ const FAQ: FC<FAQProps> = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return(
-  <div className="faq bg-black/5 w-full">
+  <div className="faq bg-black/5 w-full border-t">
     <div className="container mx-auto p-4">
       <Collapsible open={isOpen} onOpenChange={setIsOpen} className="w-full space-y-2">
         <div className="flex items-center justify-between px-4">
