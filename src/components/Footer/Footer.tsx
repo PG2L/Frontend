@@ -101,7 +101,7 @@ const Footer: FC<FooterProps> = () => (
                     <p className="text-muted-foreground mt-2 text-xs text-wrap">*We care about the protection of your data. Read our <Link href="/" className="hover:underline">Privacy Policy</Link>.</p>
                 </div>
             </div>
-            <Separator></Separator>
+            <hr/>
             <div className="footer__bottom flex justify-between items-center mt-12">
                 <div className="w-1/3">
                     <Button asChild variant="outline" className="footer__logo border-solid border border-black px-8 py-2 rounded bg-white/50">
