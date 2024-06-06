@@ -1,6 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import FAQ from '../FAQ/FAQ';
 import styles from './Layout.module.css';
 
 /**
@@ -21,6 +22,7 @@ const Layout: FC<LayoutProps> = ({ children }) => (
         <main className={styles.MainContent}>
             {children}
         </main>
+        <FAQ />
         <Footer />
     </div>
 );
