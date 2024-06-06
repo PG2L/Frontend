@@ -76,12 +76,12 @@ const socialLinks: {title: string, href: string, url: string}[] = [
 ];
 
 const Footer: FC<FooterProps> = () => (
-    <footer className="footer border-t mt-3 py-12 px-20">
-        <div className="container mx-auto px-4 flex flex-col space-y-6">
+    <footer className="footer border-t py-12 px-20">
+        <div className="container mx-auto px-4 flex flex-col space-y-4">
             <div className="footer__top flex justify-between items-start space-x-12">
                 <div className="footer__content flex justify-between items-start space-x-12">
                     {footerColumns.map((column, index) => (
-                        <div key={index} className="footer__column flex flex-col items-center justify-center space-y-12">
+                        <div key={index} className="footer__column flex flex-col items-center justify-center space-y-8">
                             <h3 className="font-medium text-sm">{column.title}</h3>
                             <nav className="footer__column__nav flex flex-col items-center justify-center space-y-4">
                                 {column.items.map((link, index) => (
