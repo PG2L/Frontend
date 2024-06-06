@@ -84,7 +84,7 @@ const ListItem = React.forwardRef<
 ListItem.displayName = "ListItem"
 
 const Header: FC<HeaderProps> = () => (
-    <header className="header py-3 hover:bg-black/[0.03] border-solid border-b transition-all duration-300" id="header" data-testid="header">
+    <header className="header py-3 bg-white border-solid border-b transition-all duration-300 w-full" id="header" data-testid="header">
         <div className="container flex justify-between items-center">
             <div className="header-left-side flex justify-between items-center space-x-8">
                 <Button asChild variant="outline" className="header-left-side__logo border-solid border border-black px-8 py-2 rounded bg-white/50">
