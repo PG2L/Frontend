@@ -7,12 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar } from "@/components/ui/avatar";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
 } from "@/components/ui/card"
 import { AvatarImage } from '@radix-ui/react-avatar';
 
@@ -82,10 +82,10 @@ export default function Page() {
             stars: 5
         },
         {
-          name: "Jane Smith",
-          description: "Data Scientist",
-          review: "This platform has completely changed the way I learn. The interactive lessons and gamified elements keep me motivated and eager to progress. Absolutely worth 5 stars!",
-          stars: 5
+            name: "Jane Smith",
+            description: "Data Scientist",
+            review: "This platform has completely changed the way I learn. The interactive lessons and gamified elements keep me motivated and eager to progress. Absolutely worth 5 stars!",
+            stars: 5
         },
         {
             name: "Robert Johnson",
@@ -111,7 +111,7 @@ export default function Page() {
             review: "This app has made me look forward to learning. The gamified approach is not just fun, but also very effective. I've learned so much in such a short time. 5 stars well deserved!",
             stars: 5
         }
-      ]
+    ]
     return (
         <Layout>
             <div className="landing-content" style={{
@@ -165,107 +165,107 @@ export default function Page() {
                         </Card>
                     ))}
                 </div>
-                <div className="flex justify-center items-center gap-2">
-                  <Button variant="outline" className="h-24 w-80">
-                    <span className="text-xl">Leaderboard</span>
-                  </Button>
-                  <Button variant="outline" className="h-24 w-80">
-                    <span className="text-xl">Courses</span>
-                  </Button>
-                  <Button variant="outline" className="h-24 w-80">
-                    <span className="text-xl">Lessons</span>
-                  </Button>
+                <div className="flex justify-center items-center gap-1">
+                    <Button variant="outline" className="h-24 w-80">
+                        <span className="text-xl">Leaderboard</span>
+                    </Button>
+                    <Button variant="outline" className="h-24 w-80">
+                        <span className="text-xl">Courses</span>
+                    </Button>
+                    <Button variant="outline" className="h-24 w-80">
+                        <span className="text-xl">Lessons</span>
+                    </Button>
                 </div>
                 <div className="flex gap-12">
-                  <div className="flex flex-col gap-10 w-2/5">
-                    <h2 className="text-3xl">Ready to get started ?</h2>
-                    <p className="text-muted-foreground">Dive into a world where learning meets adventure! Our gamified e-learning platform transforms education into an exciting journey, filled with challenges, rewards, and interactive experiences. Whether you&apos;re mastering a new skill or advancing your career, our app makes every lesson engaging and fun. Join us today and turn your learning goals into game-winning achievements!</p>
-                    <p className="text-lg">Join the community and start learning today</p>
-                    <div className="flex justify-center items-center space-x-4">
-                      <Button size="lg">Get started</Button>
-                      <Button variant="outline" size="lg">Learn more</Button>
+                    <div className="flex flex-col gap-10 w-2/5">
+                        <h2 className="text-3xl">Ready to get started ?</h2>
+                        <p className="text-muted-foreground">Dive into a world where learning meets adventure! Our gamified e-learning platform transforms education into an exciting journey, filled with challenges, rewards, and interactive experiences. Whether you&apos;re mastering a new skill or advancing your career, our app makes every lesson engaging and fun. Join us today and turn your learning goals into game-winning achievements!</p>
+                        <p className="text-lg">Join the community and start learning today</p>
+                        <div className="flex justify-center items-center space-x-4">
+                            <Button size="lg">Get started</Button>
+                            <Button variant="outline" size="lg">Learn more</Button>
+                        </div>
                     </div>
-                  </div>
-                  <div className="dummy w-3/5 bg-black/[0.05] rounded"></div>
+                    <div className="dummy w-3/5 bg-black/[0.05] rounded"></div>
                 </div>
-                <div className="flex flex-col justify-center items-center gap-6">
-                  <h2 className="text-center text-3xl font-medium">Unlock your learning potential</h2>
-                  <div className="flex flex-wrap justify-center items-start gap-6">
-                    {featureContent.map((content, index) => (
-                      <Card key={index} className="w-1/4">
-                        <CardHeader>
-                          <CardTitle className="text-center">{content.title}</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <CardDescription>
-                            {content.description}
-                          </CardDescription>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
+                <div className="flex flex-col justify-center items-center gap-8">
+                    <h2 className="text-center text-3xl font-medium">Unlock your learning potential</h2>
+                    <div className="flex flex-wrap justify-center items-start gap-6">
+                        {featureContent.map((content, index) => (
+                            <Card key={index} className="w-1/4">
+                                <CardHeader>
+                                    <CardTitle className="text-center">{content.title}</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>
+                                        {content.description}
+                                    </CardDescription>
+                                </CardContent>
+                            </Card>
+                        ))}
+                    </div>
                 </div>
-                <div className="flex mx-auto flex-col gap-8 justify-center w-3/4">
-                  <h2 className="text-center text-3xl font-medium">Find a course now !</h2>
-                  <div className="flex w-full justify-center items-center gap-2">
-                    <Input type="search" placeholder="Search..."/>
-                    <Button variant="outline" type="submit" className="px-16">Search</Button>
-                  </div>
-                  <p className="text-center text-muted-foreground">Search for courses, lessons, and more on our comprehensive platform. Whether you&apos;re looking to learn a new skill, brush up on an existing one, or explore a new hobby, we&apos;ve got you covered. Our extensive library covers a wide range of topics from coding to cooking, and everything in between. Each course is carefully curated and taught by industry experts to ensure you get the most out of your learning experience. Start your learning journey with us today!</p>
+                <div className="flex mx-auto flex-col gap-8 justify-center w-3/5">
+                    <h2 className="text-center text-3xl font-medium">Find a course now !</h2>
+                    <div className="flex w-full justify-center items-center gap-2">
+                        <Input type="search" placeholder="Search..." />
+                        <Button variant="outline" type="submit" className="px-16">Search</Button>
+                    </div>
+                    <p className="text-center text-muted-foreground">Search for courses, lessons, and more on our comprehensive platform. Whether you&apos;re looking to learn a new skill, brush up on an existing one, or explore a new hobby, we&apos;ve got you covered. Our extensive library covers a wide range of topics from coding to cooking, and everything in between. Each course is carefully curated and taught by industry experts to ensure you get the most out of your learning experience. Start your learning journey with us today!</p>
                 </div>
                 <div className="flex space-x-12">
-                  <div className="dummy bg-black/[0.05] w-3/5 rounded"></div>
-                  <div className="flex flex-col w-2/5 gap-10">
-                    <h2 className="text-3xl">Empowering learners with immersive, gamified experiences that make education exciting and unforgettable.</h2>
-                    <div className="space-y-2">
-                      <p className="text-muted-foreground">Welcome to PG2L, your ultimate destination for gamified web development learning. PG2L turns the learning process into an exciting journey, where you conquer new skills as you would conquer levels in a game.</p>
-                      <p className="text-muted-foreground">Our platform offers a wide range of courses, from HTML and CSS basics to advanced JavaScript and React. Each course is structured as a quest, where you earn points, badges, and unlock new levels as you progress.</p>
-                      <p className="text-muted-foreground">The interactive lessons are designed to keep you engaged and motivated. You can track your progress, compete with friends, and even share your achievements on socal media.</p>
-                      <p className="text-muted-foreground">But that&apos;s not all! PG2L also offers personalized learning paths, tailored to your goals and skill level. Whether you&apos;re a beginner looking to get started in web development, or a seasoned developer wanting to upskill, PG2L has something for you.</p>
-                      <p className="text-muted-foreground">Join PG2L today and turn your learning journey into an adventure!</p>
+                    <div className="dummy bg-black/[0.05] w-3/5 rounded"></div>
+                    <div className="flex flex-col w-2/5 gap-10">
+                        <h2 className="text-3xl">Empowering learners with immersive, gamified experiences that make education exciting and unforgettable.</h2>
+                        <div className="space-y-2">
+                            <p className="text-muted-foreground">Welcome to PG2L, your ultimate destination for gamified web development learning. PG2L turns the learning process into an exciting journey, where you conquer new skills as you would conquer levels in a game.</p>
+                            <p className="text-muted-foreground">Our platform offers a wide range of courses, from HTML and CSS basics to advanced JavaScript and React. Each course is structured as a quest, where you earn points, badges, and unlock new levels as you progress.</p>
+                            <p className="text-muted-foreground">The interactive lessons are designed to keep you engaged and motivated. You can track your progress, compete with friends, and even share your achievements on socal media.</p>
+                            <p className="text-muted-foreground">But that&apos;s not all! PG2L also offers personalized learning paths, tailored to your goals and skill level. Whether you&apos;re a beginner looking to get started in web development, or a seasoned developer wanting to upskill, PG2L has something for you.</p>
+                            <p className="text-muted-foreground">Join PG2L today and turn your learning journey into an adventure!</p>
+                        </div>
+                        <div className="flex justify-center items-center space-x-4">
+                            <Button size="lg">Get started</Button>
+                            <Button variant="outline" size="lg">Learn more</Button>
+                        </div>
                     </div>
-                    <div className="flex justify-center items-center space-x-4">
-                      <Button size="lg">Get started</Button>
-                      <Button variant="outline" size="lg">Learn more</Button>
-                    </div>
-                  </div>
                 </div>
                 <div className="flex flex-wrap gap-6 justify-center items-center">
                     {testimonies.map((_, index) => (
-                      <Card key={index} className="w-1/4">
-                        <CardHeader>
-                          <CardTitle>{_.name}</CardTitle>
-                          <CardDescription>{_.description}</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                          <CardDescription>
-                            {_.review}
-                          </CardDescription>
-                        </CardContent>
-                        <CardFooter>
-                          <div className="flex justify-between items-center w-full">
-                            <Avatar>
-                              <AvatarImage src={`https://randomuser.me/api/portraits/men/${index}.jpg`}/>
-                            </Avatar>
-                            <div className="flex h-4">
-                              {Array.from({ length: _.stars }).map((_, index) => (
-                                <Image key={index} height="16" width="16" src="https://img.icons8.com/?size=100&id=8ggStxqyboK5&format=png&color=000000" alt="" />
-                              ))}
-                            </div>
-                          </div>
-                        </CardFooter>
-                      </Card>
+                        <Card key={index} className="w-1/4">
+                            <CardHeader>
+                                <CardTitle>{_.name}</CardTitle>
+                                <CardDescription>{_.description}</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <CardDescription>
+                                    {_.review}
+                                </CardDescription>
+                            </CardContent>
+                            <CardFooter>
+                                <div className="flex justify-between items-center w-full">
+                                    <Avatar>
+                                        <AvatarImage src={`https://randomuser.me/api/portraits/men/${index}.jpg`} />
+                                    </Avatar>
+                                    <div className="flex h-4">
+                                        {Array.from({ length: _.stars }).map((_, index) => (
+                                            <Image key={index} height="16" width="16" src="https://img.icons8.com/?size=100&id=8ggStxqyboK5&format=png&color=000000" alt="" />
+                                        ))}
+                                    </div>
+                                </div>
+                            </CardFooter>
+                        </Card>
                     ))}
                 </div>
                 <div className="flex flex-col gap-6">
-                  <h2 className="text-center text-3xl font-medium">Join the community</h2>
-                  <p className="text-center text-lg">Stay up to date with the latest news, events, and announcements</p>
-                  <div className="flex justify-center items-center space-x-4">
-                    <Button variant="outline" size="lg">Join the Discord</Button>
-                    <Button variant="outline" size="lg">Follow us on Twitter</Button>
-                  </div>
+                    <h2 className="text-center text-3xl font-medium">Join the community</h2>
+                    <p className="text-center text-lg">Stay up to date with the latest news, events, and announcements</p>
+                    <div className="flex justify-center items-center space-x-4">
+                        <Button variant="outline" size="lg">Join the Discord</Button>
+                        <Button variant="outline" size="lg">Follow us on Twitter</Button>
+                    </div>
                 </div>
-              </div>
+            </div>
         </Layout>
     )
 }

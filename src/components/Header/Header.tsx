@@ -100,7 +100,7 @@ const Header: FC<HeaderProps> = () => (
                                 <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                                     <li className="row-span-3">
                                         <NavigationMenuLink asChild>
-                                            <a
+                                            <Link
                                                 className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                                                 href="/"
                                             >
@@ -112,7 +112,7 @@ const Header: FC<HeaderProps> = () => (
                                                     paste into your apps. Accessible. Customizable. Open
                                                     Source.
                                                 </p>
-                                            </a>
+                                            </Link>
                                         </NavigationMenuLink>
                                     </li>
                                     <ListItem href="/docs" title="Introduction">
@@ -164,46 +164,46 @@ const Header: FC<HeaderProps> = () => (
                                         <CardHeader>
                                             <CardTitle className="text-xl">Sign Up</CardTitle>
                                             <CardDescription>
-                                            Enter your information to create an account
+                                                Enter your information to create an account
                                             </CardDescription>
                                         </CardHeader>
                                         <CardContent>
                                             <div className="grid gap-4">
-                                            <div className="grid grid-cols-2 gap-4">
-                                                <div className="grid gap-2">
-                                                <label htmlFor="first-name">First name</label>
-                                                <Input id="first-name" placeholder="Max" required />
+                                                <div className="grid grid-cols-2 gap-4">
+                                                    <div className="grid gap-2">
+                                                        <label htmlFor="first-name">First name</label>
+                                                        <Input id="first-name" placeholder="Max" required />
+                                                    </div>
+                                                    <div className="grid gap-2">
+                                                        <label htmlFor="last-name">Last name</label>
+                                                        <Input id="last-name" placeholder="Robinson" required />
+                                                    </div>
                                                 </div>
                                                 <div className="grid gap-2">
-                                                <label htmlFor="last-name">Last name</label>
-                                                <Input id="last-name" placeholder="Robinson" required />
+                                                    <label htmlFor="email">Email</label>
+                                                    <Input
+                                                        id="email"
+                                                        type="email"
+                                                        placeholder="m@example.com"
+                                                        required
+                                                    />
                                                 </div>
-                                            </div>
-                                            <div className="grid gap-2">
-                                                <label htmlFor="email">Email</label>
-                                                <Input
-                                                id="email"
-                                                type="email"
-                                                placeholder="m@example.com"
-                                                required
-                                                />
-                                            </div>
-                                            <div className="grid gap-2">
-                                                <label htmlFor="password">Password</label>
-                                                <Input id="password" type="password" />
-                                            </div>
-                                            <Button type="submit" className="w-full">
-                                                Create an account
-                                            </Button>
-                                            <Button variant="outline" className="w-full">
-                                                Sign up with GitHub
-                                            </Button>
+                                                <div className="grid gap-2">
+                                                    <label htmlFor="password">Password</label>
+                                                    <Input id="password" type="password" />
+                                                </div>
+                                                <Button type="submit" className="w-full">
+                                                    Create an account
+                                                </Button>
+                                                <Button variant="outline" className="w-full">
+                                                    Sign up with GitHub
+                                                </Button>
                                             </div>
                                             <div className="mt-4 text-center text-sm">
-                                            Already have an account?{" "}
-                                            <Link href="#" className="underline">
-                                                Sign in
-                                            </Link>
+                                                Already have an account?{" "}
+                                                <Link href="#" className="underline">
+                                                    Sign in
+                                                </Link>
                                             </div>
                                         </CardContent>
                                     </Card>
@@ -216,41 +216,41 @@ const Header: FC<HeaderProps> = () => (
                                         <CardHeader>
                                             <CardTitle className="text-2xl">Login</CardTitle>
                                             <CardDescription>
-                                            Enter your email below to login to your account
+                                                Enter your email below to login to your account
                                             </CardDescription>
                                         </CardHeader>
                                         <CardContent>
                                             <div className="grid gap-4">
-                                            <div className="grid gap-2">
-                                                <label htmlFor="email">Email</label>
-                                                <Input
-                                                id="email"
-                                                type="email"
-                                                placeholder="m@example.com"
-                                                required
-                                                />
-                                            </div>
-                                            <div className="grid gap-2">
-                                                <div className="flex items-center">
-                                                <label htmlFor="password">Password</label>
-                                                <Link href="#" className="ml-auto inline-block text-sm underline">
-                                                    Forgot your password?
-                                                </Link>
+                                                <div className="grid gap-2">
+                                                    <label htmlFor="email">Email</label>
+                                                    <Input
+                                                        id="email"
+                                                        type="email"
+                                                        placeholder="m@example.com"
+                                                        required
+                                                    />
                                                 </div>
-                                                <Input id="password" type="password" required />
-                                            </div>
-                                            <Button type="submit" className="w-full">
-                                                Login
-                                            </Button>
-                                            <Button variant="outline" className="w-full">
-                                                Login with Google
-                                            </Button>
+                                                <div className="grid gap-2">
+                                                    <div className="flex items-center">
+                                                        <label htmlFor="password">Password</label>
+                                                        <Link href="#" className="ml-auto inline-block text-sm underline">
+                                                            Forgot your password?
+                                                        </Link>
+                                                    </div>
+                                                    <Input id="password" type="password" required />
+                                                </div>
+                                                <Button type="submit" className="w-full">
+                                                    Login
+                                                </Button>
+                                                <Button variant="outline" className="w-full">
+                                                    Login with Google
+                                                </Button>
                                             </div>
                                             <div className="mt-4 text-center text-sm">
-                                            Don&apos;t have an account?{" "}
-                                            <Link href="#" className="underline">
-                                                Sign up
-                                            </Link>
+                                                Don&apos;t have an account?{" "}
+                                                <Link href="#" className="underline">
+                                                    Sign up
+                                                </Link>
                                             </div>
                                         </CardContent>
                                     </Card>
