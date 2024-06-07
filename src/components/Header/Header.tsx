@@ -14,6 +14,9 @@ import {
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Input } from '../ui/input';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
+import { Label } from '@radix-ui/react-context-menu';
+import { NavigationMenuViewport } from '@radix-ui/react-navigation-menu';
 
 
 interface HeaderProps { }
@@ -93,7 +96,7 @@ const Header: FC<HeaderProps> = () => (
                     <NavigationMenuList>
                         <NavigationMenuItem>
                             <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
-                            <NavigationMenuContent>
+                            <NavigationMenuContent data-motion="horizontal">
                                 <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                                     <li className="row-span-3">
                                         <NavigationMenuLink asChild>
@@ -151,17 +154,114 @@ const Header: FC<HeaderProps> = () => (
                 </NavigationMenu>
             </div>
             <div className="header-right-side flex justify-between items-center space-x-16">
-                <div className="flex w-full max-w-sm items-center space-x-2">
-                    <Input type="search" placeholder="Search..." />
-                    <Button variant="outline" type="submit">Search</Button>
-                </div>
                 <div className="header-right-side__account flex justify-between items-center space-x-4">
-                    <Button asChild variant="ghost">
-                        <Link href="/signin">Sign in</Link>
-                    </Button>
-                    <Button asChild variant="ghost">
-                        <Link href="/login">Login</Link>
-                    </Button>
+                    <NavigationMenu>
+                        <NavigationMenuList>
+                            <NavigationMenuItem>
+                                <NavigationMenuTrigger>Sign up</NavigationMenuTrigger>
+                                <NavigationMenuContent>
+                                    <Card className="w-80">
+                                        <CardHeader>
+                                            <CardTitle className="text-xl">Sign Up</CardTitle>
+                                            <CardDescription>
+                                            Enter your information to create an account
+                                            </CardDescription>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <div className="grid gap-4">
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <div className="grid gap-2">
+                                                <label htmlFor="first-name">First name</label>
+                                                <Input id="first-name" placeholder="Max" required />
+                                                </div>
+                                                <div className="grid gap-2">
+                                                <label htmlFor="last-name">Last name</label>
+                                                <Input id="last-name" placeholder="Robinson" required />
+                                                </div>
+                                            </div>
+                                            <div className="grid gap-2">
+                                                <label htmlFor="email">Email</label>
+                                                <Input
+                                                id="email"
+                                                type="email"
+                                                placeholder="m@example.com"
+                                                required
+                                                />
+                                            </div>
+                                            <div className="grid gap-2">
+                                                <label htmlFor="password">Password</label>
+                                                <Input id="password" type="password" />
+                                            </div>
+                                            <Button type="submit" className="w-full">
+                                                Create an account
+                                            </Button>
+                                            <Button variant="outline" className="w-full">
+                                                Sign up with GitHub
+                                            </Button>
+                                            </div>
+                                            <div className="mt-4 text-center text-sm">
+                                            Already have an account?{" "}
+                                            <Link href="#" className="underline">
+                                                Sign in
+                                            </Link>
+                                            </div>
+                                        </CardContent>
+                                    </Card>
+                                </NavigationMenuContent>
+                            </NavigationMenuItem>
+                            <NavigationMenuItem>
+                                <NavigationMenuTrigger>Login</NavigationMenuTrigger>
+                                <NavigationMenuContent>
+                                    <Card className="w-80">
+                                        <CardHeader>
+                                            <CardTitle className="text-2xl">Login</CardTitle>
+                                            <CardDescription>
+                                            Enter your email below to login to your account
+                                            </CardDescription>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <div className="grid gap-4">
+                                            <div className="grid gap-2">
+                                                <label htmlFor="email">Email</label>
+                                                <Input
+                                                id="email"
+                                                type="email"
+                                                placeholder="m@example.com"
+                                                required
+                                                />
+                                            </div>
+                                            <div className="grid gap-2">
+                                                <div className="flex items-center">
+                                                <label htmlFor="password">Password</label>
+                                                <Link href="#" className="ml-auto inline-block text-sm underline">
+                                                    Forgot your password?
+                                                </Link>
+                                                </div>
+                                                <Input id="password" type="password" required />
+                                            </div>
+                                            <Button type="submit" className="w-full">
+                                                Login
+                                            </Button>
+                                            <Button variant="outline" className="w-full">
+                                                Login with Google
+                                            </Button>
+                                            </div>
+                                            <div className="mt-4 text-center text-sm">
+                                            Don&apos;t have an account?{" "}
+                                            <Link href="#" className="underline">
+                                                Sign up
+                                            </Link>
+                                            </div>
+                                        </CardContent>
+                                    </Card>
+                                </NavigationMenuContent>
+                            </NavigationMenuItem>
+                        </NavigationMenuList>
+                    </NavigationMenu>
+                    <div className="flex w-full max-w-sm items-center space-x-2">
+                        <Input type="search" placeholder="Search..." />
+                        <Button variant="outline" type="submit">Search</Button>
+                    </div>
                 </div>
             </div>
         </div>
