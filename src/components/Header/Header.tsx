@@ -4,7 +4,6 @@ import React, { FC } from 'react';
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-// import { Icons } from "@/components/icons"
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -157,10 +156,10 @@ const Header: FC<HeaderProps> = () => (
                     <Button variant="outline" type="submit">Search</Button>
                 </div>
                 <div className="header-right-side__account flex justify-between items-center space-x-4">
-                    <Button asChild variant="outline">
+                    <Button asChild variant="ghost">
                         <Link href="/signin">Sign in</Link>
                     </Button>
-                    <Button asChild variant="outline">
+                    <Button asChild variant="ghost">
                         <Link href="/login">Login</Link>
                     </Button>
                 </div>
