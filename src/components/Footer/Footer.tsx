@@ -85,7 +85,7 @@ const Footer: FC<FooterProps> = () => (
                             <h3 className="font-medium text-sm">{column.title}</h3>
                             <nav className="footer__column__nav flex flex-col items-center justify-center space-y-4">
                                 {column.items.map((link, index) => (
-                                    <Link key={index} href="/" className="hover:underline text-sm">{link}</Link>
+                                    <Link key={index} href="/" className="hover:underline text-sm text-muted-foreground">{link}</Link>
                                 ))}
                             </nav>
                         </div>
