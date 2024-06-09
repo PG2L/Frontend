@@ -194,7 +194,7 @@ export default function Page() {
                         {featureContent.map((content, index) => (
                             <Card key={index} className="w-1/4">
                                 <CardHeader>
-                                    <CardTitle className="text-center">{content.title}</CardTitle>
+                                    <CardTitle className="text-center font-medium text-xl">{content.title}</CardTitle>
                                 </CardHeader>
                                 <CardContent>
                                     <CardDescription>
@@ -269,5 +269,3 @@ export default function Page() {
         </Layout>
     )
 }
-
-// export default Home;
