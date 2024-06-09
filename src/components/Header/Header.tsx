@@ -92,7 +92,7 @@ const Header: FC<HeaderProps> = () => (
                 <Button asChild variant="outline" className="header-left-side__logo border-solid border border-black px-8 py-2 rounded bg-white/50">
                     <Link href="/">Logo</Link>
                 </Button>
-                <NavigationMenu>
+                <NavigationMenu className="left-0">
                     <NavigationMenuList>
                         <NavigationMenuItem>
                             <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
@@ -155,7 +155,11 @@ const Header: FC<HeaderProps> = () => (
             </div>
             <div className="header-right-side flex justify-between items-center space-x-16">
                 <div className="header-right-side__account flex justify-between items-center space-x-4">
-                    <NavigationMenu>
+                    <div className="flex w-full max-w-sm items-center space-x-2">
+                        <Input type="search" placeholder="Search..." />
+                        <Button variant="outline" type="submit">Search</Button>
+                    </div>
+                    <NavigationMenu className="right-0">
                         <NavigationMenuList>
                             <NavigationMenuItem>
                                 <NavigationMenuTrigger>Sign up</NavigationMenuTrigger>
@@ -258,10 +262,6 @@ const Header: FC<HeaderProps> = () => (
                             </NavigationMenuItem>
                         </NavigationMenuList>
                     </NavigationMenu>
-                    <div className="flex w-full max-w-sm items-center space-x-2">
-                        <Input type="search" placeholder="Search..." />
-                        <Button variant="outline" type="submit">Search</Button>
-                    </div>
                 </div>
             </div>
         </div>
