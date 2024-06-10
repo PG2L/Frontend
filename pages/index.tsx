@@ -133,7 +133,7 @@ export default function Page() {
                 </div>
                 <div className="flex flex-col justify-center items-center m-0 px-0">
                     <h2 className="text-3xl">Backed by the best</h2>
-                    <div className="overflow-hidden mt-6 w-full border-b border-t bg-white/[0.4] whitespace-nowrap flex items-center">
+                    <div className="overflow-hidden mt-6 w-full border-b border-t bg-white whitespace-nowrap flex items-center">
                         <div className="slide-track animate-[slide_60s_linear_infinite] inline-block whitespace-nowrap content-center py-2">
                             <div className="flex space-x-60 justify-center">
                                 {sponsors.map((sponsor, index) => (
@@ -191,7 +191,7 @@ export default function Page() {
                 </div>
                 <div className="grid gap-12 px-6">
                     <h2 className="text-center text-3xl font-medium">Unlock your learning potential</h2>
-                    <div className="grid justify-center md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    <div className="grid justify-center md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {featureContent.map((content, index) => (
                             <Card key={index}>
                                 <CardHeader>
@@ -231,7 +231,7 @@ export default function Page() {
                         </div>
                     </div>
                 </div>
-                <div className="grid gap-6 justify-center md:grid-cols-2 xl:grid-cols-3 px-6">
+                <div className="grid gap-6 justify-center md:grid-cols-2 lg:grid-cols-3 px-6">
                     {testimonies.map((_, index) => (
                         <Card key={index}>
                             <CardHeader>
