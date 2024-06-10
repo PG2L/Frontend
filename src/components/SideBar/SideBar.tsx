@@ -1,0 +1,83 @@
+import React, { FC } from 'react';
+import styles from './SideBar.module.css';
+import { icons } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Button } from '../ui/button';
+import { ScrollArea } from '../ui/scroll-area';
+import {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetDescription,
+    SheetFooter,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet"
+import { Separator } from '../ui/separator';
+
+
+interface SideBarProps {
+    className?: string;
+}
+
+const SideBar: FC<SideBarProps> = ({ className }) => (
+    <div className={cn(className)}>
+        <Sheet>
+            <SheetTrigger asChild>
+                <Button variant="ghost">
+                    <icons.Menu width="32" height="32" />
+                </Button>
+            </SheetTrigger>
+            <SheetContent side={"left"}>
+                <SheetHeader>
+                    <SheetTitle className="text-xl">Menu</SheetTitle>
+                    <SheetDescription>
+                        Make your way through the app
+                    </SheetDescription>
+                </SheetHeader>
+                <div className="flex flex-col mt-6 gap-1 w-full justify-start">
+                    <Button variant="ghost" className="flex gap-2">
+                        <icons.Home width="24" height="24" />
+                        Home
+                    </Button>
+                    <Button variant="ghost" className="flex gap-2">
+                        <icons.Bell width="24" height="24" />
+                        Notifications
+                    </Button>
+                    <Button variant="ghost" className="flex gap-2">
+                        <icons.MessageSquare width="24" height="24" />
+                        Messages
+                    </Button>
+                    <Button variant="ghost" className="flex gap-2">
+                        <icons.Book width="24" height="24" />
+                        Bookmarks
+                    </Button>
+                    <Button variant="ghost" className="flex gap-2">
+                        <icons.UserPlus width="24" height="24" />
+                        Friends
+                    </Button>
+                    <Button variant="ghost" className="flex gap-2">
+                        <icons.Globe width="24" height="24" />
+                        Explore
+                    </Button>
+                    <Separator />
+                    <Button variant="ghost" className="flex gap-2">
+                        <icons.User width="24" height="24" />
+                        Profile
+                    </Button>
+                    <Button variant="ghost" className="flex gap-2">
+                        <icons.Settings width="24" height="24" />
+                        Settings
+                    </Button>
+                    <Button variant="ghost" className="flex gap-2">
+                        <icons.LogOut width="24" height="24" />
+                        Log out
+                    </Button>
+                </div>
+            </SheetContent>
+        </Sheet>
+    </div>
+);
+
+export default SideBar;
