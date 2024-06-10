@@ -15,8 +15,10 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Input } from '../ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
+import { icons } from 'lucide-react';
 import { Label } from '@radix-ui/react-context-menu';
 import { NavigationMenuViewport } from '@radix-ui/react-navigation-menu';
+import SideBar from '../SideBar/SideBar';
 
 
 interface HeaderProps { }
@@ -86,13 +88,14 @@ const ListItem = React.forwardRef<
 ListItem.displayName = "ListItem"
 
 const Header: FC<HeaderProps> = () => (
-    <header className="header py-3 bg-white border-solid border-b transition-all duration-300 w-full fixed top-0 bg-white z-50" id="header" data-testid="header">
-        <div className="container flex justify-between items-center">
-            <div className="header-left-side flex justify-between items-center space-x-8">
-                <Button asChild variant="outline" className="header-left-side__logo border-solid border border-black px-8 py-2 rounded bg-white/50">
+    <header className="py-3 bg-white border-solid border-b transition-all duration-300 w-full fixed top-0 bg-white z-50" id="header" data-testid="header">
+        <div className="container flex justify-between items-center flex gap-6">
+            <div className="flex justify-between items-center">
+                <SideBar className="lg:hidden"></SideBar>
+                <Button asChild variant="outline" className="border-solid border border-black px-8 py-2 mx-2 rounded bg-white/50 hidden sm:block">
                     <Link href="/">Logo</Link>
                 </Button>
-                <NavigationMenu className="left-0">
+                <NavigationMenu className="left-0 hidden lg:block">
                     <NavigationMenuList>
                         <NavigationMenuItem>
                             <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
@@ -153,20 +156,22 @@ const Header: FC<HeaderProps> = () => (
                     </NavigationMenuList>
                 </NavigationMenu>
             </div>
-            <div className="header-right-side flex justify-between items-center space-x-16">
-                <div className="header-right-side__account flex justify-between items-center space-x-4">
-                    <div className="flex w-full max-w-sm items-center space-x-2">
+            <div className="flex justify-between items-center space-x-16">
+                <div className="flex justify-between items-center space-x-4">
+                    <div className="w-full max-w-sm items-center space-x-2 hidden sm:flex">
                         <Input type="search" placeholder="Search..." />
-                        <Button variant="outline" type="submit">Search</Button>
+                        <Button variant="ghost" type="submit" size="sm">
+                            <icons.Search />
+                        </Button>
                     </div>
                     <NavigationMenu className="right-0">
                         <NavigationMenuList>
                             <NavigationMenuItem>
-                                <NavigationMenuTrigger>Sign up</NavigationMenuTrigger>
+                                <NavigationMenuTrigger>Sign In</NavigationMenuTrigger>
                                 <NavigationMenuContent>
                                     <Card className="w-80">
                                         <CardHeader>
-                                            <CardTitle className="text-xl">Sign Up</CardTitle>
+                                            <CardTitle className="text-xl">Sign In</CardTitle>
                                             <CardDescription>
                                                 Enter your information to create an account
                                             </CardDescription>
