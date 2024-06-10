@@ -3,14 +3,11 @@ import Layout from "@/components/Layout/Layout";
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
 import { AvatarImage } from '@radix-ui/react-avatar';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-
 
 
 export default function Page() {
 
-    const coursesContent: { title: string, description: string, author: string }[] = [
+    const lessonsContent: { title: string, description: string, author: string }[] = [
         {
             title: "Introduction to Python Programming",
             description: "Master the basics of Python, a popular and versatile programming language. Learn about data types, control flow, functions, and error handling.",
@@ -65,31 +62,34 @@ export default function Page() {
 
     return (
         <Layout>
-            <div className="pb-12 pt-36 container items-center justify-end">
-                <div className="w-full border rounded-lg p-2">
-                    <ScrollArea className="h-96">
-                        <div className="flex flex-wrap items-center justify-between gap-1">
-                            {coursesContent.map((course, index) => (
-                                <Card key={index} className="bg-[#FBF9F9] h-60 w-full p-3">
-                                    <CardHeader className="h-[40%]">
-                                        <div className="bg-black/[0.03]"></div>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <h2 className="font-medium text-xl">{course.title}</h2>
-                                        <hr />
-                                    </CardContent>
-                                    <CardFooter>
-                                    <Badge>1 course</Badge>
-                                        <Avatar>
-                                            <AvatarImage src="/avatar.jpg" alt="avatar" />
-                                            <span>{course.author}</span>
-                                        </Avatar>
-                                    </CardFooter>
-                                </Card>
-                            ))}
+            <div className="container flex flex-col items-center justify-center w-full h-full space-y-4 py-24">
+                <h1 className="text-4xl font-medium">Courses</h1>
+                {lessonsContent.map((lesson, index) => (
+                    <a key={index} className="flex items-center justify-center p-6 gap-6 w-full hover:bg-black/[0.03] rounded-sm cursor-pointer">
+                        <div className="dummy w-2/5 bg-black/[0.05] h-64 rounded-lg"></div>
+                        <div className="flex flex-col justify-between gap-5 w-3/5">
+                            <h2 className="font-medium text-xl">{lesson.title}</h2>
+                            <hr />
+                            <div className="flex gap-2">
+                                <Badge>1 course</Badge>
+                                <Badge>6 lessons</Badge>
+                                <Badge>+100 000 XP</Badge>
+                            </div>
+                            <p className="text-muted-foreground text-sm">
+                                {lesson.description}
+                            </p>
+                            <div className="flex gap-3">
+                                <Avatar>
+                                    <AvatarImage src={`https://randomuser.me/api/portraits/men/${index + 20}.jpg`} alt="avatar" />
+                                </Avatar>
+                                <div className="grid">
+                                    <p className="text-sm text-muted-foreground">Created by</p>
+                                    <p className="font-medium">{lesson.author}</p>
+                                </div>
+                            </div>
                         </div>
-                    </ScrollArea>
-                </div>
+                    </a>
+                ))}
             </div>
         </Layout>
     );
