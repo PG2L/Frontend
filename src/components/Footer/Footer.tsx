@@ -78,7 +78,7 @@ const socialLinks: { title: string, href: string, url: string }[] = [
 const Footer: FC<FooterProps> = () => (
     <footer className="border-t">
         <div className="container mx-auto py-4 md:py-6 lg:py-8 grid">
-            <div className="grid lg:flex justify-center gap-6 items-center lg:items-start">
+            <div className="grid lg:flex justify-center lg:justify-between gap-6 items-center lg:items-start">
                 <div className="grid grid-cols-3 md:grid-cols-5 items-start gap-6 lg:gap-0">
                     {footerColumns.map((column, index) => (
                         <div key={index} className="flex flex-col items-center justify-center space-y-8">
