@@ -160,7 +160,7 @@ const Header: FC<HeaderProps> = () => (
                 <div className="flex justify-between items-center space-x-4">
                     <div className="w-full max-w-sm items-center space-x-2 hidden sm:flex">
                         <Input type="search" placeholder="Search..." />
-                        <Button variant="ghost" type="submit" size="sm">
+                        <Button variant="ghost" type="submit" size="icon">
                             <icons.Search />
                         </Button>
                     </div>

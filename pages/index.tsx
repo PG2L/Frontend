@@ -114,23 +114,24 @@ export default function Page() {
     ]
     return (
         <Layout>
-            <div className="landing-content" style={{
+            <div style={{
                 background: `radial-gradient(circle at 70% 50%, #43d9ac30 0%, #43d9ac20 15%, transparent 30%),
                 radial-gradient(circle at 50% 40%, #4d5cce30 0%, #4d5cce20 15%, transparent 30%), radial-gradient(circle at 30% 60%, #cc4dcc30 0%, #cc4dcc20 15%, transparent 30%), #FBF9F9`
-            }}>
-                <div className="container relative py-48 flex flex-col items-center justify-center h-full">
-                    <div className="landing-content__presentation h-1/2 flex flex-col items-center justify-center space-y-2">
+            }}
+                className="w-[100%]">
+                <div className="container py-48 flex flex-col items-center justify-center">
+                    <div className="h-1/2 flex flex-col items-center justify-center space-y-2">
                         <Badge>NEW: Build on Bitcoin - Stacks Developer Degree out now !</Badge>
                         <Badge>Announcing: Uniswap Hook Incubator - do you have what it takes ?</Badge>
-                        <span className="text-muted-foreground text-3xl">Lead the charge to new frontiers</span>
-                        <h1 className="text-7xl font-medium">Welcome to PG2L</h1>
+                        <span className="text-muted-foreground text-3xl text-center">Lead the charge to new frontiers</span>
+                        <h1 className="text-7xl font-medium text-center">Welcome to PG2L</h1>
                         <span className="text-muted-foreground text-m font-medium">The future is now</span>
                         <div className="!mt-16">
                             <Button size="lg">Get started</Button>
                         </div>
                     </div>
                 </div>
-                <div className="sponsor-banner flex flex-col justify-center items-center m-0 px-0">
+                <div className="flex flex-col justify-center items-center m-0 px-0">
                     <h2 className="text-3xl">Backed by the best</h2>
                     <div className="overflow-hidden mt-6 w-full border-b border-t bg-white/[0.4] whitespace-nowrap flex items-center">
                         <div className="slide-track animate-[slide_60s_linear_infinite] inline-block whitespace-nowrap content-center py-2">
@@ -146,10 +147,10 @@ export default function Page() {
                     </div>
                 </div>
             </div>
-            <div className="container py-16 space-y-16">
-                <div className="flex gap-6">
+            <div className="container py-16 grid justify-center justify-items-center gap-12">
+                <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 justify-items-center px-6">
                     {lessonsContent.map((content, index) => (
-                        <Card key={index} className="w-1/4">
+                        <Card key={index}>
                             <CardHeader>
                                 <div className="bg-black/[0.07] py-24 rounded"></div>
                             </CardHeader>
@@ -165,34 +166,34 @@ export default function Page() {
                         </Card>
                     ))}
                 </div>
-                <div className="flex justify-center items-center gap-1">
-                    <Button variant="outline" className="h-24 w-80">
+                <div className="flex flex-col md:flex-row justify-center items-center gap-1">
+                    <Button variant="outline" className="h-24 w-48">
                         <span className="text-xl">Leaderboard</span>
                     </Button>
-                    <Button variant="outline" className="h-24 w-80">
+                    <Button variant="outline" className="h-24 w-48">
                         <span className="text-xl">Courses</span>
                     </Button>
-                    <Button variant="outline" className="h-24 w-80">
+                    <Button variant="outline" className="h-24 w-48">
                         <span className="text-xl">Lessons</span>
                     </Button>
                 </div>
-                <div className="flex gap-12">
-                    <div className="flex flex-col gap-10 w-2/5">
+                <div className="grid gap-12 lg:flex lg:justify-between lg:gap-6 px-6">
+                    <div className="grid gap-6 lg:w-[100%]">
                         <h2 className="text-3xl">Ready to get started ?</h2>
                         <p className="text-muted-foreground">Dive into a world where learning meets adventure! Our gamified e-learning platform transforms education into an exciting journey, filled with challenges, rewards, and interactive experiences. Whether you&apos;re mastering a new skill or advancing your career, our app makes every lesson engaging and fun. Join us today and turn your learning goals into game-winning achievements!</p>
                         <p className="text-lg">Join the community and start learning today</p>
-                        <div className="flex justify-center items-center space-x-4">
+                        <div className="flex justify-center items-center gap-4">
                             <Button size="lg">Get started</Button>
                             <Button variant="outline" size="lg">Learn more</Button>
                         </div>
                     </div>
-                    <div className="dummy w-3/5 bg-black/[0.05] rounded"></div>
+                    <div className="dummy h-40 lg:w-full lg:h-[auto] bg-black/[0.05] rounded"></div>
                 </div>
-                <div className="flex flex-col justify-center items-center gap-8">
+                <div className="grid gap-12 px-6">
                     <h2 className="text-center text-3xl font-medium">Unlock your learning potential</h2>
-                    <div className="flex flex-wrap justify-center items-start gap-6">
+                    <div className="grid justify-center md:grid-cols-2 xl:grid-cols-3 gap-6">
                         {featureContent.map((content, index) => (
-                            <Card key={index} className="w-1/4">
+                            <Card key={index}>
                                 <CardHeader>
                                     <CardTitle className="text-center font-medium text-xl">{content.title}</CardTitle>
                                 </CardHeader>
@@ -205,17 +206,17 @@ export default function Page() {
                         ))}
                     </div>
                 </div>
-                <div className="flex mx-auto flex-col gap-8 justify-center w-3/5">
+                <div className="flex px-6 mx-auto flex-col gap-6 justify-center max-w-4xl">
                     <h2 className="text-center text-3xl font-medium">Find a course now !</h2>
                     <div className="flex w-full justify-center items-center gap-2">
                         <Input type="search" placeholder="Search..." />
-                        <Button variant="outline" type="submit" className="px-16">Search</Button>
+                        <Button variant="outline" type="submit" className="lg:px-16">Search</Button>
                     </div>
                     <p className="text-center text-muted-foreground">Search for courses, lessons, and more on our comprehensive platform. Whether you&apos;re looking to learn a new skill, brush up on an existing one, or explore a new hobby, we&apos;ve got you covered. Our extensive library covers a wide range of topics from coding to cooking, and everything in between. Each course is carefully curated and taught by industry experts to ensure you get the most out of your learning experience. Start your learning journey with us today!</p>
                 </div>
-                <div className="flex space-x-12">
-                    <div className="dummy bg-black/[0.05] w-3/5 rounded"></div>
-                    <div className="flex flex-col w-2/5 gap-10">
+                <div className="grid gap-6 px-6 lg:grid-cols-2">
+                    <div className="dummy bg-black/[0.05] h-40 lg:h-auto rounded"></div>
+                    <div className="grid gap-10">
                         <h2 className="text-3xl">Empowering learners with immersive, gamified experiences that make education exciting and unforgettable.</h2>
                         <div className="space-y-2">
                             <p className="text-muted-foreground">Welcome to PG2L, your ultimate destination for gamified web development learning. PG2L turns the learning process into an exciting journey, where you conquer new skills as you would conquer levels in a game.</p>
@@ -230,9 +231,9 @@ export default function Page() {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-wrap gap-6 justify-center items-center">
+                <div className="grid gap-6 justify-center md:grid-cols-2 xl:grid-cols-3 px-6">
                     {testimonies.map((_, index) => (
-                        <Card key={index} className="w-1/4">
+                        <Card key={index}>
                             <CardHeader>
                                 <CardTitle>{_.name}</CardTitle>
                                 <CardDescription>{_.description}</CardDescription>
@@ -257,12 +258,12 @@ export default function Page() {
                         </Card>
                     ))}
                 </div>
-                <div className="flex flex-col gap-6">
+                <div className="grid gap-6">
                     <h2 className="text-center text-3xl font-medium">Join the community</h2>
                     <p className="text-center text-lg">Stay up to date with the latest news, events, and announcements</p>
-                    <div className="flex justify-center items-center space-x-4">
-                        <Button variant="outline" size="lg">Join the Discord</Button>
-                        <Button variant="outline" size="lg">Follow us on Twitter</Button>
+                    <div className="flex justify-center gap-2 items-center">
+                        <Button variant="outline">Join the Discord</Button>
+                        <Button variant="outline">Follow us on Twitter</Button>
                     </div>
                 </div>
             </div>
