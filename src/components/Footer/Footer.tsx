@@ -9,7 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 
 interface FooterProps { }
 
-const footerColumns: {title: string, items: string[]}[] = [
+const footerColumns: { title: string, items: string[] }[] = [
     {
         title: 'Learn',
         items: ['Assessments', 'Lessons', 'Courses']
@@ -32,7 +32,7 @@ const footerColumns: {title: string, items: string[]}[] = [
     }
 ];
 
-const socialLinks: {title: string, href: string, url: string}[] = [
+const socialLinks: { title: string, href: string, url: string }[] = [
     {
         title: 'Facebook',
         href: '/',
@@ -76,51 +76,48 @@ const socialLinks: {title: string, href: string, url: string}[] = [
 ];
 
 const Footer: FC<FooterProps> = () => (
-    <footer className="footer border-t py-12 px-20">
-        <div className="container mx-auto px-4 flex flex-col space-y-4">
-            <div className="footer__top flex justify-between items-start space-x-12">
-                <div className="footer__content flex justify-between items-start space-x-12">
+    <footer className="border-t">
+        <div className="container mx-auto py-4 md:py-6 lg:py-8 grid">
+            <div className="grid lg:flex justify-center gap-6 items-center lg:items-start">
+                <div className="grid grid-cols-3 md:grid-cols-5 items-start gap-6 lg:gap-0">
                     {footerColumns.map((column, index) => (
-                        <div key={index} className="footer__column flex flex-col items-center justify-center space-y-8">
+                        <div key={index} className="flex flex-col items-center justify-center space-y-8">
                             <h3 className="font-medium text-sm">{column.title}</h3>
-                            <nav className="footer__column__nav flex flex-col items-center justify-center space-y-4">
+                            <nav className="flex flex-col items-center justify-center space-y-4">
                                 {column.items.map((link, index) => (
-                                    <Link key={index} href="/" className="hover:underline text-sm text-muted-foreground">{link}</Link>
+                                    <Link key={index} href="/" className="hover:underline text-sm text-muted-foreground text-nowrap lg:text-wrap">{link}</Link>
                                 ))}
                             </nav>
                         </div>
                     ))}
                 </div>
-                <div className="footer__subscribe flex flex-col items-start">
+                <div className="flex flex-col lg:grid gap-4 lg:gap-6 items-center justify-start">
                     <h3 className="font-medium">Subscribe to our newsletter</h3>
-                    <p className="text-muted-foreground mt-4">The latest news, articles, and resources, sent to your inbox weekly.</p>
-                    <div className="flex w-full max-w-sm items-center space-x-2 mt-2">
+                    <p className="text-muted-foreground">The latest news, articles, and resources, sent to your inbox weekly.</p>
+                    <div className="flex w-full max-w-sm items-center space-x-2">
                         <Input type="email" placeholder="Email*" />
                         <Button type="submit">Subscribe</Button>
                     </div>
-                    <p className="text-muted-foreground mt-2 text-xs text-wrap">*We care about the protection of your data. Read our <Link href="/" className="hover:underline">Privacy Policy</Link>.</p>
+                    <p className="text-muted-foreground text-xs text-wrap">*We care about the protection of your data. Read our <Link href="/" className="hover:underline">Privacy Policy</Link>.</p>
                 </div>
             </div>
-            <hr/>
-            <div className="footer__bottom flex justify-between items-center mt-12">
-                <div className="w-1/3">
+            <div className="border-t grid md:flex md:justify-between gap-6 items-center mt-6 py-6">
+                <div className="flex justify-center items-center gap-6">
                     <Button asChild variant="outline" className="footer__logo border-solid border border-black px-8 py-2 rounded bg-white/50">
                         <Link href="/">Logo</Link>
                     </Button>
-                </div>
-                <div className="footer__copyright justify-self-center w-1/3">
                     <p className="text-muted-foreground text-center">© 2024 Company. All rights reserved.</p>
                 </div>
-                <div className="footer__social-links flex justify-end items-center space-x-2 w-1/3">
+                <div className="flex justify-center items-center space-x-2">
                     {socialLinks.map((link, index) => (
-                        <Avatar key={index} className="h-6 w-6">
+                        <Avatar key={index} className="h-8 w-8">
                             <AvatarImage src={link['url']} alt={link['title']} />
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
                     ))}
                 </div>
             </div>
-        </div>
+        </div >
     </footer >
 );
 
