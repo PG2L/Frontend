@@ -127,7 +127,7 @@ export default function Page() {
 
     return (
         <IndexView>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-2 sm:gap-4 md:gap-6 w-full p-2 sm:p-4 bg-background">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-2 sm:gap-4 md:gap-6 w-full p-2 sm:p-4 md:p-6 bg-background">
                 {coursesContent.map((course, index) => (
                     <a key={index} href={`/courses/${index + 1}`} >
                         <Card className={`p-2 sm:p-4 border w-full grid gap-2 sm:gap-4 rounded-lg ${course.isUnlock && "border-2 border-primary"} ${course.isFinished && "bg-secondary"}`}>
