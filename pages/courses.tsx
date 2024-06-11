@@ -79,7 +79,7 @@ export default function Page() {
         <Layout>
             <div className="pb-12 pt-36 container items-center">
                 <ScrollArea className="h-screen p-1 w-full border rounded-lg bg-white">
-                    <div className="grid grid-cols-1 items-center justify-between gap-1 rounded-lg w-full">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center justify-between gap-1 rounded-lg w-full">
                         {coursesContent.map((course, index) => (
                             <div key={index} className="p-2 bg-[#FBF9F9] border w-full grid gap-2 rounded">
                                 <div className="grid">
@@ -98,7 +98,7 @@ export default function Page() {
                                         <Badge>8 exercices</Badge>
                                         <Badge>+100 000 XP</Badge>
                                     </div>
-                                    <div className="grid text-nowrap">
+                                    <div className="grid text-nowrap gap-2">
                                         <div className="flex items-center">
                                             <Avatar className="h-6 w-6">
                                                 <AvatarImage src="https://img.icons8.com/?size=100&id=JUqatp7GzFaD&format=png&color=000000">
