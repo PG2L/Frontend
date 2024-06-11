@@ -115,8 +115,8 @@ export default function Page() {
     return (
         <Layout>
             <div style={{
-                background: `radial-gradient(circle at 70% 50%, #43d9ac30 0%, #43d9ac20 15%, transparent 30%),
-                radial-gradient(circle at 50% 40%, #4d5cce30 0%, #4d5cce20 15%, transparent 30%), radial-gradient(circle at 30% 60%, #cc4dcc30 0%, #cc4dcc20 15%, transparent 30%), #FBF9F9`
+                background: `radial-gradient(circle at 70% 50%, #43d9ac 0%, #43d9ac20 15%, transparent 30%),
+                radial-gradient(circle at 50% 40%, #4d5cce30 0%, #4d5cce20 15%, transparent 30%), radial-gradient(circle at 30% 60%, #cc4dcc30 0%, #cc4dcc20 15%, transparent 30%), var(--background)`
             }}
                 className="w-[100%]">
                 <div className="container py-48 flex flex-col items-center justify-center">
@@ -133,7 +133,7 @@ export default function Page() {
                 </div>
                 <div className="flex flex-col justify-center items-center m-0 px-0">
                     <h2 className="text-3xl">Backed by the best</h2>
-                    <div className="overflow-hidden mt-6 w-full border-b border-t bg-white whitespace-nowrap flex items-center">
+                    <div className="overflow-hidden mt-6 w-full border-b border-t bg-secondary whitespace-nowrap flex items-center">
                         <div className="slide-track animate-[slide_60s_linear_infinite] inline-block whitespace-nowrap content-center py-2">
                             <div className="flex space-x-60 justify-center">
                                 {sponsors.map((sponsor, index) => (
@@ -152,7 +152,7 @@ export default function Page() {
                     {lessonsContent.map((content, index) => (
                         <Card key={index}>
                             <CardHeader>
-                                <div className="bg-black/[0.07] py-24 rounded"></div>
+                                <div className="bg-secondary py-24 rounded"></div>
                             </CardHeader>
                             <CardContent>
                                 <CardTitle>{content.title}</CardTitle>
@@ -167,13 +167,13 @@ export default function Page() {
                     ))}
                 </div>
                 <div className="flex flex-col md:flex-row justify-center items-center gap-1">
-                    <Button variant="outline" className="h-24 w-48">
+                    <Button className="h-24 w-48">
                         <span className="text-xl">Leaderboard</span>
                     </Button>
-                    <Button variant="outline" className="h-24 w-48">
+                    <Button className="h-24 w-48">
                         <span className="text-xl">Courses</span>
                     </Button>
-                    <Button variant="outline" className="h-24 w-48">
+                    <Button className="h-24 w-48">
                         <span className="text-xl">Lessons</span>
                     </Button>
                 </div>
@@ -187,7 +187,7 @@ export default function Page() {
                             <Button variant="outline" size="lg">Learn more</Button>
                         </div>
                     </div>
-                    <div className="dummy h-40 lg:w-full lg:h-[auto] bg-black/[0.05] rounded"></div>
+                    <div className="dummy h-40 lg:w-full lg:h-[auto] bg-secondary rounded"></div>
                 </div>
                 <div className="grid gap-12 px-6">
                     <h2 className="text-center text-3xl font-medium">Unlock your learning potential</h2>
@@ -215,7 +215,7 @@ export default function Page() {
                     <p className="text-center text-muted-foreground">Search for courses, lessons, and more on our comprehensive platform. Whether you&apos;re looking to learn a new skill, brush up on an existing one, or explore a new hobby, we&apos;ve got you covered. Our extensive library covers a wide range of topics from coding to cooking, and everything in between. Each course is carefully curated and taught by industry experts to ensure you get the most out of your learning experience. Start your learning journey with us today!</p>
                 </div>
                 <div className="grid gap-6 px-6 lg:grid-cols-2">
-                    <div className="dummy bg-black/[0.05] h-40 lg:h-auto rounded"></div>
+                    <div className="dummy bg-secondary h-40 lg:h-auto rounded"></div>
                     <div className="grid gap-10">
                         <h2 className="text-3xl">Empowering learners with immersive, gamified experiences that make education exciting and unforgettable.</h2>
                         <div className="space-y-2">

@@ -78,27 +78,29 @@ export default function Page() {
     return (
         <Layout>
             <div className="pb-12 pt-36 container items-center">
-                <ScrollArea className="h-screen p-1 w-full border rounded-lg bg-white">
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center justify-between gap-1 rounded-lg w-full">
+                <ScrollArea className="h-screen p-2 sm:p-4 w-full border rounded-lg">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-2 sm:gap-4 w-full">
                         {coursesContent.map((course, index) => (
-                            <div key={index} className="p-2 bg-[#FBF9F9] border w-full grid gap-2 rounded">
-                                <div className="grid">
-                                    <div className="bg-black/[0.05] h-32"></div>
+                            <Card key={index} className="p-2 sm:p-4 border w-full grid gap-2 sm:gap-4 rounded">
+                                <CardHeader className="grid p-1">
+                                    <div className="bg-secondary h-32 rounded"></div>
                                     <div className="flex justify-between gap-1">
-                                    {Array.from({ length: course.lessonNb }).map((_, index) => (
-                                        <div key={index} className="w-full h-1 mt-1 bg-black/[0.05]"></div>
-                                    ))}
+                                        {Array.from({ length: course.lessonNb }).map((_, index) => (
+                                            <div key={index} className="w-full h-6 rounded mt-1 bg-secondary"></div>
+                                        ))}
                                     </div>
-                                </div>
-                                <h3 className="text-lg text-nowrap overflow-hidden text-ellipsis">{course.title}</h3>
-                                <div className="flex justify-between">
+                                </CardHeader>
+                                <CardContent className="p-1 min-w-0">
+                                    <h3 className="text-lg text-nowrap overflow-hidden text-ellipsis font-medium">{course.title}</h3>
+                                </CardContent>
+                                <CardFooter className="flex justify-between items-start p-1">
                                     <div className="flex justify-start items-start gap-1 flex-wrap">
                                         <Badge>1 course</Badge>
                                         <Badge>6 lessons</Badge>
                                         <Badge>8 exercices</Badge>
                                         <Badge>+100 000 XP</Badge>
                                     </div>
-                                    <div className="grid text-nowrap gap-2">
+                                    <div className="grid text-nowrap gap-2 text-muted-foreground">
                                         <div className="flex items-center">
                                             <Avatar className="h-6 w-6">
                                                 <AvatarImage src="https://img.icons8.com/?size=100&id=JUqatp7GzFaD&format=png&color=000000">
@@ -114,8 +116,8 @@ export default function Page() {
                                             15 000
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </CardFooter>
+                            </Card>
                         ))}
                     </div>
                 </ScrollArea>

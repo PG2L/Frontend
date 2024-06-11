@@ -103,7 +103,7 @@ const Footer: FC<FooterProps> = () => (
             </div>
             <div className="border-t grid md:flex md:justify-between gap-6 items-center mt-6 py-6">
                 <div className="flex justify-center items-center gap-6">
-                    <Button asChild variant="outline" className="footer__logo border-solid border border-black px-8 py-2 rounded bg-white/50">
+                    <Button asChild className="footer__logo border-solid border border-black px-8 py-2 rounded">
                         <Link href="/">Logo</Link>
                     </Button>
                     <p className="text-muted-foreground text-center">© 2024 Company. All rights reserved.</p>

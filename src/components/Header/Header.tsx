@@ -88,12 +88,12 @@ const ListItem = React.forwardRef<
 ListItem.displayName = "ListItem"
 
 const Header: FC<HeaderProps> = () => (
-    <header className="py-3 bg-white border-solid border-b transition-all duration-300 w-full fixed top-0 bg-white z-50" id="header" data-testid="header">
+    <header className="py-3 bg-background border-solid border-b transition-all duration-300 w-full fixed top-0 z-50" id="header" data-testid="header">
         <div className="container flex justify-between items-center flex gap-6">
             <div className="flex justify-between items-center">
                 <SideBar className="lg:hidden"></SideBar>
-                <Button asChild variant="outline" className="border-solid border border-black px-8 py-2 mx-2 rounded bg-white/50 hidden sm:block">
-                    <Link href="/">Logo</Link>
+                <Button asChild className="border-solid border border-black px-8 py-2 mx-2 rounded hidden sm:block">
+                    <Link href="/" className="text-black">Logo</Link>
                 </Button>
                 <NavigationMenu className="left-0 hidden lg:block">
                     <NavigationMenuList>
