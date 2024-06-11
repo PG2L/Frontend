@@ -2,7 +2,7 @@
 
 import React, { FC } from 'react';
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import {
     NavigationMenu,
@@ -16,8 +16,6 @@ import {
 import { Input } from '../ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { icons } from 'lucide-react';
-import { Label } from '@radix-ui/react-context-menu';
-import { NavigationMenuViewport } from '@radix-ui/react-navigation-menu';
 import SideBar from '../SideBar/SideBar';
 
 
@@ -76,8 +74,8 @@ const ListItem = React.forwardRef<
                     )}
                     {...props}
                 >
-                    <div className="text-sm font-medium leading-none">{title}</div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                    <div className="font-medium leading-none">{title}</div>
+                    <p className="line-clamp-2 leading-snug text-muted-foreground">
                         {children}
                     </p>
                 </a>
@@ -88,7 +86,7 @@ const ListItem = React.forwardRef<
 ListItem.displayName = "ListItem"
 
 const Header: FC<HeaderProps> = () => (
-    <header className="py-3 bg-background border-solid border-b transition-all duration-300 w-full fixed top-0 z-50" id="header" data-testid="header">
+    <header className="py-3 bg-card border-solid border-b transition-all duration-300 w-full fixed top-0 z-50" id="header" data-testid="header">
         <div className="container flex justify-between items-center flex gap-6">
             <div className="flex justify-between items-center">
                 <SideBar className="lg:hidden"></SideBar>
@@ -98,7 +96,7 @@ const Header: FC<HeaderProps> = () => (
                 <NavigationMenu className="left-0 hidden lg:block">
                     <NavigationMenuList>
                         <NavigationMenuItem>
-                            <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+                            <NavigationMenuTrigger className="bg-secondary">Getting started</NavigationMenuTrigger>
                             <NavigationMenuContent data-motion="horizontal">
                                 <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                                     <li className="row-span-3">
@@ -110,7 +108,7 @@ const Header: FC<HeaderProps> = () => (
                                                 <div className="mb-2 mt-4 text-lg font-medium">
                                                     shadcn/ui
                                                 </div>
-                                                <p className="text-sm leading-tight text-muted-foreground">
+                                                <p className="leading-tight text-muted-foreground">
                                                     Beautifully designed components that you can copy and
                                                     paste into your apps. Accessible. Customizable. Open
                                                     Source.
@@ -131,7 +129,7 @@ const Header: FC<HeaderProps> = () => (
                             </NavigationMenuContent>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
-                            <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+                            <NavigationMenuTrigger className="bg-secondary">Components</NavigationMenuTrigger>
                             <NavigationMenuContent>
                                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                                     {components.map((component) => (
@@ -148,7 +146,7 @@ const Header: FC<HeaderProps> = () => (
                         </NavigationMenuItem>
                         <NavigationMenuItem>
                             <Link href="/docs" legacyBehavior passHref>
-                                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} bg-secondary`} >
                                     Documentation
                                 </NavigationMenuLink>
                             </Link>
@@ -167,7 +165,9 @@ const Header: FC<HeaderProps> = () => (
                     <NavigationMenu className="right-0">
                         <NavigationMenuList>
                             <NavigationMenuItem>
-                                <NavigationMenuTrigger>Sign In</NavigationMenuTrigger>
+                                <NavigationMenuTrigger className="border-primary border-2 bg-secondary">
+                                    Sign In
+                                </NavigationMenuTrigger>
                                 <NavigationMenuContent>
                                     <Card className="w-80">
                                         <CardHeader>
@@ -208,7 +208,7 @@ const Header: FC<HeaderProps> = () => (
                                                     Sign up with GitHub
                                                 </Button>
                                             </div>
-                                            <div className="mt-4 text-center text-sm">
+                                            <div className="mt-4 text-center ">
                                                 Already have an account?{" "}
                                                 <Link href="#" className="underline">
                                                     Sign in
@@ -219,7 +219,9 @@ const Header: FC<HeaderProps> = () => (
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
                             <NavigationMenuItem>
-                                <NavigationMenuTrigger>Login</NavigationMenuTrigger>
+                                <NavigationMenuTrigger className="border-primary border-2 bg-secondary">
+                                    Login
+                                </NavigationMenuTrigger>
                                 <NavigationMenuContent>
                                     <Card className="w-80">
                                         <CardHeader>
@@ -242,7 +244,7 @@ const Header: FC<HeaderProps> = () => (
                                                 <div className="grid gap-2">
                                                     <div className="flex items-center">
                                                         <label htmlFor="password">Password</label>
-                                                        <Link href="#" className="ml-auto inline-block text-sm underline">
+                                                        <Link href="#" className="ml-auto inline-block  underline">
                                                             Forgot your password?
                                                         </Link>
                                                     </div>
@@ -255,7 +257,7 @@ const Header: FC<HeaderProps> = () => (
                                                     Login with Google
                                                 </Button>
                                             </div>
-                                            <div className="mt-4 text-center text-sm">
+                                            <div className="mt-4 text-center ">
                                                 Don&apos;t have an account?{" "}
                                                 <Link href="#" className="underline">
                                                     Sign up

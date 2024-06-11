@@ -20,14 +20,14 @@ import { AvatarImage } from '@radix-ui/react-avatar';
 export default function Page() {
 
     const sponsors: string[] = [
-        "https://img.icons8.com/?size=100&id=435&format=png&color=000000",
-        "https://img.icons8.com/?size=100&id=25627&format=png&color=000000",
-        "https://img.icons8.com/?size=100&id=32292&format=png&color=000000",
-        "https://img.icons8.com/?size=100&id=447&format=png&color=000000",
-        "https://img.icons8.com/?size=100&id=12598&format=png&color=000000",
-        "https://img.icons8.com/?size=100&id=437&format=png&color=000000",
-        "https://img.icons8.com/?size=100&id=37325&format=png&color=000000",
-        "https://img.icons8.com/?size=100&id=jlpBF1fJe9fs&format=png&color=000000"
+        "https://img.icons8.com/?size=100&id=435&format=png&color=1461cc",
+        "https://img.icons8.com/?size=100&id=25627&format=png&color=1461cc",
+        "https://img.icons8.com/?size=100&id=32292&format=png&color=1461cc",
+        "https://img.icons8.com/?size=100&id=447&format=png&color=1461cc",
+        "https://img.icons8.com/?size=100&id=12598&format=png&color=1461cc",
+        "https://img.icons8.com/?size=100&id=437&format=png&color=1461cc",
+        "https://img.icons8.com/?size=100&id=37325&format=png&color=1461cc",
+        "https://img.icons8.com/?size=100&id=jlpBF1fJe9fs&format=png&color=1461cc"
     ];
     const lessonsContent: { title: string, description: string }[] = [
         {
@@ -127,13 +127,13 @@ export default function Page() {
                         <h1 className="text-7xl font-medium text-center">Welcome to PG2L</h1>
                         <span className="text-muted-foreground text-m font-medium">The future is now</span>
                         <div className="!mt-16">
-                            <Button size="lg">Get started</Button>
+                            <Button size="lg" className="text-xl px-12 py-8">Get started</Button>
                         </div>
                     </div>
                 </div>
                 <div className="flex flex-col justify-center items-center m-0 px-0">
-                    <h2 className="text-3xl">Backed by the best</h2>
-                    <div className="overflow-hidden mt-6 w-full border-b border-t bg-secondary whitespace-nowrap flex items-center">
+                    <h2 className="text-3xl text-color-gradient">Backed by the best</h2>
+                    <div className="overflow-hidden mt-6 w-full border-b border-t bg-card whitespace-nowrap flex items-center">
                         <div className="slide-track animate-[slide_60s_linear_infinite] inline-block whitespace-nowrap content-center py-2">
                             <div className="flex space-x-60 justify-center">
                                 {sponsors.map((sponsor, index) => (

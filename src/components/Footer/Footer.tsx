@@ -36,47 +36,47 @@ const socialLinks: { title: string, href: string, url: string }[] = [
     {
         title: 'Facebook',
         href: '/',
-        url: 'https://img.icons8.com/?size=100&id=8818&format=png&color=000000'
+        url: 'https://img.icons8.com/?size=100&id=8818&format=png&color=ffffff'
     },
     {
         title: 'Twitter',
         href: '/',
-        url: 'https://img.icons8.com/?size=100&id=60014&format=png&color=000000'
+        url: 'https://img.icons8.com/?size=100&id=60014&format=png&color=ffffff'
     },
     {
         title: 'Instagram',
         href: '/',
-        url: 'https://img.icons8.com/?size=100&id=59813&format=png&color=000000'
+        url: 'https://img.icons8.com/?size=100&id=59813&format=png&color=ffffff'
     },
     {
         title: 'LinkedIn',
         href: '/',
-        url: 'https://img.icons8.com/?size=100&id=8808&format=png&color=000000'
+        url: 'https://img.icons8.com/?size=100&id=8808&format=png&color=ffffff'
     },
     {
         title: 'YouTube',
         href: '/',
-        url: 'https://img.icons8.com/?size=100&id=37326&format=png&color=000000'
+        url: 'https://img.icons8.com/?size=100&id=37326&format=png&color=ffffff'
     },
     {
         title: 'GitHub',
         href: '/',
-        url: 'https://img.icons8.com/?size=100&id=zuHqpgzrusU5&format=png&color=000000'
+        url: 'https://img.icons8.com/?size=100&id=zuHqpgzrusU5&format=png&color=ffffff'
     },
     {
         title: 'Discord',
         href: '/',
-        url: 'https://img.icons8.com/?size=100&id=30888&format=png&color=000000'
+        url: 'https://img.icons8.com/?size=100&id=30888&format=png&color=ffffff'
     },
     {
         title: 'Slack',
         href: '/',
-        url: 'https://img.icons8.com/?size=100&id=OBMhWEebAWe9&format=png&color=000000'
+        url: 'https://img.icons8.com/?size=100&id=OBMhWEebAWe9&format=png&color=ffffff'
     }
 ];
 
 const Footer: FC<FooterProps> = () => (
-    <footer className="border-t">
+    <footer className="border-t bg-card">
         <div className="container mx-auto py-4 md:py-6 lg:py-8 grid">
             <div className="grid lg:flex justify-center lg:justify-between gap-6 items-center lg:items-start">
                 <div className="grid grid-cols-3 md:grid-cols-5 items-start gap-6 lg:gap-0">
@@ -110,7 +110,7 @@ const Footer: FC<FooterProps> = () => (
                 </div>
                 <div className="flex justify-center items-center space-x-2">
                     {socialLinks.map((link, index) => (
-                        <Avatar key={index} className="h-8 w-8">
+                        <Avatar key={index} className="h-6 w-6">
                             <AvatarImage src={link['url']} alt={link['title']} />
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
