@@ -10,7 +10,7 @@ interface IndexViewProps {
 const IndexView: FC<IndexViewProps> = ({ children }) => (
     <Layout>
         <div className="pb-12 pt-36 px-4 sm:container items-center">
-            <ScrollArea className="h-screen w-full border rounded-lg bg-card">
+            <ScrollArea className="h-screen w-full border rounded-lg bg-background">
                 {children}
             </ScrollArea>
         </div>
