@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { icons } from 'lucide-react';
+import * as icons from 'lucide-react';
 import React from 'react';
 
 export default function Page() {
@@ -62,7 +62,7 @@ export default function Page() {
 
     return (
         <IndexView>
-            <div className="grid md:flex gap-6 grid-cols-1 border rounded-lg p-2 sm:p-4 bg-background">
+            <div className="grid md:flex gap-6 grid-cols-1 border rounded-lg p-2 sm:p-4">
                 <div className="hidden md:grid grid-cols-1 w-1/3 gap-6 h-fit">
                     <Card>
                         <CardHeader className="flex justify-center items-center gap-4 rounded outline outline-2 outline-primary">
@@ -99,7 +99,7 @@ export default function Page() {
                 </div>
                 <div className="md:w-2/3 grid gap-6">
                     <Card>
-                        <CardHeader className="outline outline-2 outline-primary rounded-lg">
+                        <CardHeader className="outline outline-2 outline-primary rounded-lg gap-4">
                             <div className="hidden sm:block py-36 bg-secondary rounded"></div>
                             <div className="grid grid-cols-1">
                                 <div className="flex gap-2 mt-2">
@@ -120,23 +120,18 @@ export default function Page() {
                                         <Badge>+100 000 xp</Badge>
                                     </div>
                                 </div>
-                                <div className="flex flex-col h-full text-nowrap gap-2 items-start justify-start">
-                                    <div className="flex">
-                                        <Avatar className="h-6 w-6">
-                                            <AvatarImage src="https://img.icons8.com/?size=100&id=JUqatp7GzFaD&format=png&color=1461cc">
-                                            </AvatarImage>
-                                        </Avatar>
+                                <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end">
+                                    <div className="flex gap-2">
                                         500
+                                        <icons.LucideStar color="#1461cc" />
                                     </div>
-                                    <div className="flex items-center">
-                                        <Avatar className="h-6 w-6">
-                                            <AvatarImage src="https://img.icons8.com/?size=100&id=54309&format=png&color=1461cc">
-                                            </AvatarImage>
-                                        </Avatar>
+                                    <div className="flex gap-2">
                                         15 000
+                                        <icons.LucideMedal color="#1461cc" />
                                     </div>
                                 </div>
                             </div>
+                            <Button>Continue course</Button>
                         </CardHeader>
                     </Card>
                     <Card className="md:hidden">
