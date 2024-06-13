@@ -210,7 +210,7 @@ export default function Page() {
                     <h2 className="text-center text-3xl font-medium">Find a course now !</h2>
                     <div className="flex w-full justify-center items-center gap-2">
                         <Input type="search" placeholder="Search..." />
-                        <Button variant="outline" type="submit" className="lg:px-16">Search</Button>
+                        <Button variant="secondary" type="submit" className="lg:px-16">Search</Button>
                     </div>
                     <p className="text-center text-muted-foreground">Search for courses, lessons, and more on our comprehensive platform. Whether you&apos;re looking to learn a new skill, brush up on an existing one, or explore a new hobby, we&apos;ve got you covered. Our extensive library covers a wide range of topics from coding to cooking, and everything in between. Each course is carefully curated and taught by industry experts to ensure you get the most out of your learning experience. Start your learning journey with us today!</p>
                 </div>

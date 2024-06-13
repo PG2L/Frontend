@@ -127,7 +127,7 @@ export default function Page() {
 
     return (
         <IndexView>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-2 sm:gap-4 md:gap-6 w-full p-2 sm:p-4 md:p-6 bg-background">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-2 sm:gap-4 w-full p-2 sm:p-4 bg-background">
                 {coursesContent.map((course, index) => (
                     <a key={index} href={`/courses/${index + 1}`} >
                         <Card className={`p-2 sm:p-4 border w-full grid gap-2 sm:gap-4 rounded-lg ${course.isUnlock && "border-2 border-primary"} ${course.isFinished && "bg-secondary"}`}>
@@ -158,11 +158,11 @@ export default function Page() {
                                 <div className={`grid text-nowrap gap-1 text-primary ${course.isFinished && "!text-muted-foreground"}`}>
                                     <div className="flex items-center justify-end gap-2">
                                         <p className={`${(!course.isFinished) && "text-white"}`}>500</p>
-                                        <icons.MedalIcon />
+                                        <icons.MedalIcon strokeWidth={1} />
                                     </div>
                                     <div className="flex items-center gap-2 justify-end">
                                         <p className={`${(!course.isFinished) && "text-white"}`}>15 000</p>
-                                        <icons.StarIcon />
+                                        <icons.StarIcon strokeWidth={1} />
                                     </div>
                                 </div>
                             </CardFooter>

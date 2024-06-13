@@ -64,8 +64,8 @@ export default function Page() {
 
     return (
         <IndexView>
-            <div className="grid md:flex gap-6 grid-cols-1 border rounded-lg p-2 sm:p-4">
-                <div className="hidden md:grid grid-cols-1 w-1/3 gap-6 h-fit">
+            <div className="grid md:flex gap-4 grid-cols-1 rounded-lg p-2 sm:p-4">
+                <div className="hidden md:grid grid-cols-1 w-1/3 gap-4 h-fit">
                     <Card>
                         <CardHeader className="flex justify-center items-center gap-4 rounded outline outline-2 outline-primary">
                             <h1 className="text-xl font-medium text-center">Introduction to Python Programming</h1>
@@ -82,7 +82,7 @@ export default function Page() {
                         <CardContent className="p-4">
                             <div className="grid gap-4">
                                 {lessonsMenuContent.map((lesson, index) => (
-                                    <Card key={index} className={`${lesson.isFinished && "bg-secondary"} ${lesson.isUnlock && "outline outline-2 outline-primary"}`}>
+                                    <Card key={index} className={`${lesson.isFinished && "bg-secondary"} ${lesson.isUnlock && "outline outline-2 outline-primary"} ${(index === 3) && "transform translate-x-4"}`}>
                                         <CardHeader>
                                             <h2 className={`text-lg ${!lesson.isUnlock && "text-muted-foreground"}`}>{lesson.title}</h2>
                                         </CardHeader>
@@ -99,13 +99,13 @@ export default function Page() {
                         </CardContent>
                     </Card>
                 </div>
-                <div className="md:w-2/3 grid gap-6">
+                <div className="md:w-2/3 grid gap-4">
                     <Card>
                         <CardHeader className="outline outline-2 outline-primary rounded-lg gap-6">
                             <div className="hidden sm:block py-36 bg-secondary rounded"></div>
                             <div className="flex justify-between items-start">
                                 <div className="grid gap-4">
-                                    <h1 className="text-xl font-medium">Lesson 4 : Introduction to Python Programming</h1>
+                                    <h1 className="text-xl font-medium">Lesson 4 : Advanced Python Concept</h1>
                                     <div className="flex gap-1 flex-wrap">
                                         <Badge>Python</Badge>
                                         <Badge>Easy</Badge>
@@ -117,11 +117,11 @@ export default function Page() {
                                 <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end">
                                     <div className="flex gap-2">
                                         500
-                                        <icons.LucideStar color="#1461cc" />
+                                        <icons.LucideStar strokeWidth={1} color="#1461cc" />
                                     </div>
                                     <div className="flex gap-2">
                                         15 000
-                                        <icons.LucideMedal color="#1461cc" />
+                                        <icons.LucideMedal strokeWidth={1} color="#1461cc" />
                                     </div>
                                 </div>
                             </div>

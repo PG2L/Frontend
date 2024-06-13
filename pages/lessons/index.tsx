@@ -148,7 +148,7 @@ export default function Page() {
 
     return (
         <IndexView>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-2 sm:gap-4 md:gap-6 w-full p-2 sm:p-4 md:p-6 bg-background">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-2 sm:gap-4 w-full sm:p-4 p-2 bg-background">
                 {lessons.map((lesson, index) => (
                     <a key={index} href={`/lessons/${index + 1}`} >
                         <Card className={`p-2 sm:p-4 border w-full grid gap-2 sm:gap-4 rounded-lg ${lesson.isUnlock && "outline outline-primary outline-2"} ${lesson.isFinished && "bg-secondary"}`}>
@@ -156,12 +156,12 @@ export default function Page() {
                                 <div className={`${lesson.isFinished ? "bg-card" : "bg-secondary"} h-32 rounded flex justify-center items-center`}>
                                     {lesson.isFinished &&
                                         <Avatar className="h-32 w-32 flex justify-center items-center">
-                                            <icons.Check className="h-16 w-16 text-white"></icons.Check>
+                                            <icons.Check strokeWidth={1} className="h-16 w-16 text-white"></icons.Check>
                                         </Avatar>
                                     }
                                 </div>
-                                <CardDescription className="text-sm text-muted-foreground text-end">{lesson.course}</CardDescription>
-                                <h3 className="text-lg text-nowrap overflow-hidden text-ellipsis font-medium">{lesson.title}</h3>
+                                <span className="text-sm text-muted-foreground text-end">{lesson.course}</span>
+                                <h3 className="text-lg text-nowrap overflow-hidden text-ellipsis font-medium !mt-0">{lesson.title}</h3>
                             </CardHeader>
                             <CardFooter className="flex justify-between items-start p-1">
                                 <div className="flex justify-start items-start gap-1 flex-wrap">
@@ -173,11 +173,11 @@ export default function Page() {
                                 <div className={`grid text-nowrap gap-1 text-primary ${lesson.isFinished && "!text-muted-foreground"}`}>
                                     <div className="flex items-center justify-end gap-2">
                                         <p className={`${(!lesson.isFinished) && "text-white"}`}>500</p>
-                                        <icons.MedalIcon />
+                                        <icons.MedalIcon strokeWidth={1} />
                                     </div>
                                     <div className="flex items-center gap-2 justify-end">
                                         <p className={`${(!lesson.isFinished) && "text-white"}`}>15 000</p>
-                                        <icons.StarIcon />
+                                        <icons.StarIcon strokeWidth={1} />
                                     </div>
                                 </div>
                             </CardFooter>

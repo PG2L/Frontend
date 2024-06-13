@@ -165,7 +165,7 @@ const Header: FC<HeaderProps> = () => (
                     <NavigationMenu className="right-0">
                         <NavigationMenuList>
                             <NavigationMenuItem>
-                                <NavigationMenuTrigger className="border-primary border-2 bg-secondary">
+                                <NavigationMenuTrigger className="border-primary border-2 bg-card">
                                     Sign In
                                 </NavigationMenuTrigger>
                                 <NavigationMenuContent>
@@ -219,7 +219,7 @@ const Header: FC<HeaderProps> = () => (
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
                             <NavigationMenuItem>
-                                <NavigationMenuTrigger className="border-primary border-2 bg-secondary">
+                                <NavigationMenuTrigger className="border-primary border-2 bg-card">
                                     Login
                                 </NavigationMenuTrigger>
                                 <NavigationMenuContent>
