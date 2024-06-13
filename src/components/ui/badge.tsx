@@ -15,6 +15,27 @@ const badgeVariants = cva(
         destructive:
           "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
+
+        // Difficulty badges
+        beginner: "text-primary-foreground border-transparent bg-[#1abc9c] hover:bg-[#1abc9c]/80",
+        novice: "text-primary-foreground border-transparent bg-[#2ecc71] hover:bg-[#2ecc71]/80",
+        intermediate: "text-primary-foreground border-transparent bg-[#f1c40f] hover:bg-[#f1c40f]/80",
+        advanced: "text-primary-foreground border-transparent bg-[#f39c12] hover:bg-[#f39c12]/80",
+        expert: "text-primary-foreground border-transparent bg-[#e67e22]  hover:bg-[#e67e22]/80]",
+        master: "text-primary-foreground border-transparent bg-[#e74c3c] hover:bg-[#e74c3c]/80",
+        "master+": "text-primary-foreground border-transparent bg-[#c0392b]  hover:bg-[#c0392b]/80]",
+
+        // Language badges
+        javascript: "text-primary-foreground border-transparent bg-[#f0db4f ]  hover:bg-[#f0db4f ]/80]",
+        "c#": "text-primary-foreground border-transparent bg-[#68217a]  hover:bg-[#68217a]/80]",
+        "c++": "text-primary-foreground border-transparent bg-[#00599C]  hover:bg-[#00599C]/80]",
+        java: "text-primary-foreground border-transparent bg-[#b07219]  hover:bg-[#b07219]/80]",
+        php: "text-primary-foreground border-transparent bg-[#8993be]  hover:bg-[#8993be]/80]",
+        ruby: "text-primary-foreground border-transparent bg-[#cc342d]  hover:bg-[#cc342d]/80]",
+        python: "text-primary-foreground border-transparent bg-[#306998]  hover:bg-[#306998]/80]",
+        "html/css": "text-primary-foreground border-transparent bg-[#e34c26]  hover:bg-[#e34c26]/80]",
+        go: "text-primary-foreground border-transparent bg-[#00add8]  hover:bg-[#00add8]/80]",
+        mysql: "text-primary-foreground border-transparent bg-[#4479a1]  hover:bg-[#4479a1]/80]",
       },
     },
     defaultVariants: {
