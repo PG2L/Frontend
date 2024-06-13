@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
 import { AvatarImage } from '@radix-ui/react-avatar';
@@ -6,129 +6,143 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import IndexView from '@/components/IndexView/IndexView';
 import * as icons from 'lucide-react';
 
+async function getData() {
+    const res = await fetch('http://localhost:8000/courses')
 
+    if (!res.ok) {
+        throw new Error('Failed to fetch data')
+    }
+
+    return res.json()
+}
 
 export default function Page() {
 
-    const coursesContent: { title: string, lessonNb: number, lessonsFinished: number, isUnlock: boolean, isFinished: boolean }[] = [
-        {
-            title: "Full Stack Development with Node.js and Express",
-            lessonNb: 5,
-            lessonsFinished: 4,
-            isUnlock: true,
-            isFinished: false
-        },
-        {
-            title: "Machine Learning with Python",
-            lessonNb: 4,
-            lessonsFinished: 3,
-            isUnlock: true,
-            isFinished: false
-        },
-        {
-            title: "Advanced Python Programming",
-            lessonNb: 2,
-            lessonsFinished: 1,
-            isUnlock: true,
-            isFinished: false
-        },
-        {
-            title: "Back-End Development with Django",
-            lessonNb: 8,
-            lessonsFinished: 3,
-            isUnlock: true,
-            isFinished: false
-        },
-        {
-            title: "Front-End Development with Vue.js",
-            lessonNb: 3,
-            lessonsFinished: 0,
-            isUnlock: true,
-            isFinished: false
-        },
-        {
-            title: "Mobile App Development with React Native",
-            lessonNb: 2,
-            lessonsFinished: 0,
-            isUnlock: false,
-            isFinished: false
-        },
-        {
-            title: "DevOps with Docker and Kubernetes",
-            lessonNb: 3,
-            lessonsFinished: 0,
-            isUnlock: false,
-            isFinished: false
-        },
-        {
-            title: "Introduction to Ruby Programming",
-            lessonNb: 4,
-            lessonsFinished: 0,
-            isUnlock: false,
-            isFinished: false
-        },
-        {
-            title: "Web Development with Angular",
-            lessonNb: 3,
-            lessonsFinished: 0,
-            isUnlock: false,
-            isFinished: false
-        },
-        {
-            title: "Data Analysis with R",
-            lessonNb: 5,
-            lessonsFinished: 0,
-            isUnlock: false,
-            isFinished: false
-        },
-        {
-            title: "Mobile App Development with Flutter",
-            lessonNb: 4,
-            lessonsFinished: 0,
-            isUnlock: false,
-            isFinished: false
-        },
-        {
-            title: "Game Development with Unity",
-            lessonNb: 6,
-            lessonsFinished: 0,
-            isUnlock: false,
-            isFinished: false
-        },
-        {
-            title: "Cybersecurity Basics",
-            lessonNb: 3,
-            lessonsFinished: 0,
-            isUnlock: false,
-            isFinished: false
-        },
-        {
-            title: "Introduction to Python Programming",
-            lessonNb: 4,
-            lessonsFinished: 4,
-            isUnlock: true,
-            isFinished: true
-        },
-        {
-            title: "Web Development with JavaScript and React",
-            lessonNb: 2,
-            lessonsFinished: 2,
-            isUnlock: true,
-            isFinished: true
-        },
-        {
-            title: "Data Structures and Algorithms",
-            lessonNb: 3,
-            lessonsFinished: 3,
-            isUnlock: true,
-            isFinished: true
-        }
-    ];
+    const [data, setData] = useState(null);
 
+    useEffect(() => {
+        getData().then(data => setData(data)).catch(error => console.error(error));
+    }, []);
+
+    // const coursesContent: { title: string, lessonNb: number, lessonsFinished: number, isUnlock: boolean, isFinished: boolean }[] = [
+    //     {
+    //         title: "Full Stack Development with Node.js and Express",
+    //         lessonNb: 5,
+    //         lessonsFinished: 4,
+    //         isUnlock: true,
+    //         isFinished: false
+    //     },
+    //     {
+    //         title: "Machine Learning with Python",
+    //         lessonNb: 4,
+    //         lessonsFinished: 3,
+    //         isUnlock: true,
+    //         isFinished: false
+    //     },
+    //     {
+    //         title: "Advanced Python Programming",
+    //         lessonNb: 2,
+    //         lessonsFinished: 1,
+    //         isUnlock: true,
+    //         isFinished: false
+    //     },
+    //     {
+    //         title: "Back-End Development with Django",
+    //         lessonNb: 8,
+    //         lessonsFinished: 3,
+    //         isUnlock: true,
+    //         isFinished: false
+    //     },
+    //     {
+    //         title: "Front-End Development with Vue.js",
+    //         lessonNb: 3,
+    //         lessonsFinished: 0,
+    //         isUnlock: true,
+    //         isFinished: false
+    //     },
+    //     {
+    //         title: "Mobile App Development with React Native",
+    //         lessonNb: 2,
+    //         lessonsFinished: 0,
+    //         isUnlock: false,
+    //         isFinished: false
+    //     },
+    //     {
+    //         title: "DevOps with Docker and Kubernetes",
+    //         lessonNb: 3,
+    //         lessonsFinished: 0,
+    //         isUnlock: false,
+    //         isFinished: false
+    //     },
+    //     {
+    //         title: "Introduction to Ruby Programming",
+    //         lessonNb: 4,
+    //         lessonsFinished: 0,
+    //         isUnlock: false,
+    //         isFinished: false
+    //     },
+    //     {
+    //         title: "Web Development with Angular",
+    //         lessonNb: 3,
+    //         lessonsFinished: 0,
+    //         isUnlock: false,
+    //         isFinished: false
+    //     },
+    //     {
+    //         title: "Data Analysis with R",
+    //         lessonNb: 5,
+    //         lessonsFinished: 0,
+    //         isUnlock: false,
+    //         isFinished: false
+    //     },
+    //     {
+    //         title: "Mobile App Development with Flutter",
+    //         lessonNb: 4,
+    //         lessonsFinished: 0,
+    //         isUnlock: false,
+    //         isFinished: false
+    //     },
+    //     {
+    //         title: "Game Development with Unity",
+    //         lessonNb: 6,
+    //         lessonsFinished: 0,
+    //         isUnlock: false,
+    //         isFinished: false
+    //     },
+    //     {
+    //         title: "Cybersecurity Basics",
+    //         lessonNb: 3,
+    //         lessonsFinished: 0,
+    //         isUnlock: false,
+    //         isFinished: false
+    //     },
+    //     {
+    //         title: "Introduction to Python Programming",
+    //         lessonNb: 4,
+    //         lessonsFinished: 4,
+    //         isUnlock: true,
+    //         isFinished: true
+    //     },
+    //     {
+    //         title: "Web Development with JavaScript and React",
+    //         lessonNb: 2,
+    //         lessonsFinished: 2,
+    //         isUnlock: true,
+    //         isFinished: true
+    //     },
+    //     {
+    //         title: "Data Structures and Algorithms",
+    //         lessonNb: 3,
+    //         lessonsFinished: 3,
+    //         isUnlock: true,
+    //         isFinished: true
+    //     }
+    // ];
+    console.log(data);
     return (
         <IndexView>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-2 sm:gap-4 w-full p-2 sm:p-4 bg-background">
-                {coursesContent.map((course, index) => (
+                {data && data.map((course, index) => (
                     <a key={index} href={`/courses/${index + 1}`} >
                         <Card className={`p-2 sm:p-4 border w-full grid gap-2 sm:gap-4 rounded-lg ${course.isUnlock && "border-2 border-primary"} ${course.isFinished && "bg-secondary"}`}>
                             <CardHeader className="grid p-1">
@@ -140,8 +154,8 @@ export default function Page() {
                                     }
                                 </div>
                                 <div className="flex justify-between gap-1">
-                                    {Array.from({ length: course.lessonNb }).map((_, index) => (
-                                        <div key={index} className={`w-full h-3 rounded mt-1 ${(index <= course.lessonsFinished - 1) ? "bg-primary" : "bg-secondary"} ${(index === course.lessonsFinished) && course.isUnlock && "border-2 border-primary border-solid"}`}></div>
+                                    {Array.from({ length: course.lessons.length }).map((_, index) => (
+                                        <div key={index} className={`w-full h-3 rounded mt-1 bg-secondary`}></div>
                                     ))}
                                 </div>
                             </CardHeader>
@@ -150,18 +164,18 @@ export default function Page() {
                             </CardContent>
                             <CardFooter className="flex justify-between items-start p-1">
                                 <div className="flex justify-start items-start gap-1 flex-wrap">
-                                    <Badge>1 course</Badge>
-                                    <Badge>6 lessons</Badge>
-                                    <Badge>5 000 points</Badge>
-                                    <Badge>+100 000 XP</Badge>
+                                    <Badge>{course.difficulty}</Badge>
+                                    <Badge>{course.lessons_count} lessons</Badge>
+                                    <Badge>{course.points_gain} points</Badge>
+                                    <Badge>+{course.exp_gain} XP</Badge>
                                 </div>
                                 <div className={`grid text-nowrap gap-1 text-primary ${course.isFinished && "!text-muted-foreground"}`}>
                                     <div className="flex items-center justify-end gap-2">
-                                        <p className={`${(!course.isFinished) && "text-white"}`}>500</p>
+                                        <p className={`${(!course.isFinished) && "text-white"}`}>{course.points_gain}</p>
                                         <icons.MedalIcon strokeWidth={1} />
                                     </div>
                                     <div className="flex items-center gap-2 justify-end">
-                                        <p className={`${(!course.isFinished) && "text-white"}`}>15 000</p>
+                                        <p className={`${(!course.isFinished) && "text-white"}`}>{course.exp_gain}</p>
                                         <icons.StarIcon strokeWidth={1} />
                                     </div>
                                 </div>

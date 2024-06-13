@@ -20,14 +20,14 @@ import { AvatarImage } from '@radix-ui/react-avatar';
 export default function Page() {
 
     const sponsors: string[] = [
-        "https://img.icons8.com/?size=100&id=435&format=png&color=1461cc",
-        "https://img.icons8.com/?size=100&id=25627&format=png&color=1461cc",
-        "https://img.icons8.com/?size=100&id=32292&format=png&color=1461cc",
-        "https://img.icons8.com/?size=100&id=447&format=png&color=1461cc",
-        "https://img.icons8.com/?size=100&id=12598&format=png&color=1461cc",
-        "https://img.icons8.com/?size=100&id=437&format=png&color=1461cc",
-        "https://img.icons8.com/?size=100&id=37325&format=png&color=1461cc",
-        "https://img.icons8.com/?size=100&id=jlpBF1fJe9fs&format=png&color=1461cc"
+        `https://img.icons8.com/?size=100&id=435&format=png&color=1461cc`,
+        `https://img.icons8.com/?size=100&id=25627&format=png&color=1461cc`,
+        `https://img.icons8.com/?size=100&id=32292&format=png&color=1461cc`,
+        `https://img.icons8.com/?size=100&id=447&format=png&color=1461cc`,
+        `https://img.icons8.com/?size=100&id=12598&format=png&color=1461cc`,
+        `https://img.icons8.com/?size=100&id=437&format=png&color=1461cc`,
+        `https://img.icons8.com/?size=100&id=37325&format=png&color=1461cc`,
+        `https://img.icons8.com/?size=100&id=jlpBF1fJe9fs&format=png&color=1461cc`
     ];
     const lessonsContent: { title: string, description: string }[] = [
         {

@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import { useRouter } from 'next/router';
 import IndexView from '@/components/IndexView/IndexView';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -6,92 +7,117 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import * as icons from 'lucide-react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+async function getData(id: number) {
+
+    const res = await fetch(`http://localhost:8000/courses/${id}`);
+
+    if (!res.ok) {
+        throw new Error('Failed to fetch data')
+    }
+
+    return res.json()
+}
 
 export default function Page() {
-    const lessonsMenuContent: { title: string, badges: string[], isFinished: boolean, isUnlock: boolean }[] = [
-        {
-            title: "Lesson 1 : Introduction to Python",
-            badges: ["Python", "Easy", "3 lessons", "5 000 points", "+100 000 xp"],
-            isFinished: true,
-            isUnlock: true
-        },
-        {
-            title: "Lesson 2 : Basic Python Construct",
-            badges: ["Python", "Easy", "1 lesson", "1 000 points", "+20 000 xp"],
-            isFinished: true,
-            isUnlock: true
-        },
-        {
-            title: "Lesson 3 : Data Structure in Python",
-            badges: ["Python", "Intermediate", "1 lesson", "2 000 points", "+40 000 xp"],
-            isFinished: true,
-            isUnlock: true
-        },
-        {
-            title: "Lesson 4 : Advanced Python Concept",
-            badges: ["Python", "Intermediate", "1 lesson", "1 000 points", "+20 000 xp"],
-            isFinished: false,
-            isUnlock: true
-        },
-        {
-            title: "Lesson 5 : Object-Oriented Programming (OOP) in Python",
-            badges: ["Python", "Intermediate", "1 lesson", "1 000 points", "+20 000 xp"],
-            isFinished: false,
-            isUnlock: false
-        },
-        {
-            title: "Lesson 6 : Working with Libraries and Frameworks",
-            badges: ["Python", "Hard", "1 lesson", "1 000 points", "+20 000 xp"],
-            isFinished: false,
-            isUnlock: false
-        },
-        {
-            title: "Lesson 7 : Practical Applications of Python",
-            badges: ["Python", "Hard", "1 lesson", "1 000 points", "+20 000 xp"],
-            isFinished: false,
-            isUnlock: false
-        },
-        {
-            title: "Lesson 8 : Final Project and Assessment",
-            badges: ["Python", "Hackerman", "1 lesson", "1 000 points", "+20 000 xp"],
-            isFinished: false,
-            isUnlock: false
-        }
-    ];
+    
+    const router = useRouter();
+    const { id } = router.query;
+
+    const [data, setData] = useState(null);
+
+    console.log(id);
+    useEffect(() => {
+        getData(id).then(data => setData(data)).catch(error => console.error(error));
+    }, [id]);
+
+    // const data && data.lessons: { title: string, badges: string[], isFinished: boolean, isUnlock: boolean }[] = [
+    //     {
+    //         title: "Lesson 1 : Introduction to Python",
+    //         badges: ["Python", "Easy", "3 lessons", "5 000 points", "+100 000 xp"],
+    //         isFinished: true,
+    //         isUnlock: true
+    //     },
+    //     {
+    //         title: "Lesson 2 : Basic Python Construct",
+    //         badges: ["Python", "Easy", "1 lesson", "1 000 points", "+20 000 xp"],
+    //         isFinished: true,
+    //         isUnlock: true
+    //     },
+    //     {
+    //         title: "Lesson 3 : Data Structure in Python",
+    //         badges: ["Python", "Intermediate", "1 lesson", "2 000 points", "+40 000 xp"],
+    //         isFinished: true,
+    //         isUnlock: true
+    //     },
+    //     {
+    //         title: "Lesson 4 : Advanced Python Concept",
+    //         badges: ["Python", "Intermediate", "1 lesson", "1 000 points", "+20 000 xp"],
+    //         isFinished: false,
+    //         isUnlock: true
+    //     },
+    //     {
+    //         title: "Lesson 5 : Object-Oriented Programming (OOP) in Python",
+    //         badges: ["Python", "Intermediate", "1 lesson", "1 000 points", "+20 000 xp"],
+    //         isFinished: false,
+    //         isUnlock: false
+    //     },
+    //     {
+    //         title: "Lesson 6 : Working with Libraries and Frameworks",
+    //         badges: ["Python", "Hard", "1 lesson", "1 000 points", "+20 000 xp"],
+    //         isFinished: false,
+    //         isUnlock: false
+    //     },
+    //     {
+    //         title: "Lesson 7 : Practical Applications of Python",
+    //         badges: ["Python", "Hard", "1 lesson", "1 000 points", "+20 000 xp"],
+    //         isFinished: false,
+    //         isUnlock: false
+    //     },
+    //     {
+    //         title: "Lesson 8 : Final Project and Assessment",
+    //         badges: ["Python", "Hackerman", "1 lesson", "1 000 points", "+20 000 xp"],
+    //         isFinished: false,
+    //         isUnlock: false
+    //     }
+    // ];
 
     return (
         <IndexView>
             <div className="grid md:flex gap-4 grid-cols-1 border rounded-lg p-2 sm:p-4">
                 <div className="hidden md:grid grid-cols-1 w-1/3 gap-4 h-fit">
-                    <Card>
-                        <CardHeader className="flex justify-center items-center gap-4 rounded outline outline-2 outline-primary">
-                            <h1 className="text-xl font-medium text-center">Introduction to Python Programming</h1>
-                            <div className="flex flex-wrap gap-1 justify-center w-3/4">
-                                <Badge>Python</Badge>
-                                <Badge>Easy</Badge>
-                                <Badge>3 lessons</Badge>
-                                <Badge>5 000 points</Badge>
-                                <Badge>+100 000 xp</Badge>
-                            </div>
-                        </CardHeader>
-                    </Card>
+                        <Card>
+                    <a href={`/courses/${id}`}>
+                            <CardHeader className="flex justify-center items-center gap-4 rounded outline outline-2 outline-primary">
+                                <h1 className="text-xl font-medium text-center">{data && data.title}</h1>
+                                <div className="flex flex-wrap gap-1 justify-center w-3/4">
+                                    <Badge variant={data && data.language.name.toLowerCase()}>{data && data.language.name}</Badge>
+                                    <Badge variant={data && data.difficulty.toLowerCase()}>{data && data.difficulty}</Badge>
+                                    <Badge>{data && data.points_gain} points</Badge>
+                                    <Badge>+{data && data.exp_gain} xp</Badge>
+                                </div>
+                            </CardHeader>
+                    </a>
+                        </Card>
                     <Card>
                         <CardContent className="p-4">
                             <div className="grid gap-4">
-                                {lessonsMenuContent.map((lesson, index) => (
-                                    <Card key={index} className={`${lesson.isFinished && "bg-secondary"} ${lesson.isUnlock && "outline outline-2 outline-primary"}`}>
+                                {data && data.lessons && data.lessons.map((lesson, index) => (
+                                    <a key={index} href={`/lessons/${lesson.id}`}>
+                                    <Card className={`${lesson.isFinished && "bg-secondary"} outline outline-2 outline-secondary`}>
                                         <CardHeader>
-                                            <h2 className={`text-lg ${!lesson.isUnlock && "text-muted-foreground"}`}>{lesson.title}</h2>
+                                            <h2 className={`text-lg`}>{index + 1} .  {lesson.title}</h2>
                                         </CardHeader>
                                         <CardFooter>
                                             <div className="flex flex-wrap gap-1 justify-start items-center">
-                                                {lesson.badges.map((badge, index) => (
+                                                {/* {lesson.badges.map((badge, index) => (
                                                     <Badge key={index}>{badge}</Badge>
-                                                ))}
+                                                ))} */}
                                             </div>
                                         </CardFooter>
                                     </Card>
+                                    </a>
                                 ))}
                             </div>
                         </CardContent>
@@ -103,35 +129,34 @@ export default function Page() {
                             <div className="hidden sm:block py-36 bg-secondary rounded"></div>
                             <div className="grid grid-cols-1">
                                 <div className="flex gap-2 mt-2">
-                                    {lessonsMenuContent.map((lesson, index) => (
+                                    {data && data.lessons && data.lessons.map((lesson, index) => (
                                         <div key={index} className={`h-3 w-1/3 rounded ${lesson.isFinished ? "bg-primary" : "bg-secondary"} ${lesson.isUnlock && "outline outline-2 outline-primary"}`}></div>
                                     ))}
                                 </div>
-                                <p className="text-muted-foreground text-end">37%</p>
+                                <p className="text-muted-foreground text-end">0%</p>
                             </div>
                             <div className="flex justify-between items-start">
                                 <div className="grid gap-4">
-                                    <h1 className="text-xl font-medium">Introduction to Python Programming</h1>
+                                    <h1 className="text-3xl font-medium">{data && data.title}</h1>
                                     <div className="flex gap-1 flex-wrap">
-                                        <Badge>Python</Badge>
-                                        <Badge>Easy</Badge>
-                                        <Badge>3 lessons</Badge>
-                                        <Badge>5 000 points</Badge>
-                                        <Badge>+100 000 xp</Badge>
+                                        <Badge variant={data && data.language.name.toLowerCase()}>{data && data.language.name}</Badge>
+                                        <Badge variant={data && data.difficulty.toLowerCase()}>{data && data.difficulty}</Badge>
+                                        <Badge>{data && data.points_gain} points</Badge>
+                                        <Badge>+{data && data.exp_gain} xp</Badge>
                                     </div>
                                 </div>
                                 <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end">
                                     <div className="flex gap-2">
-                                        500
+                                        {data && data.points_gain }
                                         <icons.LucideStar strokeWidth={1} color="#1461cc" />
                                     </div>
                                     <div className="flex gap-2">
-                                        15 000
+                                        {data && data.exp_gain}
                                         <icons.LucideMedal strokeWidth={1} color="#1461cc" />
                                     </div>
                                 </div>
                             </div>
-                            <Button>Continue course</Button>
+                            <Button size="lg" className="text-lg">Continue</Button>
                         </CardHeader>
                     </Card>
                     <Card className="md:hidden">
@@ -147,16 +172,16 @@ export default function Page() {
                                 </CollapsibleTrigger>
                                 <CollapsibleContent>
                                     <div className="grid gap-4 mt-4">
-                                        {lessonsMenuContent.map((lesson, index) => (
+                                        {data && data.lessons && data.lessons.map((lesson, index) => (
                                             <Card key={index} className={`${lesson.isFinished && "bg-secondary"} ${lesson.isUnlock && "outline outline-2 outline-primary"}`}>
                                                 <CardHeader>
-                                                    <h2 className={`text-lg ${!lesson.isUnlock && "text-muted-foreground"}`}>{lesson.title}</h2>
+                                                    <h2 className={`text-lg`}>{lesson.title}</h2>
                                                 </CardHeader>
                                                 <CardFooter>
                                                     <div className="flex flex-wrap gap-1 justify-start items-center">
-                                                        {lesson.badges.map((badge, index) => (
+                                                        {/* {lesson.badges.map((badge, index) => (
                                                             <Badge key={index}>{badge}</Badge>
-                                                        ))}
+                                                        ))} */}
                                                     </div>
                                                 </CardFooter>
                                             </Card>
@@ -168,7 +193,9 @@ export default function Page() {
                     </Card>
                     <Card className="text-muted-foreground">
                         <CardHeader>
-                            <p className="text-white">
+                        {data && data.description}
+                        </CardHeader>
+                            {/* <p className="text-white">
                                 The "Introduction to Python Programming" course is designed to provide learners with a solid foundation in Python, one of the most popular and versatile programming languages in the world today. This course is suitable for complete beginners with no prior programming experience as well as those with some programming background who wish to learn Python. The course emphasizes practical applications and real-world examples to ensure that students gain not only theoretical knowledge but also hands-on skills.
                             </p>
                         </CardHeader>
@@ -283,7 +310,7 @@ export default function Page() {
 
                                 <p className="text-white">This comprehensive course aims to equip learners with the skills and confidence to use Python for a wide range of applications, laying a strong foundation for further study and professional development in the field of programming and software development.</p>
                             </div>
-                        </CardContent>
+                        </CardContent> */}
                     </Card>
                 </div>
             </div>
