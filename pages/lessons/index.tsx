@@ -5,6 +5,7 @@ import { AvatarImage } from '@radix-ui/react-avatar';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card';
 import IndexView from '@/components/IndexView/IndexView';
 import * as icons from 'lucide-react';
+import Layout from '@/components/Layout/Layout';
 
 export default function Page() {
 
@@ -147,11 +148,11 @@ export default function Page() {
     ]
 
     return (
-        <IndexView>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-2 sm:gap-4 w-full sm:p-4 p-2 bg-background">
+        <Layout>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-4 w-full bg-background py-6">
                 {lessons.map((lesson, index) => (
                     <a key={index} href={`/lessons/${index + 1}`} >
-                        <Card className={`p-2 sm:p-4 border w-full grid gap-2 sm:gap-4 rounded-lg ${lesson.isUnlock && "outline outline-primary outline-2"} ${lesson.isFinished && "bg-secondary"}`}>
+                        <Card className={`p-4 border w-full grid gap-2 sm:gap-4 rounded-lg ${lesson.isUnlock && "outline outline-primary outline-1"} ${lesson.isFinished && "bg-secondary"}`}>
                             <CardHeader className="grid p-1">
                                 <div className={`${lesson.isFinished ? "bg-card" : "bg-secondary"} h-32 rounded flex justify-center items-center`}>
                                     {lesson.isFinished &&
@@ -185,6 +186,6 @@ export default function Page() {
                     </a>
                 ))}
             </div>
-        </IndexView>
+        </Layout>
     )
 }

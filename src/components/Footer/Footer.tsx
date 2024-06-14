@@ -77,13 +77,13 @@ const socialLinks: { title: string, href: string, url: string }[] = [
 
 const Footer: FC<FooterProps> = () => (
     <footer className="border-t bg-card">
-        <div className="container mx-auto py-4 md:py-6 lg:py-8 grid">
-            <div className="grid lg:flex justify-center lg:justify-between gap-6 items-center lg:items-start">
+        <div className="container mx-auto py-4 md:py-6 grid">
+            <div className="grid lg:flex justify-center lg:justify-between lg:gap-12 gap-6 items-center lg:items-start">
                 <div className="grid grid-cols-3 md:grid-cols-5 items-start gap-6 lg:gap-0">
                     {footerColumns.map((column, index) => (
-                        <div key={index} className="flex flex-col items-center justify-center space-y-8">
+                        <div key={index} className="grid gap-6 text-center items-center justify-center">
                             <h3 className="font-medium text-sm">{column.title}</h3>
-                            <nav className="flex flex-col items-center justify-center space-y-4">
+                            <nav className="grid items-center justify-center gap-4">
                                 {column.items.map((link, index) => (
                                     <Link key={index} href="/" className="hover:underline text-sm text-muted-foreground text-nowrap lg:text-wrap">{link}</Link>
                                 ))}
@@ -94,7 +94,7 @@ const Footer: FC<FooterProps> = () => (
                 <div className="flex flex-col lg:grid gap-4 lg:gap-6 items-center justify-start">
                     <h3 className="font-medium">Subscribe to our newsletter</h3>
                     <p className="text-muted-foreground">The latest news, articles, and resources, sent to your inbox weekly.</p>
-                    <div className="flex w-full max-w-sm items-center space-x-2">
+                    <div className="flex w-full max-w-sm items-center gap-2">
                         <Input type="email" placeholder="Email*" />
                         <Button type="submit">Subscribe</Button>
                     </div>
@@ -103,12 +103,12 @@ const Footer: FC<FooterProps> = () => (
             </div>
             <div className="border-t grid md:flex md:justify-between gap-6 items-center mt-6 py-6">
                 <div className="flex justify-center items-center gap-6">
-                    <Button asChild className="footer__logo border-solid border border-black px-8 py-2 rounded">
+                    <Button asChild className="px-8 py-2">
                         <Link href="/">Logo</Link>
                     </Button>
                     <p className="text-muted-foreground text-center">© 2024 Company. All rights reserved.</p>
                 </div>
-                <div className="flex justify-center items-center space-x-2">
+                <div className="flex justify-center items-center gap-2">
                     {socialLinks.map((link, index) => (
                         <Avatar key={index} className="h-6 w-6">
                             <AvatarImage src={link['url']} alt={link['title']} />

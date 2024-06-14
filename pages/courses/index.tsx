@@ -5,6 +5,7 @@ import { AvatarImage } from '@radix-ui/react-avatar';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import IndexView from '@/components/IndexView/IndexView';
 import * as icons from 'lucide-react';
+import Layout from '@/components/Layout/Layout';
 
 async function getData() {
     const res = await fetch('http://localhost:8000/courses')
@@ -18,7 +19,7 @@ async function getData() {
 
 export default function Page() {
 
-    const [data, setData] = useState(null);
+    const [data, setData] = useState<null | any[]>(null);
 
     useEffect(() => {
         getData().then(data => setData(data)).catch(error => console.error(error));
@@ -140,11 +141,11 @@ export default function Page() {
     // ];
     console.log(data);
     return (
-        <IndexView>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-2 sm:gap-4 w-full p-2 sm:p-4 bg-background">
+        <Layout>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between py-6 gap-4 w-full bg-background">
                 {data && data.map((course, index) => (
                     <a key={index} href={`/courses/${index + 1}`} >
-                        <Card className={`p-2 sm:p-4 border w-full grid gap-2 sm:gap-4 rounded-lg ${course.isUnlock && "border-2 border-primary"} ${course.isFinished && "bg-secondary"}`}>
+                        <Card className={`p-2 sm:p-4 border w-full grid gap-2 sm:gap-4 rounded-lg ${course.isUnlock && "outline-1 border-primary"} ${course.isFinished && "bg-secondary"}`}>
                             <CardHeader className="grid p-1">
                                 <div className={`${course.isFinished ? "bg-card" : "bg-secondary"} h-32 rounded flex justify-center items-center`}>
                                     {course.isFinished &&
@@ -164,10 +165,11 @@ export default function Page() {
                             </CardContent>
                             <CardFooter className="flex justify-between items-start p-1">
                                 <div className="flex justify-start items-start gap-1 flex-wrap">
-                                    <Badge>{course.difficulty}</Badge>
-                                    <Badge>{course.lessons_count} lessons</Badge>
-                                    <Badge>{course.points_gain} points</Badge>
-                                    <Badge>+{course.exp_gain} XP</Badge>
+                                    {course.lessons_count && <Badge>{course.lessons_count} lessons</Badge>}
+                                    {course.difficulty && <Badge variant={course.difficulty.toLowerCase()}>{course.difficulty}</Badge>}
+                                    {course.language && <Badge variant={course.language.name.toLowerCase()}>{course.language.name}</Badge>}
+                                    {/* <Badge>{course.points_gain} points</Badge>
+                                    <Badge>+{course.exp_gain} XP</Badge> */}
                                 </div>
                                 <div className={`grid text-nowrap gap-1 text-primary ${course.isFinished && "!text-muted-foreground"}`}>
                                     <div className="flex items-center justify-end gap-2">
@@ -184,6 +186,6 @@ export default function Page() {
                     </a>
                 ))}
             </div>
-        </IndexView >
+        </Layout >
     );
 }

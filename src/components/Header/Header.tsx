@@ -90,13 +90,13 @@ const Header: FC<HeaderProps> = () => (
         <div className="container flex justify-between items-center flex gap-6">
             <div className="flex justify-between items-center">
                 <SideBar className="lg:hidden"></SideBar>
-                <Button asChild className="border-solid border border-black px-8 py-2 mx-2 rounded hidden sm:block">
+                <Button asChild className="border-solid border border-black px-8 py-2 rounded hidden sm:block">
                     <Link href="/" className="text-black">Logo</Link>
                 </Button>
-                <NavigationMenu className="left-0 hidden lg:block">
+                <NavigationMenu className="hidden lg:block ms-4">
                     <NavigationMenuList>
                         <NavigationMenuItem>
-                            <NavigationMenuTrigger className="bg-secondary">Getting started</NavigationMenuTrigger>
+                            <NavigationMenuTrigger className="bg-card">Getting started</NavigationMenuTrigger>
                             <NavigationMenuContent data-motion="horizontal">
                                 <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                                     <li className="row-span-3">
@@ -129,7 +129,7 @@ const Header: FC<HeaderProps> = () => (
                             </NavigationMenuContent>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
-                            <NavigationMenuTrigger className="bg-secondary">Components</NavigationMenuTrigger>
+                            <NavigationMenuTrigger className="bg-card">Components</NavigationMenuTrigger>
                             <NavigationMenuContent>
                                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                                     {components.map((component) => (
@@ -146,7 +146,7 @@ const Header: FC<HeaderProps> = () => (
                         </NavigationMenuItem>
                         <NavigationMenuItem>
                             <Link href="/docs" legacyBehavior passHref>
-                                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} bg-secondary`} >
+                                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} bg-card`} >
                                     Documentation
                                 </NavigationMenuLink>
                             </Link>
@@ -165,7 +165,7 @@ const Header: FC<HeaderProps> = () => (
                     <NavigationMenu className="right-0">
                         <NavigationMenuList>
                             <NavigationMenuItem>
-                                <NavigationMenuTrigger className="border-primary border-2 bg-card">
+                                <NavigationMenuTrigger className="border-primary border bg-card">
                                     Sign In
                                 </NavigationMenuTrigger>
                                 <NavigationMenuContent>
@@ -219,7 +219,7 @@ const Header: FC<HeaderProps> = () => (
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
                             <NavigationMenuItem>
-                                <NavigationMenuTrigger className="border-primary border-2 bg-card">
+                                <NavigationMenuTrigger className="border-primary border bg-card">
                                     Login
                                 </NavigationMenuTrigger>
                                 <NavigationMenuContent>

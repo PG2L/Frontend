@@ -195,7 +195,7 @@ export default function Page() {
                         </CardHeader>
                     </Card>
                     <Card>
-                        <CardContent className="p-4 lg:pt-12 rounded outline outline-2 outline-primary grid gap-4 lg:gap-6 justify-items-center">
+                        <CardContent className="p-4 lg:pt-12 rounded outline outline-1 outline-primary grid gap-4 lg:gap-6 justify-items-center">
                             <icons.UserCircleIcon className="h-24 w-24" strokeWidth={1} />
                             <div className="grid grid cols-1 gap-2 lg:gap-6 justify-items-center justify-center">
                                 <div className="grid gap-2">

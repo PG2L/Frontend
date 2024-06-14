@@ -9,6 +9,7 @@ import * as icons from 'lucide-react';
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@radix-ui/react-collapsible';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/router';
+import Layout from '@/components/Layout/Layout';
 
 async function getData(id: number) {
 
@@ -85,28 +86,28 @@ export default function Page() {
     // ];
 
     return (
-        <IndexView>
-            <div className="grid md:flex gap-4 grid-cols-1 rounded-lg p-2 sm:p-4">
+        <Layout>
+            <div className="grid md:flex gap-4 bg-gradient-to-r grid-cols-1 rounded-lg">
                 <div className="hidden md:grid grid-cols-1 w-1/3 gap-4 h-fit">
                     <Card>
                         <a href={`/courses/${data && data.course.id}`}>
-                        <CardHeader className="flex justify-center items-center gap-4 rounded outline outline-2 outline-primary">
-                            <h1 className="text-xl font-medium text-center">{data && data.course && data.course.title}</h1>
-                            <div className="flex flex-wrap gap-1 justify-center w-3/4">
-                                <Badge variant={data && data.language && data.language.name.toLowerCase()}>{data && data.language.name}</Badge>
-                                <Badge variant={data && data.difficulty.toLowerCase()}>{data && data.difficulty}</Badge>
-                                <Badge>5 000 points</Badge>
-                                <Badge>+100 000 xp</Badge>
-                            </div>
-                        </CardHeader>
-                    </a>
+                            <CardHeader className="flex justify-center items-center gap-4 rounded outline outline-1 outline-primary">
+                                <h1 className="text-lg font-medium text-center">{data && data.course && data.course.title}</h1>
+                                <div className="flex flex-wrap gap-1 justify-center w-3/4">
+                                    {data && data.course.language.name && <Badge variant={data.course.language.name.toLowerCase()}>{data.course.language.name}</Badge>}
+                                    {data && data.course.difficulty && <Badge variant={data.course.difficulty.toLowerCase()}>{data.course.difficulty}</Badge>}
+                                    <Badge>5 000 points</Badge>
+                                    <Badge>+100 000 xp</Badge>
+                                </div>
+                            </CardHeader>
+                        </a>
                     </Card>
                     <Card>
                         <CardContent className="p-4">
                             <div className="grid gap-4">
-                            {data && data.course.lessons && data.course.lessons.map((lesson, index) => (
+                                {data && data.course.lessons && data.course.lessons.map((lesson, index) => (
                                     <a key={index} href={`/lessons/${lesson.id}`}>
-                                        <Card className={`${lesson.isFinished && "bg-secondary"} outline outline-2 outline-secondary ${(lesson.id == id) && "translate-x-6 outline-foreground"}`}>
+                                        <Card className={`${lesson.isFinished && "bg-secondary"} outline outline-1 outline-secondary ${(lesson.id == id) && "translate-x-4 outline-primary"}`}>
                                             <CardHeader>
                                                 <h2 className={`text-lg`}>{index + 1} .  {lesson.title}</h2>
                                             </CardHeader>
@@ -125,19 +126,22 @@ export default function Page() {
                     </Card>
                 </div>
                 <div className="md:w-2/3 grid gap-4">
-                    <Card>
-                        <CardHeader className="outline outline-2 outline-primary rounded-lg gap-6">
+                    <Card className="outline outline-1 outline-primary">
+                        <CardHeader>
                             <div className="hidden sm:block py-36 bg-secondary rounded"></div>
-                            <div className="flex justify-between items-start">
-                                <div className="grid gap-4">
+                            <h3 className="text-muted-foreground">{data && data.course.title}</h3>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="flex justify-between items-center">
+                                <div className="grid gap-2">
                                     <div className="flex items-end text-xl font-medium">
                                         <p>{data && data.lesson_number}</p>
                                         <icons.Dot className="h-6 w-6 text-primary" />
                                         <h1>{data && data.title}</h1>
                                     </div>
                                     <div className="flex gap-1 flex-wrap">
-                                        <Badge variant={data && data.language && data.language.name.toLowerCase()}>{data && data.language.name}</Badge>
-                                        <Badge variant={data && data.difficulty.toLowerCase()}>{data && data.difficulty}</Badge>
+                                        {data && data.course.language.name && <Badge variant={data.course.language.name.toLowerCase()}>{data.course.language.name}</Badge>}
+                                        {data && data.course.difficulty && <Badge variant={data.course.difficulty.toLowerCase()}>{data.course.difficulty}</Badge>}
                                         <Badge>5 000 points</Badge>
                                         <Badge>+100 000 xp</Badge>
                                     </div>
@@ -153,8 +157,10 @@ export default function Page() {
                                     </div>
                                 </div>
                             </div>
-                            <Button size="lg" className="text-lg">Start lesson</Button>
-                        </CardHeader>
+                        </CardContent>
+                        <CardFooter>
+                            <Button className="text-lg w-full">Start lesson</Button>
+                        </CardFooter>
                     </Card>
                     <Card className="md:hidden">
                         <CardHeader>
@@ -169,8 +175,8 @@ export default function Page() {
                                 </CollapsibleTrigger>
                                 <CollapsibleContent>
                                     <div className="grid gap-4 mt-4">
-                                        {data && data.menu && data.menu.lessons.map((lesson, index) => (
-                                            <Card key={index} className={`${lesson.isFinished && "bg-secondary"} ${lesson.isUnlock && "outline outline-2 outline-primary"}`}>
+                                        {/* {data && data.menu && data.menu.lessons.map((lesson, index) => (
+                                            <Card key={index} className={`${lesson.isFinished && "bg-secondary"} ${lesson.isUnlock && "outline outline-1 outline-primary"}`}>
                                                 <CardHeader>
                                                     <h2 className={`text-lg ${!lesson.isUnlock && "text-muted-foreground"}`}>{lesson.title}</h2>
                                                 </CardHeader>
@@ -182,7 +188,7 @@ export default function Page() {
                                                     </div>
                                                 </CardFooter>
                                             </Card>
-                                        ))}
+                                        ))} */}
                                     </div>
                                 </CollapsibleContent>
                             </Collapsible>
@@ -312,6 +318,6 @@ export default function Page() {
                     </Card>
                 </div>
             </div>
-        </IndexView>
+        </Layout>
     )
 }

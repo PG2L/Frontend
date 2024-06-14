@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/co
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import * as icons from 'lucide-react';
 import React, { useEffect, useState } from 'react';
+import Layout from '@/components/Layout/Layout';
 
 async function getData(id: number) {
 
@@ -21,7 +22,7 @@ async function getData(id: number) {
 }
 
 export default function Page() {
-    
+
     const router = useRouter();
     const { id } = router.query;
 
@@ -84,13 +85,13 @@ export default function Page() {
     // ];
 
     return (
-        <IndexView>
-            <div className="grid md:flex gap-4 grid-cols-1 border rounded-lg p-2 sm:p-4">
+        <Layout>
+            <div className="grid md:flex gap-4 grid-cols-1 rounded-lg">
                 <div className="hidden md:grid grid-cols-1 w-1/3 gap-4 h-fit">
-                        <Card>
-                    <a href={`/courses/${id}`}>
-                            <CardHeader className="flex justify-center items-center gap-4 rounded outline outline-2 outline-primary">
-                                <h1 className="text-xl font-medium text-center">{data && data.title}</h1>
+                    <Card>
+                        <a href={`/courses/${id}`}>
+                            <CardHeader className="flex justify-center items-center gap-4 rounded outline outline-1 outline-primary">
+                                <h1 className="text-lg font-medium text-center">{data && data.title}</h1>
                                 <div className="flex flex-wrap gap-1 justify-center w-3/4">
                                     <Badge variant={data && data.language.name.toLowerCase()}>{data && data.language.name}</Badge>
                                     <Badge variant={data && data.difficulty.toLowerCase()}>{data && data.difficulty}</Badge>
@@ -98,25 +99,25 @@ export default function Page() {
                                     <Badge>+{data && data.exp_gain} xp</Badge>
                                 </div>
                             </CardHeader>
-                    </a>
-                        </Card>
+                        </a>
+                    </Card>
                     <Card>
                         <CardContent className="p-4">
                             <div className="grid gap-4">
                                 {data && data.lessons && data.lessons.map((lesson, index) => (
                                     <a key={index} href={`/lessons/${lesson.id}`}>
-                                    <Card className={`${lesson.isFinished && "bg-secondary"} outline outline-2 outline-secondary`}>
-                                        <CardHeader>
-                                            <h2 className={`text-lg`}>{index + 1} .  {lesson.title}</h2>
-                                        </CardHeader>
-                                        <CardFooter>
-                                            <div className="flex flex-wrap gap-1 justify-start items-center">
-                                                {/* {lesson.badges.map((badge, index) => (
+                                        <Card className={`${lesson.isFinished && "bg-secondary"} outline outline-1 outline-secondary`}>
+                                            <CardHeader>
+                                                <h2 className={`text-lg`}>{index + 1} .  {lesson.title}</h2>
+                                            </CardHeader>
+                                            <CardFooter>
+                                                <div className="flex flex-wrap gap-1 justify-start items-center">
+                                                    {/* {lesson.badges.map((badge, index) => (
                                                     <Badge key={index}>{badge}</Badge>
                                                 ))} */}
-                                            </div>
-                                        </CardFooter>
-                                    </Card>
+                                                </div>
+                                            </CardFooter>
+                                        </Card>
                                     </a>
                                 ))}
                             </div>
@@ -124,20 +125,22 @@ export default function Page() {
                     </Card>
                 </div>
                 <div className="md:w-2/3 grid gap-4">
-                    <Card>
-                        <CardHeader className="outline outline-2 outline-primary rounded-lg gap-4">
+                    <Card className="outline outline-1 outline-primary">
+                        <CardHeader>
                             <div className="hidden sm:block py-36 bg-secondary rounded"></div>
                             <div className="grid grid-cols-1">
-                                <div className="flex gap-2 mt-2">
+                                <div className="flex gap-2">
                                     {data && data.lessons && data.lessons.map((lesson, index) => (
-                                        <div key={index} className={`h-3 w-1/3 rounded ${lesson.isFinished ? "bg-primary" : "bg-secondary"} ${lesson.isUnlock && "outline outline-2 outline-primary"}`}></div>
+                                        <div key={index} className={`h-3 w-1/3 rounded ${lesson.isFinished ? "bg-primary" : "bg-secondary"} ${lesson.isUnlock && "outline outline-1 outline-primary"}`}></div>
                                     ))}
                                 </div>
                                 <p className="text-muted-foreground text-end">0%</p>
                             </div>
-                            <div className="flex justify-between items-start">
+                        </CardHeader>
+                        <CardContent>
+                            <div className="flex justify-between items-center">
                                 <div className="grid gap-4">
-                                    <h1 className="text-3xl font-medium">{data && data.title}</h1>
+                                    <h1 className="text-xl font-medium">{data && data.title}</h1>
                                     <div className="flex gap-1 flex-wrap">
                                         <Badge variant={data && data.language.name.toLowerCase()}>{data && data.language.name}</Badge>
                                         <Badge variant={data && data.difficulty.toLowerCase()}>{data && data.difficulty}</Badge>
@@ -147,7 +150,7 @@ export default function Page() {
                                 </div>
                                 <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end">
                                     <div className="flex gap-2">
-                                        {data && data.points_gain }
+                                        {data && data.points_gain}
                                         <icons.LucideStar strokeWidth={1} color="#1461cc" />
                                     </div>
                                     <div className="flex gap-2">
@@ -156,8 +159,10 @@ export default function Page() {
                                     </div>
                                 </div>
                             </div>
-                            <Button size="lg" className="text-lg">Continue</Button>
-                        </CardHeader>
+                        </CardContent>
+                        <CardFooter>
+                            <Button size="lg" className="text-lg w-full">Continue</Button>
+                        </CardFooter>
                     </Card>
                     <Card className="md:hidden">
                         <CardHeader>
@@ -173,7 +178,7 @@ export default function Page() {
                                 <CollapsibleContent>
                                     <div className="grid gap-4 mt-4">
                                         {data && data.lessons && data.lessons.map((lesson, index) => (
-                                            <Card key={index} className={`${lesson.isFinished && "bg-secondary"} ${lesson.isUnlock && "outline outline-2 outline-primary"}`}>
+                                            <Card key={index} className={`${lesson.isFinished && "bg-secondary"} ${lesson.isUnlock && "outline outline-1 outline-primary"}`}>
                                                 <CardHeader>
                                                     <h2 className={`text-lg`}>{lesson.title}</h2>
                                                 </CardHeader>
@@ -193,9 +198,9 @@ export default function Page() {
                     </Card>
                     <Card className="text-muted-foreground">
                         <CardHeader>
-                        {data && data.description}
+                            {data && data.description}
                         </CardHeader>
-                            {/* <p className="text-white">
+                        {/* <p className="text-white">
                                 The "Introduction to Python Programming" course is designed to provide learners with a solid foundation in Python, one of the most popular and versatile programming languages in the world today. This course is suitable for complete beginners with no prior programming experience as well as those with some programming background who wish to learn Python. The course emphasizes practical applications and real-world examples to ensure that students gain not only theoretical knowledge but also hands-on skills.
                             </p>
                         </CardHeader>
@@ -314,6 +319,6 @@ export default function Page() {
                     </Card>
                 </div>
             </div>
-        </IndexView>
+        </Layout>
     )
 }

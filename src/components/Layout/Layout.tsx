@@ -19,7 +19,7 @@ interface LayoutProps {
 const Layout: FC<LayoutProps> = ({ children }) => (
     <div className="layout flex flex-col" id="layout" data-testid="layout">
         <Header />
-        <main className="MainContent bg-background">
+        <main className="MainContent container pt-28 pb-12">
             {children}
         </main>
         <FAQ />
