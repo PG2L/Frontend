@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
-import { AvatarImage } from '@radix-ui/react-avatar';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import IndexView from '@/components/IndexView/IndexView';
+import { Card, CardFooter, CardHeader } from '@/components/ui/card';
 import * as icons from 'lucide-react';
 import Layout from '@/components/Layout/Layout';
 
@@ -142,10 +140,10 @@ export default function Page() {
     console.log(data);
     return (
         <Layout>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between py-6 gap-4 w-full bg-background">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between py-6 gap-4 lg:gap-6 w-full bg-background">
                 {data && data.map((course, index) => (
                     <a key={index} href={`/courses/${index + 1}`} >
-                        <Card className={`p-2 sm:p-4 border w-full grid gap-2 sm:gap-4 rounded-lg ${course.isUnlock && "outline-1 border-primary"} ${course.isFinished && "bg-secondary"}`}>
+                        <Card className={`p-2 sm:p-4 border w-full grid gap-2 sm:gap-4 rounded-lg hover:shadow-primary hover:scale-[1.01] ${course.isUnlock && "outline-1 border-primary"} ${course.isFinished && "bg-secondary"}`}>
                             <CardHeader className="grid p-1">
                                 <div className={`${course.isFinished ? "bg-card" : "bg-secondary"} h-32 rounded flex justify-center items-center`}>
                                     {course.isFinished &&
@@ -159,10 +157,8 @@ export default function Page() {
                                         <div key={index} className={`w-full h-3 rounded mt-1 bg-secondary`}></div>
                                     ))}
                                 </div>
+                                <h3 className="text-lg text-nowrap overflow-hidden text-ellipsis">{course.title}</h3>
                             </CardHeader>
-                            <CardContent className="p-1 min-w-0">
-                                <h3 className="text-lg text-nowrap overflow-hidden text-ellipsis font-medium">{course.title}</h3>
-                            </CardContent>
                             <CardFooter className="flex justify-between items-start p-1">
                                 <div className="flex justify-start items-start gap-1 flex-wrap">
                                     {course.lessons_count && <Badge>{course.lessons_count} lessons</Badge>}

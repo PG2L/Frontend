@@ -91,7 +91,7 @@ const Footer: FC<FooterProps> = () => (
                         </div>
                     ))}
                 </div>
-                <div className="flex flex-col lg:grid gap-4 lg:gap-6 items-center justify-start">
+                <div className="flex flex-col lg:grid gap-4 items-center justify-start">
                     <h3 className="font-medium">Subscribe to our newsletter</h3>
                     <p className="text-muted-foreground">The latest news, articles, and resources, sent to your inbox weekly.</p>
                     <div className="flex w-full max-w-sm items-center gap-2">

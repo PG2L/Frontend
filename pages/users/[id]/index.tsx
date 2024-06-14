@@ -8,6 +8,7 @@ import IndexView from '@/components/IndexView/IndexView';
 import * as icons from 'lucide-react';
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@radix-ui/react-collapsible';
 import { Button } from '@/components/ui/button';
+import Layout from '@/components/Layout/Layout';
 
 export default function Page() {
 
@@ -186,9 +187,9 @@ export default function Page() {
         ]
 
     return (
-        <IndexView>
-            <div className="grid lg:flex gap-4 grid-cols-1 rounded-lg p-2 sm:p-4">
-                <div className="grid grid-cols-1 gap-4 h-fit w-full lg:w-1/3">
+        <Layout>
+            <div className="grid lg:flex gap-4 lg:gap-6 grid-cols-1 rounded-lg">
+                <div className="grid grid-cols-1 gap-4 lg:gap-6 h-fit w-full lg:w-1/3">
                     <Card className="hidden sm:block w-full">
                         <CardHeader className="flex justify-center items-center gap-4 rounded">
                             <h1 className="text-xl font-medium text-center">Profil</h1>
@@ -233,7 +234,7 @@ export default function Page() {
                         </div>
                     </div>
                 </div>
-                <div className="lg:w-2/3 h-fit grid gap-4">
+                <div className="lg:w-2/3 h-fit grid gap-4 lg:gap-6">
                     <Card className="lg:order-last">
                         <CardHeader>
                             <Collapsible className="text-xl font-medium">
@@ -289,6 +290,6 @@ export default function Page() {
                     </Card>
                 </div>
             </div>
-        </IndexView >
+        </Layout >
     )
 }

@@ -86,15 +86,15 @@ export default function Page() {
 
     return (
         <Layout>
-            <div className="grid md:flex gap-4 grid-cols-1 rounded-lg">
+            <div className="grid md:flex gap-4 lg:gap-6 grid-cols-1 rounded-lg">
                 <div className="hidden md:grid grid-cols-1 w-1/3 gap-4 h-fit">
                     <Card>
                         <a href={`/courses/${id}`}>
                             <CardHeader className="flex justify-center items-center gap-4 rounded outline outline-1 outline-primary">
                                 <h1 className="text-lg font-medium text-center">{data && data.title}</h1>
                                 <div className="flex flex-wrap gap-1 justify-center w-3/4">
-                                    <Badge variant={data && data.language.name.toLowerCase()}>{data && data.language.name}</Badge>
-                                    <Badge variant={data && data.difficulty.toLowerCase()}>{data && data.difficulty}</Badge>
+                                        {data && data.language && data.language.name && <Badge variant={data.language.name.toLowerCase()}>{data.language.name}</Badge>}
+                                        {data && data.difficulty && <Badge variant={data.difficulty.toLowerCase()}>{data.difficulty}</Badge>}
                                     <Badge>{data && data.points_gain} points</Badge>
                                     <Badge>+{data && data.exp_gain} xp</Badge>
                                 </div>
@@ -106,7 +106,7 @@ export default function Page() {
                             <div className="grid gap-4">
                                 {data && data.lessons && data.lessons.map((lesson, index) => (
                                     <a key={index} href={`/lessons/${lesson.id}`}>
-                                        <Card className={`${lesson.isFinished && "bg-secondary"} outline outline-1 outline-secondary`}>
+                                        <Card className={`${lesson.isFinished && "bg-secondary"}hover:shadow-secondary hover:scale-[1.01] outline outline-1 outline-secondary`}>
                                             <CardHeader>
                                                 <h2 className={`text-lg`}>{index + 1} .  {lesson.title}</h2>
                                             </CardHeader>
@@ -124,7 +124,7 @@ export default function Page() {
                         </CardContent>
                     </Card>
                 </div>
-                <div className="md:w-2/3 grid gap-4">
+                <div className="md:w-2/3 grid gap-4 lg:gap-6">
                     <Card className="outline outline-1 outline-primary">
                         <CardHeader>
                             <div className="hidden sm:block py-36 bg-secondary rounded"></div>
@@ -142,8 +142,8 @@ export default function Page() {
                                 <div className="grid gap-4">
                                     <h1 className="text-xl font-medium">{data && data.title}</h1>
                                     <div className="flex gap-1 flex-wrap">
-                                        <Badge variant={data && data.language.name.toLowerCase()}>{data && data.language.name}</Badge>
-                                        <Badge variant={data && data.difficulty.toLowerCase()}>{data && data.difficulty}</Badge>
+                                        {data && data.language && data.language.name && <Badge variant={data.language.name.toLowerCase()}>{data.language.name}</Badge>}
+                                        {data && data.difficulty && <Badge variant={data.difficulty.toLowerCase()}>{data.difficulty}</Badge>}
                                         <Badge>{data && data.points_gain} points</Badge>
                                         <Badge>+{data && data.exp_gain} xp</Badge>
                                     </div>
