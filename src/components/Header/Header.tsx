@@ -17,39 +17,48 @@ import { Input } from '../ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { icons } from 'lucide-react';
 import SideBar from '../SideBar/SideBar';
-
-
-interface HeaderProps { }
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, UseFormReturn } from 'react-hook-form';
+import { z } from 'zod';
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from '../ui/form';
 
 const components: { title: string; href: string; description: string }[] = [
     {
-        title: "Alert Dialog",
-        href: "/docs/primitives/alert-dialog",
+        title: "All lessons",
+        href: "/lessons",
         description:
-            "A modal dialog that interrupts the user with important content and expects a response.",
+            "A list of every lessons on our website",
     },
     {
-        title: "Hover Card",
-        href: "/docs/primitives/hover-card",
+        title: "One lesson",
+        href: "/lessons/1",
         description:
-            "For sighted users to preview content available behind a link.",
+            "A single lesson page",
     },
     {
-        title: "Progress",
-        href: "/docs/primitives/progress",
+        title: "All courses",
+        href: "/courses",
         description:
-            "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+            "A list of every courses on our website",
     },
     {
-        title: "Scroll-area",
-        href: "/docs/primitives/scroll-area",
-        description: "Visually or semantically separates content.",
+        title: "One course",
+        href: "/courses/1",
+        description: "A single course page",
     },
     {
-        title: "Tabs",
-        href: "/docs/primitives/tabs",
+        title: "User",
+        href: "/users/1",
         description:
-            "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+            "A single user page",
     },
     {
         title: "Tooltip",
@@ -83,9 +92,59 @@ const ListItem = React.forwardRef<
         </li>
     )
 })
-ListItem.displayName = "ListItem"
+ListItem.displayName = "ListItem";
 
-const Header: FC<HeaderProps> = () => (
+const formSchema = z.object({
+    username: z.string().min(2, {
+        message: "Username must be at least 2 characters.",
+    }),
+    email: z.string().email({
+        message: "Invalid email address.",
+    }),
+    password: z.string().min(8, {
+        message: "Password must be at least 8 characters.",
+    }),
+})
+
+interface HeaderProps {}
+
+const Header: FC<HeaderProps> = () => {
+
+    const form = useForm({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            username: "",
+            email: "",
+            password: "",
+        },
+    });
+
+    const onSubmit = async (values) => {
+        try {
+            const response = await fetch(`http://localhost:8000/users/new`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(values),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to post data');
+            }
+    
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    if (!form) {
+        return null;
+    }
+
+    return (
     <header className="py-3 bg-card border-solid border-b transition-all duration-300 w-full fixed top-0 z-50" id="header" data-testid="header">
         <div className="container flex justify-between items-center flex gap-6">
             <div className="flex justify-between items-center">
@@ -163,7 +222,7 @@ const Header: FC<HeaderProps> = () => (
                         </Button>
                     </div>
                     <NavigationMenu className="right-0">
-                        <NavigationMenuList>
+                        <NavigationMenuList className="flex gap-2">
                             <NavigationMenuItem>
                                 <NavigationMenuTrigger className="border-primary border bg-card">
                                     Sign In
@@ -177,43 +236,66 @@ const Header: FC<HeaderProps> = () => (
                                             </CardDescription>
                                         </CardHeader>
                                         <CardContent>
-                                            <div className="grid gap-4">
-                                                <div className="grid grid-cols-2 gap-4">
-                                                    <div className="grid gap-2">
-                                                        <label htmlFor="first-name">First name</label>
-                                                        <Input id="first-name" placeholder="Max" required />
+                                            <Form {...form}>
+                                                <form onSubmit={form.handleSubmit(onSubmit)}>
+                                                    <div className="grid gap-4">
+                                                        <FormField
+                                                        control={form.control}
+                                                        name="username"
+                                                        render={({ field }) => (
+                                                            <FormItem>
+                                                            <FormLabel>Username</FormLabel>
+                                                            <FormControl>
+                                                                <Input placeholder="Nakkarst" {...field} />
+                                                            </FormControl>
+                                                            <FormMessage />
+                                                            </FormItem>
+                                                        )}
+                                                        />
+                                                        <FormField
+                                                        control={form.control}
+                                                        name="email"
+                                                        render={({ field }) => (
+                                                            <FormItem>
+                                                            <FormLabel>Email</FormLabel>
+                                                            <FormControl>
+                                                                <Input placeholder="example@mail.com" {...field} />
+                                                            </FormControl>
+                                                            <FormMessage />
+                                                            </FormItem>
+                                                        )}
+                                                        />
+                                                        <FormField
+                                                        control={form.control}
+                                                        name="password"
+                                                        render={({ field }) => (
+                                                            <FormItem className="w-full">
+                                                            <FormLabel>Password</FormLabel>
+                                                            <FormControl>
+                                                                <Input type="password" {...field} />
+                                                            </FormControl>
+                                                            <FormDescription>
+                                                                Must be at least 8 characters.
+                                                            </FormDescription>
+                                                            <FormMessage />
+                                                            </FormItem>
+                                                        )}
+                                                        />
+                                                        <Button type="submit" className="w-full">
+                                                            Create an account
+                                                        </Button>
+                                                        <Button variant="outline" className="w-full">
+                                                            Sign up with GitHub
+                                                        </Button>
+                                                        </div>
+                                                        <div className="mt-4 text-center ">
+                                                        Already have an account?{" "}
+                                                        <Link href="#" className="underline">
+                                                        Sign in
+                                                        </Link>
                                                     </div>
-                                                    <div className="grid gap-2">
-                                                        <label htmlFor="last-name">Last name</label>
-                                                        <Input id="last-name" placeholder="Robinson" required />
-                                                    </div>
-                                                </div>
-                                                <div className="grid gap-2">
-                                                    <label htmlFor="email">Email</label>
-                                                    <Input
-                                                        id="email"
-                                                        type="email"
-                                                        placeholder="m@example.com"
-                                                        required
-                                                    />
-                                                </div>
-                                                <div className="grid gap-2">
-                                                    <label htmlFor="password">Password</label>
-                                                    <Input id="password" type="password" />
-                                                </div>
-                                                <Button type="submit" className="w-full">
-                                                    Create an account
-                                                </Button>
-                                                <Button variant="outline" className="w-full">
-                                                    Sign up with GitHub
-                                                </Button>
-                                            </div>
-                                            <div className="mt-4 text-center ">
-                                                Already have an account?{" "}
-                                                <Link href="#" className="underline">
-                                                    Sign in
-                                                </Link>
-                                            </div>
+                                                </form>
+                                            </Form>
                                         </CardContent>
                                     </Card>
                                 </NavigationMenuContent>
@@ -272,7 +354,7 @@ const Header: FC<HeaderProps> = () => (
                 </div>
             </div>
         </div>
-    </header>
-);
+    </header>)
+};
 
 export default Header;
