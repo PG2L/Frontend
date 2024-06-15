@@ -52,7 +52,7 @@ const FAQ: FC<FAQProps> = () => {
             <div className="container mx-auto p-4">
                 <Collapsible open={isOpen} onOpenChange={setIsOpen} className="w-full space-y-2">
                     <div className="flex items-center justify-between px-4">
-                        <h3 className="text-xl font-bold">
+                        <h3 className="text-lg font-bold">
                             F.A.Q
                         </h3>
                         <CollapsibleTrigger asChild>

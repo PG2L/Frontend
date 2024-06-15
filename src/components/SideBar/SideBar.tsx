@@ -31,7 +31,7 @@ const SideBar: FC<SideBarProps> = ({ className }) => (
             </SheetTrigger>
             <SheetContent side={"left"}>
                 <SheetHeader>
-                    <SheetTitle className="text-xl">Menu</SheetTitle>
+                    <SheetTitle className="text-lg">Menu</SheetTitle>
                     <SheetDescription>
                         Make your way through the app
                     </SheetDescription>

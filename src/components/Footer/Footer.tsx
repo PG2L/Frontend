@@ -106,7 +106,7 @@ const Footer: FC<FooterProps> = () => (
                     <Button asChild className="px-8 py-2">
                         <Link href="/">Logo</Link>
                     </Button>
-                    <p className="text-muted-foreground text-center">© 2024 Company. All rights reserved.</p>
+                    <p className="text-muted-foreground text-end w-full">© 2024 Company. All rights reserved.</p>
                 </div>
                 <div className="flex justify-center items-center gap-2">
                     {socialLinks.map((link, index) => (
