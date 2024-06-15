@@ -9,6 +9,8 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import * as icons from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import Layout from '@/components/Layout/Layout';
+import Link from 'next/link';
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
 
 async function getData(id: number) {
 
@@ -26,7 +28,7 @@ export default function Page() {
     const router = useRouter();
     const { id } = router.query;
 
-    const [data, setData] = useState(null);
+    const [data, setData] = useState<any[]>();
 
     console.log(id);
     useEffect(() => {
@@ -86,126 +88,159 @@ export default function Page() {
 
     return (
         <Layout>
-            <div className="grid md:flex gap-4 lg:gap-6 grid-cols-1 rounded-lg">
-                <div className="hidden md:grid grid-cols-1 w-1/3 gap-4 h-fit">
-                    <Card>
-                        <a href={`/courses/${id}`}>
-                            <CardHeader className="flex justify-center items-center gap-4 rounded outline outline-1 outline-primary">
-                                <h1 className="text-lg font-medium text-center">{data && data.title}</h1>
-                                <div className="flex flex-wrap gap-1 justify-center w-3/4">
-                                        {data && data.language && data.language.name && <Badge variant={data.language.name.toLowerCase()}>{data.language.name}</Badge>}
-                                        {data && data.difficulty && <Badge variant={data.difficulty.toLowerCase()}>{data.difficulty}</Badge>}
-                                    <Badge>{data && data.points_gain} points</Badge>
-                                    <Badge>+{data && data.exp_gain} xp</Badge>
-                                </div>
-                            </CardHeader>
-                        </a>
-                    </Card>
-                    <Card>
-                        <CardContent className="p-4">
-                            <div className="grid gap-4">
-                                {data && data.lessons && data.lessons.map((lesson, index) => (
-                                    <a key={index} href={`/lessons/${lesson.id}`}>
-                                        <Card className={`${lesson.isFinished && "bg-secondary"}hover:shadow-secondary hover:scale-[1.01] outline outline-1 outline-secondary`}>
-                                            <CardHeader>
-                                                <h2 className={`text-lg`}>{index + 1} .  {lesson.title}</h2>
-                                            </CardHeader>
-                                            <CardFooter>
-                                                <div className="flex flex-wrap gap-1 justify-start items-center">
-                                                    {/* {lesson.badges.map((badge, index) => (
+            {data &&
+                <>
+                    <Breadcrumb>
+                        <BreadcrumbList>
+                            <BreadcrumbItem>
+                                <BreadcrumbLink asChild>
+                                    <Link href="/">Home</Link>
+                                </BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbLink asChild>
+                                    <Link href="/courses">Courses</Link>
+                                </BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbPage>{data.title}</BreadcrumbPage>
+                            </BreadcrumbItem>
+                        </BreadcrumbList>
+                    </Breadcrumb>
+                    <div className="grid md:flex gap-4 lg:gap-6 grid-cols-1 rounded-lg mt-6">
+                        <div className="hidden md:grid grid-cols-1 w-1/3 gap-4 h-fit">
+                            <Card>
+                                <Link href={`/courses/${id}`}>
+                                    <CardHeader className="flex justify-center items-center gap-4 rounded outline outline-1 outline-primary hover:shadow-secondary hover:scale-[1.01]">
+                                        <h1 className="font-medium text-center">{data['title']}</h1>
+                                        <div className="flex flex-wrap gap-1 justify-center w-3/4">
+                                            {data.language.name && <Badge variant={data.language.name.toLowerCase()}>{data.language.name}</Badge>}
+                                            {data.difficulty && <Badge variant={data.difficulty.toLowerCase()}>{data.difficulty}</Badge>}
+                                            <Badge>{data.points_gain} points</Badge>
+                                            <Badge>+{data.exp_gain} xp</Badge>
+                                        </div>
+                                    </CardHeader>
+                                </Link>
+                            </Card>
+                            <Card>
+                                <CardContent className="p-4">
+                                    <div className="grid gap-4">
+                                        {data.lessons && data.lessons.map((lesson, index) => (
+                                            <Link key={index} href={`/lessons/${lesson.id}`}>
+                                                <Card className={`${lesson.isFinished && "bg-secondary"} hover:shadow-secondary hover:scale-[1.01] hover:border-primary outline outline-1 outline-secondary`}>
+                                                    <CardHeader>
+                                                        <h2>{index + 1} .  {lesson.title}</h2>
+                                                    </CardHeader>
+                                                    <CardFooter>
+                                                        <div className="flex flex-wrap gap-1 justify-start items-center">
+                                                            {/* {lesson.badges.map((badge, index) => (
                                                     <Badge key={index}>{badge}</Badge>
                                                 ))} */}
-                                                </div>
-                                            </CardFooter>
-                                        </Card>
-                                    </a>
-                                ))}
-                            </div>
-                        </CardContent>
-                    </Card>
-                </div>
-                <div className="md:w-2/3 grid gap-4 lg:gap-6">
-                    <Card className="outline outline-1 outline-primary">
-                        <CardHeader>
-                            <div className="hidden sm:block py-36 bg-secondary rounded"></div>
-                            <div className="grid grid-cols-1">
-                                <div className="flex gap-2">
-                                    {data && data.lessons && data.lessons.map((lesson, index) => (
-                                        <div key={index} className={`h-3 w-1/3 rounded ${lesson.isFinished ? "bg-primary" : "bg-secondary"} ${lesson.isUnlock && "outline outline-1 outline-primary"}`}></div>
-                                    ))}
-                                </div>
-                                <p className="text-muted-foreground text-end">0%</p>
-                            </div>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="flex justify-between items-center">
-                                <div className="grid gap-4">
-                                    <h1 className="text-xl font-medium">{data && data.title}</h1>
-                                    <div className="flex gap-1 flex-wrap">
-                                        {data && data.language && data.language.name && <Badge variant={data.language.name.toLowerCase()}>{data.language.name}</Badge>}
-                                        {data && data.difficulty && <Badge variant={data.difficulty.toLowerCase()}>{data.difficulty}</Badge>}
-                                        <Badge>{data && data.points_gain} points</Badge>
-                                        <Badge>+{data && data.exp_gain} xp</Badge>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end">
-                                    <div className="flex gap-2">
-                                        {data && data.points_gain}
-                                        <icons.LucideStar strokeWidth={1} color="#1461cc" />
-                                    </div>
-                                    <div className="flex gap-2">
-                                        {data && data.exp_gain}
-                                        <icons.LucideMedal strokeWidth={1} color="#1461cc" />
-                                    </div>
-                                </div>
-                            </div>
-                        </CardContent>
-                        <CardFooter>
-                            <Button size="lg" className="text-lg w-full">Continue</Button>
-                        </CardFooter>
-                    </Card>
-                    <Card className="md:hidden">
-                        <CardHeader>
-                            <Collapsible className="text-xl font-medium">
-                                <CollapsibleTrigger asChild>
-                                    <div className="flex items-center justify-between">
-                                        <h2 className="text-lg font-medium">Included lessons</h2>
-                                        <Button variant="ghost">
-                                            <icons.ChevronDown />
-                                        </Button>
-                                    </div>
-                                </CollapsibleTrigger>
-                                <CollapsibleContent>
-                                    <div className="grid gap-4 mt-4">
-                                        {data && data.lessons && data.lessons.map((lesson, index) => (
-                                            <Card key={index} className={`${lesson.isFinished && "bg-secondary"} ${lesson.isUnlock && "outline outline-1 outline-primary"}`}>
-                                                <CardHeader>
-                                                    <h2 className={`text-lg`}>{lesson.title}</h2>
-                                                </CardHeader>
-                                                <CardFooter>
-                                                    <div className="flex flex-wrap gap-1 justify-start items-center">
-                                                        {/* {lesson.badges.map((badge, index) => (
-                                                            <Badge key={index}>{badge}</Badge>
-                                                        ))} */}
-                                                    </div>
-                                                </CardFooter>
-                                            </Card>
+                                                        </div>
+                                                    </CardFooter>
+                                                </Card>
+                                            </Link>
                                         ))}
                                     </div>
-                                </CollapsibleContent>
-                            </Collapsible>
-                        </CardHeader>
-                    </Card>
-                    <Card className="text-muted-foreground">
-                        <CardHeader>
-                            {data && data.description}
-                        </CardHeader>
-                        {/* <p className="text-white">
+                                </CardContent>
+                            </Card>
+                        </div>
+                        <div className="md:w-2/3 grid gap-4 lg:gap-6">
+                            <Card className="outline outline-1 outline-primary">
+                                <CardHeader>
+                                    <div className="hidden sm:block py-36 bg-secondary rounded"></div>
+                                    <div className="grid grid-cols-1">
+                                        <div className="flex gap-2">
+                                            {data.lessons && data.lessons.map((lesson, index) => (
+                                                <div key={index} className={`h-3 w-1/3 rounded ${lesson.isFinished ? "bg-primary" : "bg-secondary"} ${lesson.isUnlock && "outline outline-1 outline-primary"}`}></div>
+                                            ))}
+                                        </div>
+                                        <p className="text-muted-foreground text-end">0%</p>
+                                    </div>
+                                </CardHeader>
+                                <CardContent>
+                                    <div className="flex justify-between items-center">
+                                        <div className="grid gap-4">
+                                            <h1 className="text-lg font-medium">{data.title}</h1>
+                                            <div className="flex gap-1 flex-wrap">
+                                                {data.language && data.language.name && <Badge variant={data.language.name.toLowerCase()}>{data.language.name}</Badge>}
+                                                {data.difficulty && <Badge variant={data.difficulty.toLowerCase()}>{data.difficulty}</Badge>}
+                                                <Badge>{data.points_gain} points</Badge>
+                                                <Badge>+{data.exp_gain} xp</Badge>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end">
+                                            <div className="flex gap-2">
+                                                {data.points_gain}
+                                                <icons.LucideStar strokeWidth={1} color="#1461cc" />
+                                            </div>
+                                            <div className="flex gap-2">
+                                                {data.exp_gain}
+                                                <icons.LucideMedal strokeWidth={1} color="#1461cc" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </CardContent>
+                                <CardFooter>
+                                    <div className="grid w-full grid-cols-1 sm:flex sm:justify-between gap-6">
+                                        <div className="flex items-end gap-6">
+                                            <div className="flex gap-1">
+                                                <icons.BookUser strokeWidth={1} color="#1461cc" />
+                                                <span className="text-muted-foreground">18 000+ students</span>
+                                            </div>
+                                            <div className="flex gap-1">
+                                                <icons.Clock strokeWidth={1} color="#1461cc" />
+                                                <span className="text-muted-foreground">5h</span>
+                                            </div>
+                                        </div>
+                                        <Button size="lg" className="w-full sm:w-1/2">Continue</Button>
+                                    </div>
+                                </CardFooter>
+                            </Card>
+                            <Card className="md:hidden">
+                                <CardHeader>
+                                    <Collapsible className="text-lg font-medium">
+                                        <CollapsibleTrigger asChild>
+                                            <div className="flex items-center justify-between">
+                                                <h2 className=" font-medium">Included lessons</h2>
+                                                <Button variant="ghost">
+                                                    <icons.ChevronDown />
+                                                </Button>
+                                            </div>
+                                        </CollapsibleTrigger>
+                                        <CollapsibleContent>
+                                            <div className="grid gap-4 mt-4">
+                                                {data.lessons && data.lessons.map((lesson, index) => (
+                                                    <Card key={index} className={`${lesson.isFinished && "bg-secondary"} ${lesson.isUnlock && "outline outline-1 outline-primary"}`}>
+                                                        <CardHeader>
+                                                            <h2>{lesson.title}</h2>
+                                                        </CardHeader>
+                                                        <CardFooter>
+                                                            <div className="flex flex-wrap gap-1 justify-start items-center">
+                                                                {/* {lesson.badges.map((badge, index) => (
+                                                            <Badge key={index}>{badge}</Badge>
+                                                        ))} */}
+                                                            </div>
+                                                        </CardFooter>
+                                                    </Card>
+                                                ))}
+                                            </div>
+                                        </CollapsibleContent>
+                                    </Collapsible>
+                                </CardHeader>
+                            </Card>
+                            <Card className="text-muted-foreground">
+                                <CardHeader>
+                                    {data.description}
+                                </CardHeader>
+                                {/* <p className="text-white">
                                 The "Introduction to Python Programming" course is designed to provide learners with a solid foundation in Python, one of the most popular and versatile programming languages in the world today. This course is suitable for complete beginners with no prior programming experience as well as those with some programming background who wish to learn Python. The course emphasizes practical applications and real-world examples to ensure that students gain not only theoretical knowledge but also hands-on skills.
                             </p>
                         </CardHeader>
                         <CardContent>
-                            <h3 className="text-xl text-white font-medium mb-4">Course Objectives:</h3>
+                            <h3 className="text-lg text-white font-medium mb-4">Course Objectives:</h3>
                             <p>By the end of this course, students will be able to:</p>
                             <ul className="ms-4 list-disc marker:text-primary">
                                 <li>Understand the basic concepts and constructs of Python programming.</li>
@@ -216,9 +251,9 @@ export default function Page() {
                                 <li>Apply Python in various domains such as web development, automation, and data science.</li>
                             </ul>
 
-                            <h3 className="text-xl text-white font-medium mt-6">Course Outline:</h3>
+                            <h3 className="text-lg text-white font-medium mt-6">Course Outline:</h3>
                             <div className="grid gap-4 mt-4">
-                                <h3 className="text-lg text-white">Lesson 1: Introduction to Python</h3>
+                                <h3 className=" text-white">Lesson 1: Introduction to Python</h3>
                                 <ul className="ms-4  list-disc marker:text-primary">
                                     <li>Overview of Python and its applications</li>
                                     <li>Setting up the Python environment (installation, IDEs, Jupyter Notebooks)</li>
@@ -226,7 +261,7 @@ export default function Page() {
                                     <li>Understanding Python syntax and conventions</li>
                                 </ul>
 
-                                <h3 className="text-lg text-white">Lesson 2: Basic Python Constructs</h3>
+                                <h3 className=" text-white">Lesson 2: Basic Python Constructs</h3>
                                 <ul className="ms-4  list-disc marker:text-primary">
                                     <li>Variables, data types, and operators</li>
                                     <li>Control flow: conditional statements (if, else, elif)</li>
@@ -234,7 +269,7 @@ export default function Page() {
                                     <li>Functions: defining and calling functions, lambda functions</li>
                                 </ul>
 
-                                <h3 className="text-lg text-white">Lesson 3: Data Structures in Python</h3>
+                                <h3 className=" text-white">Lesson 3: Data Structures in Python</h3>
                                 <ul className="ms-4  list-disc marker:text-primary">
                                     <li>Lists, tuples, and sets</li>
                                     <li>Dictionaries and their applications</li>
@@ -242,7 +277,7 @@ export default function Page() {
                                     <li>String manipulation and formatting</li>
                                 </ul>
 
-                                <h3 className="text-lg text-white">Lesson 4: Advanced Python Concepts</h3>
+                                <h3 className=" text-white">Lesson 4: Advanced Python Concepts</h3>
                                 <ul className="ms-4  list-disc marker:text-primary">
                                     <li>Lessons and packages</li>
                                     <li>File handling (reading from and writing to files)</li>
@@ -250,7 +285,7 @@ export default function Page() {
                                     <li>Working with dates and times</li>
                                 </ul>
 
-                                <h3 className="text-lg text-white">Lesson 5: Object-Oriented Programming (OOP) in Python</h3>
+                                <h3 className=" text-white">Lesson 5: Object-Oriented Programming (OOP) in Python</h3>
                                 <ul className="ms-4  list-disc marker:text-primary">
                                     <li>Understanding classes and objects</li>
                                     <li>Attributes and methods</li>
@@ -258,7 +293,7 @@ export default function Page() {
                                     <li>Encapsulation and data hiding</li>
                                 </ul>
 
-                                <h3 className="text-lg text-white">Lesson 6: Working with Libraries and Frameworks</h3>
+                                <h3 className=" text-white">Lesson 6: Working with Libraries and Frameworks</h3>
                                 <ul className="ms-4  list-disc marker:text-primary">
                                     <li>Overview of Python standard library</li>
                                     <li>Introduction to popular third-party libraries (e.g., NumPy, Pandas)</li>
@@ -266,7 +301,7 @@ export default function Page() {
                                     <li>Data visualization with Matplotlib and Seaborn</li>
                                 </ul>
 
-                                <h3 className="text-lg text-white">Lesson 7: Practical Applications of Python</h3>
+                                <h3 className=" text-white">Lesson 7: Practical Applications of Python</h3>
                                 <ul className="ms-4  list-disc marker:text-primary">
                                     <li>Web scraping with BeautifulSoup and Requests</li>
                                     <li>Introduction to web development with Flask or Django</li>
@@ -274,14 +309,14 @@ export default function Page() {
                                     <li>Basic introduction to machine learning concepts</li>
                                 </ul>
 
-                                <h3 className="text-lg text-white">Lesson 8: Final Project and Assessment</h3>
+                                <h3 className=" text-white">Lesson 8: Final Project and Assessment</h3>
                                 <ul className="ms-4  list-disc marker:text-primary">
                                     <li>Developing a final project that integrates various concepts learned</li>
                                     <li>Peer review and feedback sessions</li>
                                     <li>Final assessment to evaluate understanding and application of Python programming skills</li>
                                 </ul>
 
-                                <h3 className="text-xl text-white font-medium">Teaching Methodology:</h3>
+                                <h3 className="text-lg text-white font-medium">Teaching Methodology:</h3>
                                 <ul className="ms-4  list-disc marker:text-primary">
                                     <li>Lectures and interactive discussions</li>
                                     <li>Hands-on coding exercises and assignments</li>
@@ -290,35 +325,37 @@ export default function Page() {
                                     <li>Access to online resources and supplementary materials</li>
                                 </ul>
 
-                                <h3 className="text-xl text-white font-medium">Prerequisites:</h3>
+                                <h3 className="text-lg text-white font-medium">Prerequisites:</h3>
                                 <ul className="ms-4  list-disc marker:text-primary">
                                     <li>No prior programming experience required.</li>
                                     <li>Basic computer literacy and familiarity with operating systems.</li>
                                 </ul>
 
-                                <h3 className="text-xl text-white font-medium">Recommended Texts and Resources:</h3>
+                                <h3 className="text-lg text-white font-medium">Recommended Texts and Resources:</h3>
                                 <ul className="ms-4  list-disc marker:text-primary">
                                     <li>"Automate the Boring Stuff with Python" by Al Sweigart</li>
                                     <li>"Python Crash Course" by Eric Matthes</li>
                                     <li>Online documentation and tutorials from the official Python website</li>
                                 </ul>
 
-                                <h3 className="text-xl text-white font-medium">Assessment and Certification:</h3>
+                                <h3 className="text-lg text-white font-medium">Assessment and Certification:</h3>
                                 <ul className="ms-4  list-disc marker:text-primary">
                                     <li>Continuous assessment through quizzes, assignments, and projects</li>
                                     <li>Final project evaluation and presentation</li>
                                     <li>Certificate of completion upon successfully meeting course requirements</li>
                                 </ul>
 
-                                <h3 className="text-xl text-white font-medium">Course Duration:</h3>
+                                <h3 className="text-lg text-white font-medium">Course Duration:</h3>
                                 <p>Typically, the course spans 8-12 weeks, with weekly sessions and assignments.</p>
 
                                 <p className="text-white">This comprehensive course aims to equip learners with the skills and confidence to use Python for a wide range of applications, laying a strong foundation for further study and professional development in the field of programming and software development.</p>
                             </div>
                         </CardContent> */}
-                    </Card>
-                </div>
-            </div>
+                            </Card>
+                        </div>
+                    </div>
+                </>
+            }
         </Layout>
     )
 }

@@ -17,9 +17,9 @@ interface LayoutProps {
  * @returns The rendered layout component.
  */
 const Layout: FC<LayoutProps> = ({ children }) => (
-    <div className="layout flex flex-col" id="layout" data-testid="layout">
+    <div className="flex flex-col" id="layout" data-testid="layout">
         <Header />
-        <main className="MainContent container pt-28 pb-12">
+        <main className="MainContent container pt-20 pb-12 w-full">
             {children}
         </main>
         <FAQ />

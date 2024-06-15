@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
-import { AvatarImage } from '@radix-ui/react-avatar';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card';
-import IndexView from '@/components/IndexView/IndexView';
 import * as icons from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
 import Layout from '@/components/Layout/Layout';
+import Link from 'next/link';
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
 
 async function getData() {
     const res = await fetch('http://localhost:8000/lessons')
@@ -165,10 +166,26 @@ export default function Page() {
 
     return (
         <Layout>
+            <Breadcrumb>
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href="/">Home</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbPage>Lessons</BreadcrumbPage>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-4 lg:gap-6 w-full bg-background py-6">
+                {!data && Array.from({ length: 12 }).map((_, index) => (
+                    <Skeleton key={index} className="w-full rounded-lg h-80" />
+                ))}
                 {data && data.map((lesson, index) => (
-                    <a key={index} href={`/lessons/${index + 1}`} >
-                        <Card className={`p-4 border w-full grid gap-2 sm:gap-4 rounded-lg hover:shadow-primary hover:scale-[1.01] ${lesson.isUnlock && "outline outline-primary outline-1"} ${lesson.isFinished && "bg-secondary"}`}>
+                    <Link key={index} href={`/lessons/${index + 1}`} >
+                        <Card className={`p-4 border w-full grid gap-2 sm:gap-4 rounded-lg hover:border-primary hover:scale-[1.01] ${lesson.isUnlock && "outline outline-primary outline-1"} ${lesson.isFinished && "bg-secondary"}`}>
                             <CardHeader className="grid p-1">
                                 <div className={`${lesson.isFinished ? "bg-card" : "bg-secondary"} h-32 rounded flex justify-center items-center`}>
                                     {lesson.isFinished &&
@@ -178,13 +195,12 @@ export default function Page() {
                                     }
                                 </div>
                                 <span className="text-sm text-muted-foreground">{lesson.course.title}</span>
-                                <h3 className="text-lg text-nowrap overflow-hidden text-ellipsis !mt-0">{lesson.title}</h3>
+                                <h3 className=" text-nowrap overflow-hidden text-ellipsis !mt-0">{lesson.title}</h3>
                             </CardHeader>
                             <CardFooter className="flex justify-between items-start p-1">
                                 <div className="flex justify-start items-start gap-1 flex-wrap">
-                                    <Badge>{lesson.course.lessons_count} lesson</Badge>
-                                    {lesson && lesson.course && lesson.course.language && lesson.course.language.name && <Badge variant={lesson.course.language.name.toLowerCase()}>{lesson.course.language.name}</Badge>}
-                                    {lesson && lesson.course && lesson.course.difficulty && <Badge variant={lesson.course.difficulty.toLowerCase()}>{lesson.course.difficulty}</Badge>}
+                                    {lesson.course && lesson.course.language && lesson.course.language.name && <Badge variant={lesson.course.language.name.toLowerCase()}>{lesson.course.language.name}</Badge>}
+                                    {lesson.course && lesson.course.difficulty && <Badge variant={lesson.course.difficulty.toLowerCase()}>{lesson.course.difficulty}</Badge>}
                                     <Badge>{lesson.points_gain} points</Badge>
                                     <Badge>+{lesson.exp_gain} XP</Badge>
                                 </div>
@@ -200,7 +216,7 @@ export default function Page() {
                                 </div>
                             </CardFooter>
                         </Card>
-                    </a>
+                    </Link>
                 ))}
             </div>
         </Layout>
