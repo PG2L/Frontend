@@ -7,7 +7,9 @@ const config = {
         './pages/index.{ts,tsx}',
         './components/**/*.{ts,tsx}',
         './app/**/*.{ts,tsx}',
+        './app/*.{ts,tsx}',
         './src/**/*.{ts,tsx}',
+        './src/app/globals.css', // Add this line
     ],
     prefix: "",
     theme: {

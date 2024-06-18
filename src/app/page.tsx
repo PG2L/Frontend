@@ -14,7 +14,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { AvatarImage } from '@radix-ui/react-avatar';
+// import { AvatarImage } from '@radix-ui/react-avatar';
 
 
 export default function Page() {
@@ -244,7 +244,7 @@ export default function Page() {
                             <CardFooter>
                                 <div className="flex justify-between items-center w-full">
                                     <Avatar>
-                                        <AvatarImage src={`https://randomuser.me/api/portraits/men/${index}.jpg`} />
+                                        {/* <AvatarImage src={`https://randomuser.me/api/portraits/men/${index}.jpg`} /> */}
                                     </Avatar>
                                     <div className="flex h-4">
                                         {Array.from({ length: _.stars }).map((_, index) => (

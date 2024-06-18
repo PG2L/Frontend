@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+"use client"
 import React, { useEffect, useState } from 'react';
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card';
@@ -7,12 +8,11 @@ import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@radix-ui/r
 import { Button } from '@/components/ui/button';
 import Layout from '@/components/Layout/Layout';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 
-async function getData(id: number) {
+async function getData() {
 
-    const res = await fetch(`http://localhost:8000/users/${id}`);
+    const res = await fetch(`http://localhost:8000/users/1`);
 
     if (!res.ok) {
         throw new Error('Failed to fetch data')
@@ -21,16 +21,9 @@ async function getData(id: number) {
     return res.json()
 }
 
-export default function Page() {
+export default async function Page() {
 
-    const router = useRouter();
-    const { id } = router.query;
-
-    const [data, setData] = useState<null | any>(null);
-
-    useEffect(() => {
-        getData(id).then(data => setData(data)).catch(error => console.error(error));
-    }, [id]);
+    const data = await getData();
 
     const menuContent: {
         name: string,
@@ -266,7 +259,7 @@ export default function Page() {
                                 <div className="grid gap-2 sm:flex">
                                     <Button variant="secondary" className="w-full">Send message</Button>
                                     <Button variant="secondary" className="w-full">
-                                        <Link href={`/users/${id}/edit`}>Edit profile</Link>
+                                        <Link href={`/users/1/edit`}>Edit profile</Link>
                                     </Button>
                                 </div>
                             </div>
