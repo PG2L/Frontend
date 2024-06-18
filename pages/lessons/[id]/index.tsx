@@ -102,25 +102,32 @@ export default function Page() {
         <Layout>
             {data &&
                 <>
-                    <Breadcrumb>
-                        <BreadcrumbList>
-                            <BreadcrumbItem>
-                                <BreadcrumbLink asChild>
-                                    <Link href="/">Home</Link>
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                                <BreadcrumbLink asChild>
-                                    <Link href="/lessons">Lessons</Link>
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                                <BreadcrumbPage>{data.title}</BreadcrumbPage>
-                            </BreadcrumbItem>
-                        </BreadcrumbList>
-                    </Breadcrumb>
+                    <div className="flex justify-between items-center">
+                        <Breadcrumb>
+                            <BreadcrumbList>
+                                <BreadcrumbItem>
+                                    <BreadcrumbLink asChild>
+                                        <Link href="/">Home</Link>
+                                    </BreadcrumbLink>
+                                </BreadcrumbItem>
+                                <BreadcrumbSeparator />
+                                <BreadcrumbItem>
+                                    <BreadcrumbLink asChild>
+                                        <Link href="/lessons">Lessons</Link>
+                                    </BreadcrumbLink>
+                                </BreadcrumbItem>
+                                <BreadcrumbSeparator />
+                                <BreadcrumbItem>
+                                    <BreadcrumbPage>{data.title}</BreadcrumbPage>
+                                </BreadcrumbItem>
+                            </BreadcrumbList>
+                        </Breadcrumb>
+                        <Link href={`/lessons/${id}/edit`}>
+                            <Button variant="secondary">
+                                Edit
+                            </Button>
+                        </Link>
+                    </div>
                     <div className="grid md:flex gap-4 lg:gap-6 grid-cols-1 rounded-lg mt-6">
                         <div className="hidden md:grid grid-cols-1 w-1/3 gap-4 lg:gap-6 h-fit">
                             <Card>
@@ -163,8 +170,8 @@ export default function Page() {
                             <Card className="outline outline-1 outline-primary">
                                 <CardHeader>
                                     <div className="hidden sm:block py-36 bg-secondary rounded"></div>
-                                    <h3 className="text-muted-foreground hover:underline">
-                                        <Link href={`/courses/${data.course.id}`}>{data.course.title}</Link>
+                                    <h3 className="text-muted-foreground">
+                                        <Link href={`/courses/${data.course.id}`} className="hover:underline">{data.course.title}</Link>
                                     </h3>
                                 </CardHeader>
                                 <CardContent>
