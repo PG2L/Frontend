@@ -31,7 +31,7 @@ export default async function Page({
 
     return (
         <>
-            <Card className="outline outline-1 outline-primary">
+            <Card>
                 <CardHeader>
                     <div className="hidden sm:block py-36 bg-secondary rounded"></div>
                     <h3 className="text-muted-foreground">
@@ -41,7 +41,7 @@ export default async function Page({
                 <CardContent>
                     <div className="flex justify-between items-center">
                         <div className="grid gap-2">
-                            <div className="flex items-end  font-medium">
+                            <div className="flex items-end font-medium">
                                 <p>{data.lesson_number}</p>
                                 <icons.Dot className="h-6 w-6 text-primary" />
                                 <h1>{data.title}</h1>
@@ -100,14 +100,14 @@ export default async function Page({
                     </Collapsible>
                 </CardHeader>
             </Card>
-            <Card>
-                <CardHeader>
+            <div className="grid gap-6">
+                <div>
                     {data.description}
-                </CardHeader>
-                <CardFooter className="text-muted-foreground">
+                </div>
+                <div className="text-muted-foreground">
                     {data.content}
-                </CardFooter>
-            </Card>
+                </div>
+            </div>
         </>
     )
 }

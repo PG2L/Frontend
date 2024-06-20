@@ -33,7 +33,7 @@ export default async function CourseShowLayout ({
     return (
         <>
             <div className="grid md:flex gap-4 lg:gap-6 grid-cols-1 rounded-lg mt-6">
-                <div className="hidden md:grid grid-cols-1 w-1/3 gap-4 lg:top-20 h-fit lg:sticky">
+                <div className="hidden md:grid grid-cols-1 w-1/3 gap-4 lg:top-24 h-fit lg:sticky">
                     <Card>
                         <Link href={`/courses/${params.courseId}`}>
                             <CardHeader className="flex justify-center items-center gap-4 rounded outline outline-1 outline-primary hover:shadow-secondary hover:scale-[1.01]">

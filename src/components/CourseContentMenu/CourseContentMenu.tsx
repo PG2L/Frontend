@@ -7,6 +7,7 @@ import { Skeleton } from '../ui/skeleton';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { Button } from '../ui/button';
+import { Separator } from '../ui/separator';
 
 interface CourseContentMenuProps {
     courseContent: any,
@@ -21,21 +22,26 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
     const params = useParams();
 
     return (
-        <div className="p-6 border-2">
-            <div className="grid gap-6">
-                {courseContent.lessons && courseContent.lessons.map((lesson, index) => {
-                    return <Link key={index} href={`/courses/${params.courseId}/${lesson.id}`}>
-                        <Button variant="outline" className={`${(lesson.id == params.lessonId) && "scale-[1.01] hover:!scale-[1.02] border-primary"} w-full !text-left text-wrap border-0 hover:shadow-secondary hover:scale-[1.01] hover:border-primary py-6`} size="lg">
-                                <Suspense fallback={
-                                    <Skeleton className="w-full h-6"></Skeleton>
-                                }>
-                                    <h2 className="w-full">{index + 1} .  {lesson.title}</h2>
-                                </Suspense>
-                        </Button>
-                    </Link>
-                })}
-            </div>
-        </div>
+        <>
+            <nav className="p-6">
+                <Separator />
+                <ul className="grid gap-4 mt-6">
+                    {courseContent.lessons && courseContent.lessons.map((lesson, index) => {
+                        return <li key={index}>
+                            <Link key={index} href={`/courses/${params.courseId}/${lesson.id}`}>
+                                <Button variant="ghost" className={`${(lesson.id == params.lessonId) && "border-l border-r border-primary !text-foreground"} text-muted-foreground w-full text-left text-wrap py-6 px-6`} size="lg">
+                                        <Suspense fallback={
+                                            <Skeleton className="w-full h-6"></Skeleton>
+                                        }>
+                                            <h2 className="w-full">{index + 1} .  {lesson.title}</h2>
+                                        </Suspense>
+                                </Button>
+                            </Link>
+                        </li>
+                    })}
+                </ul>
+            </nav>
+        </>
     )
 };
 

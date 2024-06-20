@@ -13,7 +13,7 @@ async function getData() {
     return response.json()
 }
 
-export default async function CourseShowLayout ({ 
+export default async function CoursesLayout ({ 
     children,
 } : {
     children: React.ReactNode,
@@ -25,11 +25,6 @@ export default async function CourseShowLayout ({
         <>
             <div className="flex w-full justify-between items-center">
                 <GlobalBreadcrumb courses={data}/>
-                <Link href="/courses/new">
-                    <Button variant="secondary">
-                        Create a course
-                    </Button>
-                </Link>
             </div>
             {children}
         </>

@@ -5,7 +5,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 export default function Loading() {
     return (
         <>
-            <Card className="outline outline-1 outline-primary">
+            <Card>
                 <CardHeader>
                     <Skeleton className="hidden sm:block py-36"/>
                     <Skeleton className="rounded h-4 w-1/2 !mt-2"/>
@@ -29,15 +29,11 @@ export default function Loading() {
                     </div>
                 </CardFooter>
             </Card>
-            <Card className="text-muted-foreground">
-                <CardHeader>
-                    <div className="grid gap-2">
-                        {Array.from({ length: 25 }).map((_, index) => (
-                            <Skeleton key={index} className="h-6 w-full"/>
-                        ))}
-                    </div>
-                </CardHeader>
-            </Card>
+            <div className="grid gap-2">
+                {Array.from({ length: 25 }).map((_, index) => (
+                    <Skeleton key={index} className={`h-6 ${(index % 2 === 0) ? 'w-full' : 'w-[95%]'}`}/>
+                ))}
+            </div>
         </>
     );
 }
