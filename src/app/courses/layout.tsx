@@ -1,12 +1,7 @@
 import React, { ReactNode } from 'react'
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import GlobalBreadcrumb from '@/components/GlobalBreadcrumb/GlobalBreadcrumb';
-
-interface LayoutProps {
-    children: ReactNode;
-}
 
 const CourseLayout = ({ children }) => (
     <>
