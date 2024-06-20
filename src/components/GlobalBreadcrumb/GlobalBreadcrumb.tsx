@@ -8,6 +8,25 @@ import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbS
 
 interface GlobalBreadcrumbProps { }
 
+// async function FetchItemsNames() {
+
+//     const paths = usePathname() || '';
+//     const pathNames = paths.split('/').filter(path => path);
+//     const [itemLinks, setItemLinks] = useState<string[]>([]);
+
+//     const links: string[] = await Promise.all(pathNames.map(async (link, index) => {
+//         if (!isNaN(parseInt(link))) {
+//             const itemType = pathNames[index - 1];
+//             const response = await fetch(`http://localhost:8000/${itemType}/${link}`);
+//             const data = await response.json();
+//             return data.title;
+//         } else {
+//             return link[0].toUpperCase() + link.slice(1, link.length);
+//         }
+//     }));
+//     setItemLinks(links);
+// }
+
 const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = () => {
 
     const paths = usePathname() || '';
@@ -15,20 +34,20 @@ const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = () => {
     const [itemLinks, setItemLinks] = useState<string[]>([]);
 
     useEffect(() => {
-        const fetchItemsNames = async () => {
-            const links: string[] = await Promise.all(pathNames.map(async (link, index) => {
-                if (!isNaN(parseInt(link))) {
-                    const itemType = pathNames[index - 1];
-                    const response = await fetch(`http://localhost:8000/${itemType}/${link}`);
-                    const data = await response.json();
-                    return data.title;
-                } else {
-                    return link[0].toUpperCase() + link.slice(1, link.length);
-                }
-            }));
-            setItemLinks(links);
-        };
-        fetchItemsNames();
+        // const fetchItemsNames = async () => {
+        //     const links: string[] = await Promise.all(pathNames.map(async (link, index) => {
+        //         if (!isNaN(parseInt(link))) {
+        //             const itemType = pathNames[index - 1];
+        //             const response = await fetch(`http://localhost:8000/${itemType}/${link}`);
+        //             const data = await response.json();
+        //             return data.title;
+        //         } else {
+        //             return link[0].toUpperCase() + link.slice(1, link.length);
+        //         }
+        //     }));
+        //     setItemLinks(links);
+        // };
+        // FetchItemsNames();
     }, [pathNames]);
 
     return (
