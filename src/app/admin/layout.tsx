@@ -32,6 +32,8 @@ export default async function AdminLayout ({
             <div className="flex mt-4 gap-6">
                 <div className="grid w-1/3 h-fit grid-cols-1">
                     <nav className="grid gap-2 w-full grid-cols-1 justify-start">
+                        <span className="text-lg font-medium">Admin Dashboard</span>
+                        <Separator />
                         <h2 className="text-lg">Courses</h2>
                         <Link href={`/admin/courses/new`}>
                             <Button variant="ghost" className={`!w-full text-start text-wrap text-muted-foreground hover:text-foreground`}>
