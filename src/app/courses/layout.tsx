@@ -3,18 +3,35 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import GlobalBreadcrumb from '@/components/GlobalBreadcrumb/GlobalBreadcrumb';
 
-const CourseLayout = ({ children }) => (
-    <>
-        <div className="flex w-full justify-between items-center">
-            <GlobalBreadcrumb />
-            <Link href="/courses/new">
-                <Button variant="secondary">
-                    Create a course
-                </Button>
-            </Link>
-        </div>
-        {children}
-    </>
-);
+async function getData() {
+    const response = await fetch('http://localhost:8000/courses')
 
-export default CourseLayout;
+    if (!response.ok) {
+        throw new Error('Failed to fetch data')
+    }
+
+    return response.json()
+}
+
+export default async function CourseShowLayout ({ 
+    children,
+} : {
+    children: React.ReactNode,
+}) {
+    
+    const data = await getData();
+    
+    return (
+        <>
+            <div className="flex w-full justify-between items-center">
+                <GlobalBreadcrumb courses={data}/>
+                <Link href="/courses/new">
+                    <Button variant="secondary">
+                        Create a course
+                    </Button>
+                </Link>
+            </div>
+            {children}
+        </>
+    )
+};

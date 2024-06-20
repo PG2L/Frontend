@@ -6,48 +6,35 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '../ui/breadcrumb';
 
-interface GlobalBreadcrumbProps { }
+interface GlobalBreadcrumbProps { 
+    courses?: any[],
+}
 
-// async function FetchItemsNames() {
-
-//     const paths = usePathname() || '';
-//     const pathNames = paths.split('/').filter(path => path);
-//     const [itemLinks, setItemLinks] = useState<string[]>([]);
-
-//     const links: string[] = await Promise.all(pathNames.map(async (link, index) => {
-//         if (!isNaN(parseInt(link))) {
-//             const itemType = pathNames[index - 1];
-//             const response = await fetch(`http://localhost:8000/${itemType}/${link}`);
-//             const data = await response.json();
-//             return data.title;
-//         } else {
-//             return link[0].toUpperCase() + link.slice(1, link.length);
-//         }
-//     }));
-//     setItemLinks(links);
-// }
-
-const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = () => {
+const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = ({
+    courses,
+}: {
+    courses: any[],
+}) => {
 
     const paths = usePathname() || '';
     const pathNames = paths.split('/').filter(path => path);
     const [itemLinks, setItemLinks] = useState<string[]>([]);
 
     useEffect(() => {
-        // const fetchItemsNames = async () => {
-        //     const links: string[] = await Promise.all(pathNames.map(async (link, index) => {
-        //         if (!isNaN(parseInt(link))) {
-        //             const itemType = pathNames[index - 1];
-        //             const response = await fetch(`http://localhost:8000/${itemType}/${link}`);
-        //             const data = await response.json();
-        //             return data.title;
-        //         } else {
-        //             return link[0].toUpperCase() + link.slice(1, link.length);
-        //         }
-        //     }));
-        //     setItemLinks(links);
-        // };
-        // FetchItemsNames();
+        const fetchItemsNames = async () => {
+            const links: string[] = await Promise.all(pathNames.map(async (link, index) => {
+                if (link.match(/^[0-9]+$/)) {
+                    if (index === 1) {
+                        return courses[parseInt(link) - 1].title;
+                    } else if (index === 2) {
+                        return courses[parseInt(pathNames[1]) - 1].lessons.find((lesson: any) => lesson.id === parseInt(link)).title;
+                    }
+                }
+                return link[0].toUpperCase() + link.slice(1, link.length);
+            }));
+            setItemLinks(links);
+        };
+        fetchItemsNames();
     }, [pathNames]);
 
     return (
@@ -61,7 +48,7 @@ const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = () => {
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     {itemLinks.map((itemLink, index) => {
-                        let href = `/${itemLinks.slice(0, index + 1).join('/').toLowerCase()}`;
+                        let href = `/${pathNames.slice(0, index + 1).join('/')}`;
                         return (
                             <>
                                 {itemLinks.length !== index + 1 ?

@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 async function getData(id: string) {
 
-    const response = await fetch(`http://localhost:8000/courses/1`);
+    const response = await fetch(`http://localhost:8000/courses/${id}`);
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -22,11 +22,11 @@ export default async function Page({
     params,
 }: {
     params: {
-        id: string,
+        courseId: string,
     };
 }) {
 
-    const data = await getData(params.id);
+    const data = await getData(params.courseId);
 
     return (
         data &&
