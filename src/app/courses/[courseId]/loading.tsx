@@ -30,9 +30,13 @@ export default function Loading() {
                 </CardFooter>
             </Card>
             <div className="grid gap-2">
-                {Array.from({ length: 25 }).map((_, index) => (
-                    <Skeleton key={index} className={`h-6 ${(index % 2 === 0) ? 'w-full' : 'w-[95%]'}`}/>
-                ))}
+                {Array.from({ length: 25 }).map((_, index) => {
+                    if (index % 8 === 0) {
+                        return <br key={index} />
+                    } else {
+                        return <Skeleton key={index} className={`h-6 ${(index % 2 === 0) ? 'w-full' : 'w-[95%]'}`}/>
+                    }
+                })}
             </div>
         </>
     );
