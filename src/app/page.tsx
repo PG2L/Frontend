@@ -113,7 +113,7 @@ export default function Page() {
         }
     ]
     return (
-        <Layout>
+        <>
             <div className="py-48 flex flex-col items-center justify-center">
                 <div className="h-1/2 flex flex-col items-center justify-center space-y-2">
                     <Badge>NEW: Build on Bitcoin - Stacks Developer Degree out now !</Badge>
@@ -265,6 +265,6 @@ export default function Page() {
                     </div>
                 </div>
             </div>
-        </Layout >
+        </>
     )
 }

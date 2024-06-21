@@ -27,7 +27,7 @@ export default async function AdminLayout ({
     return (
         <>
             <div className="flex w-full justify-between items-center">
-                <GlobalBreadcrumb courses={data}/>
+                {/* <GlobalBreadcrumb courses={data}/> */}
             </div>
             <div className="flex mt-4 gap-6">
                 <div className="grid w-1/3 h-fit grid-cols-1">
