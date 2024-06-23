@@ -204,9 +204,9 @@ const Header: FC<HeaderProps> = () => {
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
                             <NavigationMenuItem>
-                                <Link href="/docs" legacyBehavior passHref>
+                                <Link href="/admin/courses/new" legacyBehavior passHref>
                                     <NavigationMenuLink className={`${navigationMenuTriggerStyle()} bg-card`} >
-                                        Documentation
+                                        Admin Dashboard
                                     </NavigationMenuLink>
                                 </Link>
                             </NavigationMenuItem>
