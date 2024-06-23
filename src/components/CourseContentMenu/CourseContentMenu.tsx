@@ -33,7 +33,7 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
                         {courseContent.lessons && courseContent.lessons.map((lesson, index) => (
                             <li key={index}>
                                 <Link key={index} href={`/courses/${params.courseId}/${lesson.id}`}>
-                                    <Button variant="ghost" className={`${(lesson.id == params.lessonId) && "border-l border-r border-primary !text-foreground"} text-muted-foreground w-full text-start text-wrap`}>
+                                    <Button variant="ghost" className={`text-muted-foreground w-full text-start font-normal text-wrap ${(lesson.id == params.lessonId) && "border-l border-r border-primary !text-foreground font-medium"}`}>
                                             <Suspense fallback={
                                                 <Skeleton className="w-full h-6"></Skeleton>
                                             }>
