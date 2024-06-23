@@ -14,7 +14,7 @@ interface CourseContentMenuProps {
     courseContent: any,
 }
 
-const CourseContentMenu: FC<CourseContentMenuProps> = ({ 
+const CourseContentMenu: FC<CourseContentMenuProps> = ({
     courseContent,
 }: {
     courseContent: any,
@@ -33,12 +33,12 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
                         {courseContent.lessons && courseContent.lessons.map((lesson, index) => (
                             <li key={index}>
                                 <Link key={index} href={`/courses/${params.courseId}/${lesson.id}`}>
-                                    <Button variant="ghost" className={`text-muted-foreground w-full text-start font-normal text-wrap ${(lesson.id == params.lessonId) && "border-l border-r border-primary !text-foreground font-medium"}`}>
-                                            <Suspense fallback={
-                                                <Skeleton className="w-full h-6"></Skeleton>
-                                            }>
-                                                <h2 className="w-full">{index + 1} .  {lesson.title}</h2>
-                                            </Suspense>
+                                    <Button variant="ghost" className={`text-muted-foreground w-full text-start font-normal text-wrap ${(lesson.id == params.lessonId) && "border-l border-r border-primary !text-foreground font-medium bg-secondary"}`}>
+                                        <Suspense fallback={
+                                            <Skeleton className="w-full h-6"></Skeleton>
+                                        }>
+                                            <h2 className="w-full">{index + 1} .  {lesson.title}</h2>
+                                        </Suspense>
                                     </Button>
                                 </Link>
                             </li>
@@ -48,11 +48,11 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
                     {params.hasOwnProperty('lessonId') ?
                         <div className={`flex gap-6 justify-between ${isFirstLesson && "!justify-end"}`}>
                             {!isFirstLesson &&
-                            <Link href={`/courses/${params.courseId}/${params.lessonId - 1}`} className="justify-self-start">
-                                <Button variant="ghost">
-                                    <icons.ChevronsLeft strokeWidth={1} />
-                                </Button>
-                            </Link>
+                                <Link href={`/courses/${params.courseId}/${params.lessonId - 1}`} className="justify-self-start">
+                                    <Button variant="ghost">
+                                        <icons.ChevronsLeft strokeWidth={1} />
+                                    </Button>
+                                </Link>
                             }
                             {!isLastLesson &&
                                 <Link href={`/courses/${params.courseId}/${parseInt(params.lessonId) + 1}`} className="justify-self-end">
@@ -62,12 +62,12 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
                                 </Link>
                             }
                         </div>
-                    :
-                    <Link href={`/courses/${params.courseId}/${courseContent.lessons[0].id}`} className="justify-self-center w-1/2">
-                        <Button className="w-full">
-                            Start Course
-                        </Button>
-                    </Link>
+                        :
+                        <Link href={`/courses/${params.courseId}/${courseContent.lessons[0].id}`} className="justify-self-center w-1/2">
+                            <Button className="w-full">
+                                Start Course
+                            </Button>
+                        </Link>
                     }
                 </nav>
             </div>

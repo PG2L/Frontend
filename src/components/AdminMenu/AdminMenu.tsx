@@ -74,7 +74,7 @@ const AdminMenu: FC<AdminMenuProps> = () => {
                             <h2 className="text-lg">{item.title}</h2>
                             {item.content.map((content, index) => (
                                 <Link href={content.href} key={index}>
-                                    <Button variant="ghost" className={`!w-full text-start text-wrap text-muted-foreground hover:text-foreground ${content.active && "border-l border-r border-primary !text-foreground font-medium"}`}>
+                                    <Button variant="ghost" className={`!w-full text-start text-wrap text-muted-foreground hover:text-foreground ${content.active && "border-l border-r border-primary !text-foreground font-medium bg-secondary"} ${!content.active && "!font-normal"}`}>
                                         <span className="w-full">{content.title}</span>
                                     </Button>
                                 </Link>
