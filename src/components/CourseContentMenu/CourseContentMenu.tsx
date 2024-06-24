@@ -31,17 +31,17 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
                     <Separator />
                     <ul className="grid gap-2">
                         {courseContent.lessons && courseContent.lessons.map((lesson, index) => (
-                            <li key={index}>
-                                <Link key={index} href={`/courses/${params.courseId}/${lesson.id}`}>
-                                    <Button variant="ghost" className={`text-muted-foreground w-full text-start font-normal text-wrap ${(lesson.id == params.lessonId) && "active"}`}>
-                                        <Suspense fallback={
-                                            <Skeleton className="w-full h-6"></Skeleton>
-                                        }>
+                            <Suspense key={index} fallback={
+                                <Skeleton className="w-full h-6"></Skeleton>
+                            }>
+                                <li>
+                                    <Link href={`/courses/${params.courseId}/${lesson.id}`}>
+                                        <Button variant="ghost" className={`text-muted-foreground w-full text-start font-normal text-wrap ${(lesson.id == params.lessonId) && "active"}`}>
                                             <h2 className="w-full">{index + 1} .  {lesson.title}</h2>
-                                        </Suspense>
-                                    </Button>
-                                </Link>
-                            </li>
+                                        </Button>
+                                    </Link>
+                                </li>
+                            </Suspense>
                         ))}
                     </ul>
                     <Separator />
