@@ -194,38 +194,42 @@ export default async function Page() {
         ]
 
     return (
-        <div className="w-full flex gap-6 justify-between">
-            <div className="grid gap-4 w-[37.5%]">
-                {menuContent.map((item, index) => (
-                    index <= 3 && (
-                        <div key={index} className="flex flex-col">
-                            <h2 className=" font-medium mb-2">{item.name}</h2>
-                            {item.content.map((content, index) => (
-                                <div key={index} className="flex justify-between border-b">
-                                    <h3 className="text-muted-foreground">{content.name}</h3>
-                                    <h3 className="text-white">{content.value}</h3>
+        <>
+            <div className="w-3/5 flex gap-6">
+                <div className="w-full flex gap-6">
+                    <div className="grid gap-4 w-full">
+                        {menuContent.map((item, index) => (
+                            index <= 3 && (
+                                <div key={index} className="flex flex-col">
+                                    <h2 className=" font-medium mb-2">{item.name}</h2>
+                                    {item.content.map((content, index) => (
+                                        <div key={index} className="flex justify-between border-b">
+                                            <h3 className="text-muted-foreground">{content.name}</h3>
+                                            <h3 className="text-white">{content.value}</h3>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
-                    )
-                ))}
-            </div>
-            <div className="grid gap-4 w-[37.5%]">
-                {menuContent.map((item, index) => (
-                    index > 3 && (
-                        <div key={index} className="flex flex-col">
-                            <h2 className=" font-medium mb-2">{item.name}</h2>
-                            {item.content.map((content, index) => (
-                                <div key={index} className="flex justify-between border-b">
-                                    <h3 className="text-muted-foreground">{content.name}</h3>
-                                    <h3 className="text-white">{content.value}</h3>
+                            )
+                        ))}
+                    </div>
+                    <div className="grid gap-4 w-full">
+                        {menuContent.map((item, index) => (
+                            index > 3 && (
+                                <div key={index} className="flex flex-col">
+                                    <h2 className=" font-medium mb-2">{item.name}</h2>
+                                    {item.content.map((content, index) => (
+                                        <div key={index} className="flex justify-between border-b">
+                                            <h3 className="text-muted-foreground">{content.name}</h3>
+                                            <h3 className="text-white">{content.value}</h3>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
-                    )
-                ))}
+                            )
+                        ))}
+                    </div>
+                </div>
             </div>
             <ProfileSidebar />
-        </div>
+        </>
     );
 }

@@ -22,7 +22,7 @@ export default async function CoursesLayout({
     const data = await getData();
 
     return (
-        <div className="grid">
+        <div className="grid w-4/5">
             <GlobalBreadcrumb courses={data} />
             {children}
         </div>

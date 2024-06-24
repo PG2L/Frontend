@@ -36,33 +36,35 @@ export default async function CourseShowLayout({
                     {children}
                 </div>
                 <div className="hidden md:flex flex-col w-1/3">
-                    <Card className="h-fit">
-                        <Link href={`/courses/${params.courseId}`}>
-                            <CardHeader className="flex justify-center items-center gap-4 rounded outline outline-1 outline-primary hover:shadow-secondary hover:scale-[1.01] h-fit">
-                                <Suspense fallback={
-                                    <Skeleton className="w-full h-6" />
-                                }>
-                                    <h1 className="font-medium text-center">{data['title']}</h1>
-                                </Suspense>
-                                <Suspense fallback={
-                                    <div className="flex flex-wrap gap-1 justify-center w-3/4">
-                                        <Skeleton className="h-5 w-14" />
-                                        <Skeleton className="h-5 w-24" />
-                                        <Skeleton className="h-5 w-20" />
-                                        <Skeleton className="h-5 w-16" />
-                                    </div>
-                                }>
-                                    <div className="flex flex-wrap gap-1 justify-center w-3/4">
-                                        {data.language && data.language.name && <Badge variant={data.language.name.toLowerCase()}>{data.language.name}</Badge>}
-                                        {data.difficulty && <Badge variant={data.difficulty.toLowerCase()}>{data.difficulty}</Badge>}
-                                        <Badge>{data.points_gain} points</Badge>
-                                        <Badge>+{data.exp_gain} xp</Badge>
-                                    </div>
-                                </Suspense>
-                            </CardHeader>
-                        </Link>
-                    </Card>
-                    <CourseContentMenu courseContent={data} />
+                    <div className="sticky top-6 h-fit">
+                        <Card className="h-fit">
+                            <Link href={`/courses/${params.courseId}`}>
+                                <CardHeader className="flex justify-center items-center gap-4 rounded outline outline-1 outline-primary hover:shadow-secondary hover:scale-[1.01] h-fit">
+                                    <Suspense fallback={
+                                        <Skeleton className="w-full h-6" />
+                                    }>
+                                        <h1 className="font-medium text-center">{data['title']}</h1>
+                                    </Suspense>
+                                    <Suspense fallback={
+                                        <div className="flex flex-wrap gap-1 justify-center w-3/4">
+                                            <Skeleton className="h-5 w-14" />
+                                            <Skeleton className="h-5 w-24" />
+                                            <Skeleton className="h-5 w-20" />
+                                            <Skeleton className="h-5 w-16" />
+                                        </div>
+                                    }>
+                                        <div className="flex flex-wrap gap-1 justify-center w-3/4">
+                                            {data.language && data.language.name && <Badge variant={data.language.name.toLowerCase()}>{data.language.name}</Badge>}
+                                            {data.difficulty && <Badge variant={data.difficulty.toLowerCase()}>{data.difficulty}</Badge>}
+                                            <Badge>{data.points_gain} points</Badge>
+                                            <Badge>+{data.exp_gain} xp</Badge>
+                                        </div>
+                                    </Suspense>
+                                </CardHeader>
+                            </Link>
+                        </Card>
+                        <CourseContentMenu courseContent={data} />
+                    </div>
                 </div>
             </div>
         </>

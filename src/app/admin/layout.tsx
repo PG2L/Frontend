@@ -11,7 +11,7 @@ export default async function AdminLayout({
 
     return (
         <>
-            <div className="flex mt-4 gap-6">
+            <div className="flex container gap-6">
                 <AdminMenu />
                 {children}
             </div>
