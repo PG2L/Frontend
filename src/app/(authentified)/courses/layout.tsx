@@ -13,20 +13,18 @@ async function getData() {
     return response.json()
 }
 
-export default async function CoursesLayout ({ 
+export default async function CoursesLayout({
     children,
-} : {
+}: {
     children: React.ReactNode,
 }) {
-    
+
     const data = await getData();
-    
+
     return (
-        <>
-            <div className="flex w-full justify-between items-center">
-                <GlobalBreadcrumb courses={data}/>
-            </div>
+        <div className="grid">
+            <GlobalBreadcrumb courses={data} />
             {children}
-        </>
+        </div>
     )
 };

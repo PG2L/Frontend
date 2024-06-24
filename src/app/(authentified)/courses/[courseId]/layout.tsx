@@ -32,6 +32,9 @@ export default async function CourseShowLayout({
     return (
         <>
             <div className="grid md:flex gap-4 lg:gap-6 grid-cols-1 rounded-lg mt-6">
+                <div className="md:w-2/3 grid gap-4 lg:gap-6">
+                    {children}
+                </div>
                 <div className="hidden md:flex flex-col w-1/3">
                     <Card className="h-fit">
                         <Link href={`/courses/${params.courseId}`}>
@@ -60,9 +63,6 @@ export default async function CourseShowLayout({
                         </Link>
                     </Card>
                     <CourseContentMenu courseContent={data} />
-                </div>
-                <div className="md:w-2/3 grid gap-4 lg:gap-6">
-                    {children}
                 </div>
             </div>
         </>
