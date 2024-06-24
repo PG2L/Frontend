@@ -9,7 +9,7 @@ const config = {
         './app/**/*.{ts,tsx}',
         './app/*.{ts,tsx}',
         './src/**/*.{ts,tsx}',
-        './src/app/globals.css', // Add this line
+        './src/app/globals.css',
     ],
     prefix: "",
     theme: {
