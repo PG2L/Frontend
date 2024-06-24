@@ -1,9 +1,8 @@
-import React, { Children, ReactNode, Suspense, use } from 'react'
+import React, { Suspense } from 'react'
 import Link from 'next/link';
-import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
+import { Card, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useRouter } from 'next/navigation';
 import CourseContentMenu from '@/components/CourseContentMenu/CourseContentMenu';
 
 async function getData(id: string) {
@@ -17,17 +16,17 @@ async function getData(id: string) {
     return response.json();
 }
 
-export default async function CourseShowLayout ({ 
+export default async function CourseShowLayout({
     children,
     params,
-} : {
+}: {
     children: React.ReactNode,
     params: {
         courseId: string,
         lessonId: string,
     };
 }) {
-    
+
     const data = await getData(params.courseId);
 
     return (
@@ -44,10 +43,10 @@ export default async function CourseShowLayout ({
                                 </Suspense>
                                 <Suspense fallback={
                                     <div className="flex flex-wrap gap-1 justify-center w-3/4">
-                                        <Skeleton className="h-5 w-14"/>
-                                        <Skeleton className="h-5 w-24"/>
-                                        <Skeleton className="h-5 w-20"/>
-                                        <Skeleton className="h-5 w-16"/>
+                                        <Skeleton className="h-5 w-14" />
+                                        <Skeleton className="h-5 w-24" />
+                                        <Skeleton className="h-5 w-20" />
+                                        <Skeleton className="h-5 w-16" />
                                     </div>
                                 }>
                                     <div className="flex flex-wrap gap-1 justify-center w-3/4">
