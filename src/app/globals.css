@@ -74,8 +74,8 @@
 }
 
 .active {
-    border-right: 1px solid #1461CC;
-    border-left: 1px solid #1461CC;
+    /* border-right: 1px solid #1461CC; */
+    /* border-left: 1px solid #1461CC; */
     background: #141F2F;
     color: var(--foreground);
     font-weight: 600;
