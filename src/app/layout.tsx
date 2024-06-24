@@ -19,8 +19,7 @@ export default function RootLayout({
         <html lang="en">
             <body>
                 <div className="flex flex-col" id="layout" data-testid="layout">
-                    <Header />
-                    <main className="MainContent container pt-20 pb-12 w-full">
+                    <main className="pt-6 pb-6 w-full">
                         {children}
                     </main>
                     <FAQ />
