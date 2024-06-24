@@ -73,6 +73,14 @@
     scrollbar-color: #141F2F transparent;
 }
 
+.active {
+    border-right: 1px solid #1461CC;
+    border-left: 1px solid #1461CC;
+    background: #141F2F;
+    color: var(--foreground);
+    font-weight: 600;
+}
+
 @layer base {
     * {
         @apply border-border;
