@@ -21,6 +21,10 @@ const MainMenu: FC<MainMenuProps> = () => {
         {
             title: 'Courses',
             link: '/courses',
+        }, ,
+        {
+            title: 'Leaderboard',
+            link: '/leaderboard',
         },
         {
             title: 'Achievements',
@@ -31,7 +35,7 @@ const MainMenu: FC<MainMenuProps> = () => {
             link: '/statistics',
         },
         {
-            title: 'My Profile',
+            title: 'Profile',
             link: '/profile',
         },
         {
@@ -42,12 +46,16 @@ const MainMenu: FC<MainMenuProps> = () => {
             title: 'About',
             link: '/about',
         },
+        {
+            title: 'Admin',
+            link: '/admin/courses/new',
+        },
     ]
     return (
-        <div className={`w-1/5 flex flex-col gap-6`}>
+        <div className={`!w-1/5 flex flex-col gap-6`}>
             <h1 className="text-foreground text-lg font-medium text-center">Welcome, Nakkarst</h1>
             <div className="h-fit sticky top-6 grid gap-2">
-                <Separator />
+                <Separator className="mb-4" />
                 {menuItems.map((item, index) => (
                     <Link key={index} href={item.link}>
                         <Button variant="ghost" className={`w-full text-start ${pageContext === item.link.slice(1, item.link.length + 1) && "active"}`}>
