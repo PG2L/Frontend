@@ -14,11 +14,11 @@ import {
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Input } from '../ui/input';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { icons } from 'lucide-react';
 import SideBar from '../SideBar/SideBar';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, UseFormReturn } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import {
     Form,
@@ -148,9 +148,9 @@ const Header: FC<HeaderProps> = () => {
         <header className="py-3 bg-card border-solid border-b transition-all duration-0 w-full fixed top-0 z-50" id="header" data-testid="header">
             <div className="container flex justify-between items-center flex gap-6">
                 <div className="flex justify-between items-center">
-                    <SideBar className="lg:hidden"></SideBar>
+                    <SideBar className="lg:hidden" />
                     <Button asChild className="border-solid border border-black px-8 py-2 rounded hidden sm:block">
-                        <Link href="/" className="text-black">Logo</Link>
+                        <Link href="/">Logo</Link>
                     </Button>
                     <NavigationMenu className="hidden lg:block ms-4">
                         <NavigationMenuList>
