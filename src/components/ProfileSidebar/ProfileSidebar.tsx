@@ -17,7 +17,7 @@ interface ProfileSidebarProps {
 
 const ProfileSidebar: FC<ProfileSidebarProps> = () => {
     return (
-        <div className="w-1/4 items-start">
+        <div className="w-1/5 items-start">
             <Card className="sticky top-6">
                 <CardHeader className="items-center justify-center">
                     <icons.UserCircleIcon className="h-24 w-24" strokeWidth={1} />
