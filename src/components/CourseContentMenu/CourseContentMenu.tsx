@@ -26,14 +26,14 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
 
     return (
         <>
-            <div className="grid h-full">
-                <nav className="p-6 lg:sticky top-20 h-fit grid gap-4">
+            <div className="grid h-full gap-6">
+                <nav className="px-6 mt-6 lg:sticky top-6 h-fit grid gap-6">
                     <Separator />
                     <ul className="grid gap-2">
                         {courseContent.lessons && courseContent.lessons.map((lesson, index) => (
                             <li key={index}>
                                 <Link key={index} href={`/courses/${params.courseId}/${lesson.id}`}>
-                                    <Button variant="ghost" className={`text-muted-foreground w-full text-start font-normal text-wrap ${(lesson.id == params.lessonId) && "border-l border-r border-primary !text-foreground font-medium bg-secondary"}`}>
+                                    <Button variant="ghost" className={`text-muted-foreground w-full text-start font-normal text-wrap ${(lesson.id == params.lessonId) && "active"}`}>
                                         <Suspense fallback={
                                             <Skeleton className="w-full h-6"></Skeleton>
                                         }>
