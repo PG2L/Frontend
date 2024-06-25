@@ -2,7 +2,7 @@
 
 import React, { FC } from 'react';
 import styles from './ActivityChart.module.css';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 
 interface ActivityChartProps { }
 
@@ -10,40 +10,38 @@ const ActivityChart: FC<ActivityChartProps> = () => {
 
     const data = [
         {
-            name: 'Monday',
+            Day: 'Monday',
             Lessons: 4,
         },
         {
-            name: 'Tuesday',
+            Day: 'Tuesday',
             Lessons: 8,
         },
         {
-            name: 'Wednesday',
+            Day: 'Wednesday',
             Lessons: 7,
         },
         {
-            name: 'Thursday',
+            Day: 'Thursday',
             Lessons: 5,
         },
         {
-            name: 'Friday',
+            Day: 'Friday',
             Lessons: 9,
         },
         {
-            name: 'Saturday',
+            Day: 'Saturday',
             Lessons: 1,
         },
         {
-            name: 'Sunday',
+            Day: 'Sunday',
             Lessons: 6,
         },
     ];
 
     return (
         <ResponsiveContainer width="100%" height="100%">
-            <AreaChart
-                width={500}
-                height={400}
+            <BarChart
                 data={data}
                 margin={{
                     top: 10,
@@ -52,12 +50,11 @@ const ActivityChart: FC<ActivityChartProps> = () => {
                     bottom: 0,
                 }}
             >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
+                <XAxis dataKey="Day" />
+                <YAxis dataKey="Lessons" />
                 <Tooltip />
-                <Area type="basis" dataKey="Lessons" stroke="#141F2F" fill="#1461cc" />
-            </AreaChart>
+                <Bar type="basis" dataKey="Lessons" stroke="#141F2F" fill="#1461cc" />
+            </BarChart>
         </ResponsiveContainer>
     )
 };
