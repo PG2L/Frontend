@@ -3,7 +3,6 @@ import ProfileSidebar from '@/components/ProfileSidebar/ProfileSidebar';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import CourseCard from '@/components/CourseCard/CourseCard';
 import { Calendar } from '@/components/ui/calendar';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import ActivityChart from '@/components/ActivityChart/ActivityChart';
 
 async function getCourses() {
