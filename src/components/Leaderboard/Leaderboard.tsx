@@ -36,47 +36,40 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
-const data: Payment[] = [
+const data: User[] = [
     {
-        id: "m5gr84i9",
-        amount: 316,
-        status: "success",
+        id: 4,
+        username: "ken99",
+        total_exp: 316,
         email: "ken99@yahoo.com",
     },
     {
-        id: "3u1reuv4",
-        amount: 242,
-        status: "success",
+        id: 5,
+        username: "Abe45",
+        total_exp: 242,
         email: "Abe45@gmail.com",
     },
     {
-        id: "derv1ws0",
-        amount: 837,
-        status: "processing",
+        id: 1,
+        username: "Monserrat44",
+        total_exp: 837,
         email: "Monserrat44@gmail.com",
     },
     {
-        id: "5kma53ae",
-        amount: 874,
-        status: "success",
+        id: 3,
+        username: "Silas22",
+        total_exp: 874,
         email: "Silas22@gmail.com",
     },
     {
-        id: "bhqecj4p",
-        amount: 721,
-        status: "failed",
+        id: 2,
+        username: "Carmella",
+        total_exp: 721,
         email: "carmella@hotmail.com",
     },
 ]
 
-export type Payment = {
-    id: string
-    amount: number
-    status: "pending" | "processing" | "success" | "failed"
-    email: string
-}
-
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<User>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -100,11 +93,26 @@ export const columns: ColumnDef<Payment>[] = [
         enableHiding: false,
     },
     {
-        accessorKey: "status",
-        header: "Status",
+        accessorKey: "rank",
+        header: "Rank",
         cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("status")}</div>
+            <div className="capitalize">{row.index + 1}</div>
         ),
+    },
+    {
+        accessorKey: "username",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Username
+                    <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => <div className="lowercase">{row.getValue("username")}</div>,
     },
     {
         accessorKey: "email",
@@ -115,25 +123,19 @@ export const columns: ColumnDef<Payment>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Email
-                    <icons.DotIcon className="ml-2 h-4 w-4" />
+                    <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
         },
         cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
     },
     {
-        accessorKey: "amount",
-        header: () => <div className="text-right">Amount</div>,
+        accessorKey: "total_exp",
+        header: () => <div className="text-right">Total_exp</div>,
         cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("amount"))
+            const total_exp = parseFloat(row.getValue("total_exp"))
 
-            // Format the amount as a dollar amount
-            const formatted = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-            }).format(amount)
-
-            return <div className="text-right font-medium">{formatted}</div>
+            return <div className="text-right font-medium">{total_exp}</div>
         },
     },
     {
@@ -147,7 +149,7 @@ export const columns: ColumnDef<Payment>[] = [
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-8 w-8 p-0">
                             <span className="sr-only">Open menu</span>
-                            <icons.DotSquare className="h-4 w-4" />
+                            ...
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
@@ -155,11 +157,11 @@ export const columns: ColumnDef<Payment>[] = [
                         <DropdownMenuItem
                             onClick={() => navigator.clipboard.writeText(payment.id)}
                         >
-                            Copy payment ID
+                            View profile
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>View customer</DropdownMenuItem>
-                        <DropdownMenuItem>View payment details</DropdownMenuItem>
+                        <DropdownMenuItem>Add friend</DropdownMenuItem>
+                        <DropdownMenuItem>Block</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             )
@@ -199,10 +201,10 @@ export default function DataTableDemo() {
         <div className="w-full">
             <div className="flex items-center py-4">
                 <Input
-                    placeholder="Filter emails..."
-                    value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+                    placeholder="Search..."
+                    value={(table.getColumn("username")?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
-                        table.getColumn("email")?.setFilterValue(event.target.value)
+                        table.getColumn("username")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
                 />
@@ -233,7 +235,7 @@ export default function DataTableDemo() {
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
-            <div className="rounded-md border">
+            <div className="rounded-md">
                 <Table>
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
