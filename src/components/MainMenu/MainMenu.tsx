@@ -52,8 +52,8 @@ const MainMenu: FC<MainMenuProps> = () => {
         },
     ]
     return (
-        <div className={`!w-1/5 flex flex-col gap-6`}>
-            <h1 className="text-foreground text-lg font-medium text-center">Welcome, Nakkarst</h1>
+        <div className={`flex flex-col gap-6`}>
+            <h1 className="text-foreground text-lg font-medium">Welcome, Nakkarst</h1>
             <div className="h-fit sticky top-6 grid gap-2">
                 <Separator className="mb-4" />
                 {menuItems.map((item, index) => (

@@ -11,7 +11,9 @@ export default async function CoursesLayout({
     return (
         <>
             <div className="flex gap-6 justify-between container">
-                <MainMenu />
+                <div className="w-1/5">
+                    <MainMenu />
+                </div>
                 {children}
             </div>
         </>
