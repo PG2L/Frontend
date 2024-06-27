@@ -57,40 +57,40 @@ const AdminHeader: FC<AdminHeaderProps> = ({
             </div>
         }>
             <div className="md:flex grid items-center gap-6 w-full">
-                <div className="flex md:w-1/2 text-lg">
+                <div className="flex md:w-2/3 text-lg">
                     <h1 className="text-muted-foreground text-nowrap">
-                        Edit {pageContext} #
-                        {course ? course.id : lesson ? lesson.id : user ? user.id : ''} -{" "}
+                        Edit { pageContext } #
+                        { course ? course.id : lesson ? lesson.id : user ? user.id : '' } -{ " " }
                     </h1>
                     <span className="text-foreground font-medium ms-2 w-full">
-                        {course ? course.title : lesson ? lesson.title : user ? user.email : ""}
+                        { course ? course.title : lesson ? lesson.title : user ? user.email : "" }
                     </span>
                 </div>
                 <Select
-                    onValueChange={(value) => redirect(`/admin/${pageContext}s/${value}`)}
+                    onValueChange={ (value) => redirect(`/admin/${pageContext}s/${value}`) }
                 >
-                    <SelectTrigger className="md:w-1/2">
-                        <SelectValue placeholder={`Select a ${pageContext}`} />
+                    <SelectTrigger className="md:w-1/3">
+                        <SelectValue placeholder={ `Select a ${pageContext}` } />
                     </SelectTrigger>
                     <SelectContent>
-                        {courses &&
+                        { courses &&
                             courses.map((courseItem) => (
-                                <SelectItem key={courseItem.id} value={courseItem.id}>
-                                    {courseItem.id} - {courseItem.title}
+                                <SelectItem key={ courseItem.id } value={ courseItem.id }>
+                                    { courseItem.id } - { courseItem.title }
                                 </SelectItem>
-                            ))}
-                        {lessons &&
+                            )) }
+                        { lessons &&
                             lessons.map((lessonItem) => (
-                                <SelectItem key={lessonItem.id} value={lessonItem.id}>
-                                    {lessonItem.id} - {lessonItem.title}
+                                <SelectItem key={ lessonItem.id } value={ lessonItem.id }>
+                                    { lessonItem.id } - { lessonItem.title }
                                 </SelectItem>
-                            ))}
-                        {users &&
+                            )) }
+                        { users &&
                             users.map((userItem) => (
-                                <SelectItem key={userItem.id} value={userItem.id}>
-                                    {userItem.id} - {userItem.email}
+                                <SelectItem key={ userItem.id } value={ userItem.id }>
+                                    { userItem.id } - { userItem.email }
                                 </SelectItem>
-                            ))}
+                            )) }
                     </SelectContent>
                 </Select>
             </div>

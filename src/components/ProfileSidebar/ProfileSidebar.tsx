@@ -5,13 +5,10 @@ import { Badge } from '../ui/badge';
 import * as icons from 'lucide-react';
 import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
-import { Card, CardHeader } from '../ui/card';
 import { Avatar, AvatarImage } from '../ui/avatar';
 import { Progress } from '../ui/progress';
 import { Select, SelectContent, SelectItem, SelectTrigger } from '../ui/select';
 import { Switch } from '../ui/switch';
-import { Label } from '../ui/label';
-import { ScrollArea, ScrollBar } from '../ui/scroll-area';
 
 interface ProfileSidebarProps {
     user?: {
@@ -39,7 +36,7 @@ const ProfileSidebar: FC<ProfileSidebarProps> = () => {
                 <div className={ `flex flex-col items-start border-l gap-4 py-6 ${isOpen ? "px-6 h-fit sticky" : "px-2 h-screen justify-between sticky top-0"}` }>
                     <div className="items-center">
                         <div className="items-center justify-center flex">
-                            <icons.UserCircleIcon className={ `${isOpen ? "h-20 w-20" : "h-12 w-12"}` } strokeWidth={ 1 } color="#1461cc" />
+                            <icons.UserCircleIcon className={ `${isOpen ? "h-20 w-20" : "h-16 w-16"}` } strokeWidth={ 1 } color="#1461cc" />
                         </div>
                         { isOpen &&
                             <div className="grid gap-4 justify-items-center">

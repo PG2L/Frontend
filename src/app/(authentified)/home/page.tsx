@@ -27,35 +27,22 @@ export default async function Page() {
         <>
             <div className="flex justify-between gap-6 w-full">
                 <div className="grid gap-6">
-                    <Card>
-                        <CardHeader>
-                            <div className="flex justify-between items-center w-full">
-                                <div className="grid gap-4">
-                                    <span className="text-xl">Welcome back, <span className="text-3xl font-medium">Nakkarst!</span></span>
-                                    <p>You already have completed <span className="text-primary font-medium">50% of your daily goals !</span></p>
-                                </div>
-                                <Button variant="ghost">
-                                    <icons.X size={ 24 } />
-                                </Button>
+                    <div className="flex justify-between items-center w-full">
+                        <div className="grid gap-4">
+                            <span className="text-xl">Welcome back, <span className="text-3xl font-medium">Nakkarst!</span></span>
+                            <p>You already have completed <span className="text-primary font-medium">50% of your daily goals !</span></p>
+                        </div>
+                    </div>
+                    <div className="grid">
+                        <h1 className="text-2xl">Resume</h1>
+                        <ScrollArea>
+                            <div className="w-full p-6 flex gap-6 items-center justify-start">
+                                { courses.map((course: any, index: number) => (
+                                    <CourseCard key={ index } course={ course } className="min-w-72" />
+                                )) }
                             </div>
-                        </CardHeader>
-                    </Card>
-                    <div className="flex gap-6">
-                        <div className="grid w-1/2">
-                            <h1 className="text-2xl">Your week</h1>
-                            <ActivityChart />
-                        </div>
-                        <div className="grid w-1/2">
-                            <h1 className="text-2xl">Resume</h1>
-                            <ScrollArea>
-                                <div className="w-full p-6 flex gap-6 items-center justify-start">
-                                    { courses.map((course: any, index: number) => (
-                                        <CourseCard key={ index } course={ course } className="min-w-72" />
-                                    )) }
-                                </div>
-                                <ScrollBar orientation="horizontal" />
-                            </ScrollArea>
-                        </div>
+                            <ScrollBar orientation="horizontal" />
+                        </ScrollArea>
                     </div>
                     <div className="flex justify-between w-full gap-6">
                         <div>

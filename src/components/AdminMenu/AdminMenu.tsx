@@ -56,7 +56,7 @@ const AdminMenu: FC<AdminMenuProps> = () => {
                 },
                 {
                     title: "Edit an existing user",
-                    href: "/admin/users/1",
+                    href: "/admin/users/6",
                     active: pageContext === "users" && contextSlug !== "new",
                 }
             ]
@@ -66,25 +66,24 @@ const AdminMenu: FC<AdminMenuProps> = () => {
     return (
         <div className="hidden md:flex flex-col gap-0 w-1/3 h-auto">
             <nav className="flex flex-col gap-2 w-full h-full">
-                <span className="text-lg font-medium mb-2 !h-fit">Admin Dashboard</span>
-                <div className="grid gap-2 w-full sticky h-fit top-24">
-                    {menuItems.map((item) => (
+                <div className="grid gap-2 w-full sticky h-fit">
+                    { menuItems.map((item) => (
                         <>
                             <Separator />
-                            <h2 className="text-lg">{item.title}</h2>
-                            {item.content.map((content, index) => (
-                                <Link href={content.href} key={index}>
-                                    <Button variant="ghost" className={`!w-full text-start text-wrap text-muted-foreground hover:text-foreground ${content.active && "active"}`}>
-                                        <span className="w-full">{content.title}</span>
+                            <h2 className="text-lg">{ item.title }</h2>
+                            { item.content.map((content, index) => (
+                                <Link href={ content.href } key={ index }>
+                                    <Button variant="ghost" className={ `!w-full text-start text-wrap text-muted-foreground hover:text-foreground ${content.active && "active"}` }>
+                                        <span className="w-full">{ content.title }</span>
                                     </Button>
                                 </Link>
-                            ))}
+                            )) }
                         </>
-                    ))}
+                    )) }
                 </div>
             </nav>
         </div>
-    )
+    );
 };
 
 export default AdminMenu;

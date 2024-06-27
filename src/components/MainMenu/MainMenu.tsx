@@ -91,7 +91,7 @@ const MainMenu: FC<MainMenuProps> = () => {
                         <div className="flex items-center justify-center">
                             <div className="grid items-center justify-center gap-4">
                                 { menuItems.map((item, index) => {
-                                    const active = pageContext === item.link.slice(1, item.link.length + 1);
+                                    const active = pageContext === item.link.slice(1, pageContext.length + 1);
                                     return (
                                         <Link key={ index } href={ item.link }>
                                             <Button variant="ghost" className={ `w-full text-start fill-muted-foreground text-muted-foreground hover:text-foreground  hover:fill-foreground ${active && "active fill-foreground text-foreground"}` }>

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import MainMenu from '@/components/MainMenu/MainMenu';
 import ProfileSidebar from '@/components/ProfileSidebar/ProfileSidebar';
 import FAQ from '@/components/FAQ/FAQ';
@@ -15,7 +15,7 @@ export default async function CoursesLayout({
         <>
             <div className="flex justify-between">
                 <MainMenu />
-                <ScrollArea className="grid w-full max-h-full">
+                <ScrollArea className="grid w-full max-h-screen">
                     <div className="p-6">
                         { children }
                     </div>
