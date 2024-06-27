@@ -104,3 +104,8 @@
         transform: translateX(0%);
     }
 }
+
+.container {
+    max-width: none !important;
+}
+

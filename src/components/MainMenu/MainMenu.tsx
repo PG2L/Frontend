@@ -6,11 +6,12 @@ import React, { FC } from 'react';
 import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
 import * as icons from 'lucide-react';
-import { Avatar, AvatarImage } from '../ui/avatar';
 
 interface MainMenuProps { }
 
 const MainMenu: FC<MainMenuProps> = () => {
+
+    const [isOpen, setIsOpen] = React.useState(true);
 
     const path = usePathname();
     const pageContext = path.split('/')[1];
@@ -59,7 +60,7 @@ const MainMenu: FC<MainMenuProps> = () => {
             filledIcon: "M47.16,21.221l-5.91-0.966c-0.346-1.186-0.819-2.326-1.411-3.405l3.45-4.917c0.279-0.397,0.231-0.938-0.112-1.282 l-3.889-3.887c-0.347-0.346-0.893-0.391-1.291-0.104l-4.843,3.481c-1.089-0.602-2.239-1.08-3.432-1.427l-1.031-5.886 C28.607,2.35,28.192,2,27.706,2h-5.5c-0.49,0-0.908,0.355-0.987,0.839l-0.956,5.854c-1.2,0.345-2.352,0.818-3.437,1.412l-4.83-3.45 c-0.399-0.285-0.942-0.239-1.289,0.106L6.82,10.648c-0.343,0.343-0.391,0.883-0.112,1.28l3.399,4.863 c-0.605,1.095-1.087,2.254-1.438,3.46l-5.831,0.971c-0.482,0.08-0.836,0.498-0.836,0.986v5.5c0,0.485,0.348,0.9,0.825,0.985 l5.831,1.034c0.349,1.203,0.831,2.362,1.438,3.46l-3.441,4.813c-0.284,0.397-0.239,0.942,0.106,1.289l3.888,3.891 c0.343,0.343,0.884,0.391,1.281,0.112l4.87-3.411c1.093,0.601,2.248,1.078,3.445,1.424l0.976,5.861C21.3,47.647,21.717,48,22.206,48 h5.5c0.485,0,0.9-0.348,0.984-0.825l1.045-5.89c1.199-0.353,2.348-0.833,3.43-1.435l4.905,3.441 c0.398,0.281,0.938,0.232,1.282-0.111l3.888-3.891c0.346-0.347,0.391-0.894,0.104-1.292l-3.498-4.857 c0.593-1.08,1.064-2.222,1.407-3.408l5.918-1.039c0.479-0.084,0.827-0.5,0.827-0.985v-5.5C47.999,21.718,47.644,21.3,47.16,21.221z M25,32c-3.866,0-7-3.134-7-7c0-3.866,3.134-7,7-7s7,3.134,7,7C32,28.866,28.866,32,25,32z"
         },
         {
-            title: 'About',
+            title: 'About Us',
             link: '/about',
             icon: "M 24 4 C 12.972066 4 4 12.972074 4 24 C 4 35.027926 12.972066 44 24 44 C 35.027934 44 44 35.027926 44 24 C 44 12.972074 35.027934 4 24 4 z M 24 7 C 33.406615 7 41 14.593391 41 24 C 41 33.406609 33.406615 41 24 41 C 14.593385 41 7 33.406609 7 24 C 7 14.593391 14.593385 7 24 7 z M 24 14 A 2 2 0 0 0 24 18 A 2 2 0 0 0 24 14 z M 23.976562 20.978516 A 1.50015 1.50015 0 0 0 22.5 22.5 L 22.5 33.5 A 1.50015 1.50015 0 1 0 25.5 33.5 L 25.5 22.5 A 1.50015 1.50015 0 0 0 23.976562 20.978516 z",
             filledIcon: "M24,4C12.972,4,4,12.972,4,24s8.972,20,20,20s20-8.972,20-20S35.028,4,24,4z M25.5,33.5c0,0.828-0.672,1.5-1.5,1.5	s-1.5-0.672-1.5-1.5v-11c0-0.828,0.672-1.5,1.5-1.5s1.5,0.672,1.5,1.5V33.5z M24,18c-1.105,0-2-0.895-2-2c0-1.105,0.895-2,2-2	s2,0.895,2,2C26,17.105,25.105,18,24,18z"
@@ -71,29 +72,60 @@ const MainMenu: FC<MainMenuProps> = () => {
             filledIcon: "M 24 4 C 19.599415 4 16 7.599415 16 12 L 16 16 L 12.5 16 C 10.019 16 8 18.019 8 20.5 L 8 39.5 C 8 41.981 10.019 44 12.5 44 L 35.5 44 C 37.981 44 40 41.981 40 39.5 L 40 20.5 C 40 18.019 37.981 16 35.5 16 L 32 16 L 32 12 C 32 7.599415 28.400585 4 24 4 z M 24 7 C 26.779415 7 29 9.220585 29 12 L 29 16 L 19 16 L 19 12 C 19 9.220585 21.220585 7 24 7 z M 24 27 C 25.657 27 27 28.343 27 30 C 27 31.657 25.657 33 24 33 C 22.343 33 21 31.657 21 30 C 21 28.343 22.343 27 24 27 z"
         },
     ];
+
+    const logoutButton = <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="28" height="28" viewBox="0 0 48 48">
+        <path d="M 24 4 C 12.972066 4 4 12.972074 4 24 C 4 35.027926 12.972066 44 24 44 C 35.027934 44 44 35.027926 44 24 C 44 12.972074 35.027934 4 24 4 z M 24 7 C 28.159946 7 31.91445 8.5434723 34.865234 11.013672 L 11.013672 34.863281 C 8.544055 31.912656 7 28.1594 7 24 C 7 14.593391 14.593385 7 24 7 z M 36.986328 13.134766 C 39.456525 16.085553 41 19.840056 41 24 C 41 33.406609 33.406615 41 24 41 C 19.840597 41 16.087341 39.455948 13.136719 36.986328 L 36.986328 13.134766 z"></path>
+    </svg>;
+
     return (
-        <div className={ `flex flex-col gap-6 h-full` }>
-            <h1 className="text-foreground text-lg font-medium">Welcome, Nakkarst</h1>
-            <div className="h-fit sticky top-6 grid gap-2">
-                <Separator className="mb-4" />
-                { menuItems.map((item, index) => {
-                    const active = pageContext === item.link.slice(1, item.link.length + 1);
-                    return (
-                        <Link key={ index } href={ item.link }>
-                            <Button variant="ghost" className={ `w-full text-start fill-secondary hover:fill-foreground ${active && "active fill-foreground"}` }>
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="28" height="28" viewBox="0 0 48 48">
-                                        <path className={ ` ${active ? "opacity-100" : "opacity-0"}` } d={ item.filledIcon }></path>
-                                        <path className={ ` ${active ? "opacity-0" : "opacity-100"}` } d={ item.icon }></path>
-                                    </svg>
-                                </div>
-                                <span className="w-full ms-2">{ item.title }</span>
-                            </Button>
-                        </Link>
-                    );
-                }) }
+        <>
+            <div className={ `flex flex-col bg-card border-r sticky left-0 top-0 min-h-screen justify-between py-6 ${isOpen ? 'px-6' : 'px-2'}` }>
+                <div className="sticky top-6">
+                    <div className="items-start mb-2">
+                        <div className="rounded grid justify-items-center">
+                            <span className="text-xl">PG<span className="text-3xl text-primary font-medium">2</span>L</span>
+                        </div>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        <Separator className="mb-4" />
+                        <div className="flex items-center justify-center">
+                            <div className="grid items-center justify-center gap-4">
+                                { menuItems.map((item, index) => {
+                                    const active = pageContext === item.link.slice(1, item.link.length + 1);
+                                    return (
+                                        <Link key={ index } href={ item.link }>
+                                            <Button variant="ghost" className={ `w-full text-start fill-muted-foreground text-muted-foreground hover:text-foreground  hover:fill-foreground ${active && "active fill-foreground text-foreground"}` }>
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="28" height="28" viewBox="0 0 48 48">
+                                                        <path className={ ` ${active ? "opacity-100" : "opacity-0"}` } d={ item.filledIcon }></path>
+                                                        <path className={ ` ${active ? "opacity-0" : "opacity-100"}` } d={ item.icon }></path>
+                                                    </svg>
+                                                </div>
+                                                { isOpen && <span className="w-full ms-2">{ item.title }</span> }
+                                            </Button>
+                                        </Link>
+                                    );
+                                }) }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="h-fit">
+                    <Button variant="ghost" className={ `w-full text-start fill-muted-foreground hover:fill-foreground text-muted-foreground hover:text-foreground` }>
+                        <div>
+                            { logoutButton }
+                        </div>
+                        { isOpen && <span className="w-full ms-2">Logout</span> }
+                    </Button>
+                    <Separator className="mt-4" />
+                </div>
             </div>
-        </div>
+            <div className="flex flex-col h-screen items-center justify-center z-50 ">
+                <Button variant="ghost" onClick={ () => setIsOpen(!isOpen) } className={ `absolute !p-2 fixed` } size="sm">
+                    { isOpen ? <icons.ChevronLeftIcon className="h-6 w-6" /> : <icons.ChevronRightIcon className="h-6 w-6" /> }
+                </Button>
+            </div>
+        </>
     );
 };
 

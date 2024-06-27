@@ -1,11 +1,10 @@
 import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import Layout from "@/components/Layout/Layout";
+import FAQ from "@/components/FAQ/FAQ";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Avatar } from "@/components/ui/avatar";
 import {
     Card,
     CardContent,
@@ -13,9 +12,9 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import Header from '@/components/Header/Header';
-// import { AvatarImage } from '@radix-ui/react-avatar';
+import Footer from '@/components/Footer/Footer';
 
 
 export default function Page() {
@@ -30,7 +29,7 @@ export default function Page() {
         `https://img.icons8.com/?size=100&id=37325&format=png&color=1461cc`,
         `https://img.icons8.com/?size=100&id=jlpBF1fJe9fs&format=png&color=1461cc`
     ];
-    const lessonsContent: { title: string, description: string }[] = [
+    const lessonsContent: { title: string, description: string; }[] = [
         {
             title: "Introduction to Python Programming",
             description: "Master the basics of Python, a popular and versatile programming language. Learn about data types, control flow, functions, and error handling."
@@ -49,7 +48,7 @@ export default function Page() {
         }
     ];
 
-    const featureContent: { title: string, description: string }[] = [
+    const featureContent: { title: string, description: string; }[] = [
         {
             title: "Interactive Lessons",
             description: "Engaging, interactive lessons that make learning fun and effective. Lessons can include multimedia content, quizzes, and interactive exercises."
@@ -75,7 +74,7 @@ export default function Page() {
             description: "Allows users to download lessons and learn even when they're offline. This is especially useful for users with limited internet access."
         }
     ];
-    const testimonies: { name: string, description: string, review: string, stars: number }[] = [
+    const testimonies: { name: string, description: string, review: string, stars: number; }[] = [
         {
             name: "John Doe",
             description: "Software Engineer",
@@ -112,7 +111,7 @@ export default function Page() {
             review: "This app has made me look forward to learning. The gamified approach is not just fun, but also very effective. I've learned so much in such a short time. 5 stars well deserved!",
             stars: 5
         }
-    ]
+    ];
     return (
         <>
             <Header />
@@ -132,34 +131,34 @@ export default function Page() {
                     <div className="overflow-hidden mt-6 w-full border-b border-t bg-card whitespace-nowrap flex items-center">
                         <div className="slide-track animate-[slide_60s_linear_infinite] inline-block whitespace-nowrap content-center py-2">
                             <div className="flex gap-48 justify-center">
-                                {sponsors.map((sponsor, index) => (
-                                    <Image key={index} src={sponsor} alt="" width="64" height="64" />
-                                ))}
-                                {sponsors.map((sponsor, index) => (
-                                    <Image key={index + sponsors.length} src={sponsor} alt="" width="64" height="64" />
-                                ))}
+                                { sponsors.map((sponsor, index) => (
+                                    <Image key={ index } src={ sponsor } alt="" width="64" height="64" />
+                                )) }
+                                { sponsors.map((sponsor, index) => (
+                                    <Image key={ index + sponsors.length } src={ sponsor } alt="" width="64" height="64" />
+                                )) }
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="py-16 grid justify-center justify-items-center gap-24">
                     <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 justify-items-center w-full">
-                        {lessonsContent.map((content, index) => (
-                            <Card key={index}>
+                        { lessonsContent.map((content, index) => (
+                            <Card key={ index }>
                                 <CardHeader>
                                     <div className="bg-secondary py-24 rounded"></div>
                                 </CardHeader>
                                 <CardContent>
-                                    <CardTitle>{content.title}</CardTitle>
+                                    <CardTitle>{ content.title }</CardTitle>
                                     <CardDescription className="mt-4">
-                                        {content.description}
+                                        { content.description }
                                     </CardDescription>
                                 </CardContent>
                                 <CardFooter className="flex items-end justify-end">
                                     <Link href="/" className="underline">Start learning</Link>
                                 </CardFooter>
                             </Card>
-                        ))}
+                        )) }
                     </div>
                     <div className="flex flex-col md:flex-row justify-center items-center gap-1">
                         <Link href="/leaderboard">
@@ -193,18 +192,18 @@ export default function Page() {
                     <div className="grid gap-12">
                         <h2 className="text-center text-3xl font-medium">Unlock your learning potential</h2>
                         <div className="grid justify-center md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {featureContent.map((content, index) => (
-                                <Card key={index}>
+                            { featureContent.map((content, index) => (
+                                <Card key={ index }>
                                     <CardHeader>
-                                        <CardTitle className="text-center font-medium text-lg">{content.title}</CardTitle>
+                                        <CardTitle className="text-center font-medium text-lg">{ content.title }</CardTitle>
                                     </CardHeader>
                                     <CardContent>
                                         <CardDescription>
-                                            {content.description}
+                                            { content.description }
                                         </CardDescription>
                                     </CardContent>
                                 </Card>
-                            ))}
+                            )) }
                         </div>
                     </div>
                     <div className="flex mx-auto flex-col gap-6 justify-center max-w-4xl">
@@ -233,31 +232,28 @@ export default function Page() {
                         </div>
                     </div>
                     <div className="grid gap-6 justify-center md:grid-cols-2 lg:grid-cols-3">
-                        {testimonies.map((_, index) => (
-                            <Card key={index}>
+                        { testimonies.map((_, index) => (
+                            <Card key={ index }>
                                 <CardHeader>
-                                    <CardTitle>{_.name}</CardTitle>
-                                    <CardDescription>{_.description}</CardDescription>
+                                    <CardTitle>{ _.name }</CardTitle>
+                                    <CardDescription>{ _.description }</CardDescription>
                                 </CardHeader>
                                 <CardContent>
                                     <CardDescription>
-                                        {_.review}
+                                        { _.review }
                                     </CardDescription>
                                 </CardContent>
                                 <CardFooter>
                                     <div className="flex justify-between items-center w-full">
-                                        <Avatar>
-                                            {/* <AvatarImage src={`https://randomuser.me/api/portraits/men/${index}.jpg`} /> */}
-                                        </Avatar>
                                         <div className="flex h-4">
-                                            {Array.from({ length: _.stars }).map((_, index) => (
-                                                <Image key={index} height="16" width="16" src="https://img.icons8.com/?size=100&id=8ggStxqyboK5&format=png&color=000000" alt="" />
-                                            ))}
+                                            { Array.from({ length: _.stars }).map((_, index) => (
+                                                <Image key={ index } height="16" width="16" src="https://img.icons8.com/?size=100&id=8ggStxqyboK5&format=png&color=000000" alt="" />
+                                            )) }
                                         </div>
                                     </div>
                                 </CardFooter>
                             </Card>
-                        ))}
+                        )) }
                     </div>
                     <div className="grid gap-6">
                         <h2 className="text-center text-3xl font-medium">Join the community</h2>
@@ -269,6 +265,8 @@ export default function Page() {
                     </div>
                 </div>
             </div>
+            <FAQ />
+            <Footer />
         </>
-    )
+    );
 }

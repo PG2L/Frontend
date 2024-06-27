@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '../ui/breadcrumb';
 
-interface GlobalBreadcrumbProps { 
+interface GlobalBreadcrumbProps {
     courses?: any[],
 }
 
@@ -38,40 +38,38 @@ const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = ({
     }, [pathNames]);
 
     return (
-        <nav className={styles.breadcrumb}>
-            <Breadcrumb>
-                <BreadcrumbList>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                            <Link href="/">Home</Link>
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    {itemLinks.map((itemLink, index) => {
-                        let href = `/${pathNames.slice(0, index + 1).join('/')}`;
-                        return (
-                            <>
-                                {itemLinks.length !== index + 1 ?
+        <>
+            { pathNames.length > 1 &&
+                <nav className={ styles.breadcrumb }>
+                    <Breadcrumb>
+                        <BreadcrumbList>
+                            { itemLinks.map((itemLink, index) => {
+                                let href = `/${pathNames.slice(0, index + 1).join('/')}`;
+                                return (
                                     <>
-                                        <BreadcrumbItem>
-                                            <BreadcrumbLink asChild>
-                                                <Link href={href}>{itemLink}</Link>
-                                            </BreadcrumbLink>
-                                        </BreadcrumbItem>
-                                        <BreadcrumbSeparator />
+                                        { itemLinks.length !== index + 1 ?
+                                            <>
+                                                <BreadcrumbItem>
+                                                    <BreadcrumbLink asChild>
+                                                        <Link href={ href }>{ itemLink }</Link>
+                                                    </BreadcrumbLink>
+                                                </BreadcrumbItem>
+                                                <BreadcrumbSeparator />
+                                            </>
+                                            :
+                                            <BreadcrumbItem>
+                                                <BreadcrumbPage>{ itemLink }</BreadcrumbPage>
+                                            </BreadcrumbItem>
+                                        }
                                     </>
-                                    :
-                                    <BreadcrumbItem>
-                                        <BreadcrumbPage>{itemLink}</BreadcrumbPage>
-                                    </BreadcrumbItem>
-                                }
-                            </>
-                        )
-                    })}
-                </BreadcrumbList >
-            </Breadcrumb>
-        </nav >
-    )
+                                );
+                            }) }
+                        </BreadcrumbList >
+                    </Breadcrumb>
+                </nav >
+            }
+        </>
+    );
 };
 
 export default GlobalBreadcrumb;

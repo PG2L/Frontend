@@ -1,15 +1,14 @@
-"use client"
+"use client";
 
 import React, { FC } from 'react';
 import Link from 'next/link';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
-import { Separator } from '../ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 
 interface FooterProps { }
 
-const footerColumns: { title: string, items: string[] }[] = [
+const footerColumns: { title: string, items: string[]; }[] = [
     {
         title: 'Learn',
         items: ['Assessments', 'Lessons', 'Courses']
@@ -32,7 +31,7 @@ const footerColumns: { title: string, items: string[] }[] = [
     }
 ];
 
-const socialLinks: { title: string, href: string, url: string }[] = [
+const socialLinks: { title: string, href: string, url: string; }[] = [
     {
         title: 'Facebook',
         href: '/',
@@ -80,16 +79,16 @@ const Footer: FC<FooterProps> = () => (
         <div className="container mx-auto py-4 md:py-6 grid">
             <div className="grid lg:flex justify-center lg:justify-between lg:gap-12 gap-6 items-center lg:items-start">
                 <div className="grid grid-cols-3 md:grid-cols-5 items-start gap-6 lg:gap-0">
-                    {footerColumns.map((column, index) => (
-                        <div key={index} className="grid gap-6 text-center items-center justify-center">
-                            <h3 className="font-medium text-sm">{column.title}</h3>
+                    { footerColumns.map((column, index) => (
+                        <div key={ index } className="grid gap-6 text-center items-center justify-center">
+                            <h3 className="font-medium text-sm">{ column.title }</h3>
                             <nav className="grid items-center justify-center gap-4">
-                                {column.items.map((link, index) => (
-                                    <Link key={index} href="/" className="hover:underline text-sm text-muted-foreground text-nowrap lg:text-wrap">{link}</Link>
-                                ))}
+                                { column.items.map((link, index) => (
+                                    <Link key={ index } href="/" className="hover:underline text-sm text-muted-foreground text-nowrap lg:text-wrap">{ link }</Link>
+                                )) }
                             </nav>
                         </div>
-                    ))}
+                    )) }
                 </div>
                 <div className="flex flex-col lg:grid gap-4 items-center justify-start">
                     <h3 className="font-medium">Subscribe to our newsletter</h3>
@@ -109,12 +108,12 @@ const Footer: FC<FooterProps> = () => (
                     <p className="text-muted-foreground text-end w-full">© 2024 Company. All rights reserved.</p>
                 </div>
                 <div className="flex justify-center items-center gap-2">
-                    {socialLinks.map((link, index) => (
-                        <Avatar key={index} className="h-6 w-6">
-                            <AvatarImage src={link['url']} alt={link['title']} />
+                    { socialLinks.map((link, index) => (
+                        <Avatar key={ index } className="h-6 w-6">
+                            <AvatarImage src={ link['url'] } alt={ link['title'] } />
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
-                    ))}
+                    )) }
                 </div>
             </div>
         </div >

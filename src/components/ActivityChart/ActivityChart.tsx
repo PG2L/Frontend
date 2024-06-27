@@ -40,23 +40,23 @@ const ActivityChart: FC<ActivityChartProps> = () => {
     ];
 
     return (
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" className="max-w-80">
             <BarChart
-                data={data}
-                margin={{
+                data={ data }
+                margin={ {
                     top: 10,
                     right: 30,
                     left: 0,
                     bottom: 0,
-                }}
+                } }
             >
                 <XAxis dataKey="Day" />
                 <YAxis dataKey="Lessons" />
                 <Tooltip />
-                <Bar type="basis" dataKey="Lessons" stroke="#141F2F" fill="#1461cc" />
+                <Bar type="rounded" dataKey="Lessons" stroke="#141F2F" fill="#1461cc" />
             </BarChart>
         </ResponsiveContainer>
-    )
+    );
 };
 
 export default ActivityChart;
