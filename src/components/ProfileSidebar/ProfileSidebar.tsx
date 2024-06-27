@@ -27,13 +27,13 @@ const ProfileSidebar: FC<ProfileSidebarProps> = () => {
 
     return (
         <>
-            <div className={ `flex bg-card right-0 top-0 sticky z-50 ${isOpen ? 'h-fit' : 'h-screen'}` }>
+            <div className={ `flex bg-card right-0 top-0 sticky z-50 min-h-screen` }>
                 <div className="flex flex-col items-center h-screen fixed justify-center z-[51]">
                     <Button variant="ghost" onClick={ () => setIsOpen(!isOpen) } className={ `absolute !p-2` } size="sm">
                         { isOpen ? <icons.ChevronRightIcon className="h-6 w-6" /> : <icons.ChevronLeftIcon className="h-6 w-6" /> }
                     </Button>
                 </div>
-                <div className={ `flex flex-col items-start border-l gap-4 py-6 ${isOpen ? "px-6 h-fit sticky" : "px-2 h-screen justify-between sticky top-0"}` }>
+                <div className={ `flex flex-col items-start border-l gap-4 justify-between py-6 ${isOpen ? "px-6 sticky" : "px-2 sticky top-0"}` }>
                     <div className="items-center">
                         <div className="items-center justify-center flex">
                             <icons.UserCircleIcon className={ `${isOpen ? "h-20 w-20" : "h-16 w-16"}` } strokeWidth={ 1 } color="#1461cc" />

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import AdminMenu from '@/components/AdminMenu/AdminMenu';
 
 export default async function AdminLayout({
@@ -11,10 +11,10 @@ export default async function AdminLayout({
 
     return (
         <>
-            <div className="flex container gap-6">
+            <div className="flex gap-6">
                 <AdminMenu />
-                {children}
+                { children }
             </div>
         </>
-    )
+    );
 };
