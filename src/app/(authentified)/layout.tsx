@@ -15,7 +15,7 @@ export default async function CoursesLayout({
         <>
             <div className="flex justify-between">
                 <MainMenu />
-                <ScrollArea className="grid w-full h-screen" orientation="vertical">
+                <ScrollArea className="grid w-full max-h-full">
                     <div className="p-6">
                         { children }
                     </div>

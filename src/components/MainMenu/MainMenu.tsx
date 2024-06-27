@@ -79,7 +79,7 @@ const MainMenu: FC<MainMenuProps> = () => {
 
     return (
         <>
-            <div className={ `flex flex-col bg-card border-r sticky left-0 top-0 min-h-screen justify-between py-6 ${isOpen ? 'px-6' : 'px-2'}` }>
+            <div className={ `flex flex-col bg-card border-r sticky left-0 top-0 h-screen justify-between py-6 ${isOpen ? 'px-6' : 'px-2'}` }>
                 <div className="sticky top-6">
                     <div className="items-start mb-2">
                         <div className="rounded grid justify-items-center">
