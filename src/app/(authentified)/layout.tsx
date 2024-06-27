@@ -1,6 +1,9 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode } from 'react';
 import MainMenu from '@/components/MainMenu/MainMenu';
 import ProfileSidebar from '@/components/ProfileSidebar/ProfileSidebar';
+import FAQ from '@/components/FAQ/FAQ';
+import Footer from '@/components/Footer/Footer';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 export default async function CoursesLayout({
     children,
@@ -10,12 +13,18 @@ export default async function CoursesLayout({
 
     return (
         <>
-            <div className="flex gap-6 justify-between container">
-                <div className="w-1/5">
-                    <MainMenu />
-                </div>
-                {children}
+            <div className="flex justify-between">
+                <MainMenu />
+                <ScrollArea className="grid w-full h-screen" orientation="vertical">
+                    <div className="p-6">
+                        { children }
+                    </div>
+                    <FAQ />
+                    <Footer />
+                    <ScrollBar />
+                </ScrollArea>
+                <ProfileSidebar />
             </div>
         </>
-    )
+    );
 };
