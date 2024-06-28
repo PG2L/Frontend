@@ -68,9 +68,9 @@ const AdminMenu: FC<AdminMenuProps> = () => {
             <div className="hidden md:flex flex-col gap-0 w-1/4 h-auto">
                 <nav className="flex flex-col gap-2 w-full h-full">
                     <div className="grid gap-2 w-full sticky h-fit top-6">
-                        { menuItems.map((item) => (
+                        { menuItems.map((item, index) => (
                             <>
-                                <Separator />
+                                { index !== 0 && <Separator /> }
                                 <h2 className="text-lg">{ item.title }</h2>
                                 { item.content.map((content, index) => (
                                     <Link href={ content.href } key={ index }>
