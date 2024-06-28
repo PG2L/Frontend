@@ -1,7 +1,6 @@
 "use client";
 
 import React, { FC, Suspense } from 'react';
-import styles from './UserForm.module.css';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -23,22 +22,12 @@ const formSchema = z.object({
     confirmPassword: z.string().min(8, {
         message: "Password must be at least 8 characters.",
     }),
-    firstname: z.string().min(2, {
-        message: "First name must be at least 2 characters.",
-    }),
-    lastname: z.string().min(2, {
-        message: "Last name must be at least 2 characters.",
-    }),
-    adress: z.string().min(10, {
-        message: "Address must be at least 10 characters.",
-    }),
-    country_name: z.string().min(2, {
-        message: "Country name must be at least 2 characters.",
-    }),
-    role: z.string().min(2, {
-        message: "Role must be at least 2 characters.",
-    }),
-})
+    firstname: z.string().optional(),
+    lastname: z.string().optional(),
+    address: z.string().optional(),
+    country_name: z.string().optional(),
+    role: z.string().optional(),
+});
 
 interface UserFormProps {
     user?: {
@@ -48,7 +37,7 @@ interface UserFormProps {
         password: string,
         firstname: string,
         lastname: string,
-        adress: string,
+        address: string,
         country_name: string,
         role: string,
     },
@@ -65,7 +54,7 @@ const UserForm: FC<UserFormProps> = ({
             password: user ? user.password : "",
             firstname: user ? user.firstname : "",
             lastname: user ? user.lastname : "",
-            adress: user ? user.adress : "",
+            address: user ? user.address : "",
             country_name: user ? user.country_name : "",
             role: user ? user.role : "",
         },
@@ -132,165 +121,165 @@ const UserForm: FC<UserFormProps> = ({
                 <Skeleton className="w-24 h-10 justify-self-center" />
             </div>
         }>
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 lg:gap-6 mt-6">
+            <Form { ...form }>
+                <form onSubmit={ form.handleSubmit(onSubmit) } className="grid gap-4 lg:gap-6 mt-6">
                     <div className="grid md:flex gap-4 lg:gap-6">
                         <FormField
-                            control={form.control}
+                            control={ form.control }
                             name="username"
-                            render={({ field }) => (
+                            render={ ({ field }) => (
                                 <FormItem className="w-full">
                                     <FormLabel>Username</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Nakkarst" {...field} />
+                                        <Input placeholder="Nakkarst" { ...field } />
                                     </FormControl>
                                     <FormDescription>
-                                        Choose a unique username that you'll use to log in and will be visible to other users on the platform. Avoid using personal information for privacy.
+                                        Choose a unique username that you&apos;ll use to log in and will be visible to other users on the platform. Avoid using personal information for privacy.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
-                            )}
+                            ) }
                         />
                         <FormField
-                            control={form.control}
+                            control={ form.control }
                             name="email"
-                            render={({ field }) => (
+                            render={ ({ field }) => (
                                 <FormItem className="w-full">
                                     <FormLabel>Email</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="example@mail.com" {...field} />
+                                        <Input placeholder="example@mail.com" { ...field } />
                                     </FormControl>
                                     <FormDescription>
-                                        Enter your email address. We'll use it for important notifications about your courses and account security. Rest assured, we respect your privacy and won't share it with third parties.
+                                        Enter your email address. We&apos;ll use it for important notifications about your courses and account security. Rest assured, we respect your privacy and won&apos;t share it with third parties.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
-                            )}
+                            ) }
                         />
                     </div>
                     <div className="grid gap-4 sm:flex lg:gap-6">
                         <FormField
-                            control={form.control}
+                            control={ form.control }
                             name="password"
-                            render={({ field }) => (
+                            render={ ({ field }) => (
                                 <FormItem className="w-full">
                                     <FormLabel>Password</FormLabel>
                                     <FormControl>
-                                        <Input type="password" {...field} />
+                                        <Input type="password" { ...field } />
                                     </FormControl>
                                     <FormDescription>
                                         Create a strong password to protect your account. It should be at least 8 characters long and include a mix of letters, numbers, and symbols.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
-                            )}
+                            ) }
                         />
                         <FormField
-                            control={form.control}
+                            control={ form.control }
                             name="confirmPassword"
-                            render={({ field }) => (
+                            render={ ({ field }) => (
                                 <FormItem className="w-full">
                                     <FormLabel>Confirm Password</FormLabel>
                                     <FormControl>
-                                        <Input type="password" {...field} />
+                                        <Input type="password" { ...field } />
                                     </FormControl>
                                     <FormDescription>
-                                        Re-enter your password to confirm it. This ensures that you've typed your password correctly.
+                                        Re-enter your password to confirm it. This ensures that you&apos;ve typed your password correctly.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
-                            )}
+                            ) }
                         />
                     </div>
                     <div className="grid gap-4 sm:flex lg:gap-6">
                         <FormField
-                            control={form.control}
+                            control={ form.control }
                             name="firstname"
-                            render={({ field }) => (
+                            render={ ({ field }) => (
                                 <FormItem className="w-full">
                                     <FormLabel>First Name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="John" {...field} />
+                                        <Input placeholder="John" { ...field } />
                                     </FormControl>
                                     <FormDescription>
                                         Enter your first name. This will help us personalize your learning experience.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
-                            )}
+                            ) }
                         />
                         <FormField
-                            control={form.control}
+                            control={ form.control }
                             name="lastname"
-                            render={({ field }) => (
+                            render={ ({ field }) => (
                                 <FormItem className="w-full">
                                     <FormLabel>Last Name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Doe" {...field} />
+                                        <Input placeholder="Doe" { ...field } />
                                     </FormControl>
                                     <FormDescription>
                                         Enter your last name. This will be used along with your first name to personalize your certificates of completion.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
-                            )}
+                            ) }
                         />
                     </div>
                     <FormField
-                        control={form.control}
-                        name="adress"
-                        render={({ field }) => (
+                        control={ form.control }
+                        name="address"
+                        render={ ({ field }) => (
                             <FormItem>
                                 <FormLabel>Address</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="1234 Main St" {...field} />
+                                    <Input placeholder="1234 Main St" { ...field } />
                                 </FormControl>
                                 <FormDescription>
                                     Provide your full address. This information might be used for billing purposes or sending physical materials related to your courses.
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>
-                        )}
+                        ) }
                     />
                     <div className="grid md:flex gap-4 lg:gap-6">
                         <FormField
-                            control={form.control}
+                            control={ form.control }
                             name="country_name"
-                            render={({ field }) => (
+                            render={ ({ field }) => (
                                 <FormItem className="w-full">
                                     <FormLabel>Country Name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="United States" {...field} />
+                                        <Input placeholder="United States" { ...field } />
                                     </FormControl>
                                     <FormDescription>
                                         Select your country from the list. This helps us offer you region-specific content and comply with local laws.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
-                            )}
+                            ) }
                         />
                         <FormField
-                            control={form.control}
+                            control={ form.control }
                             name="role"
-                            render={({ field }) => (
+                            render={ ({ field }) => (
                                 <FormItem className="w-full">
                                     <FormLabel>Role</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Admin" {...field} />
+                                        <Input placeholder="Admin" { ...field } />
                                     </FormControl>
                                     <FormDescription>
-                                        Indicate your current role or the role you're aspiring to. This information helps us recommend the most relevant courses for your career path.
+                                        Indicate your current role or the role you&apos;re aspiring to. This information helps us recommend the most relevant courses for your career path.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
-                            )}
+                            ) }
                         />
                     </div>
                     <Button type="submit" size="lg" className="mt-4 justify-self-center">Submit</Button>
                 </form>
             </Form>
         </Suspense>
-    )
+    );
 };
 
 export default UserForm;

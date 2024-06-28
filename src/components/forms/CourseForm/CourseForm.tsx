@@ -1,45 +1,51 @@
 "use client";
 
 import React, { FC, Suspense } from 'react';
-import styles from './CourseForm.module.css';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { RadioGroup } from '@radix-ui/react-context-menu';
-import { RadioGroupItem } from '@radix-ui/react-radio-group';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Skeleton } from '@/components/ui/skeleton';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 const formSchema = z.object({
     title: z.string().min(2, {
         message: "Title must be at least 2 characters.",
     }),
     description: z.string().optional(),
-    exp_gain: z.number().int().nonnegative({
-        message: "Experience gain must be a positive number.",
-    }).optional().transform((value) => parseInt(value)),
-    points_gain: z.number().int().nonnegative({
+    exp_gain: z.coerce.number().int().nonnegative({
         message: "Points gain must be a positive number.",
     }).optional(),
-    lessons_count: z.number().int().nonnegative({
+    points_gain: z.coerce.number().int().nonnegative({
+        message: "Points gain must be a positive number.",
+    }).optional(),
+    lessons_count: z.coerce.number().int().nonnegative({
         message: "Lesson number must be a positive number.",
     }).optional(),
-    is_free: z.boolean(),
-    lesson_count: z.number().int().nonnegative({
+    is_free: z.coerce.boolean(),
+    lesson_count: z.coerce.number().int().nonnegative({
         message: "Lesson number must be a positive number.",
     }).optional(),
-    difficulty: z.string().optional(),
-    price: z.number().int().nonnegative({
+    difficulty: z.enum([
+        'Beginner',
+        'Novice',
+        'Intermediate',
+        'Advanced',
+        'Expert',
+        'Master',
+        'Master+',
+    ]).optional(),
+    price: z.coerce.number().int().nonnegative({
         message: "Price must be a positive number.",
     }).optional(),
-    category: z.number().int().nonnegative({
+    category: z.coerce.number().int().nonnegative({
         message: "Category must be a positive number.",
     }).optional(),
-    language: z.number().int().nonnegative({
+    language: z.coerce.number().int().nonnegative({
         message: "Language must be a positive number.",
     }).optional(),
 });
@@ -56,15 +62,15 @@ interface CourseFormProps {
     course?: {
         id: number;
         title: string;
-        description: string;
-        exp_gain: number;
-        points_gain: number;
-        is_free: boolean;
-        lesson_count: number;
-        difficulty: string;
-        price: number;
-        category: number;
-        language: number;
+        description?: string;
+        exp_gain?: number;
+        points_gain?: number;
+        is_free?: boolean;
+        lesson_count?: number;
+        difficulty?: "Beginner" | "Novice" | "Intermediate" | "Advanced" | "Expert" | "Master" | "Master+";
+        price?: number;
+        category?: number;
+        language?: number;
     };
 }
 
@@ -73,6 +79,7 @@ const CourseForm: FC<CourseFormProps> = ({
     languages,
     course,
 }) => {
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -82,7 +89,7 @@ const CourseForm: FC<CourseFormProps> = ({
             points_gain: course ? course.points_gain : 0,
             is_free: course ? course.is_free : true,
             lesson_count: course ? course.lesson_count : 0,
-            difficulty: course ? course.difficulty : "",
+            difficulty: course ? course.difficulty : "Beginner",
             price: course ? course.price : 0,
             category: course ? course.category : 0,
             language: course ? course.language : 0,
@@ -226,7 +233,7 @@ const CourseForm: FC<CourseFormProps> = ({
                             render={ ({ field }) => (
                                 <FormItem className="w-full">
                                     <FormLabel>Difficulty</FormLabel>
-                                    <Select onValueChange={ field.onChange } defaultValue={ field.value.toString() }>
+                                    <Select onValueChange={ field.onChange } defaultValue={ field?.value }>
                                         <FormControl>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Select a difficulty" />
@@ -273,7 +280,7 @@ const CourseForm: FC<CourseFormProps> = ({
                                         <Input type="number" { ...field } />
                                     </FormControl>
                                     <FormDescription>
-                                        Enter the total number of lessons included in this course. This gives learners an idea of the course's scope and structure.
+                                        Enter the total number of lessons included in this course. This gives learners an idea of the course&apos;s scope and structure.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
@@ -287,7 +294,7 @@ const CourseForm: FC<CourseFormProps> = ({
                             render={ ({ field }) => (
                                 <FormItem className="w-full">
                                     <FormLabel>Category</FormLabel>
-                                    <Select onValueChange={ field.onChange } defaultValue={ field.value }>
+                                    <Select onValueChange={ field.onChange } defaultValue={ field.value?.toString() }>
                                         <FormControl>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Select a category" />
@@ -295,8 +302,8 @@ const CourseForm: FC<CourseFormProps> = ({
                                         </FormControl>
                                         <SelectContent>
                                             { categories.map((category) => (
-                                                <SelectItem key={ category.id } value={ category.id }>
-                                                    { category.name }
+                                                <SelectItem key={ category.id } value={ category.id.toString() }>
+                                                    { category.id } - { category.name }
                                                 </SelectItem>
                                             )) }
                                         </SelectContent>
@@ -314,7 +321,7 @@ const CourseForm: FC<CourseFormProps> = ({
                             render={ ({ field }) => (
                                 <FormItem className="w-full">
                                     <FormLabel>Language</FormLabel>
-                                    <Select onValueChange={ field.onChange } defaultValue={ field.value.toString() }>
+                                    <Select onValueChange={ field.onChange } defaultValue={ field.value?.toString() }>
                                         <FormControl>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Select a language" />
@@ -322,8 +329,8 @@ const CourseForm: FC<CourseFormProps> = ({
                                         </FormControl>
                                         <SelectContent>
                                             { languages.map((language) => (
-                                                <SelectItem key={ language.id } value={ language.id }>
-                                                    { language.name }
+                                                <SelectItem key={ language.id } value={ language?.id.toString() }>
+                                                    { language.id } - { language.name }
                                                 </SelectItem>
                                             )) }
                                         </SelectContent>
@@ -346,12 +353,12 @@ const CourseForm: FC<CourseFormProps> = ({
                                     <FormControl>
                                         <RadioGroup
                                             onValueChange={ field.onChange }
-                                            defaultValue={ field.value }
+                                            defaultValue={ field.value?.toString() }
                                             className="flex flex-col space-y-1"
                                         >
                                             <FormItem className="flex items-center space-x-3 space-y-0">
                                                 <FormControl>
-                                                    {/* <RadioGroupItem value={true} /> */ }
+                                                    <RadioGroupItem value="yes" />
                                                 </FormControl>
                                                 <FormLabel className="font-normal">
                                                     Yes
@@ -359,7 +366,7 @@ const CourseForm: FC<CourseFormProps> = ({
                                             </FormItem>
                                             <FormItem className="flex items-center space-x-3 space-y-0">
                                                 <FormControl>
-                                                    {/* <RadioGroupItem value={false} /> */ }
+                                                    <RadioGroupItem value="no" />
                                                 </FormControl>
                                                 <FormLabel className="font-normal">
                                                     No
