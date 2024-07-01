@@ -9,11 +9,9 @@ const DarkModeToggle: FC<DarkModeToggleProps> = ({
     isOpen,
 }) => {
 
-    const getTheme = useMemo(() => {
+    const getTheme: string = useMemo(() => {
         return localStorage.getItem('theme') || 'light';
-    },
-        []
-    );
+    }, []);
 
     const [isDark, setIsDark] = useState(getTheme === 'dark');
 

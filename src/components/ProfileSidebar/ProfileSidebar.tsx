@@ -24,7 +24,7 @@ interface ProfileSidebarProps {
 
 const ProfileSidebar: FC<ProfileSidebarProps> = () => {
 
-    const [isOpen, setIsOpen] = React.useState(false);
+    const [isOpen, setIsOpen] = React.useState(true);
 
     return (
         <div>
@@ -35,8 +35,8 @@ const ProfileSidebar: FC<ProfileSidebarProps> = () => {
                     </Button>
                 </div>
                 { isOpen ?
-                    <ScrollArea className={ `flex flex-col items-start border-l h-full gap-4 justify-between py-6 px-6 sticky` }>
-                        <div className="items-center">
+                    <ScrollArea className={ `flex flex-col items-start border-l min-h-screen gap-4 justify-between py-6 px-6 sticky` }>
+                        <div>
                             <div className="items-center justify-center flex">
                                 <icons.UserCircleIcon className={ `h-20 w-20` } strokeWidth={ 1 } color="#1461cc" />
                             </div>
@@ -118,7 +118,7 @@ const ProfileSidebar: FC<ProfileSidebarProps> = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="grid gap-4 w-full">
+                        <div className="grid gap-4 w-full align-self-end">
                             <div className="bg-background rounded-lg border p-4 grid gap-4">
                                 <div className="flex justify-between items-center">
                                     <h3 className="text-lg text-center">Friends <span className="text-base text-muted-foreground">(All-time XP)</span></h3>
