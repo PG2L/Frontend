@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { FC } from 'react';
 import Link from "next/link";
@@ -14,23 +14,13 @@ import {
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Input } from '../ui/input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { icons } from 'lucide-react';
 import SideBar from '../SideBar/SideBar';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '../ui/form';
+import LoginForm from '../forms/LoginForm/LoginForm';
+import SigninForm from '../forms/SigninForm/SigninForm';
+import DarkModeToggle from '../DarkModeToggle/DarkModeToggle';
 
-const components: { title: string; href: string; description: string }[] = [
+const components: { title: string; href: string; description: string; }[] = [
     {
         title: "All lessons",
         href: "/lessons",
@@ -66,7 +56,7 @@ const components: { title: string; href: string; description: string }[] = [
         description:
             "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
     },
-]
+];
 
 const ListItem = React.forwardRef<
     React.ElementRef<"a">,
@@ -76,73 +66,27 @@ const ListItem = React.forwardRef<
         <li>
             <NavigationMenuLink asChild>
                 <Link
-                    ref={ref}
-                    className={cn(
+                    ref={ ref }
+                    className={ cn(
                         "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
                         className
-                    )}
-                    {...props}
+                    ) }
+                    { ...props }
                 >
-                    <div className="font-medium leading-none">{title}</div>
+                    <div className="font-medium leading-none">{ title }</div>
                     <p className="line-clamp-2 leading-snug text-muted-foreground">
-                        {children}
+                        { children }
                     </p>
                 </Link>
             </NavigationMenuLink>
         </li>
-    )
-})
+    );
+});
 ListItem.displayName = "ListItem";
-
-const formSchema = z.object({
-    username: z.string().min(2, {
-        message: "Username must be at least 2 characters.",
-    }),
-    email: z.string().email({
-        message: "Invalid email address.",
-    }),
-    password: z.string().min(8, {
-        message: "Password must be at least 8 characters.",
-    }),
-})
 
 interface HeaderProps { }
 
 const Header: FC<HeaderProps> = () => {
-
-    const form = useForm({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            username: "",
-            email: "",
-            password: "",
-        },
-    });
-
-    const onSubmit = async (values: any) => {
-        try {
-            const response = await fetch(`http://localhost:8000/users/new`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(values),
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to post data');
-            }
-
-            const data = await response.json();
-            console.log(data);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    if (!form) {
-        return null;
-    }
 
     return (
         <header className="py-3 bg-card border-solid border-b transition-all duration-0 w-full fixed top-0 z-50" id="header" data-testid="header">
@@ -191,21 +135,21 @@ const Header: FC<HeaderProps> = () => {
                                 <NavigationMenuTrigger className="bg-card">Navigation</NavigationMenuTrigger>
                                 <NavigationMenuContent>
                                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                                        {components.map((component) => (
+                                        { components.map((component) => (
                                             <ListItem
-                                                key={component.title}
-                                                title={component.title}
-                                                href={component.href}
+                                                key={ component.title }
+                                                title={ component.title }
+                                                href={ component.href }
                                             >
-                                                {component.description}
+                                                { component.description }
                                             </ListItem>
-                                        ))}
+                                        )) }
                                     </ul>
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
                             <NavigationMenuItem>
                                 <Link href="/admin/courses/new" legacyBehavior passHref>
-                                    <NavigationMenuLink className={`${navigationMenuTriggerStyle()} bg-card`} >
+                                    <NavigationMenuLink className={ `${navigationMenuTriggerStyle()} bg-card` } >
                                         Admin Dashboard
                                     </NavigationMenuLink>
                                 </Link>
@@ -213,14 +157,15 @@ const Header: FC<HeaderProps> = () => {
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
-                <div className="flex justify-between items-center space-x-16">
-                    <div className="flex justify-between items-center space-x-4">
-                        <div className="w-full max-w-sm items-center space-x-2 hidden sm:flex">
+                <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center gap-4">
+                        <div className="w-full max-w-sm items-center gap-2 hidden sm:flex">
                             <Input type="search" placeholder="Search..." />
                             <Button variant="ghost" type="submit" size="icon">
                                 <icons.Search />
                             </Button>
                         </div>
+                        <DarkModeToggle />
                         <NavigationMenu className="right-0">
                             <NavigationMenuList className="flex gap-2">
                                 <NavigationMenuItem>
@@ -228,76 +173,7 @@ const Header: FC<HeaderProps> = () => {
                                         Sign In
                                     </NavigationMenuTrigger>
                                     <NavigationMenuContent>
-                                        <Card className="w-80">
-                                            <CardHeader>
-                                                <CardTitle className="text-lg">Sign In</CardTitle>
-                                                <CardDescription>
-                                                    Enter your information to create an account
-                                                </CardDescription>
-                                            </CardHeader>
-                                            <CardContent>
-                                                <Form {...form}>
-                                                    <form onSubmit={form.handleSubmit(onSubmit)}>
-                                                        <div className="grid gap-4">
-                                                            <FormField
-                                                                control={form.control}
-                                                                name="username"
-                                                                render={({ field }) => (
-                                                                    <FormItem>
-                                                                        <FormLabel>Username</FormLabel>
-                                                                        <FormControl>
-                                                                            <Input placeholder="Nakkarst" {...field} />
-                                                                        </FormControl>
-                                                                        <FormMessage />
-                                                                    </FormItem>
-                                                                )}
-                                                            />
-                                                            <FormField
-                                                                control={form.control}
-                                                                name="email"
-                                                                render={({ field }) => (
-                                                                    <FormItem>
-                                                                        <FormLabel>Email</FormLabel>
-                                                                        <FormControl>
-                                                                            <Input placeholder="example@mail.com" {...field} />
-                                                                        </FormControl>
-                                                                        <FormMessage />
-                                                                    </FormItem>
-                                                                )}
-                                                            />
-                                                            <FormField
-                                                                control={form.control}
-                                                                name="password"
-                                                                render={({ field }) => (
-                                                                    <FormItem className="w-full">
-                                                                        <FormLabel>Password</FormLabel>
-                                                                        <FormControl>
-                                                                            <Input type="password" {...field} />
-                                                                        </FormControl>
-                                                                        <FormDescription>
-                                                                            Must be at least 8 characters.
-                                                                        </FormDescription>
-                                                                        <FormMessage />
-                                                                    </FormItem>
-                                                                )}
-                                                            />
-                                                            <Button type="submit" className="w-full">
-                                                                Create an account
-                                                            </Button>
-                                                            <Button variant="outline" className="w-full">
-                                                                Sign up with GitHub
-                                                            </Button>
-                                                        </div>
-                                                        <div className="mt-4 text-center ">
-                                                            Already have an account?{" "}
-                                                            <Link href="#" className="underline">
-                                                                Sign in
-                                                            </Link>
-                                                        </div>
-                                                    </form>
-                                                </Form>
-                                            </CardContent>
-                                        </Card>
+                                        <SigninForm />
                                     </NavigationMenuContent>
                                 </NavigationMenuItem>
                                 <NavigationMenuItem>
@@ -305,48 +181,7 @@ const Header: FC<HeaderProps> = () => {
                                         Login
                                     </NavigationMenuTrigger>
                                     <NavigationMenuContent>
-                                        <Card className="w-80">
-                                            <CardHeader>
-                                                <CardTitle className="text-2xl">Login</CardTitle>
-                                                <CardDescription>
-                                                    Enter your email below to login to your account
-                                                </CardDescription>
-                                            </CardHeader>
-                                            <CardContent>
-                                                <div className="grid gap-4">
-                                                    <div className="grid gap-2">
-                                                        <label htmlFor="email">Email</label>
-                                                        <Input
-                                                            id="email"
-                                                            type="email"
-                                                            placeholder="m@example.com"
-                                                            required
-                                                        />
-                                                    </div>
-                                                    <div className="grid gap-2">
-                                                        <div className="flex items-center">
-                                                            <label htmlFor="password">Password</label>
-                                                            <Link href="#" className="ml-auto inline-block  underline">
-                                                                Forgot your password?
-                                                            </Link>
-                                                        </div>
-                                                        <Input id="password" type="password" required />
-                                                    </div>
-                                                    <Button type="submit" className="w-full">
-                                                        Login
-                                                    </Button>
-                                                    <Button variant="outline" className="w-full">
-                                                        Login with Google
-                                                    </Button>
-                                                </div>
-                                                <div className="mt-4 text-center ">
-                                                    Don&apos;t have an account?{" "}
-                                                    <Link href="#" className="underline">
-                                                        Sign up
-                                                    </Link>
-                                                </div>
-                                            </CardContent>
-                                        </Card>
+                                        <LoginForm />
                                     </NavigationMenuContent>
                                 </NavigationMenuItem>
                             </NavigationMenuList>
@@ -354,7 +189,7 @@ const Header: FC<HeaderProps> = () => {
                     </div>
                 </div>
             </div>
-        </header>)
+        </header>);
 };
 
 export default Header;
