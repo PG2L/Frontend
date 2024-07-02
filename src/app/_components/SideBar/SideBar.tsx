@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styles from './SideBar.module.css';
 import { icons } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/app/_lib/utils';
 import { Button } from '../ui/button';
 import { ScrollArea } from '../ui/scroll-area';
 import {

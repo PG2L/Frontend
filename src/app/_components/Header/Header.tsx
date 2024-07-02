@@ -3,7 +3,7 @@
 import React, { FC } from 'react';
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/app/_lib/utils";
 import {
     NavigationMenu,
     NavigationMenuContent,

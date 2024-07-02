@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useFormState, useFormStatus } from 'react-dom';
 import { useRouter } from 'next/navigation';
-import { login } from '@/lib/auth';
+import { login } from '@/app/_lib/auth';
 
 
 interface LoginFormProps { }
