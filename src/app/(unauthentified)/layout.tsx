@@ -16,7 +16,7 @@ export default async function CoursesLayout({
         <>
             <div className="flex flex-col min-h-screen">
                 <Header />
-                <div className="p-6 mt-20">
+                <div className="p-6 mt-16">
                     { children }
                 </div>
                 <FAQ />

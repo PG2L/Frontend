@@ -10,6 +10,8 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import LoginForm from '@/components/forms/LoginForm/LoginForm';
+import SigninForm from '@/components/forms/SigninForm/SigninForm';
 
 const formSchema = z.object({
     username: z.string().min(2, {
@@ -88,120 +90,10 @@ export default function Page() {
                     <TabsTrigger value="signup">Sign up</TabsTrigger>
                 </TabsList>
                 <TabsContent value="login">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle className="text-2xl">Login</CardTitle>
-                            <CardDescription>
-                                Enter your email below to login to your account
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="grid gap-4">
-                                <div className="grid gap-2">
-                                    <label htmlFor="email">Email</label>
-                                    <Input
-                                        id="email"
-                                        type="email"
-                                        placeholder="m@example.com"
-                                        required
-                                    />
-                                </div>
-                                <div className="grid gap-2">
-                                    <div className="flex items-center">
-                                        <label htmlFor="password">Password</label>
-                                        <Link href="#" className="ml-auto inline-block  underline">
-                                            Forgot your password?
-                                        </Link>
-                                    </div>
-                                    <Input id="password" type="password" required />
-                                </div>
-                                <Button type="submit" className="w-full">
-                                    Login
-                                </Button>
-                                <Button variant="outline" className="w-full">
-                                    Login with Google
-                                </Button>
-                            </div>
-                            <div className="mt-4 text-center ">
-                                Don&apos;t have an account?{ " " }
-                                <Link href="#" className="underline">
-                                    Sign up
-                                </Link>
-                            </div>
-                        </CardContent>
-                    </Card>
+                    <LoginForm />
                 </TabsContent>
                 <TabsContent value="signup">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle className="text-lg">Sign In</CardTitle>
-                            <CardDescription>
-                                Enter your information to create an account
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <Form { ...form }>
-                                <form onSubmit={ form.handleSubmit(onSubmit) }>
-                                    <div className="grid gap-4">
-                                        <FormField
-                                            control={ form.control }
-                                            name="username"
-                                            render={ ({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel>Username</FormLabel>
-                                                    <FormControl>
-                                                        <Input placeholder="Nakkarst" { ...field } />
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            ) }
-                                        />
-                                        <FormField
-                                            control={ form.control }
-                                            name="email"
-                                            render={ ({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel>Email</FormLabel>
-                                                    <FormControl>
-                                                        <Input placeholder="example@mail.com" { ...field } />
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            ) }
-                                        />
-                                        <FormField
-                                            control={ form.control }
-                                            name="password"
-                                            render={ ({ field }) => (
-                                                <FormItem className="w-full">
-                                                    <FormLabel>Password</FormLabel>
-                                                    <FormControl>
-                                                        <Input type="password" { ...field } />
-                                                    </FormControl>
-                                                    <FormDescription>
-                                                        Must be at least 8 characters.
-                                                    </FormDescription>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            ) }
-                                        />
-                                        <Button type="submit" className="w-full">
-                                            Create an account
-                                        </Button>
-                                        <Button variant="outline" className="w-full">
-                                            Sign up with GitHub
-                                        </Button>
-                                    </div>
-                                    <div className="mt-4 text-center ">
-                                        Already have an account?{ " " }
-                                        <Link href="#" className="underline">
-                                            Sign in
-                                        </Link>
-                                    </div>
-                                </form>
-                            </Form>
-                        </CardContent>
-                    </Card>
+                    <SigninForm />
                 </TabsContent>
             </Tabs>
         </>

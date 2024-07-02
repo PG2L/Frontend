@@ -118,7 +118,7 @@ const ProfileSidebar: FC<ProfileSidebarProps> = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="grid gap-4 w-full align-self-end">
+                        <div className="grid gap-4 w-full align-self-end mt-6">
                             <div className="bg-background rounded-lg border p-4 grid gap-4">
                                 <div className="flex justify-between items-center">
                                     <h3 className="text-lg text-center">Friends <span className="text-base text-muted-foreground">(All-time XP)</span></h3>

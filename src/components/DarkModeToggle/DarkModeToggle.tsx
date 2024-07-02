@@ -34,7 +34,7 @@ const DarkModeToggle: FC<DarkModeToggleProps> = ({
     }, [isDark, systemPrefersDark]);
 
     return (
-        <div className={ `flex gap-2 items-center select-none ${!isOpen && "w-full justify-center"}` }>
+        <div className={ `flex gap-2 items-center select-none` }>
             <Switch
                 checked={ isDark }
                 onCheckedChange={ () => setIsDark(!isDark) }
