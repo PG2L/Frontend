@@ -1,9 +1,6 @@
 import React from 'react';
-import MainMenu from '@/components/MainMenu/MainMenu';
-import ProfileSidebar from '@/components/ProfileSidebar/ProfileSidebar';
 import FAQ from '@/components/FAQ/FAQ';
 import Footer from '@/components/Footer/Footer';
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import Header from '@/components/Header/Header';
 
 export default async function CoursesLayout({

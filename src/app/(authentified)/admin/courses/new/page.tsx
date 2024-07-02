@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { z } from "zod";
 import CourseForm from '@/components/forms/CourseForm/CourseForm';
 
@@ -35,17 +35,17 @@ const formSchema = z.object({
     language_id: z.number().int().positive({
         message: "Language must be a positive number.",
     }),
-})
+});
 
 async function getCategories() {
 
     const res = await fetch(`http://localhost:8000/categories`);
 
     if (!res.ok) {
-        throw new Error('Failed to fetch data')
+        throw new Error('Failed to fetch data');
     }
 
-    return res.json()
+    return res.json();
 }
 
 async function getLanguages() {
@@ -53,10 +53,10 @@ async function getLanguages() {
     const res = await fetch(`http://localhost:8000/languages`);
 
     if (!res.ok) {
-        throw new Error('Failed to fetch data')
+        throw new Error('Failed to fetch data');
     }
 
-    return res.json()
+    return res.json();
 }
 
 export default async function Page() {
@@ -67,7 +67,7 @@ export default async function Page() {
 
     return (
         <>
-            <CourseForm categories={categories} languages={languages} />
+            <CourseForm categories={ categories } languages={ languages } />
         </>
-    )
+    );
 }

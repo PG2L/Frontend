@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import * as icons from 'lucide-react';
@@ -12,13 +12,13 @@ async function getData(id: string) {
     const response = await fetch(`http://localhost:8000/lessons/${id}`);
 
     if (!response.ok) {
-        throw new Error('Failed to fetch data')
+        throw new Error('Failed to fetch data');
     }
 
     return response.json();
 }
 
-export default async function Page({ 
+export default async function Page({
     params,
 }: {
     params: {
@@ -35,32 +35,32 @@ export default async function Page({
                 <CardHeader>
                     <div className="hidden sm:block py-36 bg-secondary rounded"></div>
                     <h3 className="text-muted-foreground">
-                        <Link href={`/courses/${data.course.id}`} className="hover:underline">{data.course.title}</Link>
+                        <Link href={ `/courses/${data.course.id}` } className="hover:underline">{ data.course.title }</Link>
                     </h3>
                 </CardHeader>
                 <CardContent>
                     <div className="flex justify-between items-center">
                         <div className="grid gap-2">
                             <div className="flex items-end font-medium">
-                                <p>{data.lesson_number}</p>
+                                <p>{ data.lesson_number }</p>
                                 <icons.Dot className="h-6 w-6 text-primary" />
-                                <h1>{data.title}</h1>
+                                <h1>{ data.title }</h1>
                             </div>
                             <div className="flex gap-1 flex-wrap">
-                                {data.course.language.name && <Badge variant={data.course.language.name.toLowerCase()}>{data.course.language.name}</Badge>}
-                                {data.course.difficulty && <Badge variant={data.course.difficulty.toLowerCase()}>{data.course.difficulty}</Badge>}
+                                { data.course.language.name && <Badge variant={ data.course.language.name.toLowerCase() }>{ data.course.language.name }</Badge> }
+                                { data.course.difficulty && <Badge variant={ data.course.difficulty.toLowerCase() }>{ data.course.difficulty }</Badge> }
                                 <Badge>5 000 points</Badge>
                                 <Badge>+100 000 xp</Badge>
                             </div>
                         </div>
                         <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end">
                             <div className="flex gap-2">
-                                {data.points_gain?.toString()}
-                                <icons.LucideStar strokeWidth={1} color="#1461cc" />
+                                { data.points_gain?.toString() }
+                                <icons.LucideStar strokeWidth={ 1 } color="#1461cc" />
                             </div>
                             <div className="flex gap-2">
-                                {data.exp_gain?.toString()}
-                                <icons.LucideMedal strokeWidth={1} color="#1461cc" />
+                                { data.exp_gain?.toString() }
+                                <icons.LucideMedal strokeWidth={ 1 } color="#1461cc" />
                             </div>
                         </div>
                     </div>
@@ -69,11 +69,11 @@ export default async function Page({
                     <div className="grid w-full grid-cols-1 sm:flex sm:justify-between gap-6">
                         <div className="flex items-end gap-6">
                             <div className="flex gap-1">
-                                <icons.BookUser strokeWidth={1} color="#1461cc" />
+                                <icons.BookUser strokeWidth={ 1 } color="#1461cc" />
                                 <span className="text-muted-foreground">7 000+ students</span>
                             </div>
                             <div className="flex gap-1">
-                                <icons.Clock strokeWidth={1} color="#1461cc" />
+                                <icons.Clock strokeWidth={ 1 } color="#1461cc" />
                                 <span className="text-muted-foreground">30 min</span>
                             </div>
                         </div>
@@ -94,7 +94,7 @@ export default async function Page({
                         </CollapsibleTrigger>
                         <CollapsibleContent>
                             <div className="grid gap-4 mt-4">
-                                
+
                             </div>
                         </CollapsibleContent>
                     </Collapsible>
@@ -102,12 +102,12 @@ export default async function Page({
             </Card>
             <div className="grid gap-6">
                 <div>
-                    {data.description}
+                    { data.description }
                 </div>
                 <div className="text-muted-foreground">
-                    {data.content}
+                    { data.content }
                 </div>
             </div>
         </>
-    )
+    );
 }

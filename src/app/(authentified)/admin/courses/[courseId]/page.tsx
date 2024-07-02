@@ -1,23 +1,22 @@
 import React from 'react';
 import CourseForm from '@/components/forms/CourseForm/CourseForm';
-import AdminHeader from '@/components/AdminHeader/AdminHeader';
 
 async function getCourse(id: string) {
 
     const response = await fetch(`http://localhost:8000/courses/${id}`);
 
     if (!response.ok) {
-        throw new Error('Failed to fetch course')
+        throw new Error('Failed to fetch course');
     }
 
-    return response.json()
+    return response.json();
 }
 
 async function getLanguages() {
     const response = await fetch('http://localhost:8000/languages');
 
     if (!response.ok) {
-        throw new Error('Failed to fetch course')
+        throw new Error('Failed to fetch course');
     }
 
     return response.json();
@@ -27,7 +26,7 @@ async function getCategories() {
     const response = await fetch('http://localhost:8000/categories');
 
     if (!response.ok) {
-        throw new Error('Failed to fetch course')
+        throw new Error('Failed to fetch course');
     }
 
     return response.json();
@@ -50,8 +49,8 @@ export default async function Page({
     return (
         <>
             <div className="grid w-full">
-                <CourseForm languages={languages} categories={categories} course={course} />
+                <CourseForm languages={ languages } categories={ categories } course={ course } />
             </div>
         </>
-    )
+    );
 }
