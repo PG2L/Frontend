@@ -1,5 +1,5 @@
 import React from 'react';
-import CourseForm from '@/components/forms/CourseForm/CourseForm';
+import CourseForm from '@/app/_components/forms/CourseForm/CourseForm';
 
 async function getCourse(id: string) {
 

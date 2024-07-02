@@ -1,11 +1,11 @@
 import React from 'react';
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import CourseCard from '@/components/CourseCard/CourseCard';
-import { Calendar } from '@/components/ui/calendar';
-import { Card, CardFooter, CardHeader } from '@/components/ui/card';
-import LanguagesPieChart from '@/components/LanguagesPieChart/LanguagesPieChart';
-import { Progress } from '@/components/ui/progress';
-import { Avatar } from '@/components/ui/avatar';
+import { ScrollArea, ScrollBar } from '@/app/_components/ui/scroll-area';
+import CourseCard from '@/app/_components/CourseCard/CourseCard';
+import { Calendar } from '@/app/_components/ui/calendar';
+import { Card, CardFooter, CardHeader } from '@/app/_components/ui/card';
+import LanguagesPieChart from '@/app/_components/LanguagesPieChart/LanguagesPieChart';
+import { Progress } from '@/app/_components/ui/progress';
+import { Avatar } from '@/app/_components/ui/avatar';
 
 async function getCourses() {
     const response = await fetch('http://localhost:8000/courses');

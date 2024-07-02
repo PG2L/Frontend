@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import GlobalBreadcrumb from '@/components/GlobalBreadcrumb/GlobalBreadcrumb';
+import GlobalBreadcrumb from '@/app/_components/GlobalBreadcrumb/GlobalBreadcrumb';
 
 async function getData() {
     const response = await fetch('http://localhost:8000/courses');

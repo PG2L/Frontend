@@ -1,5 +1,5 @@
 import React from 'react';
-import UserForm from '@/components/forms/UserForm/UserForm';
+import UserForm from '@/app/_components/forms/UserForm/UserForm';
 
 export default async function Page() {
 
@@ -8,5 +8,5 @@ export default async function Page() {
             <h1 className="text-lg">Create a new user</h1>
             <UserForm />
         </div>
-    )
+    );
 }

@@ -1,26 +1,26 @@
 import React from 'react';
-import UserForm from '@/components/forms/UserForm/UserForm';
-import AdminHeader from '@/components/AdminHeader/AdminHeader';
+import UserForm from '@/app/_components/forms/UserForm/UserForm';
+import AdminHeader from '@/app/_components/AdminHeader/AdminHeader';
 
 async function getUser(id: number) {
 
     const res = await fetch(`http://localhost:8000/users/${id}`);
 
     if (!res.ok) {
-        throw new Error('Failed to fetch data')
+        throw new Error('Failed to fetch data');
     }
 
-    return res.json()
+    return res.json();
 }
 
 async function getUsers() {
     const res = await fetch('http://localhost:8000/users');
 
     if (!res.ok) {
-        throw new Error('Failed to fetch data')
+        throw new Error('Failed to fetch data');
     }
 
-    return res.json()
+    return res.json();
 }
 
 export default async function Page({
@@ -37,8 +37,8 @@ export default async function Page({
 
     return (
         <div className="grid w-full grid-cols-1">
-            <AdminHeader user={user} users={users} />
-            <UserForm user={user} />
+            <AdminHeader user={ user } users={ users } />
+            <UserForm user={ user } />
         </div>
-    )
+    );
 }

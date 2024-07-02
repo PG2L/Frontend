@@ -1,5 +1,5 @@
 import React from 'react';
-import Leaderboard from '@/components/Leaderboard/Leaderboard';
+import Leaderboard from '@/app/_components/Leaderboard/Leaderboard';
 
 
 async function getUsers() {

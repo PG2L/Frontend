@@ -1,7 +1,7 @@
 import React from 'react';
-import FAQ from '@/components/FAQ/FAQ';
-import Footer from '@/components/Footer/Footer';
-import Header from '@/components/Header/Header';
+import FAQ from '@/app/_components/FAQ/FAQ';
+import Footer from '@/app/_components/Footer/Footer';
+import Header from '@/app/_components/Header/Header';
 
 export default async function CoursesLayout({
     children,

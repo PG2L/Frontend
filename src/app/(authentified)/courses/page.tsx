@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
-import { Skeleton } from '@/components/ui/skeleton';
-import CourseCard from '@/components/CourseCard/CourseCard';
+import { Skeleton } from '@/app/_components/ui/skeleton';
+import CourseCard from '@/app/_components/CourseCard/CourseCard';
 
 
 async function getData() {

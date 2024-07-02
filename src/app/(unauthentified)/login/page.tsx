@@ -1,17 +1,17 @@
 "use client";
 
 import React from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import LoginForm from '@/components/forms/LoginForm/LoginForm';
-import SigninForm from '@/components/forms/SigninForm/SigninForm';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/_components/ui/tabs';
+import LoginForm from '@/app/_components/forms/LoginForm/LoginForm';
+import SigninForm from '@/app/_components/forms/SigninForm/SigninForm';
 
 export default function Page() {
 
     return (
         <>
-            <Tabs defaultValue="signup" className="max-w-[400px] m-auto">
+            <Tabs defaultValue="login" className="max-w-[400px] m-auto">
                 <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="login">Login</TabsTrigger>
+                    <TabsTrigger value="login">Log In</TabsTrigger>
                     <TabsTrigger value="signup">Sign up</TabsTrigger>
                 </TabsList>
                 <TabsContent value="login">

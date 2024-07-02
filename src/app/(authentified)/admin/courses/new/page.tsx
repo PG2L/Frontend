@@ -1,6 +1,6 @@
 import React from 'react';
 import { z } from "zod";
-import CourseForm from '@/components/forms/CourseForm/CourseForm';
+import CourseForm from '@/app/_components/forms/CourseForm/CourseForm';
 
 
 const formSchema = z.object({

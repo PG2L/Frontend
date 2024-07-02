@@ -1,10 +1,10 @@
 import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import FAQ from "@/components/FAQ/FAQ";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import FAQ from "@/app/_components/FAQ/FAQ";
+import { Badge } from "@/app/_components/ui/badge";
+import { Button } from "@/app/_components/ui/button";
+import { Input } from "@/app/_components/ui/input";
 import {
     Card,
     CardContent,
@@ -12,9 +12,9 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card";
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
+} from "@/app/_components/ui/card";
+import Header from '@/app/_components/Header/Header';
+import Footer from '@/app/_components/Footer/Footer';
 
 export default function Page() {
 

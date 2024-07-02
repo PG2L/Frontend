@@ -1,15 +1,15 @@
-import React from 'react'
-import AdminHeader from '@/components/AdminHeader/AdminHeader';
+import React from 'react';
+import AdminHeader from '@/app/_components/AdminHeader/AdminHeader';
 
 async function getLessons() {
 
     const res = await fetch(`http://localhost:8000/lessons`);
 
     if (!res.ok) {
-        throw new Error('Failed to fetch data')
+        throw new Error('Failed to fetch data');
     }
 
-    return res.json()
+    return res.json();
 }
 
 async function getLesson(id: string) {
@@ -17,10 +17,10 @@ async function getLesson(id: string) {
     const res = await fetch(`http://localhost:8000/lessons/${id}`);
 
     if (!res.ok) {
-        throw new Error('Failed to fetch data')
+        throw new Error('Failed to fetch data');
     }
 
-    return res.json()
+    return res.json();
 }
 
 export default async function AdminLessonEditLayout({
@@ -40,9 +40,9 @@ export default async function AdminLessonEditLayout({
     return (
         <>
             <div className="grid w-full grid-cols-1">
-                <AdminHeader lesson={lesson} lessons={lessons} />
-                {children}
+                <AdminHeader lesson={ lesson } lessons={ lessons } />
+                { children }
             </div>
         </>
-    )
+    );
 }

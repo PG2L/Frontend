@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Badge } from "@/components/ui/badge";
-import { Avatar } from "@/components/ui/avatar";
-import { Card, CardFooter, CardHeader } from '@/components/ui/card';
+import { Badge } from "@/app/_components/ui/badge";
+import { Avatar } from "@/app/_components/ui/avatar";
+import { Card, CardFooter, CardHeader } from '@/app/_components/ui/card';
 import * as icons from 'lucide-react';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Skeleton } from '@/app/_components/ui/skeleton';
 import Link from 'next/link';
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
-import { Button } from '@/components/ui/button';
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/app/_components/ui/breadcrumb';
+import { Button } from '@/app/_components/ui/button';
 
 async function getData() {
     const res = await fetch('http://localhost:8000/lessons');

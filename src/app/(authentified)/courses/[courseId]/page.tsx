@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Badge } from '@/app/_components/ui/badge';
+import { Button } from '@/app/_components/ui/button';
+import { Card, CardContent, CardFooter, CardHeader } from '@/app/_components/ui/card';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/app/_components/ui/collapsible';
 import * as icons from 'lucide-react';
 import React from 'react';
 

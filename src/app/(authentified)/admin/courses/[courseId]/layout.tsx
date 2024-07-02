@@ -1,16 +1,16 @@
-import React, { Suspense } from 'react'
-import AdminHeader from '@/components/AdminHeader/AdminHeader';
-import { Skeleton } from '@/components/ui/skeleton';
+import React, { Suspense } from 'react';
+import AdminHeader from '@/app/_components/AdminHeader/AdminHeader';
+import { Skeleton } from '@/app/_components/ui/skeleton';
 
 async function getCourses() {
 
     const res = await fetch(`http://localhost:8000/courses`);
 
     if (!res.ok) {
-        throw new Error('Failed to fetch data')
+        throw new Error('Failed to fetch data');
     }
 
-    return res.json()
+    return res.json();
 }
 
 async function getCourse(id: string) {
@@ -18,10 +18,10 @@ async function getCourse(id: string) {
     const res = await fetch(`http://localhost:8000/courses/${id}`);
 
     if (!res.ok) {
-        throw new Error('Failed to fetch data')
+        throw new Error('Failed to fetch data');
     }
 
-    return res.json()
+    return res.json();
 }
 
 export default async function AdminCourseEditLayout({
@@ -47,10 +47,10 @@ export default async function AdminCourseEditLayout({
                         <Skeleton className="md:w-1/2 h-10" />
                     </div>
                 }>
-                    <AdminHeader course={course} courses={courses} />
+                    <AdminHeader course={ course } courses={ courses } />
                 </Suspense>
-                {children}
+                { children }
             </div>
         </>
-    )
+    );
 }

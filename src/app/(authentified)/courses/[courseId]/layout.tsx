@@ -1,10 +1,10 @@
 import React, { Suspense } from 'react';
 import Link from 'next/link';
-import { Card, CardHeader } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Skeleton } from '@/components/ui/skeleton';
-import CourseContentMenu from '@/components/CourseContentMenu/CourseContentMenu';
-import { Separator } from '@/components/ui/separator';
+import { Card, CardHeader } from '@/app/_components/ui/card';
+import { Badge } from '@/app/_components/ui/badge';
+import { Skeleton } from '@/app/_components/ui/skeleton';
+import CourseContentMenu from '@/app/_components/CourseContentMenu/CourseContentMenu';
+import { Separator } from '@/app/_components/ui/separator';
 
 async function getData(id: string) {
 

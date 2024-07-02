@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminMenu from '@/components/AdminMenu/AdminMenu';
+import AdminMenu from '@/app/_components/AdminMenu/AdminMenu';
 
 export default async function AdminLayout({
     children,

@@ -1,14 +1,14 @@
 import React from 'react';
-import LessonForm from '@/components/forms/LessonForm/LessonForm';
+import LessonForm from '@/app/_components/forms/LessonForm/LessonForm';
 
 async function getCourses() {
     const res = await fetch('http://localhost:8000/courses');
 
     if (!res.ok) {
-        throw new Error('Failed to fetch data')
+        throw new Error('Failed to fetch data');
     }
 
-    return res.json()
+    return res.json();
 }
 
 export default async function Page() {
@@ -17,7 +17,7 @@ export default async function Page() {
 
     return (
         <>
-            <LessonForm courses={courses} />
+            <LessonForm courses={ courses } />
         </>
-    )
+    );
 }

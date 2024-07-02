@@ -1,5 +1,5 @@
 import React from 'react';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Skeleton } from '@/app/_components/ui/skeleton';
 
 export default function Loading() {
     return (
@@ -17,5 +17,5 @@ export default function Loading() {
                 <Skeleton className="w-24 h-10 justify-self-center" />
             </div>
         </>
-    )
+    );
 }
