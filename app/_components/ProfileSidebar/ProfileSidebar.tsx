@@ -11,23 +11,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger } from '../ui/select';
 import DarkModeToggle from '../DarkModeToggle/DarkModeToggle';
 import { ScrollArea, ScrollBar } from '../ui/scroll-area';
 import { UserContext } from '../../_contexts/UserProvider';
+import { getLevelByExp } from '../../_lib/levels';
 
-interface ProfileSidebarProps {
-    user?: {
-        username: string;
-        level: number;
-        rank: number;
-        badges: string[];
-        country: string;
-        created_at: string;
-    };
-}
+interface ProfileSidebarProps { }
 
 const ProfileSidebar: FC<ProfileSidebarProps> = () => {
 
     const [isOpen, setIsOpen] = React.useState(true);
 
-    const user = useContext(UserContext);
+    const user: User = useContext(UserContext);
+
+    const [level, exp] = getLevelByExp(user.total_exp);
 
     return (
         <div>
@@ -46,9 +40,9 @@ const ProfileSidebar: FC<ProfileSidebarProps> = () => {
                             <div className="grid gap-4 justify-items-center">
                                 <div className="grid justify-items-center justify-center">
                                     <div className="grid items-center justify-items-center">
-                                        <h1 className="text-2xl font-medium text-center">Nakkarst</h1>
+                                        <h1 className="text-2xl font-medium text-center">{ user.username }</h1>
                                         <div className="flex items-center text-center justify-center ">
-                                            <div className="text-muted-foreground">Lvl 68</div>
+                                            <div className="text-muted-foreground">Lvl { level.level }</div>
                                             <icons.Dot className="h-8 w-8 text-primary" />
                                             <div className="text-muted-foreground">Rank 1</div>
                                         </div>
