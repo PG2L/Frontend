@@ -1,4 +1,5 @@
 import React from 'react';
+import DarkModeProvider from "./_contexts/DarkModeProvider";
 import './globals.css';
 
 export const metadata = {
@@ -14,11 +15,13 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                <div className="flex flex-col" id="layout" data-testid="layout">
-                    <main>
-                        { children }
-                    </main>
-                </div>
+                <DarkModeProvider>
+                    <div className="flex flex-col" id="layout" data-testid="layout">
+                        <main>
+                            { children }
+                        </main>
+                    </div>
+                </DarkModeProvider>
             </body>
         </html>
     );

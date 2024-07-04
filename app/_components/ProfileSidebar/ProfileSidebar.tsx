@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { Badge } from '../ui/badge';
 import * as icons from 'lucide-react';
 import { Button } from '../ui/button';
@@ -10,6 +10,7 @@ import { Progress } from '../ui/progress';
 import { Select, SelectContent, SelectItem, SelectTrigger } from '../ui/select';
 import DarkModeToggle from '../DarkModeToggle/DarkModeToggle';
 import { ScrollArea, ScrollBar } from '../ui/scroll-area';
+import { UserContext } from '../../_contexts/UserProvider';
 
 interface ProfileSidebarProps {
     user?: {
@@ -25,6 +26,8 @@ interface ProfileSidebarProps {
 const ProfileSidebar: FC<ProfileSidebarProps> = () => {
 
     const [isOpen, setIsOpen] = React.useState(true);
+
+    const user = useContext(UserContext);
 
     return (
         <div>

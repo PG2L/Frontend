@@ -1,7 +1,8 @@
-import React, { FC, useState, useEffect, useMemo } from 'react';
+import React, { FC, useContext } from 'react';
 import { useMediaQuery } from "react-responsive";
 import { Switch } from '../ui/switch';
 import * as icons from 'lucide-react';
+import { DarkModeContext } from '../../_contexts/DarkModeProvider';
 
 interface DarkModeToggleProps { isOpen: boolean; }
 
@@ -9,35 +10,39 @@ const DarkModeToggle: FC<DarkModeToggleProps> = ({
     isOpen,
 }) => {
 
-    const getTheme: string = useMemo(() => {
-        return localStorage.getItem('theme') || 'light';
-    }, []);
+    const darkModeProvider = useContext(DarkModeContext);
 
-    const [isDark, setIsDark] = useState(getTheme === 'dark');
+    const darkMode = darkModeProvider.darkMode;
+    const toggleDarkMode = darkModeProvider.toggleDarkMode;
 
-    const systemPrefersDark = useMediaQuery(
-        {
-            query: "(prefers-color-scheme: dark)",
-        },
-        undefined,
-        (isSystemDark) => setIsDark(isSystemDark)
-    );
+    // const systemPrefersDark = useMediaQuery(
+    //     {
+    //         query: "(prefers-color-scheme: dark)",
+    //     },
+    //     undefined,
+    //     (isSystemDark) => setIsDark(isSystemDark)
+    // );
 
-    useEffect(() => {
-        if (isDark) {
-            document.body.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            document.body.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
-        }
-    }, [isDark, systemPrefersDark]);
+    // const [isDark, setIsDark] = useState(value === 'dark' || false);
+
+    // const value: string = useMemo(
+    //     () => (isDark === undefined ? !!systemPrefersDark : isDark),
+    //     [isDark, systemPrefersDark]
+    // );
+
+    // useEffect(() => {
+    //     if (value) {
+    //         document.body.classList.add('dark');
+    //     } else {
+    //         document.body.classList.remove('dark');
+    //     }
+    // }, [value]);
 
     return (
         <div className={ `flex gap-2 items-center select-none` }>
             <Switch
-                checked={ isDark }
-                onCheckedChange={ () => setIsDark(!isDark) }
+                checked={ darkMode }
+                onCheckedChange={ () => toggleDarkMode() }
                 aria-label="Dark mode toggle"
                 id="dark-mode-toggle"
             />

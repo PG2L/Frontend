@@ -3,7 +3,7 @@ import FAQ from '../_components/FAQ/FAQ';
 import Footer from '../_components/Footer/Footer';
 import Header from '../_components/Header/Header';
 
-export default async function CoursesLayout({
+export default function UnauthentifiedLayout({
     children,
 }: {
     children: React.ReactNode,

@@ -34,7 +34,7 @@
         ".next/types/**/*.ts",
         "jest.config.js",
         "__mocks__/styleMock.js"
-, "app/_lib/auth/AuthProvider.js"    ],
+, "app/_lib/auth/AuthProvider.js", "app/_components/_contexts/DarkModeProvider.js"    ],
     "exclude": [
         "node_modules"
     ]
