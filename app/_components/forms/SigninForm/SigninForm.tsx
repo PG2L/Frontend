@@ -1,3 +1,5 @@
+"use client";
+
 import React, { FC } from 'react';
 import styles from './SigninForm.module.css';
 import Link from 'next/link';

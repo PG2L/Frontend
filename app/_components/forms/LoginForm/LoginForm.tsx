@@ -1,3 +1,5 @@
+"use client";
+
 import React, { FC } from 'react';
 import styles from './LoginForm.module.css';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/card';
@@ -10,7 +12,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useFormState, useFormStatus } from 'react-dom';
 import { useRouter } from 'next/navigation';
-import { login } from '../../../_lib/auth';
+import { setCookie } from "cookies-next";
 
 
 interface LoginFormProps { }
@@ -33,7 +35,7 @@ function LoginButton() {
 
 const LoginForm: FC<LoginFormProps> = () => {
 
-    const [errorMessage, dispatch] = useFormState(login, undefined);
+    // const [errorMessage, dispatch] = useFormState(login, undefined);
 
     const form = useForm({
         resolver: zodResolver(z.object({
@@ -54,9 +56,18 @@ const LoginForm: FC<LoginFormProps> = () => {
 
     const onSubmit = async (values: any) => {
         try {
-            const response = await login(values);
-            if (response.token) {
-                console.log(response);
+            const response = await fetch('http://localhost:8000/api/login_check', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(values),
+            });
+            const data = await response.json();
+            console.log(data);
+            if (data.token) {
+                setCookie('currentUser', data.token);
+                setCookie('userId', data.userId);
                 router.push('/home');
             }
         } catch (error) {
@@ -74,7 +85,7 @@ const LoginForm: FC<LoginFormProps> = () => {
             </CardHeader>
             <CardContent>
                 <Form { ...form }>
-                    <form onSubmit={ form.handleSubmit(onSubmit) } action={ dispatch }>
+                    <form onSubmit={ form.handleSubmit(onSubmit) }>
                         <div className="grid gap-4">
                             <FormField
                                 control={ form.control }
@@ -105,7 +116,7 @@ const LoginForm: FC<LoginFormProps> = () => {
                                     </FormItem>
                                 ) }
                             />
-                            <div>{ errorMessage && <p>{ errorMessage }</p> }</div>
+                            {/* <div>{ errorMessage && <p>{ errorMessage }</p> }</div> */ }
                             <LoginButton />
                             <Button variant="outline" className="w-full">
                                 Log in with GitHub
