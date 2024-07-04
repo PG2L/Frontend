@@ -4,45 +4,19 @@ import { Switch } from '../ui/switch';
 import * as icons from 'lucide-react';
 import { DarkModeContext } from '../../_contexts/DarkModeProvider';
 
-interface DarkModeToggleProps { isOpen: boolean; }
+interface DarkModeToggleProps { }
 
-const DarkModeToggle: FC<DarkModeToggleProps> = ({
-    isOpen,
-}) => {
+const DarkModeToggle: FC<DarkModeToggleProps> = ({ }): React.JSX.Element => {
 
-    const darkModeProvider = useContext(DarkModeContext);
-
-    const darkMode = darkModeProvider.darkMode;
-    const toggleDarkMode = darkModeProvider.toggleDarkMode;
-
-    // const systemPrefersDark = useMediaQuery(
-    //     {
-    //         query: "(prefers-color-scheme: dark)",
-    //     },
-    //     undefined,
-    //     (isSystemDark) => setIsDark(isSystemDark)
-    // );
-
-    // const [isDark, setIsDark] = useState(value === 'dark' || false);
-
-    // const value: string = useMemo(
-    //     () => (isDark === undefined ? !!systemPrefersDark : isDark),
-    //     [isDark, systemPrefersDark]
-    // );
-
-    // useEffect(() => {
-    //     if (value) {
-    //         document.body.classList.add('dark');
-    //     } else {
-    //         document.body.classList.remove('dark');
-    //     }
-    // }, [value]);
+    const darkModeProvider: any = useContext(DarkModeContext);
+    const darkMode: any = darkModeProvider.darkMode;
+    const toggleDarkMode: any = darkModeProvider.toggleDarkMode;
 
     return (
         <div className={ `flex gap-2 items-center select-none` }>
             <Switch
                 checked={ darkMode }
-                onCheckedChange={ () => toggleDarkMode() }
+                onCheckedChange={ (): any => toggleDarkMode() }
                 aria-label="Dark mode toggle"
                 id="dark-mode-toggle"
             />

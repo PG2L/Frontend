@@ -1,23 +1,12 @@
 import React from 'react';
 import LessonForm from '../../../../_components/forms/LessonForm/LessonForm';
+import { getData } from '../../../../_lib/data';
 
-async function getCourses() {
-    const res = await fetch('http://localhost:8000/courses');
+export default async function Page(): Promise<React.JSX.Element> {
 
-    if (!res.ok) {
-        throw new Error('Failed to fetch data');
-    }
-
-    return res.json();
-}
-
-export default async function Page() {
-
-    const courses = await getCourses();
+    const courses: Course[] = await getData('courses') as Course[];
 
     return (
-        <>
-            <LessonForm courses={ courses } />
-        </>
+        <LessonForm courses={ courses } />
     );
 }

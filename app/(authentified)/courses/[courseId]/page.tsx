@@ -1,21 +1,10 @@
-/* eslint-disable react/no-unescaped-entities */
 import { Badge } from '../../../_components/ui/badge';
 import { Button } from '../../../_components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '../../../_components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../../_components/ui/collapsible';
 import * as icons from 'lucide-react';
 import React from 'react';
-
-async function getData(id: string) {
-
-    const response = await fetch(`http://localhost:8000/courses/${id}`);
-
-    if (!response.ok) {
-        throw new Error('Failed to fetch data');
-    }
-
-    return response.json();
-}
+import { getData } from '../../../_lib/data';
 
 export default async function Page({
     params,
@@ -23,9 +12,9 @@ export default async function Page({
     params: {
         courseId: string,
     };
-}) {
+}): Promise<React.JSX.Element> {
 
-    const data = await getData(params.courseId);
+    const course: Course = await getData("courses", params.courseId) as Course;
 
     return (
         <>
@@ -34,7 +23,7 @@ export default async function Page({
                     <div className="hidden sm:block py-36 bg-secondary rounded"></div>
                     <div className="grid grid-cols-1">
                         <div className="flex gap-2">
-                            { data.lessons && data.lessons.map((lesson, index) => (
+                            { course.lessons && course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => (
                                 <div key={ index } className={ `h-3 w-1/3 rounded ${lesson.isFinished ? "bg-primary" : "bg-secondary"} ${lesson.isUnlock && "outline outline-1 outline-primary"}` }></div>
                             )) }
                         </div>
@@ -44,21 +33,21 @@ export default async function Page({
                 <CardContent>
                     <div className="flex justify-between items-center">
                         <div className="grid gap-4">
-                            <h1 className="text-lg font-medium">{ data.title }</h1>
+                            <h1 className="text-lg font-medium">{ course.title }</h1>
                             <div className="flex gap-1 flex-wrap">
-                                { data.language && data.language.name && <Badge variant={ data.language.name.toLowerCase() }>{ data.language.name }</Badge> }
-                                { data.difficulty && <Badge variant={ data.difficulty.toLowerCase() }>{ data.difficulty }</Badge> }
-                                <Badge>{ data.points_gain } points</Badge>
-                                <Badge>+{ data.exp_gain } xp</Badge>
+                                { course.language && course.language.name && <Badge variant={ course.language.name.toLowerCase() }>{ course.language.name }</Badge> }
+                                { course.difficulty && <Badge variant={ course.difficulty.toLowerCase() }>{ course.difficulty }</Badge> }
+                                <Badge>{ course.points_gain } points</Badge>
+                                <Badge>+{ course.exp_gain } xp</Badge>
                             </div>
                         </div>
                         <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end">
                             <div className="flex gap-2">
-                                { data.points_gain }
+                                { course.points_gain }
                                 <icons.LucideStar strokeWidth={ 1 } color="#1461cc" />
                             </div>
                             <div className="flex gap-2">
-                                { data.exp_gain }
+                                { course.exp_gain }
                                 <icons.LucideMedal strokeWidth={ 1 } color="#1461cc" />
                             </div>
                         </div>
@@ -93,16 +82,13 @@ export default async function Page({
                         </CollapsibleTrigger>
                         <CollapsibleContent>
                             <div className="grid gap-4 mt-4">
-                                { data.lessons && data.lessons.map((lesson, index) => (
+                                { course.lessons && course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => (
                                     <Card key={ index } className={ `${lesson.isFinished && "bg-secondary"} ${lesson.isUnlock && "outline outline-1 outline-primary"}` }>
                                         <CardHeader>
                                             <h2>{ lesson.title }</h2>
                                         </CardHeader>
                                         <CardFooter>
                                             <div className="flex flex-wrap gap-1 justify-start items-center">
-                                                {/* {lesson.badges.map((badge, index) => (
-                                                    <Badge key={index}>{badge}</Badge>
-                                                ))} */}
                                             </div>
                                         </CardFooter>
                                     </Card>
@@ -113,7 +99,7 @@ export default async function Page({
                 </CardHeader>
             </Card>
             <div className="text-muted-foreground">
-                { data.description }
+                { course.description }
             </div>
         </>
     );

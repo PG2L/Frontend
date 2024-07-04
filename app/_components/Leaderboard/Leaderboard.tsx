@@ -44,20 +44,20 @@ interface LeaderboardProps {
 export const columns: ColumnDef<User>[] = [
     {
         id: "select",
-        header: ({ table }) => (
+        header: ({ table }): React.JSX.Element => (
             <Checkbox
                 checked={
                     table.getIsAllPageRowsSelected() ||
                     (table.getIsSomePageRowsSelected() && "indeterminate")
                 }
-                onCheckedChange={ (value) => table.toggleAllPageRowsSelected(!!value) }
+                onCheckedChange={ (value): void => table.toggleAllPageRowsSelected(!!value) }
                 aria-label="Select all"
             />
         ),
-        cell: ({ row }) => (
+        cell: ({ row }): React.JSX.Element => (
             <Checkbox
                 checked={ row.getIsSelected() }
-                onCheckedChange={ (value) => row.toggleSelected(!!value) }
+                onCheckedChange={ (value): void => row.toggleSelected(!!value) }
                 aria-label="Select row"
             />
         ),
@@ -66,56 +66,56 @@ export const columns: ColumnDef<User>[] = [
     },
     {
         accessorKey: "rank",
-        header: ({ column }) => {
+        header: ({ column }): React.JSX.Element => {
             return (
                 <Button
                     variant="ghost"
-                    onClick={ () => column.toggleSorting(column.getIsSorted() === "asc") }
+                    onClick={ (): void => column.toggleSorting(column.getIsSorted() === "asc") }
                 >
                     Rank
                     <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
                 </Button>
             );
         },
-        cell: ({ row }) => (
+        cell: ({ row }): React.JSX.Element => (
             <div className="ps-6">{ row.index + 1 }</div>
         ),
     },
     {
         accessorKey: "username",
-        header: ({ column }) => {
+        header: ({ column }): React.JSX.Element => {
             return (
                 <Button
                     variant="ghost"
-                    onClick={ () => column.toggleSorting(column.getIsSorted() === "asc") }
+                    onClick={ (): void => column.toggleSorting(column.getIsSorted() === "asc") }
                 >
                     Username
                     <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
                 </Button>
             );
         },
-        cell: ({ row }) => <UserHoverCard user={ row.original }>{ row.getValue("username") }</UserHoverCard>,
+        cell: ({ row }): React.JSX.Element => <UserHoverCard user={ row.original }>{ row.getValue("username") }</UserHoverCard>,
     },
     {
         accessorKey: "email",
-        header: ({ column }) => {
+        header: ({ column }): React.JSX.Element => {
             return (
                 <Button
                     variant="ghost"
-                    onClick={ () => column.toggleSorting(column.getIsSorted() === "asc") }
+                    onClick={ (): void => column.toggleSorting(column.getIsSorted() === "asc") }
                 >
                     Email
                     <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
                 </Button>
             );
         },
-        cell: ({ row }) => <div className="lowercase">{ row.getValue("email") }</div>,
+        cell: ({ row }): React.JSX.Element => <div className="lowercase">{ row.getValue("email") }</div>,
     },
     {
         accessorKey: "total_points",
         header: () => <div className="text-right">Points</div>,
-        cell: ({ row }) => {
-            const total_points = parseFloat(row.getValue("total_points"));
+        cell: ({ row }): React.JSX.Element => {
+            const total_points: number = parseFloat(row.getValue("total_points"));
 
             return <div className="text-right">{ total_points }</div>;
         },
@@ -123,7 +123,7 @@ export const columns: ColumnDef<User>[] = [
     {
         id: "actions",
         enableHiding: false,
-        cell: ({ row }) => {
+        cell: ({ row }): React.JSX.Element => {
             const payment = row.original;
 
             return (
@@ -151,7 +151,7 @@ export const columns: ColumnDef<User>[] = [
 
 export default function DataTableDemo({
     users
-}: LeaderboardProps) {
+}: LeaderboardProps): React.JSX.Element {
 
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -160,7 +160,6 @@ export default function DataTableDemo({
     const [columnVisibility, setColumnVisibility] =
         React.useState<VisibilityState>({});
     const [rowSelection, setRowSelection] = React.useState({});
-
     const table = useReactTable({
         data: users,
         columns,
@@ -186,7 +185,7 @@ export default function DataTableDemo({
                 <Input
                     placeholder="Search..."
                     value={ (table.getColumn("username")?.getFilterValue() as string) ?? "" }
-                    onChange={ (event) =>
+                    onChange={ (event): void | undefined =>
                         table.getColumn("username")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
@@ -195,9 +194,9 @@ export default function DataTableDemo({
             <div className="rounded-md">
                 <Table>
                     <TableHeader>
-                        { table.getHeaderGroups().map((headerGroup) => (
+                        { table.getHeaderGroups().map((headerGroup): React.JSX.Element => (
                             <TableRow key={ headerGroup.id }>
-                                { headerGroup.headers.map((header) => {
+                                { headerGroup.headers.map((header): React.JSX.Element => {
                                     return (
                                         <TableHead key={ header.id }>
                                             { header.isPlaceholder
@@ -214,12 +213,12 @@ export default function DataTableDemo({
                     </TableHeader>
                     <TableBody>
                         { table.getRowModel().rows?.length ? (
-                            table.getRowModel().rows.map((row) => (
+                            table.getRowModel().rows.map((row): React.JSX.Element => (
                                 <TableRow
                                     key={ row.id }
                                     data-state={ row.getIsSelected() && "selected" }
                                 >
-                                    { row.getVisibleCells().map((cell) => (
+                                    { row.getVisibleCells().map((cell): React.JSX.Element => (
                                         <TableCell key={ cell.id }>
                                             { flexRender(
                                                 cell.column.columnDef.cell,
@@ -251,7 +250,7 @@ export default function DataTableDemo({
                     <Button
                         variant="outline"
                         size="sm"
-                        onClick={ () => table.previousPage() }
+                        onClick={ (): void => table.previousPage() }
                         disabled={ !table.getCanPreviousPage() }
                     >
                         Previous
@@ -259,7 +258,7 @@ export default function DataTableDemo({
                     <Button
                         variant="outline"
                         size="sm"
-                        onClick={ () => table.nextPage() }
+                        onClick={ (): void => table.nextPage() }
                         disabled={ !table.getCanNextPage() }
                     >
                         Next

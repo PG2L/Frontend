@@ -2,7 +2,8 @@ import { Card, CardHeader, CardContent, CardFooter } from '../../../_components/
 import React from 'react';
 import { Skeleton } from '../../../_components/ui/skeleton';
 
-export default function Loading() {
+export default function Loading(): React.JSX.Element {
+
     return (
         <>
             <Card>
@@ -30,7 +31,7 @@ export default function Loading() {
                 </CardFooter>
             </Card>
             <div className="grid gap-2">
-                { Array.from({ length: 25 }).map((_, index) => {
+                { Array.from({ length: 25 }).map((_: unknown, index: number): React.JSX.Element => {
                     if (index % 8 === 0) {
                         return <br key={ index } />;
                     } else {

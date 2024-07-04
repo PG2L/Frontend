@@ -46,8 +46,9 @@ const AdminHeader: FC<AdminHeaderProps> = ({
     lessons,
     user,
     users,
-}) => {
-    const pageContext = course ? "course" : lesson ? "lesson" : "user";
+}): React.JSX.Element => {
+
+    const pageContext: "course" | "lesson" | "user" = course ? "course" : lesson ? "lesson" : "user";
 
     return (
         <Suspense fallback={
@@ -67,26 +68,35 @@ const AdminHeader: FC<AdminHeaderProps> = ({
                     </span>
                 </div>
                 <Select
-                    onValueChange={ (value) => redirect(`/admin/${pageContext}s/${value}`) }
+                    onValueChange={ (value: string): never => redirect(`/admin/${pageContext}s/${value}`) }
                 >
                     <SelectTrigger className="md:w-1/3">
                         <SelectValue placeholder={ `Select a ${pageContext}` } />
                     </SelectTrigger>
                     <SelectContent>
                         { courses &&
-                            courses.map((courseItem) => (
+                            courses.map((courseItem: {
+                                id: string;
+                                title: string;
+                            }): React.JSX.Element => (
                                 <SelectItem key={ courseItem.id } value={ courseItem.id }>
                                     { courseItem.id } - { courseItem.title }
                                 </SelectItem>
                             )) }
                         { lessons &&
-                            lessons.map((lessonItem) => (
+                            lessons.map((lessonItem: {
+                                id: string;
+                                title: string;
+                            }): React.JSX.Element => (
                                 <SelectItem key={ lessonItem.id } value={ lessonItem.id }>
                                     { lessonItem.id } - { lessonItem.title }
                                 </SelectItem>
                             )) }
                         { users &&
-                            users.map((userItem) => (
+                            users.map((userItem: {
+                                id: string;
+                                email: string;
+                            }): React.JSX.Element => (
                                 <SelectItem key={ userItem.id } value={ userItem.id }>
                                     { userItem.id } - { userItem.email }
                                 </SelectItem>

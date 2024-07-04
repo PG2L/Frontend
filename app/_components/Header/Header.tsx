@@ -62,6 +62,7 @@ const ListItem = React.forwardRef<
     React.ElementRef<"a">,
     React.ComponentPropsWithoutRef<"a">
 >(({ className, title, children, ...props }, ref) => {
+
     return (
         <li>
             <NavigationMenuLink asChild>
@@ -86,7 +87,7 @@ ListItem.displayName = "ListItem";
 
 interface HeaderProps { }
 
-const Header: FC<HeaderProps> = () => {
+const Header: FC<HeaderProps> = (): React.JSX.Element => {
 
     return (
         <header className="py-3 bg-card border-solid border-b transition-all duration-0 w-full fixed top-0 z-50" id="header" data-testid="header">
@@ -135,7 +136,11 @@ const Header: FC<HeaderProps> = () => {
                                 <NavigationMenuTrigger className="bg-card">Navigation</NavigationMenuTrigger>
                                 <NavigationMenuContent>
                                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                                        { components.map((component) => (
+                                        { components.map((component: {
+                                            title: string;
+                                            href: string;
+                                            description: string;
+                                        }): React.JSX.Element => (
                                             <ListItem
                                                 key={ component.title }
                                                 title={ component.title }

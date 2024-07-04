@@ -15,7 +15,8 @@ interface UserHoverCardProps {
     user: User;
 }
 
-export function UserHoverCard({ user }: UserHoverCardProps) {
+export function UserHoverCard({ user }: UserHoverCardProps): React.JSX.Element {
+
     return (
         <HoverCard>
             <HoverCardTrigger asChild>
@@ -34,7 +35,7 @@ export function UserHoverCard({ user }: UserHoverCardProps) {
                         </p>
                         <div className="flex items-center pt-2">
                             <span className="text-xs text-muted-foreground">
-                                Since { user.create_date }
+                                Since { user.created_at }
                             </span>
                         </div>
                     </div>

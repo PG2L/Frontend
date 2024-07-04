@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { Badge } from "../../../../_components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from '../../../../_components/ui/card';
@@ -6,17 +5,7 @@ import * as icons from 'lucide-react';
 import { Button } from '../../../../_components/ui/button';
 import Link from 'next/link';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../../../_components/ui/collapsible';
-
-async function getData(id: string) {
-
-    const response = await fetch(`http://localhost:8000/lessons/${id}`);
-
-    if (!response.ok) {
-        throw new Error('Failed to fetch data');
-    }
-
-    return response.json();
-}
+import { getData } from '../../../../_lib/data';
 
 export default async function Page({
     params,
@@ -25,9 +14,9 @@ export default async function Page({
         courseId: string,
         lessonId: string,
     };
-}) {
+}): Promise<React.JSX.Element> {
 
-    const data = await getData(params.lessonId);
+    const lesson: Lesson = await getData("lessons", params.lessonId) as Lesson;
 
     return (
         <>
@@ -35,31 +24,31 @@ export default async function Page({
                 <CardHeader>
                     <div className="hidden sm:block py-36 bg-secondary rounded"></div>
                     <h3 className="text-muted-foreground">
-                        <Link href={ `/courses/${data.course.id}` } className="hover:underline">{ data.course.title }</Link>
+                        <Link href={ `/courses/${lesson.course.id}` } className="hover:underline">{ lesson.course.title }</Link>
                     </h3>
                 </CardHeader>
                 <CardContent>
                     <div className="flex justify-between items-center">
                         <div className="grid gap-2">
                             <div className="flex items-end font-medium">
-                                <p>{ data.lesson_number }</p>
+                                <p>{ lesson.lesson_number }</p>
                                 <icons.Dot className="h-6 w-6 text-primary" />
-                                <h1>{ data.title }</h1>
+                                <h1>{ lesson.title }</h1>
                             </div>
                             <div className="flex gap-1 flex-wrap">
-                                { data.course.language.name && <Badge variant={ data.course.language.name.toLowerCase() }>{ data.course.language.name }</Badge> }
-                                { data.course.difficulty && <Badge variant={ data.course.difficulty.toLowerCase() }>{ data.course.difficulty }</Badge> }
+                                { lesson.course.language.name && <Badge variant={ lesson.course.language.name.toLowerCase() }>{ lesson.course.language.name }</Badge> }
+                                { lesson.course.difficulty && <Badge variant={ lesson.course.difficulty.toLowerCase() }>{ lesson.course.difficulty }</Badge> }
                                 <Badge>5 000 points</Badge>
                                 <Badge>+100 000 xp</Badge>
                             </div>
                         </div>
                         <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end">
                             <div className="flex gap-2">
-                                { data.points_gain?.toString() }
+                                { lesson.points_gain?.toString() }
                                 <icons.LucideStar strokeWidth={ 1 } color="#1461cc" />
                             </div>
                             <div className="flex gap-2">
-                                { data.exp_gain?.toString() }
+                                { lesson.exp_gain?.toString() }
                                 <icons.LucideMedal strokeWidth={ 1 } color="#1461cc" />
                             </div>
                         </div>
@@ -102,10 +91,10 @@ export default async function Page({
             </Card>
             <div className="grid gap-6">
                 <div>
-                    { data.description }
+                    { lesson.description }
                 </div>
                 <div className="text-muted-foreground">
-                    { data.content }
+                    { lesson.content }
                 </div>
             </div>
         </>

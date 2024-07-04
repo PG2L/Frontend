@@ -16,7 +16,7 @@ import {
 import Header from './_components/Header/Header';
 import Footer from './_components/Footer/Footer';
 
-export default function Page() {
+export default function Page(): React.JSX.Element {
 
     const sponsors: string[] = [
         `https://img.icons8.com/?size=100&id=435&format=png&color=1461cc`,
@@ -46,7 +46,6 @@ export default function Page() {
             description: "Learn how to build and deploy full-stack web applications using Node.js and Express. Topics include routing, middleware, error handling, and database integration."
         }
     ];
-
     const featureContent: { title: string, description: string; }[] = [
         {
             title: "Interactive Lessons",
@@ -111,6 +110,7 @@ export default function Page() {
             stars: 5
         }
     ];
+
     return (
         <>
             <Header />
@@ -130,10 +130,10 @@ export default function Page() {
                     <div className="overflow-hidden mt-6 w-full border-b border-t bg-card whitespace-nowrap flex items-center">
                         <div className="slide-track animate-[slide_60s_linear_infinite] inline-block whitespace-nowrap content-center py-2">
                             <div className="flex gap-48 justify-center">
-                                { sponsors.map((sponsor, index) => (
+                                { sponsors.map((sponsor: string, index: number): React.JSX.Element => (
                                     <Image key={ index } src={ sponsor } alt="" width="64" height="64" />
                                 )) }
-                                { sponsors.map((sponsor, index) => (
+                                { sponsors.map((sponsor: string, index: number): React.JSX.Element => (
                                     <Image key={ index + sponsors.length } src={ sponsor } alt="" width="64" height="64" />
                                 )) }
                             </div>
@@ -142,7 +142,10 @@ export default function Page() {
                 </div>
                 <div className="py-16 grid justify-center justify-items-center gap-24">
                     <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 justify-items-center w-full">
-                        { lessonsContent.map((content, index) => (
+                        { lessonsContent.map((content: {
+                            title: string;
+                            description: string;
+                        }, index: number): React.JSX.Element => (
                             <Card key={ index }>
                                 <CardHeader>
                                     <div className="bg-secondary py-24 rounded"></div>
@@ -191,7 +194,10 @@ export default function Page() {
                     <div className="grid gap-12">
                         <h2 className="text-center text-3xl font-medium">Unlock your learning potential</h2>
                         <div className="grid justify-center md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            { featureContent.map((content, index) => (
+                            { featureContent.map((content: {
+                                title: string;
+                                description: string;
+                            }, index: number): React.JSX.Element => (
                                 <Card key={ index }>
                                     <CardHeader>
                                         <CardTitle className="text-center font-medium text-lg">{ content.title }</CardTitle>
@@ -231,7 +237,12 @@ export default function Page() {
                         </div>
                     </div>
                     <div className="grid gap-6 justify-center md:grid-cols-2 lg:grid-cols-3">
-                        { testimonies.map((_, index) => (
+                        { testimonies.map((_: {
+                            name: string;
+                            description: string;
+                            review: string;
+                            stars: number;
+                        }, index: number): React.JSX.Element => (
                             <Card key={ index }>
                                 <CardHeader>
                                     <CardTitle>{ _.name }</CardTitle>
@@ -245,7 +256,7 @@ export default function Page() {
                                 <CardFooter>
                                     <div className="flex justify-between items-center w-full">
                                         <div className="flex h-4">
-                                            { Array.from({ length: _.stars }).map((_, index) => (
+                                            { Array.from({ length: _.stars }).map((_: unknown, index: number): React.JSX.Element => (
                                                 <Image key={ index } height="16" width="16" src="https://img.icons8.com/?size=100&id=8ggStxqyboK5&format=png&color=000000" alt="" />
                                             )) }
                                         </div>

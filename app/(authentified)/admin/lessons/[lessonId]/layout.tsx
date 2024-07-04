@@ -1,27 +1,6 @@
 import React from 'react';
 import AdminHeader from '../../../../_components/AdminHeader/AdminHeader';
-
-async function getLessons() {
-
-    const res = await fetch(`http://localhost:8000/lessons`);
-
-    if (!res.ok) {
-        throw new Error('Failed to fetch data');
-    }
-
-    return res.json();
-}
-
-async function getLesson(id: string) {
-
-    const res = await fetch(`http://localhost:8000/lessons/${id}`);
-
-    if (!res.ok) {
-        throw new Error('Failed to fetch data');
-    }
-
-    return res.json();
-}
+import { getData } from '../../../../_lib/data';
 
 export default async function AdminLessonEditLayout({
     children,
@@ -31,18 +10,15 @@ export default async function AdminLessonEditLayout({
     params: {
         lessonId: string,
     },
-}) {
+}): Promise<React.JSX.Element> {
 
-    const lessons = await getLessons();
-
-    const lesson = await getLesson(params.lessonId);
+    const lessons: Lesson[] = await getData("lessons") as Lesson[];
+    const lesson: Lesson = await getData("lessons", params.lessonId) as Lesson;
 
     return (
-        <>
-            <div className="grid w-full grid-cols-1">
-                <AdminHeader lesson={ lesson } lessons={ lessons } />
-                { children }
-            </div>
-        </>
+        <div className="grid w-full grid-cols-1">
+            <AdminHeader lesson={ lesson } lessons={ lessons } />
+            { children }
+        </div>
     );
 }

@@ -7,27 +7,27 @@ import Link from 'next/link';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '../ui/breadcrumb';
 
 interface GlobalBreadcrumbProps {
-    courses?: any[],
+    courses?: Course[],
 }
 
 const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = ({
     courses,
 }: {
-    courses: any[],
-}) => {
+    courses: Course[],
+}): React.JSX.Element => {
 
-    const paths = usePathname() || '';
-    const pathNames = paths.split('/').filter(path => path);
+    const paths: string = usePathname() || '';
+    const pathNames: string[] = paths.split('/').filter(path => path);
     const [itemLinks, setItemLinks] = useState<string[]>([]);
 
     useEffect(() => {
-        const fetchItemsNames = async () => {
-            const links: string[] = await Promise.all(pathNames.map(async (link, index) => {
+        const fetchItemsNames: () => Promise<void> = async (): Promise<void> => {
+            const links: string[] = await Promise.all(pathNames.map(async (link: string, index: number): Promise<any> => {
                 if (link.match(/^[0-9]+$/)) {
                     if (index === 1) {
                         return courses[parseInt(link) - 1].title;
                     } else if (index === 2) {
-                        return courses[parseInt(pathNames[1]) - 1].lessons.find((lesson: any) => lesson.id === parseInt(link)).title;
+                        return courses[parseInt(pathNames[1]) - 1].lessons.find((lesson: any): boolean => lesson.id === parseInt(link)).title;
                     }
                 }
                 return link[0].toUpperCase() + link.slice(1, link.length);
@@ -43,7 +43,7 @@ const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = ({
                 <nav className={ styles.breadcrumb }>
                     <Breadcrumb>
                         <BreadcrumbList>
-                            { itemLinks.map((itemLink, index) => {
+                            { itemLinks.map((itemLink: string, index: number): React.JSX.Element => {
                                 let href = `/${pathNames.slice(0, index + 1).join('/')}`;
                                 return (
                                     <>

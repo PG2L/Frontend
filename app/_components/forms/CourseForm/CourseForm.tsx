@@ -78,7 +78,7 @@ const CourseForm: FC<CourseFormProps> = ({
     categories,
     languages,
     course,
-}) => {
+}): React.JSX.Element => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -96,7 +96,7 @@ const CourseForm: FC<CourseFormProps> = ({
         },
     });
 
-    const onSubmit = async (values: any) => {
+    const onSubmit: (values: any) => Promise<void> = async (values: any): Promise<void> => {
         try {
             if (course) {
                 const response = await fetch(`http://localhost:8000/courses/${course.id}`, {
@@ -111,7 +111,7 @@ const CourseForm: FC<CourseFormProps> = ({
                     throw new Error('Failed to put data');
                 }
 
-                const data = await response.json();
+                const data: any = await response.json();
                 console.log(data);
             } else {
                 const response = await fetch('http://localhost:8000/courses/new', {
@@ -126,7 +126,7 @@ const CourseForm: FC<CourseFormProps> = ({
                     throw new Error('Failed to post data');
                 }
 
-                const data = await response.json();
+                const data: any = await response.json();
                 console.log(data);
             }
         } catch (error) {
@@ -163,7 +163,7 @@ const CourseForm: FC<CourseFormProps> = ({
                     <FormField
                         control={ form.control }
                         name="title"
-                        render={ ({ field }) => (
+                        render={ ({ field }): React.JSX.Element => (
                             <FormItem className="w-full">
                                 <FormLabel>Title <span className="text-xs text-muted-foreground font-normal">(required)</span></FormLabel>
                                 <FormControl>
@@ -301,7 +301,10 @@ const CourseForm: FC<CourseFormProps> = ({
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
-                                            { categories.map((category) => (
+                                            { categories.map((category: {
+                                                id: number;
+                                                name: string;
+                                            }): React.JSX.Element => (
                                                 <SelectItem key={ category.id } value={ category.id.toString() }>
                                                     { category.id } - { category.name }
                                                 </SelectItem>
@@ -328,7 +331,10 @@ const CourseForm: FC<CourseFormProps> = ({
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
-                                            { languages.map((language) => (
+                                            { languages.map((language: {
+                                                id: number;
+                                                name: string;
+                                            }): React.JSX.Element => (
                                                 <SelectItem key={ language.id } value={ language?.id.toString() }>
                                                     { language.id } - { language.name }
                                                 </SelectItem>

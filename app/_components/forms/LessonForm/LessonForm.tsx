@@ -49,7 +49,8 @@ interface LessonFormProps {
 const LessonForm: FC<LessonFormProps> = ({
     lesson,
     courses,
-}) => {
+}): React.JSX.Element => {
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -63,7 +64,7 @@ const LessonForm: FC<LessonFormProps> = ({
         },
     });
 
-    const onSubmit = async (values: any) => {
+    const onSubmit: (values: any) => Promise<void> = async (values: any): Promise<void> => {
         try {
             if (lesson) {
                 const response = await fetch(`http://localhost:8000/lessons/${lesson.id}`, {
@@ -78,7 +79,7 @@ const LessonForm: FC<LessonFormProps> = ({
                     throw new Error('Failed to put data');
                 }
 
-                const data = await response.json();
+                const data: any = await response.json();
                 console.log(data);
             } else {
                 const response = await fetch('http://localhost:8000/lessons/new', {
@@ -93,7 +94,7 @@ const LessonForm: FC<LessonFormProps> = ({
                     throw new Error('Failed to post data');
                 }
 
-                const data = await response.json();
+                const data: any = await response.json();
                 console.log(data);
             }
         } catch (error) {
@@ -229,7 +230,7 @@ const LessonForm: FC<LessonFormProps> = ({
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        { courses.map((course) => (
+                                        { courses.map((course: Course): React.JSX.Element => (
                                             <SelectItem key={ course.id } value={ course.id.toString() }>
                                                 { course.id } - { course.title }
                                             </SelectItem>

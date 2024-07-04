@@ -15,19 +15,17 @@ import { getLevelByExp } from '../../_lib/levels';
 
 interface ProfileSidebarProps { }
 
-const ProfileSidebar: FC<ProfileSidebarProps> = () => {
+const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
 
     const [isOpen, setIsOpen] = React.useState(true);
-
     const user: User = useContext(UserContext);
-
     const [level, exp] = getLevelByExp(user.total_exp);
 
     return (
         <div>
             <div className={ `flex bg-card right-0 top-0 sticky z-50 h-screen` }>
                 <div className="flex flex-col items-center h-screen fixed justify-center z-[51]">
-                    <Button variant="ghost" onClick={ () => setIsOpen(!isOpen) } className={ `absolute !p-2` } size="sm">
+                    <Button variant="ghost" onClick={ (): void => setIsOpen(!isOpen) } className={ `absolute !p-2` } size="sm">
                         { isOpen ? <icons.ChevronRightIcon className="h-6 w-6" /> : <icons.ChevronLeftIcon className="h-6 w-6" /> }
                     </Button>
                 </div>
@@ -89,7 +87,6 @@ const ProfileSidebar: FC<ProfileSidebarProps> = () => {
                             </div>
                             <div className="grid w-full">
                                 <h3 className="text-lg font-medium mt-4">Daily Goals</h3>
-                                {/* <span className="text-muted-foreground text-sm my-2">Complete these challenges daily for even more rewards !</span> */ }
                                 <div className="grid py-2">
                                     <div className="grid gap-2">
                                         <div className="flex justify-between items-center">

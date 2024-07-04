@@ -1,27 +1,18 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import GlobalBreadcrumb from '../../_components/GlobalBreadcrumb/GlobalBreadcrumb';
-
-async function getData() {
-    const response = await fetch('http://localhost:8000/courses');
-
-    if (!response.ok) {
-        throw new Error('Failed to fetch data');
-    }
-
-    return response.json();
-}
+import { getData } from '../../_lib/data';
 
 export default async function CoursesLayout({
     children,
 }: {
     children: React.ReactNode,
-}) {
+}): Promise<React.JSX.Element> {
 
-    const data = await getData();
+    const courses: Course[] = await getData("courses") as Course[];
 
     return (
         <div className="grid">
-            <GlobalBreadcrumb courses={ data } />
+            <GlobalBreadcrumb courses={ courses } />
             { children }
         </div>
     );

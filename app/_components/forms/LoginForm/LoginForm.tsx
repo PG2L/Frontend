@@ -10,14 +10,14 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import { setCookie } from "cookies-next";
 
 
 interface LoginFormProps { }
 
-function LoginButton() {
+function LoginButton(): React.JSX.Element {
     const { pending } = useFormStatus();
 
     function handleClick(event: any): void {
@@ -33,9 +33,7 @@ function LoginButton() {
     );
 }
 
-const LoginForm: FC<LoginFormProps> = () => {
-
-    // const [errorMessage, dispatch] = useFormState(login, undefined);
+const LoginForm: FC<LoginFormProps> = (): React.JSX.Element => {
 
     const form = useForm({
         resolver: zodResolver(z.object({
@@ -54,7 +52,7 @@ const LoginForm: FC<LoginFormProps> = () => {
 
     const router = useRouter();
 
-    const onSubmit = async (values: any) => {
+    const onSubmit: (values: any) => Promise<void> = async (values: any): Promise<void> => {
         try {
             const response = await fetch('http://localhost:8000/api/login_check', {
                 method: 'POST',
@@ -63,7 +61,7 @@ const LoginForm: FC<LoginFormProps> = () => {
                 },
                 body: JSON.stringify(values),
             });
-            const data = await response.json();
+            const data: any = await response.json();
             console.log(data);
             if (data.token) {
                 setCookie('currentUser', data.token);
@@ -116,7 +114,6 @@ const LoginForm: FC<LoginFormProps> = () => {
                                     </FormItem>
                                 ) }
                             />
-                            {/* <div>{ errorMessage && <p>{ errorMessage }</p> }</div> */ }
                             <LoginButton />
                             <Button variant="outline" className="w-full">
                                 Log in with GitHub

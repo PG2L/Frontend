@@ -7,7 +7,7 @@ export default function UnauthentifiedLayout({
     children,
 }: {
     children: React.ReactNode,
-}) {
+}): React.JSX.Element {
 
     return (
         <>

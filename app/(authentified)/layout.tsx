@@ -7,47 +7,31 @@ import { ScrollArea, ScrollBar } from '../_components/ui/scroll-area';
 import UserProvider from '../_contexts/UserProvider';
 import { getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
+import { getData } from '../_lib/data';
 
 export default async function AuthentifiedLayout({
     children,
 }: {
     children: React.ReactNode,
-}) {
+}): Promise<React.JSX.Element> {
 
     const userId = getCookie('userId', { cookies });
+    const user: User = await getData("users", userId);
 
-    const getUser: (id: any) => Promise<void> = async (id: any) => {
-        try {
-            const response = await fetch(`http://localhost:8000/users/${id}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            return await response.json();
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const user = await getUser(userId);
-    // console.log(user);
     return (
-        <>
-            <div className="flex justify-between">
-                <UserProvider user={ user }>
-                    <MainMenu />
-                    <ScrollArea className="grid w-full max-h-screen">
-                        <div className="p-6">
-                            { children }
-                        </div>
-                        <FAQ />
-                        <Footer />
-                        <ScrollBar />
-                    </ScrollArea>
-                    <ProfileSidebar />
-                </UserProvider>
-            </div>
-        </>
+        <div className="flex justify-between">
+            <UserProvider user={ user }>
+                <MainMenu />
+                <ScrollArea className="grid w-full max-h-screen">
+                    <div className="p-6">
+                        { children }
+                    </div>
+                    <FAQ />
+                    <Footer />
+                    <ScrollBar />
+                </ScrollArea>
+                <ProfileSidebar />
+            </UserProvider>
+        </div>
     );
 };

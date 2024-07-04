@@ -4,11 +4,12 @@ export default async function NewCourseLayout({
     children,
 }: {
     children: React.ReactNode,
-}) {
+}): Promise<React.JSX.Element> {
+
     return (
         <div className="grid grid-cols-1 w-full">
             <h1 className="text-lg">Create a new course</h1>
-            {children}
+            { children }
         </div>
-    )
+    );
 }

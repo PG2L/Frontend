@@ -1,47 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Badge } from "../_components/ui/badge";
-import { Avatar } from "../_components/ui/avatar";
-import { Card, CardFooter, CardHeader } from '../_components/ui/card';
+import { Badge } from "../../_components/ui/badge";
+import { Avatar } from "../../_components/ui/avatar";
+import { Card, CardFooter, CardHeader } from '../../_components/ui/card';
 import * as icons from 'lucide-react';
-import { Skeleton } from '../_components/ui/skeleton';
+import { Skeleton } from '../../_components/ui/skeleton';
 import Link from 'next/link';
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '../_components/ui/breadcrumb';
-import { Button } from '../_components/ui/button';
+import { Button } from '../../_components/ui/button';
+import { getData } from '../../_lib/data';
 
-async function getData() {
-    const res = await fetch('http://localhost:8000/lessons');
+export default async function Page(): Promise<React.JSX.Element> {
 
-    if (!res.ok) {
-        throw new Error('Failed to fetch data');
-    }
-
-    return res.json();
-}
-
-export default function Page() {
-
-    const [data, setData] = useState<null | any[]>(null);
-
-    useEffect(() => {
-        getData().then(data => setData(data)).catch(error => console.error(error));
-    }, []);
+    const lessons: Lesson[] = await getData("lessons") as Lesson[];
 
     return (
-        <Layout>
+        <>
             <div className="flex justify-between items-center">
-                <Breadcrumb>
-                    <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <Link href="/">Home</Link>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbPage>Lessons</BreadcrumbPage>
-                        </BreadcrumbItem>
-                    </BreadcrumbList>
-                </Breadcrumb>
                 <Link href="/lessons/new">
                     <Button variant="secondary">
                         Create a lesson
@@ -49,10 +22,10 @@ export default function Page() {
                 </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-4 lg:gap-6 w-full bg-background py-6">
-                { !data && Array.from({ length: 12 }).map((_, index) => (
+                { !lessons && Array.from({ length: 12 }).map((_: unknown, index: number): React.JSX.Element => (
                     <Skeleton key={ index } className="w-full rounded-lg h-80" />
                 )) }
-                { data && data.map((lesson, index) => (
+                { lessons && lessons.map((lesson: Lesson, index: number): React.JSX.Element => (
                     <Link key={ index } href={ `/lessons/${index + 1}` } >
                         <Card className={ `p-4 border w-full grid gap-2 sm:gap-4 rounded-lg hover:border-primary hover:scale-[1.01] ${lesson.isUnlock && "outline outline-primary outline-1"} ${lesson.isFinished && "bg-secondary"}` }>
                             <CardHeader className="grid p-1">
@@ -88,6 +61,6 @@ export default function Page() {
                     </Link>
                 )) }
             </div>
-        </Layout>
+        </>
     );
 }

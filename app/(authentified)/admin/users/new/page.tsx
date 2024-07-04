@@ -1,7 +1,7 @@
 import React from 'react';
 import UserForm from '../../../../_components/forms/UserForm/UserForm';
 
-export default async function Page() {
+export default async function Page(): Promise<React.JSX.Element> {
 
     return (
         <div className="grid w-full grid-cols-1">

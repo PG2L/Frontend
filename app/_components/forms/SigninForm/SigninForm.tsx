@@ -25,7 +25,7 @@ const formSchema = z.object({
     }),
 });
 
-const SigninForm: FC<SigninFormProps> = () => {
+const SigninForm: FC<SigninFormProps> = (): React.JSX.Element => {
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -36,7 +36,7 @@ const SigninForm: FC<SigninFormProps> = () => {
         },
     });
 
-    const onSubmit = async (values: any) => {
+    const onSubmit: (values: any) => Promise<void> = async (values: any): Promise<void> => {
         try {
             const response = await fetch(`http://localhost:8000/users/new`, {
                 method: 'POST',
@@ -50,7 +50,7 @@ const SigninForm: FC<SigninFormProps> = () => {
                 throw new Error('Failed to post data');
             }
 
-            const data = await response.json();
+            const data: any = await response.json();
             console.log(data);
         } catch (error) {
             console.error(error);

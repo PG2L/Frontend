@@ -45,7 +45,8 @@ interface UserFormProps {
 
 const UserForm: FC<UserFormProps> = ({
     user,
-}) => {
+}): React.JSX.Element => {
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -60,7 +61,7 @@ const UserForm: FC<UserFormProps> = ({
         },
     });
 
-    const onSubmit = async (values: any) => {
+    const onSubmit: (values: any) => Promise<void> = async (values: any): Promise<void> => {
         try {
             if (user) {
                 const response = await fetch(`http://localhost:8000/users/${user.id}`, {
@@ -75,7 +76,7 @@ const UserForm: FC<UserFormProps> = ({
                     throw new Error('Failed to put data');
                 }
 
-                const data = await response.json();
+                const data: any = await response.json();
                 console.log(data);
             } else {
                 const response = await fetch('http://localhost:8000/users/new', {
@@ -90,7 +91,7 @@ const UserForm: FC<UserFormProps> = ({
                     throw new Error('Failed to post data');
                 }
 
-                const data = await response.json();
+                const data: any = await response.json();
                 console.log(data);
             }
         } catch (error) {

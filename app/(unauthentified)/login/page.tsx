@@ -6,19 +6,17 @@ import SigninForm from '../../_components/forms/SigninForm/SigninForm';
 export default function Page(): React.JSX.Element {
 
     return (
-        <>
-            <Tabs defaultValue="login" className="max-w-[400px] m-auto">
-                <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="login">Log In</TabsTrigger>
-                    <TabsTrigger value="signup">Sign up</TabsTrigger>
-                </TabsList>
-                <TabsContent value="login">
-                    <LoginForm />
-                </TabsContent>
-                <TabsContent value="signup">
-                    <SigninForm />
-                </TabsContent>
-            </Tabs>
-        </>
+        <Tabs defaultValue="login" className="max-w-[400px] m-auto">
+            <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="login">Log In</TabsTrigger>
+                <TabsTrigger value="signup">Sign up</TabsTrigger>
+            </TabsList>
+            <TabsContent value="login">
+                <LoginForm />
+            </TabsContent>
+            <TabsContent value="signup">
+                <SigninForm />
+            </TabsContent>
+        </Tabs>
     );
 }
