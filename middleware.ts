@@ -1,11 +1,10 @@
 import type { NextRequest } from 'next/server'
+import { getCookie } from 'cookies-next'
+import {cookies} from 'next/headers'
 
 export function middleware(request: NextRequest): Response | undefined {
-    const currentUser: string | undefined = request.cookies.get('currentUser')?.value
 
-    if (currentUser && !request.nextUrl.pathname.startsWith('/home') && request.nextUrl.pathname !== '/') {
-        return Response.redirect(new URL('/home', request.url))
-    }
+    const currentUser: string | undefined = getCookie('currentUser', {cookies})
 
     if (!currentUser && !request.nextUrl.pathname.startsWith('/login') && request.nextUrl.pathname !== '/') {
         return Response.redirect(new URL('/login', request.url))
