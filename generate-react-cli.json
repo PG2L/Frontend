@@ -6,7 +6,7 @@
     "testLibrary": "None",
     "component": {
         "default": {
-            "path": "src/components",
+            "path": "app/_components",
             "withStyle": true,
             "withTest": true,
             "withStory": true,
