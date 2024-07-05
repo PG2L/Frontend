@@ -16,7 +16,7 @@ export default async function AuthentifiedLayout({
 }): Promise<React.JSX.Element> {
 
     const userId = getCookie('userId', { cookies });
-    const user: User = await getData("users", userId);
+    const user: User = await getData("users", parseInt(userId)) as User;
 
     return (
         <div className="flex justify-between">

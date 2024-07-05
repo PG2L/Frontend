@@ -5,12 +5,13 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../../_c
 import * as icons from 'lucide-react';
 import React from 'react';
 import { getData } from '../../../_lib/data';
+import CourseButton from '../../../_components/CourseButton/CourseButton';
 
 export default async function Page({
     params,
 }: {
     params: {
-        courseId: string,
+        courseId: number,
     };
 }): Promise<React.JSX.Element> {
 
@@ -65,7 +66,7 @@ export default async function Page({
                                 <span className="text-muted-foreground">5h</span>
                             </div>
                         </div>
-                        <Button size="lg" className="w-full sm:w-1/2">Continue</Button>
+                        <CourseButton />
                     </div>
                 </CardFooter>
             </Card>

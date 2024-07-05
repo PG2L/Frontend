@@ -6,6 +6,7 @@ import { Button } from '../../../../_components/ui/button';
 import Link from 'next/link';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../../../_components/ui/collapsible';
 import { getData } from '../../../../_lib/data';
+import { addCourseToUser } from '../../../../_lib/courses';
 
 export default async function Page({
     params,
@@ -17,6 +18,9 @@ export default async function Page({
 }): Promise<React.JSX.Element> {
 
     const lesson: Lesson = await getData("lessons", params.lessonId) as Lesson;
+    const handleClick = async () => {
+        await addCourseToUser(lesson.course.id, 1);
+    };
 
     return (
         <>
@@ -66,7 +70,7 @@ export default async function Page({
                                 <span className="text-muted-foreground">30 min</span>
                             </div>
                         </div>
-                        <Button size="lg" className="w-full sm:w-1/2">Start lesson</Button>
+                        <Button size="lg" className="w-full sm:w-1/2" onClick={ handleClick }>Start lesson</Button>
                     </div>
                 </CardFooter>
             </Card>

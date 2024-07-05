@@ -1,6 +1,7 @@
 import React from 'react';
 import GlobalBreadcrumb from '../../_components/GlobalBreadcrumb/GlobalBreadcrumb';
 import { getData } from '../../_lib/data';
+import CourseProvider from '../../_contexts/CourseProvider';
 
 export default async function CoursesLayout({
     children,
