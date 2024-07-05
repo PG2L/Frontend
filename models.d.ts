@@ -11,7 +11,7 @@ interface User {
     total_exp: number;
     total_points: number;
     role: 'User' | 'Admin';
-    courses: Course[];
+    courses: UserCourse[];
 }
 
 interface Course {
@@ -62,4 +62,13 @@ interface Language {
 interface Skill {
     id: number;
     name: string;
+}
+
+interface UserCourse {
+    id: number;
+    user: User;
+    course: Course;
+    progress: number;
+    completion_status: 'in-progress' | 'completed';
+    completion_date: string;
 }
