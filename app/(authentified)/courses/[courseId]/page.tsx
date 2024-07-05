@@ -6,6 +6,8 @@ import * as icons from 'lucide-react';
 import React from 'react';
 import { getData } from '../../../_lib/data';
 import CourseButton from '../../../_components/CourseButton/CourseButton';
+import CourseProgressBar from '../../../_components/CourseProgressBar/CourseProgressBar';
+import CoursesLayout from '../layout';
 
 export default async function Page({
     params,
@@ -22,14 +24,7 @@ export default async function Page({
             <Card className="border">
                 <CardHeader>
                     <div className="hidden sm:block py-36 bg-secondary rounded"></div>
-                    <div className="grid grid-cols-1">
-                        <div className="flex gap-2">
-                            { course.lessons && course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => (
-                                <div key={ index } className={ `h-3 w-1/3 rounded ${lesson.isFinished ? "bg-primary" : "bg-secondary"} ${lesson.isUnlock && "outline outline-1 outline-primary"}` }></div>
-                            )) }
-                        </div>
-                        <p className="text-muted-foreground text-end">0%</p>
-                    </div>
+                    <CourseProgressBar lessons={ course.lessons } />
                 </CardHeader>
                 <CardContent>
                     <div className="flex justify-between items-center">

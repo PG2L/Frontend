@@ -20,7 +20,7 @@ const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = ({
     const pathNames: string[] = paths.split('/').filter(path => path);
     const [itemLinks, setItemLinks] = useState<string[]>([]);
 
-    useEffect(() => {
+    useEffect((): void => {
         const fetchItemsNames: () => Promise<void> = async (): Promise<void> => {
             const links: string[] = await Promise.all(pathNames.map(async (link: string, index: number): Promise<any> => {
                 if (link.match(/^[0-9]+$/)) {
@@ -44,12 +44,12 @@ const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = ({
                     <Breadcrumb>
                         <BreadcrumbList>
                             { itemLinks.map((itemLink: string, index: number): React.JSX.Element => {
-                                let href = `/${pathNames.slice(0, index + 1).join('/')}`;
+                                let href: string = `/${pathNames.slice(0, index + 1).join('/')}`;
                                 return (
                                     <>
                                         { itemLinks.length !== index + 1 ?
                                             <>
-                                                <BreadcrumbItem>
+                                                <BreadcrumbItem key={ index }>
                                                     <BreadcrumbLink asChild>
                                                         <Link href={ href }>{ itemLink }</Link>
                                                     </BreadcrumbLink>
@@ -57,14 +57,14 @@ const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = ({
                                                 <BreadcrumbSeparator />
                                             </>
                                             :
-                                            <BreadcrumbItem>
+                                            <BreadcrumbItem key={ index }>
                                                 <BreadcrumbPage>{ itemLink }</BreadcrumbPage>
                                             </BreadcrumbItem>
                                         }
                                     </>
                                 );
                             }) }
-                        </BreadcrumbList >
+                        </BreadcrumbList>
                     </Breadcrumb>
                 </nav >
             }

@@ -17,15 +17,12 @@ function StartButton(): React.JSX.Element {
     const course: Course = useContext(CourseContext);
     const router = useRouter();
 
-    async function handleClick(event: any): Promise<void> {
-        event.preventDefault();
-        addCourseToUser(course.id, user.id);
-        router.push(`/courses/${course.id}/${course.lessons[0].id}`);
-    }
-
     return (
-        <Button aria-disabled={ pending } type="submit" onClick={ handleClick }>
-            Login
+        <Button className="w-1/2" onClick={ async (): Promise<void> => {
+            await addCourseToUser(course.id, user.id);
+            router.push(`/courses/${course.id}/${course.lessons[0].id}`);
+        } }>
+            Start course
         </Button>
     );
 }
@@ -39,8 +36,8 @@ const CourseButton: FC<CourseButtonProps> = (): React.JSX.Element => {
     return (
         <>
             { isCourseStarted ?
-                <Link href={ `/courses/${course.id}/${course.lessons[0].id}` }>
-                    <Button className={ `btn btn-primary ${styles.courseButton}` }>Continue</Button>
+                <Link href={ `/courses/${course.id}/${course.lessons[0].id}` } className="w-full">
+                    <Button className={ `w-1/2` }>Continue</Button>
                 </Link>
                 :
                 <StartButton />

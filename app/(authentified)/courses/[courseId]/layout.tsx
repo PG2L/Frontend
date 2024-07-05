@@ -19,7 +19,7 @@ export default async function CourseShowLayout({
     };
 }): Promise<React.JSX.Element> {
 
-    const course = await getData("courses", params.courseId) as Course;
+    const course: Course = await getData("courses", params.courseId) as Course;
 
     return (
         <CourseProvider course={ course }>

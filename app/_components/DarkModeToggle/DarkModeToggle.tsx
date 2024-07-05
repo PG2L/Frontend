@@ -1,5 +1,4 @@
 import React, { FC, useContext } from 'react';
-import { useMediaQuery } from "react-responsive";
 import { Switch } from '../ui/switch';
 import * as icons from 'lucide-react';
 import { DarkModeContext } from '../../_contexts/DarkModeProvider';
