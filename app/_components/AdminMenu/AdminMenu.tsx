@@ -98,36 +98,56 @@ const AdminMenu: FC<AdminMenuProps> = ({ }: AdminMenuProps): React.JSX.Element =
         ];
 
     return (
+
         <div className="hidden md:flex flex-col gap-0 w-1/4 h-auto">
             <nav className="flex flex-col gap-2 w-full h-full">
                 <div className="grid gap-2 w-full sticky h-fit top-6">
-                    { menuItems.map((item: {
-                        title: string;
-                        content: {
+
+                    {
+                        // Mapping over the menu items to create a list of menu items
+                        menuItems.map((item: {
                             title: string;
-                            href: string;
-                            active: boolean;
-                        }[];
-                    }, index: number): React.JSX.Element => (
-                        <>
-                            { index !== 0 && <Separator /> }
-                            <h2 className="text-lg">{ item.title }</h2>
-                            { item.content.map((content: {
+                            content: {
                                 title: string;
                                 href: string;
                                 active: boolean;
-                            }, index: number): React.JSX.Element => (
-                                <Link href={ content.href } key={ index }>
-                                    <Button variant="ghost" className={ `!w-full text-start text-wrap text-muted-foreground hover:text-foreground ${content.active && "active"}` }>
-                                        <span className="w-full">{ content.title }</span>
-                                    </Button>
-                                </Link>
-                            )) }
-                        </>
-                    )) }
+                            }[];
+                        }, index: number): React.JSX.Element => (
+                            <>
+                                {
+                                    index !== 0 && <Separator /> // Adds a separator between menu items
+                                }
+
+                                <h2 className="text-lg">
+                                    { item.title }
+                                </h2>
+
+                                { item.content.map((content: { // Maps over the content items to create a list of content items
+                                    title: string;
+                                    href: string;
+                                    active: boolean;
+                                }, index: number): React.JSX.Element => (
+                                    <Link
+                                        href={ content.href } // Link to the content item
+                                        key={ index }
+                                    >
+                                        <Button
+                                            variant="ghost"
+                                            className={ `!w-full text-start text-wrap text-muted-foreground hover:text-foreground ${content.active && "active"}` } // Styles the button, highlighting if active
+                                        >
+                                            <span className="w-full">{ content.title }</span>
+                                        </Button>
+                                    </Link>
+                                )) }
+
+                            </>
+                        ))
+                    }
+
                 </div>
-            </nav>
-        </div>
+            </nav >
+        </div >
+
     );
 };
 

@@ -13,12 +13,8 @@ import { redirect } from "next/navigation";
 import { Skeleton } from "../ui/skeleton";
 
 interface AdminHeaderProps {
-    course?: Course;
-    courses?: Course[];
-    lesson?: Lesson;
-    lessons?: Lesson[];
-    user?: User;
-    users?: User[];
+    item: Course | Lesson | User;
+    content: Course[] | Lesson[] | User[];
 }
 
 /**
@@ -29,21 +25,18 @@ interface AdminHeaderProps {
  * @returns {React.JSX.Element} The rendered component.
  */
 const AdminHeader: FC<AdminHeaderProps> = ({
-    course,
-    courses,
-    lesson,
-    lessons,
-    user,
-    users,
+    item,
+    content,
 }: AdminHeaderProps): React.JSX.Element => {
 
     /**
      * Determines the context of the page.
      * @type {"course" | "lesson" | "user"}
      */
-    const pageContext: "course" | "lesson" | "user" = course ? "course" : lesson ? "lesson" : "user";
+    const pageContext: "course" | "lesson" | "user" = item.hasOwnProperty("email") ? "user" : item.hasOwnProperty("category") ? "course" : "lesson";
 
     return (
+
         <Suspense fallback={
             <div className="md:flex grid items-center gap-6">
                 <Skeleton className="md:w-1/2 w-2/3 h-10" />
@@ -54,41 +47,47 @@ const AdminHeader: FC<AdminHeaderProps> = ({
                 <div className="flex md:w-2/3 text-lg">
                     <h1 className="text-muted-foreground text-nowrap">
                         Edit { pageContext } #
-                        { course ? course.id : lesson ? lesson.id : user ? user.id : '' } -{ " " }
+                        { item.id } -
+                        { " " }
                     </h1>
                     <span className="text-foreground font-medium ms-2 w-full">
-                        { course ? course.title : lesson ? lesson.title : user ? user.email : "" }
+                        {
+                            ("title" in item) ? // Checking if the item has a title property
+                                (item as Course | Lesson).title // Casting item to Course or Lesson and displaying its title
+                                : item.email // If no title, display the item's email
+                        }
                     </span>
                 </div>
-                <Select
-                    onValueChange={ (value: string): never => redirect(`/admin/${pageContext}s/${value}`) }
-                >
-                    <SelectTrigger className="md:w-1/3">
-                        <SelectValue placeholder={ `Select a ${pageContext}` } />
-                    </SelectTrigger>
-                    <SelectContent>
-                        { courses &&
-                            courses.map((courseItem: Course): React.JSX.Element => (
-                                <SelectItem key={ courseItem.id } value={ courseItem.id }>
-                                    { courseItem.id } - { courseItem.title }
+
+                {
+                    // A Select component for navigating to different admin pages based on the selected value
+                    <Select
+                        onValueChange={ (value: string): never => redirect(`/admin/${pageContext}s/${value}`) } // Redirects to the selected page context
+                    >
+                        <SelectTrigger className="md:w-1/3">
+                            <SelectValue
+                                placeholder={ `Select a ${pageContext}` }
+                            />
+                        </SelectTrigger>
+                        <SelectContent>
+                            { content.map((contentItem: User | Course | Lesson): React.JSX.Element => (
+                                <SelectItem
+                                    key={ contentItem.id } // Unique key for each item
+                                    value={ contentItem.id.toString() } // Value of the item, converted to string
+                                >
+                                    { contentItem.id } - { ("title" in contentItem) ? // Displaying the ID and title or email of the content item
+                                        (contentItem as Course | Lesson).title
+                                        : contentItem.email
+                                    }
                                 </SelectItem>
                             )) }
-                        { lessons &&
-                            lessons.map((lessonItem: Lesson): React.JSX.Element => (
-                                <SelectItem key={ lessonItem.id } value={ lessonItem.id }>
-                                    { lessonItem.id } - { lessonItem.title }
-                                </SelectItem>
-                            )) }
-                        { users &&
-                            users.map((userItem: User): React.JSX.Element => (
-                                <SelectItem key={ userItem.id } value={ userItem.id }>
-                                    { userItem.id } - { userItem.email }
-                                </SelectItem>
-                            )) }
-                    </SelectContent>
-                </Select>
+                        </SelectContent>
+                    </Select>
+                }
+
             </div>
-        </Suspense>
+        </Suspense >
+
     );
 };
 

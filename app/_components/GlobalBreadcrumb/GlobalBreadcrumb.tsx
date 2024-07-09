@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '../ui/breadcrumb';
 
 interface GlobalBreadcrumbProps {
-    courses?: Course[],
+    courses: Course[],
 }
 
 /**
@@ -45,7 +45,8 @@ const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = ({
             if (index === 1) {
                 return courses[parseInt(link) - 1].title;
             } else if (index === 2) {
-                return courses[parseInt(pathNames[1]) - 1].lessons.find((lesson: any): boolean => lesson.id === parseInt(link)).title;
+                const lesson: Lesson | undefined = courses[parseInt(pathNames[1]) - 1].lessons.find((lesson: any): boolean => lesson.id === parseInt(link));
+                return lesson ? lesson.title : '';
             }
         }
         return link[0].toUpperCase() + link.slice(1, link.length);
@@ -57,27 +58,31 @@ const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = ({
                 <nav>
                     <Breadcrumb>
                         <BreadcrumbList>
-                            { itemsLinks.map((itemLink: string, index: number): React.JSX.Element => {
-                                let href: string = `/${pathNames.slice(0, index + 1).join('/')}`;
-                                return (
-                                    <>
-                                        { itemsLinks.length !== index + 1 ?
-                                            <>
+                            {
+                                itemsLinks.map((itemLink: string, index: number): React.JSX.Element => { // Mapping over itemsLinks to create breadcrumb items
+                                    let href: string = `/${pathNames.slice(0, index + 1).join('/')}`; // Constructing the href for the breadcrumb item
+                                    return (
+                                        <>
+                                            { itemsLinks.length !== index + 1 ? // Conditional rendering based on the index of the item
+                                                <>
+                                                    <BreadcrumbItem key={ index }>
+                                                        <BreadcrumbLink asChild>
+                                                            <Link
+                                                                href={ href } // Link to the item
+                                                            >{ itemLink }</Link>
+                                                        </BreadcrumbLink>
+                                                    </BreadcrumbItem>
+                                                    <BreadcrumbSeparator />
+                                                </>
+                                                :
                                                 <BreadcrumbItem key={ index }>
-                                                    <BreadcrumbLink asChild>
-                                                        <Link href={ href }>{ itemLink }</Link>
-                                                    </BreadcrumbLink>
+                                                    <BreadcrumbPage>{ itemLink }</BreadcrumbPage>
                                                 </BreadcrumbItem>
-                                                <BreadcrumbSeparator />
-                                            </>
-                                            :
-                                            <BreadcrumbItem key={ index }>
-                                                <BreadcrumbPage>{ itemLink }</BreadcrumbPage>
-                                            </BreadcrumbItem>
-                                        }
-                                    </>
-                                );
-                            }) }
+                                            }
+                                        </>
+                                    );
+                                })
+                            }
                         </BreadcrumbList>
                     </Breadcrumb>
                 </nav >

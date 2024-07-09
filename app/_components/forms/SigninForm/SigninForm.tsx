@@ -89,6 +89,7 @@ const SigninForm: FC<SigninFormProps> = ({ }: SigninFormProps): React.JSX.Elemen
     };
 
     return (
+
         <Card className="min-w-80">
             <CardHeader>
                 <CardTitle className="text-lg">Sign In</CardTitle>
@@ -98,67 +99,75 @@ const SigninForm: FC<SigninFormProps> = ({ }: SigninFormProps): React.JSX.Elemen
             </CardHeader>
             <CardContent>
                 <Form { ...form }>
-                    <form onSubmit={ form.handleSubmit(onSubmit) }>
-                        <div className="grid gap-4">
-                            <FormField
-                                control={ form.control }
-                                name="username"
-                                render={ ({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Username</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Nakkarst" { ...field } />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                ) }
-                            />
-                            <FormField
-                                control={ form.control }
-                                name="email"
-                                render={ ({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="example@mail.com" { ...field } />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                ) }
-                            />
-                            <FormField
-                                control={ form.control }
-                                name="password"
-                                render={ ({ field }) => (
-                                    <FormItem className="w-full">
-                                        <FormLabel>Password</FormLabel>
-                                        <FormControl>
-                                            <Input type="password" { ...field } />
-                                        </FormControl>
-                                        <FormDescription>
-                                            Must be at least 8 characters.
-                                        </FormDescription>
-                                        <FormMessage />
-                                    </FormItem>
-                                ) }
-                            />
-                            <Button type="submit" className="w-full">
-                                Create an account
-                            </Button>
-                            <Button variant="outline" className="w-full">
-                                Sign up with GitHub
-                            </Button>
-                        </div>
-                        <div className="mt-4 text-center ">
-                            Already have an account?{ " " }
-                            <Link href="#" className="underline">
-                                Log in
-                            </Link>
-                        </div>
+                    <form onSubmit={ form.handleSubmit(onSubmit) } className="grid gap-4">
+
+                        {/* Username field for account creation */ }
+                        <FormField
+                            control={ form.control }
+                            name="username"
+                            render={ ({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Username</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Nakkarst" { ...field } />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            ) }
+                        />
+
+                        {/* Email field for account creation */ }
+                        <FormField
+                            control={ form.control }
+                            name="email"
+                            render={ ({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Email</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="example@mail.com" { ...field } />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            ) }
+                        />
+
+                        {/* Password field with validation and description */ }
+                        <FormField
+                            control={ form.control }
+                            name="password"
+                            render={ ({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormLabel>Password</FormLabel>
+                                    <FormControl>
+                                        <Input type="password" { ...field } />
+                                    </FormControl>
+                                    <FormDescription>
+                                        Must be at least 8 characters.
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            ) }
+                        />
+                        {/* Button to submit the form and create an account */ }
+                        <Button type="submit" className="w-full">
+                            Create an account
+                        </Button>
+                        {/* Alternative option to sign up using GitHub */ }
+                        <Button variant="outline" className="w-full">
+                            Sign up with GitHub
+                        </Button>
                     </form>
+                    <div className="mt-4 text-center ">
+                        {/* Link for users who already have an account to log in */ }
+                        Already have an account?{ " " }
+                        <Link href="#" className="underline">
+                            Log in
+                        </Link>
+                    </div>
                 </Form>
             </CardContent>
         </Card>
+
     );
 };
 

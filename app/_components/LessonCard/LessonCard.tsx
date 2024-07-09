@@ -30,12 +30,17 @@ const LessonCard: FC<LessonCardProps> = ({
     const currentLesson: Lesson = userCourse.course.lessons[userCourse.progress];
 
     return (
-        <Link href={ `/courses/${userCourse.course.id}/${currentLesson.id}` } >
+
+        <Link
+            href={ `/courses/${userCourse.course.id}/${currentLesson.id}` } // Link to the current lesson
+        >
             <Card className={ `p-2 sm:p-4 border grid gap-2 sm:gap-4 rounded-lg hover:border-primary hover:scale-[1.01] min-h-[310px] ${className}` }>
                 <CardHeader className="grid p-1">
                     <div className={ `h-32 rounded flex justify-center items-center bg-secondary` }>
+                        {/* Placeholder for lesson visual representation */ }
                     </div>
                     <Link href={ `/courses/${userCourse.course.id}` } className="text-sm text-muted-foreground text-nowrap hover:underline">
+                        {/* Display lesson number and total lessons in the course */ }
                         ({ currentLesson.lesson_number }/{ userCourse.course.lessons.length }) { userCourse.course.title }
                     </Link>
                     <h3 className=" text-nowrap overflow-hidden text-ellipsis">{ currentLesson.title }</h3>
@@ -52,6 +57,7 @@ const LessonCard: FC<LessonCardProps> = ({
                 </CardFooter>
             </Card>
         </Link>
+
     );
 };
 

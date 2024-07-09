@@ -123,7 +123,7 @@ const LessonForm: FC<LessonFormProps> = ({
      */
     const onSubmit: (values: any) => Promise<void> = async (values: any): Promise<void> => {
         try {
-            if (lesson) {
+            if (lesson) { // If lesson exists, update the lesson
                 const response = await fetch(`http://localhost:8000/lessons/${lesson.id}`, {
                     method: 'PUT',
                     headers: {
@@ -138,7 +138,7 @@ const LessonForm: FC<LessonFormProps> = ({
 
                 const data: any = await response.json();
                 console.log(data);
-            } else {
+            } else { // If lesson does not exist, create a new lesson
                 const response = await fetch('http://localhost:8000/lessons/new', {
                     method: 'POST',
                     headers: {
@@ -160,6 +160,7 @@ const LessonForm: FC<LessonFormProps> = ({
     };
 
     return (
+
         <Suspense fallback={
             <div className="grid gap-10 sm:gap-12 mt-12">
                 <Skeleton className="w-full h-10" />
@@ -174,9 +175,13 @@ const LessonForm: FC<LessonFormProps> = ({
                 <Skeleton className="w-24 h-10 justify-self-center" />
             </div>
         }>
-            <Form { ...form }>
+
+            <Form // Form component with form state and validation
+                { ...form }
+            >
                 <form onSubmit={ form.handleSubmit(onSubmit) } className="grid gap-4 lg:gap-6 mt-6">
-                    <FormField
+
+                    <FormField // Title field with validation and guidance
                         control={ form.control }
                         name="title"
                         render={ ({ field }) => (
@@ -192,7 +197,8 @@ const LessonForm: FC<LessonFormProps> = ({
                             </FormItem>
                         ) }
                     />
-                    <FormField
+
+                    <FormField // Description field with guidance
                         control={ form.control }
                         name="description"
                         render={ ({ field }) => (
@@ -208,6 +214,8 @@ const LessonForm: FC<LessonFormProps> = ({
                             </FormItem>
                         ) }
                     />
+
+                    {/* Content field for lesson material */ }
                     <FormField
                         control={ form.control }
                         name="content"
@@ -225,6 +233,8 @@ const LessonForm: FC<LessonFormProps> = ({
                         ) }
                     />
                     <div className="grid gap-4 sm:flex lg:gap-6">
+
+                        {/* Points gain field with explanation */ }
                         <FormField
                             control={ form.control }
                             name="points_gain"
@@ -241,6 +251,8 @@ const LessonForm: FC<LessonFormProps> = ({
                                 </FormItem>
                             ) }
                         />
+
+                        {/* Exp gain field for tracking progress */ }
                         <FormField
                             control={ form.control }
                             name="exp_gain"
@@ -258,6 +270,8 @@ const LessonForm: FC<LessonFormProps> = ({
                             ) }
                         />
                     </div>
+
+                    {/* Lesson number field for ordering lessons */ }
                     <FormField
                         control={ form.control }
                         name="lesson_number"
@@ -274,6 +288,8 @@ const LessonForm: FC<LessonFormProps> = ({
                             </FormItem>
                         ) }
                     />
+
+                    {/* Course selection field for associating lessons with courses */ }
                     <FormField
                         control={ form.control }
                         name="course"
@@ -301,10 +317,13 @@ const LessonForm: FC<LessonFormProps> = ({
                             </FormItem>
                         ) }
                     />
+
+                    {/* Submit button for the form */ }
                     <Button type="submit" size="lg" className="mt-4 justify-self-center">Submit</Button>
                 </form>
             </Form>
         </Suspense>
+
     );
 };
 

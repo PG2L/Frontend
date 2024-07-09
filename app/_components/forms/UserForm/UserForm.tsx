@@ -187,9 +187,13 @@ const UserForm: FC<UserFormProps> = ({
                 <Skeleton className="w-24 h-10 justify-self-center" />
             </div>
         }>
-            <Form { ...form }>
+            <Form // Form component for user data
+                { ...form }
+            >
                 <form onSubmit={ form.handleSubmit(onSubmit) } className="grid gap-4 lg:gap-6 mt-6">
                     <div className="grid md:flex gap-4 lg:gap-6">
+
+                        {/* Username field for account creation */ }
                         <FormField
                             control={ form.control }
                             name="username"
@@ -206,6 +210,8 @@ const UserForm: FC<UserFormProps> = ({
                                 </FormItem>
                             ) }
                         />
+
+                        {/* Email field for account creation */ }
                         <FormField
                             control={ form.control }
                             name="email"
@@ -224,6 +230,8 @@ const UserForm: FC<UserFormProps> = ({
                         />
                     </div>
                     <div className="grid gap-4 sm:flex lg:gap-6">
+
+                        {/* Password field with validation and description */ }
                         <FormField
                             control={ form.control }
                             name="password"
@@ -240,6 +248,8 @@ const UserForm: FC<UserFormProps> = ({
                                 </FormItem>
                             ) }
                         />
+
+                        {/* Confirm password field with validation and description */ }
                         <FormField
                             control={ form.control }
                             name="confirmPassword"
@@ -258,6 +268,8 @@ const UserForm: FC<UserFormProps> = ({
                         />
                     </div>
                     <div className="grid gap-4 sm:flex lg:gap-6">
+
+                        {/* First name field */ }
                         <FormField
                             control={ form.control }
                             name="firstname"
@@ -274,6 +286,8 @@ const UserForm: FC<UserFormProps> = ({
                                 </FormItem>
                             ) }
                         />
+
+                        {/* Last name field */ }
                         <FormField
                             control={ form.control }
                             name="lastname"
@@ -291,6 +305,8 @@ const UserForm: FC<UserFormProps> = ({
                             ) }
                         />
                     </div>
+
+                    {/* Address field with description */ }
                     <FormField
                         control={ form.control }
                         name="address"
@@ -308,6 +324,8 @@ const UserForm: FC<UserFormProps> = ({
                         ) }
                     />
                     <div className="grid md:flex gap-4 lg:gap-6">
+
+                        {/* Country name field */ }
                         <FormField
                             control={ form.control }
                             name="country_name"
@@ -324,6 +342,8 @@ const UserForm: FC<UserFormProps> = ({
                                 </FormItem>
                             ) }
                         />
+
+                        {/* Role field */ }
                         <FormField
                             control={ form.control }
                             name="role"
@@ -341,6 +361,8 @@ const UserForm: FC<UserFormProps> = ({
                             ) }
                         />
                     </div>
+
+                    {/* Submit button */ }
                     <Button type="submit" size="lg" className="mt-4 justify-self-center">Submit</Button>
                 </form>
             </Form>

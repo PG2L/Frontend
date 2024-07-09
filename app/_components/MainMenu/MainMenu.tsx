@@ -133,6 +133,7 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
     };
 
     return (
+
         <>
             <div className={ `flex flex-col bg-card border-r sticky left-0 top-0 h-screen justify-between py-6 ${isOpen ? 'px-6' : 'px-2'}` }>
                 <div className="sticky top-6">
@@ -147,56 +148,79 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                         <Separator className="mb-4" />
                         <div className="flex items-center justify-center">
                             <div className="grid items-center justify-center gap-4">
-                                { menuItems.map((item: {
-                                    title: string;
-                                    link: string;
-                                    icon: string;
-                                    filledIcon: string;
-                                }, index: number): React.JSX.Element => {
-                                    const active: boolean = pageContext === item.link.slice(1, pageContext.length + 1);
-                                    return (
-                                        <Link key={ index } href={ item.link }>
-                                            <TooltipProvider>
-                                                <Tooltip>
-                                                    <TooltipTrigger asChild>
-                                                        <Button variant="ghost" className={ `w-full text-start fill-muted-foreground text-muted-foreground hover:text-foreground  hover:fill-foreground ${active && "active fill-foreground text-foreground"}` }>
-                                                            <div>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="28" height="28" viewBox="0 0 48 48">
-                                                                    <path className={ ` ${active ? "opacity-100" : "opacity-0"}` } d={ item.filledIcon }></path>
-                                                                    <path className={ ` ${active ? "opacity-0" : "opacity-100"}` } d={ item.icon }></path>
-                                                                </svg>
-                                                            </div>
-                                                            { isOpen && <span className="w-full ms-2">{ item.title }</span> }
-                                                        </Button>
-                                                    </TooltipTrigger>
-                                                    <TooltipContent>
-                                                        { item.title }
-                                                    </TooltipContent>
-                                                </Tooltip>
-                                            </TooltipProvider>
-                                        </Link>
-                                    );
-                                }) }
+                                {
+                                    // Iterate over the menu items and create a navigation link for each
+                                    menuItems.map((item: {
+                                        title: string;
+                                        link: string;
+                                        icon: string;
+                                        filledIcon: string;
+                                    }, index: number): React.JSX.Element => {
+                                        // Determine if the current item is active based on the page context
+                                        const active: boolean = pageContext === item.link.slice(1, pageContext.length + 1);
+                                        return (
+                                            // Navigation link
+                                            <Link key={ index } href={ item.link }>
+                                                {/* Tooltip wrapper for additional information */ }
+                                                <TooltipProvider>
+                                                    <Tooltip>
+                                                        {/* Trigger for the tooltip */ }
+                                                        <TooltipTrigger asChild>
+                                                            {/* Button styled based on active state */ }
+                                                            <Button variant="ghost" className={ `w-full text-start fill-muted-foreground text-muted-foreground hover:text-foreground hover:fill-foreground ${active && "active fill-foreground text-foreground"}` }>
+                                                                <div>
+                                                                    {/* Icon with dynamic rendering based on active state */ }
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="28" height="28" viewBox="0 0 48 48">
+                                                                        <path className={ `${active ? "opacity-100" : "opacity-0"}` } d={ item.filledIcon }></path>
+                                                                        <path className={ `${active ? "opacity-0" : "opacity-100"}` } d={ item.icon }></path>
+                                                                    </svg>
+                                                                </div>
+                                                                {
+                                                                    // Conditionally rendered title based on sidebar state
+                                                                    isOpen && <span className="w-full ms-2">{ item.title }</span>
+                                                                }
+                                                            </Button>
+                                                        </TooltipTrigger>
+                                                        {/* Tooltip content */ }
+                                                        <TooltipContent>
+                                                            { item.title }
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
+                                            </Link>
+                                        );
+                                    }) }
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="h-fit">
-                    <Button variant="ghost" onClick={ logout } className={ `w-full text-start fill-muted-foreground hover:fill-foreground text-muted-foreground hover:text-foreground` }>
+                    {/* Logout button with dynamic styling for hover states */ }
+                    <Button variant="ghost" onClick={ logout } className="w-full text-start fill-muted-foreground hover:fill-foreground text-muted-foreground hover:text-foreground">
                         <div>
                             { logoutButton }
                         </div>
-                        { isOpen && <span className="w-full ms-2">Logout</span> }
+                        {
+                            // Conditionally rendered title based on sidebar state
+                            isOpen && <span className="w-full ms-2">Logout</span>
+                        }
                     </Button>
                     <Separator className="mt-4" />
                 </div>
-            </div>
-            <div className="flex flex-col h-screen items-center justify-center z-50 ">
-                <Button variant="ghost" onClick={ (): void => setIsOpen(!isOpen) } className={ `absolute !p-2 fixed` } size="sm">
-                    { isOpen ? <icons.ChevronLeftIcon className="h-6 w-6" /> : <icons.ChevronRightIcon className="h-6 w-6" /> }
-                </Button>
+                <div className="flex flex-col h-screen items-center justify-center z-50 ">
+                    {/* Toggle button to open/close the sidebar */ }
+                    <Button variant="ghost" onClick={ (): void => setIsOpen(!isOpen) } className="absolute !p-2 fixed" size="sm">
+                        {
+                            // Conditional rendering of the chevron icons based on the sidebar state
+                            isOpen ?
+                                <icons.ChevronLeftIcon className="h-6 w-6" />
+                                : <icons.ChevronRightIcon className="h-6 w-6" />
+                        }
+                    </Button>
+                </div>
             </div>
         </>
+
     );
 };
 

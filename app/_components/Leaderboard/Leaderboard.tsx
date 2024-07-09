@@ -102,7 +102,7 @@ export const columns: ColumnDef<User>[] = [
                 </Button>
             );
         },
-        cell: ({ row }): React.JSX.Element => <UserHoverCard user={ row.original }>{ row.getValue("username") }</UserHoverCard>,
+        cell: ({ row }): React.JSX.Element => <UserHoverCard user={ row.original } />,
     },
     {
         /**
@@ -207,7 +207,9 @@ export default function DataTableDemo({
     });
 
     return (
+
         <div className="w-full">
+            {/* Search input for filtering by username */ }
             <div className="flex items-center py-4">
                 <Input
                     placeholder="Search..."
@@ -218,8 +220,10 @@ export default function DataTableDemo({
                     className="max-w-sm"
                 />
             </div>
+            {/* Table container */ }
             <div className="rounded-md">
                 <Table>
+                    {/* Table header rendering */ }
                     <TableHeader>
                         { table.getHeaderGroups().map((headerGroup): React.JSX.Element => (
                             <TableRow key={ headerGroup.id }>
@@ -238,6 +242,7 @@ export default function DataTableDemo({
                             </TableRow>
                         )) }
                     </TableHeader>
+                    {/* Table body rendering */ }
                     <TableBody>
                         { table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row): React.JSX.Element => (
@@ -268,11 +273,13 @@ export default function DataTableDemo({
                     </TableBody>
                 </Table>
             </div>
+            {/* Pagination and row selection info */ }
             <div className="flex items-center justify-end space-x-2 py-4">
                 <div className="flex-1 text-sm text-muted-foreground">
                     { table.getFilteredSelectedRowModel().rows.length } of{ " " }
                     { table.getFilteredRowModel().rows.length } row(s) selected.
                 </div>
+                {/* Pagination buttons */ }
                 <div className="space-x-2">
                     <Button
                         variant="outline"
@@ -293,5 +300,6 @@ export default function DataTableDemo({
                 </div>
             </div>
         </div>
+
     );
 }

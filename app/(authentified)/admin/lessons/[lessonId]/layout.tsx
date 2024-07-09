@@ -38,7 +38,7 @@ export default async function AdminLessonEditLayout({
 
     return (
         <div className="grid w-full grid-cols-1">
-            <AdminHeader lesson={ lesson } lessons={ lessons } />
+            <AdminHeader item={ lesson } content={ lessons } />
             { children }
         </div>
     );

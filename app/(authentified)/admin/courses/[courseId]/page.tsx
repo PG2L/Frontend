@@ -24,7 +24,7 @@ export default async function Page({
      * @param {string} courseId - The ID of the course to retrieve.
      * @returns {Promise<Course>} - A promise that resolves to the course data.
      */
-    const course: Course = await getData("courses", params.courseId) as Course;
+    const course: Course = await getData("courses", Number(params.courseId)) as Course;
 
     /**
      * Fetches the categories data from the server.

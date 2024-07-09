@@ -31,14 +31,21 @@ const ResumeLesson: FC<ResumeLessonProps> = (): React.JSX.Element => {
     const userCourses: UserCourse[] = user.courses.sort((a: UserCourse, b: UserCourse): number => b.progress - a.progress);
 
     return (
+
         <div className="grid">
+            {/* Title for the resume section */ }
             <h1 className="text-2xl">Resume</h1>
+            {/* Scrollable area to display course cards */ }
             <ScrollArea>
                 <div className="w-full p-6 flex gap-6 items-center justify-start">
-                    { userCourses.map((userCourse: any, index: number): React.JSX.Element => (
-                        <LessonCard key={ index } className="min-w-72" userCourse={ userCourse } />
-                    )) }
+                    {
+                        // Mapping over userCourses to create a LessonCard for each course
+                        userCourses.map((userCourse: any, index: number): React.JSX.Element => (
+                            <LessonCard key={ index } className="min-w-72" userCourse={ userCourse } />
+                        ))
+                    }
                 </div>
+                {/* Horizontal scrollbar for the scrollable area */ }
                 <ScrollBar orientation="horizontal" />
             </ScrollArea>
         </div>

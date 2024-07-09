@@ -30,15 +30,19 @@ const DarkModeToggle: FC<DarkModeToggleProps> = ({ }: DarkModeToggleProps): Reac
     const toggleDarkMode: any = darkModeProvider.toggleDarkMode;
 
     return (
+
         <div className={ `flex gap-2 items-center select-none` }>
             <Switch
-                checked={ darkMode }
-                onCheckedChange={ (): any => toggleDarkMode() }
-                aria-label="Dark mode toggle"
-                id="dark-mode-toggle"
+                checked={ darkMode } // The state of the switch, true if dark mode is enabled
+                onCheckedChange={ (): any => toggleDarkMode() } // Function to toggle dark mode on change
+                aria-label="Dark mode toggle" // Accessibility label for the switch
+                id="dark-mode-toggle" // ID for the switch element
             />
+
+            {/* Moon icon indicating dark mode, with specified height and width */ }
             <icons.Moon height={ 20 } width={ 20 } />
         </div>
+
     );
 };
 

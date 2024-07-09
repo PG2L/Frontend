@@ -25,19 +25,19 @@ const LessonContent: FC<LessonContentProps> = ({ }: LessonContentProps): React.J
      * Retrieves the user from the UserContext.
      * @returns The user object.
      */
-    const user: User = useContext(UserContext);
+    const user: User = useContext(UserContext) as User;
 
     /**
      * Retrieves the lesson from the LessonContext.
      * @returns The lesson object.
      */
-    const lesson: Lesson = useContext(LessonContext);
+    const lesson: Lesson = useContext(LessonContext) as Lesson;
 
     /**
      * Retrieves the course from the CourseContext.
      * @returns The course object.
      */
-    const course: Course = useContext(CourseContext);
+    const course: Course = useContext(CourseContext) as Course;
 
     /**
      * Finds the user's course based on the course ID.
@@ -54,7 +54,7 @@ const LessonContent: FC<LessonContentProps> = ({ }: LessonContentProps): React.J
      * @param lesson - The lesson information.
      * @returns A boolean indicating whether the lesson is unlocked.
      */
-    const isUnlock: boolean = userCourse?.progress + 1 >= lesson.lesson_number;
+    const isUnlock: boolean = userCourse ? userCourse?.progress + 1 >= lesson.lesson_number : false;
 
     /**
      * Checks if the current lesson is the last lesson in the course.
@@ -70,6 +70,7 @@ const LessonContent: FC<LessonContentProps> = ({ }: LessonContentProps): React.J
     const router: AppRouterInstance = useRouter();
 
     return (
+
         <div className="grid gap-6 relative rounded">
             <div>
                 { lesson.description }
@@ -78,26 +79,40 @@ const LessonContent: FC<LessonContentProps> = ({ }: LessonContentProps): React.J
                 { lesson.content }
             </div>
             { !isUnlock ?
+                // Overlay if the lesson is locked
                 <div className="absolute h-full w-[102%] top-0 left-[-1%] backdrop-blur-sm select-none z-50 rounded"></div>
                 :
                 !isLastLesson ?
+                    // Button to go to the next lesson if it's not the last lesson
                     <Button className="w-1/3 align-self-center justify-self-center" onClick={ async (): Promise<void> => {
                         router.prefetch(`/courses/${course.id}/${lesson.id + 1}`);
-                        await updateCourseProgress(userCourse);
+                        if (userCourse) {
+                            await updateCourseProgress(userCourse);
+                        }
                         await updateUserPoints(user.id, user.total_points + lesson.points_gain);
                         await updateUserExp(user.id, user.total_exp + lesson.exp_gain);
                         router.push(`/courses/${course.id}/${lesson.id + 1}`);
-                    } }>Next lesson</Button>
+                    } }
+                    >
+                        Next lesson
+                    </Button>
                     :
+                    // Button to end the course if it's the last lesson
                     <Button className="w-1/3 align-self-center justify-self-center" onClick={ async (): Promise<void> => {
                         router.prefetch(`/courses/${course.id}`);
-                        await updateCourseCompletion(userCourse, "completed");
+                        if (userCourse) {
+                            await updateCourseCompletion(userCourse);
+                        }
                         await updateUserPoints(user.id, user.total_points + course.points_gain);
                         await updateUserExp(user.id, user.total_exp + course.exp_gain);
                         router.push(`/courses/${course.id}`);
-                    } }>End course</Button>
+                    } }
+                    >
+                        End course
+                    </Button>
             }
         </div>
+
     );
 };
 

@@ -43,7 +43,7 @@ export default async function AdminCourseEditLayout({
                     <Skeleton className="md:w-1/2 h-10" />
                 </div>
             }>
-                <AdminHeader course={ course } courses={ courses } />
+                <AdminHeader item={ course } content={ courses } />
             </Suspense>
             { children }
         </div>

@@ -107,61 +107,82 @@ const LoginForm: FC<LoginFormProps> = ({ }: LoginFormProps): React.JSX.Element =
     };
 
     return (
-        <Card className="min-w-80">
-            <CardHeader>
-                <CardTitle className="text-lg">Log In</CardTitle>
-                <CardDescription>
-                    Enter your email below to login to your account
-                </CardDescription>
-            </CardHeader>
-            <CardContent>
-                <Form { ...form }>
-                    <form onSubmit={ form.handleSubmit(onSubmit) }>
-                        <div className="grid gap-4">
-                            <FormField
-                                control={ form.control }
-                                name="username"
-                                render={ ({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Username</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Nakkarst" { ...field } />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                ) }
-                            />
-                            <FormField
-                                control={ form.control }
-                                name="password"
-                                render={ ({ field }) => (
-                                    <FormItem className="w-full">
-                                        <FormLabel>Password</FormLabel>
-                                        <FormControl>
-                                            <Input type="password" { ...field } />
-                                        </FormControl>
-                                        <FormDescription>
-                                            Must be at least 8 characters.
-                                        </FormDescription>
-                                        <FormMessage />
-                                    </FormItem>
-                                ) }
-                            />
-                            <LoginButton />
-                            <Button variant="outline" className="w-full">
-                                Log in with GitHub
-                            </Button>
-                        </div>
-                        <div className="mt-4 text-center ">
-                            Don&apos;t have an account?{ " " }
-                            <Link href="#" className="underline">
-                                Sign in
-                            </Link>
-                        </div>
-                    </form>
-                </Form>
-            </CardContent>
-        </Card>
+
+        <>
+            {
+                // Card component for the login form
+                <Card className="min-w-80">
+
+                    {/* CardHeader contains the title and description for the login form */ }
+                    <CardHeader>
+                        <CardTitle className="text-lg">Log In</CardTitle>
+                        <CardDescription>
+                            Enter your email below to login to your account
+                        </CardDescription>
+                    </CardHeader>
+
+                    {/* CardContent wraps the form elements */ }
+                    <CardContent>
+                        <Form { ...form }>
+                            <form onSubmit={ form.handleSubmit(onSubmit) }>
+                                <div className="grid gap-4">
+
+                                    {/* FormField for username input */ }
+                                    <FormField
+                                        control={ form.control }
+                                        name="username"
+                                        render={ ({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Username</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder="Nakkarst" { ...field } />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        ) }
+                                    />
+
+                                    {/* FormField for password input, with a description for requirements */ }
+                                    <FormField
+                                        control={ form.control }
+                                        name="password"
+                                        render={ ({ field }) => (
+                                            <FormItem className="w-full">
+                                                <FormLabel>Password</FormLabel>
+                                                <FormControl>
+                                                    <Input type="password" { ...field } />
+                                                </FormControl>
+                                                <FormDescription>
+                                                    Must be at least 8 characters.
+                                                </FormDescription>
+                                                <FormMessage />
+                                            </FormItem>
+                                        ) }
+                                    />
+
+                                    {/* LoginButton component to submit form data */ }
+                                    <LoginButton />
+
+                                    {/* Button for alternative login method with GitHub */ }
+                                    <Button variant="outline" className="w-full">
+                                        Log in with GitHub
+                                    </Button>
+                                </div>
+
+                                {/* Link for users to sign up if they don't have an account */ }
+                                <div className="mt-4 text-center ">
+                                    Don&apos;t have an account?{ " " }
+                                    <Link href="#" className="underline">
+                                        Sign in
+                                    </Link>
+                                </div>
+                            </form>
+                        </Form>
+                    </CardContent>
+                </Card>
+            }
+        </>
+
     );
 };
 

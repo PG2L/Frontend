@@ -37,11 +37,32 @@ const CourseProgressBar: FC<CourseProgressBarProps> = ({
     return (
         <div className="grid grid-cols-1">
             <div className="flex gap-2">
-                { course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => (
-                    <div key={ index } className={ `h-3 w-1/3 rounded ${userCourse && index < userCourse?.progress ? "bg-primary" : "bg-primary/[0.1]"} ${userCourse && index < userCourse?.progress + 1 && "outline outline-1 outline-primary"}` }></div>
-                )) }
+
+                {
+                    // Mapping over course.lessons to create a div for each lesson
+                    course.lessons.map((_: Lesson, index: number): React.JSX.Element => (
+                        // Each div represents a lesson
+                        <div
+                            key={ index } // Unique key for each lesson div based on its index
+                            className={
+                                `h-3 w-1/3 rounded ` + // Common classes: height, width, rounded corners
+                                `${userCourse && index < userCourse?.progress ? "bg-primary" : "bg-primary/[0.1]"}` + // Background color based on progress
+                                `${userCourse && index < userCourse?.progress + 1 && "outline outline-1 outline-primary"}` // Outline for the next lesson to complete
+                            }>
+                        </div>
+                    ))
+                }
+
             </div>
-            <p className="text-muted-foreground text-end">{ userCourse ? Math.round((userCourse.progress / course.lessons_count) * 100) : '0' }%</p>
+            <p
+                className="text-muted-foreground text-end" // Styling: muted foreground color, text aligned to the end
+            >
+                {
+                    userCourse ?
+                        Math.round((userCourse.progress / course.lessons_count) * 100) // If userCourse exists, calculate progress percentage
+                        : '0' // Default to '0%' if userCourse does not exist
+                }%
+            </p>
         </div>
     );
 };

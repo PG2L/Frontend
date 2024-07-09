@@ -8,6 +8,7 @@ import { Button } from '../ui/button';
 import Link from 'next/link';
 import { addCourseToUser } from '../../_lib/courses';
 import { useRouter } from 'next/navigation';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 interface CourseButtonProps { }
 
@@ -28,7 +29,10 @@ function StartButton(): React.JSX.Element {
      */
     const course: Course = useContext(CourseContext);
 
-    const router = useRouter();
+    /**
+     * Represents the router instance used in the component.
+     */
+    const router: AppRouterInstance = useRouter();
 
     return (
         <Button className="w-1/2 " onClick={ async (): Promise<void> => {
@@ -68,20 +72,30 @@ const CourseButton: FC<CourseButtonProps> = ({ }: CourseButtonProps): React.JSX.
     const userCourse: UserCourse | undefined = user.courses.find((courseItem: UserCourse): boolean => courseItem.course.id === course.id);
 
     return (
+
         <>
-            { userCourse && userCourse.completion_status === "in-progress" ?
-                <Link href={ `/courses/${course.id}/${course.lessons[userCourse.progress].id}` } className="w-full flex justify-end">
-                    <Button className="w-full">Continue</Button>
-                </Link>
-                :
-                !userCourse ?
-                    <StartButton />
+            {
+                // Conditional rendering based on the user's course progress
+                userCourse && userCourse.completion_status === "in-progress" ?
+                    // If the course is in progress, display a "Continue" button linking to the next lesson
+                    <Link
+                        href={ `/courses/${course.id}/${course.lessons[userCourse.progress].id}` } // Link to the next lesson
+                        className="w-full flex justify-end"
+                    >
+                        <Button className="w-full">Continue</Button>
+                    </Link>
                     :
-                    <Button className="w-1/2" disabled>
-                        Completed
-                    </Button>
+                    // If there is no userCourse, display the "StartButton" component
+                    !userCourse ?
+                        <StartButton />
+                        :
+                        // If the course is completed, display a disabled "Completed" button
+                        <Button className="w-1/2" disabled>
+                            Completed
+                        </Button>
             }
         </>
+
     );
 };
 
