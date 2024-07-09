@@ -1,3 +1,4 @@
+import { getData } from "./data";
 import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function addCourseToUser(courseId: number, userId: number): Promise<void> {
@@ -15,16 +16,16 @@ export async function addCourseToUser(courseId: number, userId: number): Promise
         if (!response.ok) {
             throw new Error('Failed to put data');
         }
-        const data = await response.json();
         revalidatePath('/', 'layout');
         revalidateTag('users');
+        const data = await response.json();
         return data;
     } catch (error) {
         console.error(error);
     }
 }
 
-export async function updateCourseProgress(userCourse): Promise<any> {
+export async function updateCourseProgress(userCourse: UserCourse): Promise<any> {
     try {
         const response = await fetch(`http://localhost:8000/user-courses/${userCourse.id}`, {
             method: 'PUT',
@@ -47,7 +48,7 @@ export async function updateCourseProgress(userCourse): Promise<any> {
     }
 }
 
-export async function updateCourseCompletion(userCourse, status: string): Promise<any> {
+export async function updateCourseCompletion(userCourse: UserCourse): Promise<any> {
     try {
         const response = await fetch(`http://localhost:8000/user-courses/${userCourse.id}`, {
             method: 'PUT',
@@ -56,7 +57,7 @@ export async function updateCourseCompletion(userCourse, status: string): Promis
             },
             body: JSON.stringify({
                 progress: userCourse.course.lessons_count,
-                completion_status: status,
+                completion_status: "completed",
                 completion_date: new Date(),
             }),
         });

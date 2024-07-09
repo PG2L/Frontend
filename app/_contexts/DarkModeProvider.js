@@ -13,7 +13,7 @@ export default function DarkModeProvider(props) {
     }
 
     useEffect(() => {
-        localStorage.setItem('darkMode', !darkMode);
+        localStorage.setItem('darkMode', darkMode);
         if (darkMode) {
             document.body.classList.add('dark');
         } else {
