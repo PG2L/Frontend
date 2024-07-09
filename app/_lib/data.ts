@@ -1,12 +1,18 @@
-export async function getData(item: string, id?: number): Promise<any> {
+/**
+ * Fetches data from the server.
+ * @param endpoint - The endpoint to fetch data from.
+ * @param id - Optional ID parameter for fetching specific data.
+ * @returns A Promise that resolves to the fetched data.
+ */
+export async function getData(endpoint: string, id?: number): Promise<any> {
 
     try {
         const res: Response = await fetch(
-            `http://localhost:8000/${item}${id ? `/${id}` : ''}`,
+            `http://localhost:8000/${endpoint}${id ? `/${id}` : ''}`,
             {
                 next:
                 {
-                    tags: [`${item}`],
+                    tags: [`${endpoint}`],
                     revalidate: 1800
                 }
             });

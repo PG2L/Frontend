@@ -1,3 +1,9 @@
+/**
+ * Updates the points of a user.
+ * @param userId - The ID of the user.
+ * @param points - The new total points for the user.
+ * @returns A Promise that resolves to void.
+ */
 export async function updateUserPoints(userId: number, points: number): Promise<void> {
     
     try {

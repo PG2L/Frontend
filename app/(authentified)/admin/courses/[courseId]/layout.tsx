@@ -3,6 +3,13 @@ import AdminHeader from '../../../../_components/AdminHeader/AdminHeader';
 import { Skeleton } from '../../../../_components/ui/skeleton';
 import { getData } from '../../../../_lib/data';
 
+/**
+ * Renders the layout for editing an admin course.
+ * 
+ * @param children - The child components to render within the layout.
+ * @param params - The parameters for the course, including the courseId.
+ * @returns A Promise that resolves to the JSX element representing the layout.
+ */
 export default async function AdminCourseEditLayout({
     children,
     params,
@@ -13,7 +20,19 @@ export default async function AdminCourseEditLayout({
     },
 }): Promise<React.JSX.Element> {
 
+    /**
+     * Fetches the course data from the server.
+     * 
+     * @returns {Promise<Course[]>} A promise that resolves to an array of Course objects.
+     */
     const courses: Course[] = await getData("courses") as Course[];
+
+    /**
+     * Retrieves the course data from the server.
+     * @param {string} endpoint - The endpoint to fetch the data from.
+     * @param {string} courseId - The ID of the course to retrieve.
+     * @returns {Promise<Course>} - A promise that resolves to the course data.
+     */
     const course: Course = await getData("courses", params.courseId) as Course;
 
     return (

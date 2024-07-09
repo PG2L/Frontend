@@ -16,6 +16,11 @@ import {
 import Header from './_components/Header/Header';
 import Footer from './_components/Footer/Footer';
 
+/**
+ * Renders the Page component.
+ * 
+ * @returns The JSX element representing the Page component.
+ */
 export default function Page(): React.JSX.Element {
 
     const sponsors: string[] = [

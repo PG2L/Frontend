@@ -1,5 +1,11 @@
 import React from 'react';
 
+/**
+ * Renders the layout for creating a new course.
+ * 
+ * @param children - The content to be rendered inside the layout.
+ * @returns A Promise that resolves to the JSX element representing the layout.
+ */
 export default async function NewCourseLayout({
     children,
 }: {

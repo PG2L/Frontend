@@ -2,6 +2,11 @@ import React from 'react';
 import Leaderboard from '../../_components/Leaderboard/Leaderboard';
 import { getData } from '../../_lib/data';
 
+/**
+ * Renders the Leaderboard page component.
+ * 
+ * @returns A Promise that resolves to a JSX.Element representing the Leaderboard page.
+ */
 export default async function Page(): Promise<React.JSX.Element> {
 
     const users: User[] = await getData("users") as User[];

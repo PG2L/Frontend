@@ -1,6 +1,10 @@
 import React from 'react';
 import { Skeleton } from '../../../../_components/ui/skeleton';
 
+/**
+ * Renders a loading component.
+ * @returns The loading component.
+ */
 export default function Loading(): React.JSX.Element {
 
     return (

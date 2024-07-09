@@ -9,6 +9,10 @@ import { usePathname } from 'next/navigation';
 
 interface AdminMenuProps { }
 
+/**
+ * Renders the admin menu component.
+ * @component
+ */
 const AdminMenu: FC<AdminMenuProps> = (): React.JSX.Element => {
 
     const path: string = usePathname() || "";

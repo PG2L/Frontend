@@ -8,6 +8,10 @@ import Link from 'next/link';
 import { Button } from '../../_components/ui/button';
 import { getData } from '../../_lib/data';
 
+/**
+ * Renders the page component for displaying lessons.
+ * @returns A Promise that resolves to a JSX.Element representing the page.
+ */
 export default async function Page(): Promise<React.JSX.Element> {
 
     const lessons: Lesson[] = await getData("lessons") as Lesson[];

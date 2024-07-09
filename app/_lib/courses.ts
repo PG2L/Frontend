@@ -1,6 +1,11 @@
-import { getData } from "./data";
 import { revalidatePath, revalidateTag } from "next/cache";
 
+/**
+ * Adds a course to a user.
+ * @param courseId - The ID of the course to add.
+ * @param userId - The ID of the user to add the course to.
+ * @returns A Promise that resolves to void.
+ */
 export async function addCourseToUser(courseId: number, userId: number): Promise<void> {
     try {
         const response = await fetch(`http://localhost:8000/user-courses/new`, {
@@ -25,6 +30,11 @@ export async function addCourseToUser(courseId: number, userId: number): Promise
     }
 }
 
+/**
+ * Updates the progress of a user course.
+ * @param userCourse: UserCourse - The user course object to update.
+ * @returns A promise that resolves with the updated data.
+ */
 export async function updateCourseProgress(userCourse: UserCourse): Promise<any> {
     try {
         const response = await fetch(`http://localhost:8000/user-courses/${userCourse.id}`, {
@@ -48,6 +58,11 @@ export async function updateCourseProgress(userCourse: UserCourse): Promise<any>
     }
 }
 
+/**
+ * Updates the completion status of a user's course.
+ * @param userCourse - The user's course object.
+ * @returns A Promise that resolves to the updated data.
+ */
 export async function updateCourseCompletion(userCourse: UserCourse): Promise<any> {
     try {
         const response = await fetch(`http://localhost:8000/user-courses/${userCourse.id}`, {

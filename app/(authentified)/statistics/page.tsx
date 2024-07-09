@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * Renders the statistics page.
+ * @returns A Promise that resolves to a JSX.Element representing the statistics page.
+ */
 export default async function Page(): Promise<React.JSX.Element> {
 
     const menuContent: {

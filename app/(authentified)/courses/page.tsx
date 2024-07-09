@@ -3,6 +3,10 @@ import { Skeleton } from '../../_components/ui/skeleton';
 import CourseCard from '../../_components/CourseCard/CourseCard';
 import { getData } from '../../_lib/data';
 
+/**
+ * Renders the Courses Page of the Web Development E-Learning Platform.
+ * @returns A Promise that resolves to a JSX.Element representing the Courses Page.
+ */
 export default async function Page(): Promise<React.JSX.Element> {
 
     const courses: Course[] = await getData("courses") as Course[];

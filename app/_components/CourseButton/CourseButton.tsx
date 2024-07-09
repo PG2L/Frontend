@@ -8,7 +8,6 @@ import { Button } from '../ui/button';
 import Link from 'next/link';
 import { addCourseToUser } from '../../_lib/courses';
 import { useRouter } from 'next/navigation';
-import { revalidatePath, revalidateTag } from 'next/cache';
 
 interface CourseButtonProps { }
 
@@ -28,6 +27,13 @@ function StartButton(): React.JSX.Element {
     );
 }
 
+/**
+ * Renders a button component for a course, based on the user's progress and completion status.
+ *
+ * @component CourseButton
+ * @param {CourseButtonProps} props - The props for the CourseButton component.
+ * @returns {React.JSX.Element} The rendered CourseButton component.
+ */
 const CourseButton: FC<CourseButtonProps> = (): React.JSX.Element => {
 
     const user: User = useContext(UserContext);

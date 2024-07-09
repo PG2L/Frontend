@@ -8,6 +8,13 @@ import { Separator } from '../../../_components/ui/separator';
 import { getData } from '../../../_lib/data';
 import CourseProvider from '../../../_contexts/CourseProvider';
 
+/**
+ * Renders the layout for the course show page.
+ *
+ * @param children - The child components to render.
+ * @param params - The parameters for the course and lesson.
+ * @returns A Promise that resolves to the JSX element representing the course show layout.
+ */
 export default async function CourseShowLayout({
     children,
     params,

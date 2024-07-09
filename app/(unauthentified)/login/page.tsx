@@ -3,6 +3,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../_components/ui/t
 import LoginForm from '../../_components/forms/LoginForm/LoginForm';
 import SigninForm from '../../_components/forms/SigninForm/SigninForm';
 
+/**
+ * Renders the login page component.
+ * 
+ * @returns The JSX element representing the login page.
+ */
 export default function Page(): React.JSX.Element {
 
     return (

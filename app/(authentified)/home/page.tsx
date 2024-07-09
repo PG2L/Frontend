@@ -9,6 +9,11 @@ import { Avatar } from '../../_components/ui/avatar';
 import { getData } from '../../_lib/data';
 import ResumeLesson from '../../_components/ResumeLesson/ResumeLesson';
 
+/**
+ * Renders the home page.
+ * 
+ * @returns A Promise that resolves to a JSX element representing the home page.
+ */
 export default async function Page(): Promise<React.JSX.Element> {
 
     const courses = await getData("courses") as Course[];

@@ -9,6 +9,13 @@ import { getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
 import { getData } from '../_lib/data';
 
+/**
+ * Renders the layout for authenticated users.
+ * 
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The child components to render.
+ * @returns {Promise<React.JSX.Element>} The rendered layout component.
+ */
 export default async function AuthentifiedLayout({
     children,
 }: {

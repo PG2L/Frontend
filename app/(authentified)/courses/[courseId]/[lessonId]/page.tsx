@@ -9,6 +9,12 @@ import { getData } from '../../../../_lib/data';
 import LessonContent from '../../../../_components/LessonContent/LessonContent';
 import LessonProvider from '../../../../_contexts/LessonProvider';
 
+/**
+ * Renders a page component for a specific lesson.
+ *
+ * @param params - The parameters for the lesson, including the courseId and lessonId.
+ * @returns A Promise that resolves to a JSX element representing the lesson page.
+ */
 export default async function Page({
     params,
 }: {

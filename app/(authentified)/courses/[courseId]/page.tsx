@@ -8,6 +8,12 @@ import { getData } from '../../../_lib/data';
 import CourseButton from '../../../_components/CourseButton/CourseButton';
 import CourseProgressBar from '../../../_components/CourseProgressBar/CourseProgressBar';
 
+/**
+ * Renders a page component for a specific course.
+ *
+ * @param params - The parameters for the page component.
+ * @returns A Promise that resolves to a JSX element representing the page component.
+ */
 export default async function Page({
     params,
 }: {

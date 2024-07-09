@@ -15,16 +15,59 @@ interface CourseContentMenuProps {
     course: Course,
 }
 
+/**
+ * Renders the course content menu component.
+ * 
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Course} props.course - The course object.
+ * @returns {JSX.Element} - The rendered component.
+ */
 const CourseContentMenu: FC<CourseContentMenuProps> = ({
     course,
 }: {
     course: Course,
 }): React.JSX.Element => {
 
+    /**
+     * Retrieves the parameters from the current route.
+     * @returns The parameters from the current route.
+     */
     const params = useParams();
+
+
+    /**
+     * Checks if the current lesson is the first lesson in the course.
+     * @param {string} params.lessonId - The ID of the current lesson.
+     * @param {Course} course - The course object containing the lessons.
+     * @returns {boolean} - True if the current lesson is the first lesson, false otherwise.
+     */
     const isFirstLesson: boolean = parseInt(params.lessonId) === course.lessons[0].id;
+
+
+    /**
+     * Checks if the current lesson is the last lesson in the course.
+     * @param {string} params.lessonId - The ID of the current lesson.
+     * @param {Course} course - The course object containing the lessons.
+     * @returns {boolean} - True if the current lesson is the last lesson, false otherwise.
+     */
     const isLastLesson: boolean = parseInt(params.lessonId) === course.lessons[course.lessons.length - 1].id;
+
+
+    /**
+     * Retrieves the user from the UserContext.
+     * @returns The user object.
+     */
     const user: User = useContext(UserContext);
+
+
+    /**
+     * Finds the user course that matches the given course ID.
+     *
+     * @param user - The user object containing the courses.
+     * @param course - The course object to find.
+     * @returns The user course that matches the given course ID, or undefined if not found.
+     */
     const userCourse: UserCourse | undefined = user.courses.find((userCourse: UserCourse): boolean => userCourse.course.id === course.id);
 
     return (

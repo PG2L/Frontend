@@ -13,32 +13,21 @@ import { redirect } from "next/navigation";
 import { Skeleton } from "../ui/skeleton";
 
 interface AdminHeaderProps {
-    course?: {
-        id: string;
-        title: string;
-    };
-    courses?: {
-        id: string;
-        title: string;
-    }[];
-    lesson?: {
-        id: string;
-        title: string;
-    };
-    lessons?: {
-        id: string;
-        title: string;
-    }[];
-    user?: {
-        id: string;
-        email: string;
-    };
-    users?: {
-        id: string;
-        email: string;
-    }[];
+    course?: Course;
+    courses?: Course[];
+    lesson?: Lesson;
+    lessons?: Lesson[];
+    user?: User;
+    users?: User[];
 }
 
+/**
+ * Renders the admin header component.
+ *
+ * @component
+ * @param {AdminHeaderProps} props - The component props.
+ * @returns {React.JSX.Element} The rendered component.
+ */
 const AdminHeader: FC<AdminHeaderProps> = ({
     course,
     courses,

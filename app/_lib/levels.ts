@@ -1,3 +1,7 @@
+/**
+ * Represents an array of levels with their corresponding information.
+ * Each level object contains the level number, name, and experience points required to reach the next level.
+ */
 const levels: {
     level: number;
     name: string;
@@ -25,6 +29,11 @@ const levels: {
     { level: 20, name: "Legend", expToNext: 0 }
 ];
 
+/**
+ * Retrieves the level and remaining experience points based on the total experience points.
+ * @param totalExp The total experience points.
+ * @returns An array containing the level object and the remaining experience points.
+ */
 export function getLevelByExp(totalExp: number): [{ level: number; name: string; expToNext: number }, number] {
     let exp: number = totalExp;
     for (let i: number = 0; i < levels.length; i++) {
@@ -35,6 +44,12 @@ export function getLevelByExp(totalExp: number): [{ level: number; name: string;
     }
 }
 
+/**
+ * Updates the experience points (exp) of a user.
+ * @param userId - The ID of the user.
+ * @param exp - The new total experience points to set for the user.
+ * @returns A Promise that resolves to void.
+ */
 export async function updateUserExp(userId: number, exp: number): Promise<void> {
     
     try {

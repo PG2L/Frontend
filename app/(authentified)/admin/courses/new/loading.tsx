@@ -1,8 +1,12 @@
 import React from 'react';
 import { Skeleton } from '../../../../_components/ui/skeleton';
 
+/**
+ * Renders a loading component with skeleton placeholders.
+ *
+ * @returns The JSX element representing the loading component.
+ */
 export default function Loading(): React.JSX.Element {
-
     return (
         <div className="grid gap-10 md:gap-12 mt-12">
             <Skeleton className="w-full h-10" />

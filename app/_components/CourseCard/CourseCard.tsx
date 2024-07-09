@@ -1,12 +1,10 @@
 "use client";
 
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
 import { Badge } from '../ui/badge';
 import { Card, CardFooter, CardHeader } from '../ui/card';
 import * as icons from 'lucide-react';
 import Link from 'next/link';
-import { Progress } from '../ui/progress';
-import { UserContext } from '../../_contexts/UserProvider';
 import CourseProgressBar from '../CourseProgressBar/CourseProgressBar';
 
 interface CourseCardProps {
@@ -14,6 +12,15 @@ interface CourseCardProps {
     className?: string;
 }
 
+/**
+ * Renders a course card component.
+ *
+ * @component
+ * @param {CourseCardProps} props - The props for the CourseCard component.
+ * @param {Course} props.course - The course object to display.
+ * @param {string} [props.className] - Additional CSS class for the component.
+ * @returns {React.JSX.Element} The rendered course card component.
+ */
 const CourseCard: FC<CourseCardProps> = ({
     course,
     className = '',

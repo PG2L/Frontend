@@ -1,6 +1,11 @@
 import React from 'react';
 import { Skeleton } from '../../_components/ui/skeleton';
 
+/**
+ * Renders a loading component with skeleton placeholders.
+ *
+ * @returns The JSX element representing the loading component.
+ */
 export default function Loading(): React.JSX.Element {
 
     return (
