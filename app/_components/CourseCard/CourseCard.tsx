@@ -1,9 +1,13 @@
-import React, { FC } from 'react';
+"use client";
+
+import React, { FC, useContext } from 'react';
 import { Badge } from '../ui/badge';
 import { Card, CardFooter, CardHeader } from '../ui/card';
 import * as icons from 'lucide-react';
 import Link from 'next/link';
 import { Progress } from '../ui/progress';
+import { UserContext } from '../../_contexts/UserProvider';
+import CourseProgressBar from '../CourseProgressBar/CourseProgressBar';
 
 interface CourseCardProps {
     course: Course;
@@ -21,9 +25,7 @@ const CourseCard: FC<CourseCardProps> = ({
                 <CardHeader className="grid p-1">
                     <div className={ `h-32 rounded flex justify-center items-center bg-secondary` }>
                     </div>
-                    <div className="flex justify-between gap-1">
-                        <Progress value={ parseInt(Math.random() * 100) } />
-                    </div>
+                    <CourseProgressBar course={ course } />
                     <h3 className=" text-nowrap overflow-hidden text-ellipsis">{ course.title }</h3>
                 </CardHeader>
                 <CardFooter className="flex justify-between items-start p-1">

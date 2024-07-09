@@ -7,7 +7,6 @@ import React from 'react';
 import { getData } from '../../../_lib/data';
 import CourseButton from '../../../_components/CourseButton/CourseButton';
 import CourseProgressBar from '../../../_components/CourseProgressBar/CourseProgressBar';
-import CoursesLayout from '../layout';
 
 export default async function Page({
     params,
@@ -24,7 +23,7 @@ export default async function Page({
             <Card className="border">
                 <CardHeader>
                     <div className="hidden sm:block py-36 bg-black/[0.1] border rounded"></div>
-                    <CourseProgressBar lessons={ course.lessons } />
+                    <CourseProgressBar course={ course } />
                 </CardHeader>
                 <CardContent>
                     <div className="flex justify-between items-center">

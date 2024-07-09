@@ -24,22 +24,18 @@ const LessonCard: FC<LessonCardProps> = ({
                     <div className={ `h-32 rounded flex justify-center items-center bg-secondary` }>
                     </div>
                     <Link href={ `/courses/${userCourse.course.id}` } className="text-sm text-muted-foreground text-nowrap hover:underline">
-                        { userCourse.course.title } ({ currentLesson.lesson_number }/{ userCourse.course.lessons.length })
+                        ({ currentLesson.lesson_number }/{ userCourse.course.lessons.length }) { userCourse.course.title }
                     </Link>
                     <h3 className=" text-nowrap overflow-hidden text-ellipsis">{ currentLesson.title }</h3>
                 </CardHeader>
                 <CardFooter className="flex justify-end gap-4 items-start p-1">
                     <div className="flex items-center justify-end gap-2">
                         <p className={ `text-foreground` }>{ currentLesson.points_gain }</p>
-                        <span className="text-primary">
-                            <icons.MedalIcon strokeWidth={ 1 } />
-                        </span>
+                        <icons.MedalIcon strokeWidth={ 1 } className="text-primary" />
                     </div>
                     <div className="flex items-center gap-2 justify-end">
                         <p className={ `text-foreground` }>{ currentLesson.exp_gain }</p>
-                        <span className="text-primary">
-                            <icons.StarIcon strokeWidth={ 1 } />
-                        </span>
+                        <icons.StarIcon strokeWidth={ 1 } className="text-primary" />
                     </div>
                 </CardFooter>
             </Card>
