@@ -10,6 +10,7 @@ import { updateCourseProgress, updateCourseCompletion } from '../../_lib/courses
 import { updateUserExp } from '../../_lib/levels';
 import { updateUserPoints } from '../../_lib/points';
 import { useRouter } from 'next/navigation';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 interface LessonContentProps { }
 
@@ -66,7 +67,7 @@ const LessonContent: FC<LessonContentProps> = ({ }: LessonContentProps): React.J
     /**
      * The router object used for navigation within the application.
      */
-    const router = useRouter();
+    const router: AppRouterInstance = useRouter();
 
     return (
         <div className="grid gap-6 relative rounded">

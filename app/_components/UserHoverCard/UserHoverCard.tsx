@@ -15,6 +15,12 @@ interface UserHoverCardProps {
     user: User;
 }
 
+/**
+ * Renders a user hover card component.
+ * 
+ * @param {Object} user - The user object.
+ * @returns {JSX.Element} The user hover card component.
+ */
 export function UserHoverCard({ user }: UserHoverCardProps): React.JSX.Element {
 
     return (

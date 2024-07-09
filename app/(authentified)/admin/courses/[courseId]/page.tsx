@@ -31,14 +31,14 @@ export default async function Page({
      * 
      * @returns {Promise<Category>} A promise that resolves to the fetched categories data.
      */
-    const categories: Category = await getData("categories") as Category;
+    const categories: Category[] = await getData("categories") as Category[];
 
     /**
      * Fetches the list of languages from the server.
      * 
      * @returns {Promise<Language>} A promise that resolves to the list of languages.
      */
-    const languages: Language = await getData("languages") as Language;
+    const languages: Language[] = await getData("languages") as Language[];
 
     return (
         <div className="grid w-full">

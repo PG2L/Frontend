@@ -14,19 +14,43 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "../ui/tooltip";
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 interface MainMenuProps { }
 
+/**
+ * Represents the main menu component.
+ * @component
+ * @returns {React.JSX.Element} The rendered component.
+ */
 const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
 
     /**
      * The router object used for navigation.
      */
-    const router = useRouter();
+    const router: AppRouterInstance = useRouter();
 
+    /**
+     * Represents the state of the MainMenu component.
+     * @typedef {Object} MainMenuState
+     * @property {boolean} isOpen - Indicates whether the MainMenu is open or closed.
+     */
     const [isOpen, setIsOpen] = React.useState(true);
+
+    /**
+     * Retrieves the current pathname using the `usePathname` hook.
+     * @returns The current pathname as a string.
+     */
     const path: string = usePathname();
+
+    /**
+     * Retrieves the page context from the given path.
+     * 
+     * @param path - The path from which to extract the page context.
+     * @returns The page context extracted from the path.
+     */
     const pageContext: string = path.split('/')[1];
+
     /**
      * Array of menu items.
      * Each menu item has a title, link, icon, and filledIcon.

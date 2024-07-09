@@ -15,11 +15,31 @@ import { getLevelByExp } from '../../_lib/levels';
 
 interface ProfileSidebarProps { }
 
+/**
+ * Represents the profile sidebar component.
+ * @component
+ * @returns {React.JSX.Element} The rendered component.
+ */
 const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
 
-    const [isOpen, setIsOpen] = React.useState(true);
+    /**
+     * Retrieves the user from the UserContext.
+     * @returns The user object.
+     */
     const user: User = useContext(UserContext);
+
+    /**
+     * Retrieves the level and experience based on the total experience points.
+     *
+     * @param {number} totalExp - The total experience points.
+     * @returns {[number, number]} - An array containing the level and experience.
+     */
     const [level, exp] = getLevelByExp(user.total_exp);
+
+    /**
+     * Represents the state of the sidebar's open/closed status.
+     */
+    const [isOpen, setIsOpen] = React.useState(true);
 
     return (
         <div>
@@ -152,17 +172,17 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                                     <SelectTrigger className="w-fit flex gap-2">
                                         <icons.FlagIcon />
                                         Français
-                                    </SelectTrigger>
+                                    </SelectTrigger >
                                     <SelectContent>
                                         <SelectItem value="eng">English</SelectItem>
                                         <SelectItem value="fr">Français</SelectItem>
                                     </SelectContent>
-                                </Select>
-                            </div>
+                                </Select >
+                            </div >
                             <Separator />
-                        </div>
+                        </div >
                         <ScrollBar />
-                    </ScrollArea>
+                    </ScrollArea >
                     :
                     <div className="items-center flex flex-col justify-between py-6 px-2 border-l">
                         <div>
@@ -202,8 +222,8 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                         </div>
                     </div>
                 }
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 
