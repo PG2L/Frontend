@@ -25,7 +25,7 @@ export default async function Page({
             <LessonProvider lesson={ lesson }>
                 <Card>
                     <CardHeader>
-                        <div className="hidden sm:block py-36 bg-secondary rounded"></div>
+                        <div className="hidden sm:block py-36 bg-black/[0.1] border rounded"></div>
                         <h3 className="text-muted-foreground">
                             <Link href={ `/courses/${lesson.course.id}` } className="hover:underline">{ lesson.course.title }</Link>
                         </h3>

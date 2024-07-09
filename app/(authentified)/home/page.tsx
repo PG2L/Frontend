@@ -7,6 +7,7 @@ import LanguagesPieChart from '../../_components/LanguagesPieChart/LanguagesPieC
 import { Progress } from '../../_components/ui/progress';
 import { Avatar } from '../../_components/ui/avatar';
 import { getData } from '../../_lib/data';
+import ResumeLesson from '../../_components/ResumeLesson/ResumeLesson';
 
 export default async function Page(): Promise<React.JSX.Element> {
 
@@ -21,17 +22,7 @@ export default async function Page(): Promise<React.JSX.Element> {
                         <p>You already have completed <span className="text-primary font-medium">50% of your daily goals !</span></p>
                     </div>
                 </div>
-                <div className="grid">
-                    <h1 className="text-2xl">Resume</h1>
-                    <ScrollArea>
-                        <div className="w-full p-6 flex gap-6 items-center justify-start">
-                            { courses.map((course: any, index: number): React.JSX.Element => (
-                                <CourseCard key={ index } course={ course } className="min-w-72" />
-                            )) }
-                        </div>
-                        <ScrollBar orientation="horizontal" />
-                    </ScrollArea>
-                </div>
+                <ResumeLesson />
                 <div className="flex justify-between w-full gap-6">
                     <div>
                         <h2 className="text-2xl">Activity</h2>

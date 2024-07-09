@@ -8,6 +8,7 @@ import { Button } from '../ui/button';
 import Link from 'next/link';
 import { addCourseToUser } from '../../_lib/courses';
 import { useRouter } from 'next/navigation';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 interface CourseButtonProps { }
 
@@ -18,7 +19,7 @@ function StartButton(): React.JSX.Element {
     const router = useRouter();
 
     return (
-        <Button className="w-1/2" onClick={ async (): Promise<void> => {
+        <Button className="w-1/2 " onClick={ async (): Promise<void> => {
             await addCourseToUser(course.id, user.id);
             router.push(`/courses/${course.id}/${course.lessons[0].id}`);
         } }>
@@ -31,16 +32,21 @@ const CourseButton: FC<CourseButtonProps> = (): React.JSX.Element => {
 
     const user: User = useContext(UserContext);
     const course: Course = useContext(CourseContext);
-    const isCourseStarted: boolean = user.courses.find(courseItem => courseItem.id === course.id) ? true : false;
+    const userCourse: UserCourse | undefined = user.courses.find((courseItem: UserCourse): boolean => courseItem.course.id === course.id);
 
     return (
         <>
-            { isCourseStarted ?
-                <Link href={ `/courses/${course.id}/${course.lessons[0].id}` } className="w-full">
-                    <Button className={ `w-1/2` }>Continue</Button>
+            { userCourse && userCourse.completion_status === "in-progress" ?
+                <Link href={ `/courses/${course.id}/${course.lessons[userCourse.progress].id}` } className="w-full flex justify-end">
+                    <Button className="w-full">Continue</Button>
                 </Link>
                 :
-                <StartButton />
+                !userCourse ?
+                    <StartButton />
+                    :
+                    <Button className="w-1/2" disabled>
+                        Completed
+                    </Button>
             }
         </>
     );

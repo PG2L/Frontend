@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, Suspense, use } from 'react';
+import React, { FC, Suspense, useContext } from 'react';
 import styles from './CourseContentMenu.module.css';
 import { Skeleton } from '../ui/skeleton';
 import Link from 'next/link';
@@ -8,33 +8,37 @@ import { useParams } from 'next/navigation';
 import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
 import { icons } from 'lucide-react';
+import { UserContext } from '../../_contexts/UserProvider';
+import CourseButton from '../CourseButton/CourseButton';
 
 interface CourseContentMenuProps {
-    courseContent: any,
+    course: Course,
 }
 
 const CourseContentMenu: FC<CourseContentMenuProps> = ({
-    courseContent,
+    course,
 }: {
-    courseContent: any,
+    course: Course,
 }): React.JSX.Element => {
 
     const params = useParams();
-    const isFirstLesson: boolean = parseInt(params.lessonId) === courseContent.lessons[0].id;
-    const isLastLesson: boolean = parseInt(params.lessonId) === courseContent.lessons[courseContent.lessons.length - 1].id;
+    const isFirstLesson: boolean = parseInt(params.lessonId) === course.lessons[0].id;
+    const isLastLesson: boolean = parseInt(params.lessonId) === course.lessons[course.lessons.length - 1].id;
+    const user: User = useContext(UserContext);
+    const userCourse: UserCourse | undefined = user.courses.find((userCourse: UserCourse): boolean => userCourse.course.id === course.id);
 
     return (
         <div className="grid h-full gap-6">
             <nav className="px-6 mt-6 top-6 h-fit grid gap-6">
                 <Separator />
                 <ul className="grid gap-2">
-                    { courseContent.lessons && courseContent.lessons.map((lesson: Lesson, index: number): React.JSX.Element => (
+                    { course.lessons && course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => (
                         <Suspense key={ index } fallback={
                             <Skeleton className="w-full h-6"></Skeleton>
                         }>
                             <li>
                                 <Link href={ `/courses/${params.courseId}/${lesson.id}` }>
-                                    <Button variant="ghost" className={ `text-muted-foreground w-full text-start font-normal text-wrap ${(lesson.id == params.lessonId) && "active"}` }>
+                                    <Button variant={ `${userCourse && userCourse.progress === index ? 'outline' : 'ghost'}` } className={ `text-muted-foreground w-full text-start font-normal text-wrap ${(lesson.id == params.lessonId) && "active"} ${userCourse && userCourse.progress <= index && "!text-foreground"}` }>
                                         <h2 className="w-full">{ index + 1 } .  { lesson.title }</h2>
                                     </Button>
                                 </Link>
@@ -61,11 +65,9 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
                         }
                     </div>
                     :
-                    <Link href={ `/courses/${params.courseId}/${courseContent.lessons[0].id}` } className="justify-self-center w-1/2">
-                        <Button className="w-full">
-                            Start Course
-                        </Button>
-                    </Link>
+                    <div className="w-full text-center px-6">
+                        <CourseButton />
+                    </div>
                 }
             </nav>
         </div>

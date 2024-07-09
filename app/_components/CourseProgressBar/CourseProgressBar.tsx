@@ -21,7 +21,7 @@ const CourseProgressBar: FC<CourseProgressBarProps> = ({
         <div className="grid grid-cols-1">
             <div className="flex gap-2">
                 { lessons.map((lesson: Lesson, index: number): React.JSX.Element => (
-                    <div key={ index } className={ `h-3 w-1/3 rounded ${userCourse && index < userCourse?.progress ? "bg-primary" : "bg-secondary"} ${userCourse && index < userCourse?.progress + 1 && "outline outline-1 outline-primary"}` }></div>
+                    <div key={ index } className={ `h-3 w-1/3 rounded ${userCourse && index < userCourse?.progress ? "bg-primary" : "bg-primary/[0.1]"} ${userCourse && index < userCourse?.progress + 1 && "outline outline-1 outline-primary"}` }></div>
                 )) }
             </div>
             <p className="text-muted-foreground text-end">{ userCourse ? Math.round((userCourse.progress / course.lessons_count) * 100) : '0' }%</p>

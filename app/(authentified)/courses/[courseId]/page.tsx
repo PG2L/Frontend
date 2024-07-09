@@ -23,7 +23,7 @@ export default async function Page({
         <>
             <Card className="border">
                 <CardHeader>
-                    <div className="hidden sm:block py-36 bg-secondary rounded"></div>
+                    <div className="hidden sm:block py-36 bg-black/[0.1] border rounded"></div>
                     <CourseProgressBar lessons={ course.lessons } />
                 </CardHeader>
                 <CardContent>
@@ -40,28 +40,38 @@ export default async function Page({
                         <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end">
                             <div className="flex gap-2">
                                 { course.points_gain }
-                                <icons.LucideStar strokeWidth={ 1 } color="#1461cc" />
+                                <span className="text-primary">
+                                    <icons.LucideStar strokeWidth={ 1 } />
+                                </span>
                             </div>
                             <div className="flex gap-2">
                                 { course.exp_gain }
-                                <icons.LucideMedal strokeWidth={ 1 } color="#1461cc" />
+                                <span className="text-primary">
+                                    <icons.LucideMedal strokeWidth={ 1 } />
+                                </span>
                             </div>
                         </div>
                     </div>
                 </CardContent>
                 <CardFooter>
                     <div className="grid w-full grid-cols-1 sm:flex sm:justify-between gap-6">
-                        <div className="flex items-end gap-6">
+                        <div className="flex items-end gap-6 w-1/2">
                             <div className="flex gap-1">
-                                <icons.BookUser strokeWidth={ 1 } color="#1461cc" />
+                                <span className="text-primary">
+                                    <icons.BookUser strokeWidth={ 1 } />
+                                </span>
                                 <span className="text-muted-foreground">18 000+ students</span>
                             </div>
                             <div className="flex gap-1">
-                                <icons.Clock strokeWidth={ 1 } color="#1461cc" />
+                                <span className="text-primary">
+                                    <icons.Clock strokeWidth={ 1 } />
+                                </span>
                                 <span className="text-muted-foreground">5h</span>
                             </div>
                         </div>
-                        <CourseButton />
+                        <div className="w-1/2 text-end">
+                            <CourseButton />
+                        </div>
                     </div>
                 </CardFooter>
             </Card>

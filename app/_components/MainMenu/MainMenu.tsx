@@ -8,6 +8,12 @@ import { Separator } from '../ui/separator';
 import * as icons from 'lucide-react';
 import { deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "../ui/tooltip";
 
 interface MainMenuProps { }
 
@@ -111,15 +117,24 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                                     const active: boolean = pageContext === item.link.slice(1, pageContext.length + 1);
                                     return (
                                         <Link key={ index } href={ item.link }>
-                                            <Button variant="ghost" className={ `w-full text-start fill-muted-foreground text-muted-foreground hover:text-foreground  hover:fill-foreground ${active && "active fill-foreground text-foreground"}` }>
-                                                <div>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="28" height="28" viewBox="0 0 48 48">
-                                                        <path className={ ` ${active ? "opacity-100" : "opacity-0"}` } d={ item.filledIcon }></path>
-                                                        <path className={ ` ${active ? "opacity-0" : "opacity-100"}` } d={ item.icon }></path>
-                                                    </svg>
-                                                </div>
-                                                { isOpen && <span className="w-full ms-2">{ item.title }</span> }
-                                            </Button>
+                                            <TooltipProvider>
+                                                <Tooltip>
+                                                    <TooltipTrigger asChild>
+                                                        <Button variant="ghost" className={ `w-full text-start fill-muted-foreground text-muted-foreground hover:text-foreground  hover:fill-foreground ${active && "active fill-foreground text-foreground"}` }>
+                                                            <div>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="28" height="28" viewBox="0 0 48 48">
+                                                                    <path className={ ` ${active ? "opacity-100" : "opacity-0"}` } d={ item.filledIcon }></path>
+                                                                    <path className={ ` ${active ? "opacity-0" : "opacity-100"}` } d={ item.icon }></path>
+                                                                </svg>
+                                                            </div>
+                                                            { isOpen && <span className="w-full ms-2">{ item.title }</span> }
+                                                        </Button>
+                                                    </TooltipTrigger>
+                                                    <TooltipContent>
+                                                        { item.title }
+                                                    </TooltipContent>
+                                                </Tooltip>
+                                            </TooltipProvider>
                                         </Link>
                                     );
                                 }) }

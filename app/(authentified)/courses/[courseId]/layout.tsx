@@ -50,9 +50,9 @@ export default async function CourseShowLayout({
                 }>
                     <div className="hidden md:flex flex-col w-1/4 min-w-[250px]">
                         <div className="sticky top-6 h-fit">
-                            <Card className="h-fit">
+                            <Card className="h-fit border-primary border hover:scale-[1.01]">
                                 <Link href={ `/courses/${params.courseId}` }>
-                                    <CardHeader className="flex justify-center items-center gap-4 rounded outline outline-1 outline-primary hover:shadow-secondary hover:scale-[1.01] h-fit">
+                                    <CardHeader className="flex justify-center items-center gap-4 rounded h-fit">
                                         <Suspense fallback={
                                             <Skeleton className="w-full h-6" />
                                         }>
@@ -76,7 +76,7 @@ export default async function CourseShowLayout({
                                     </CardHeader>
                                 </Link>
                             </Card>
-                            <CourseContentMenu courseContent={ course } />
+                            <CourseContentMenu course={ course } />
                         </div>
                     </div>
                 </Suspense>
