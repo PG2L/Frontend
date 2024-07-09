@@ -57,15 +57,15 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                             <Separator className="mt-4" />
                             <div className={ `mt-4 grid rounded-lg bg-background p-2 border !flex justify-around items-center` }>
                                 <div className="flex">
-                                    39875
+                                    { user.total_exp }
                                     <icons.MedalIcon className="ms-1 h-6 w-6 text-primary" strokeWidth={ 1 } />
                                 </div>
                                 <div className="flex">
-                                    14085
+                                    { user.total_points }
                                     <icons.Star className="ms-1 h-6 w-6 text-primary" strokeWidth={ 1 } />
                                 </div>
                                 <div className="flex">
-                                    14
+                                    { user.courses.filter((course: UserCourse): boolean => course.completion_status === "completed").length }
                                     <icons.BookCheck className="ms-1 h-6 w-6 text-primary" strokeWidth={ 1 } />
                                 </div>
                             </div>

@@ -34,3 +34,30 @@ export function getLevelByExp(totalExp: number): [{ level: number; name: string;
         exp -= levels[i].expToNext;
     }
 }
+
+export async function updateUserExp(userId: number, exp: number): Promise<void> {
+    
+    try {
+        const res: Response = await fetch(
+            `http://localhost:8000/users/${userId}`,
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    total_exp: exp,
+                }),
+                next:
+                {
+                    tags: ['users'],
+                }
+            });
+        if (!res.ok) {
+            throw new Error('Failed to update user exp');
+        }
+        return await res.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
