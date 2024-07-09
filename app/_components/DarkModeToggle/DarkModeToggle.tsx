@@ -5,10 +5,28 @@ import { DarkModeContext } from '../../_contexts/DarkModeProvider';
 
 interface DarkModeToggleProps { }
 
-const DarkModeToggle: FC<DarkModeToggleProps> = ({ }): React.JSX.Element => {
+/**
+ * Renders a toggle switch for dark mode.
+ *
+ * @component
+ */
+const DarkModeToggle: FC<DarkModeToggleProps> = ({ }: DarkModeToggleProps): React.JSX.Element => {
 
+    /**
+     * Retrieves the dark mode provider from the context.
+     */
     const darkModeProvider: any = useContext(DarkModeContext);
+
+    /**
+     * Gets the value of the darkMode property from the darkModeProvider.
+     * @returns The value of the darkMode property.
+     */
     const darkMode: any = darkModeProvider.darkMode;
+
+    /**
+     * Toggles the dark mode.
+     * @param {any} darkModeProvider - The dark mode provider.
+     */
     const toggleDarkMode: any = darkModeProvider.toggleDarkMode;
 
     return (

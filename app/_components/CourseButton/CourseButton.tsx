@@ -11,10 +11,23 @@ import { useRouter } from 'next/navigation';
 
 interface CourseButtonProps { }
 
+/**
+ * Renders a button to start a course.
+ *
+ * @returns The JSX element representing the start button.
+ */
 function StartButton(): React.JSX.Element {
 
+    /**
+     * Represents the current user.
+     */
     const user: User = useContext(UserContext);
+
+    /**
+     * Represents the current course.
+     */
     const course: Course = useContext(CourseContext);
+
     const router = useRouter();
 
     return (
@@ -34,10 +47,24 @@ function StartButton(): React.JSX.Element {
  * @param {CourseButtonProps} props - The props for the CourseButton component.
  * @returns {React.JSX.Element} The rendered CourseButton component.
  */
-const CourseButton: FC<CourseButtonProps> = (): React.JSX.Element => {
+const CourseButton: FC<CourseButtonProps> = ({ }: CourseButtonProps): React.JSX.Element => {
 
+    /**
+     * Represents the current user.
+     */
     const user: User = useContext(UserContext);
+
+    /**
+     * Represents the current course.
+     */
     const course: Course = useContext(CourseContext);
+
+    /**
+     * Finds the user's course based on the course ID.
+     * @param user - The user object containing the courses.
+     * @param course - The course object to search for.
+     * @returns The user's course if found, otherwise undefined.
+     */
     const userCourse: UserCourse | undefined = user.courses.find((courseItem: UserCourse): boolean => courseItem.course.id === course.id);
 
     return (

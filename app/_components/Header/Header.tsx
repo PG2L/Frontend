@@ -20,12 +20,25 @@ import LoginForm from '../forms/LoginForm/LoginForm';
 import SigninForm from '../forms/SigninForm/SigninForm';
 import DarkModeToggle from '../DarkModeToggle/DarkModeToggle';
 
+/**
+ * Represents an array of components with their title, href, and description.
+ */
 const components: { title: string; href: string; description: string; }[] = [
     {
+        /**
+         * The title of the component.
+         */
         title: "All lessons",
+        /**
+         * The href of the component.
+         */
         href: "/lessons",
+        /**
+         * The description of the component.
+         * Represents a list of every lesson on our website.
+         */
         description:
-            "A list of every lessons on our website",
+            "A list of every lesson on our website",
     },
     {
         title: "One lesson",
@@ -37,7 +50,7 @@ const components: { title: string; href: string; description: string; }[] = [
         title: "All courses",
         href: "/courses",
         description:
-            "A list of every courses on our website",
+            "A list of every course on our website",
     },
     {
         title: "One course",
@@ -58,6 +71,11 @@ const components: { title: string; href: string; description: string; }[] = [
     },
 ];
 
+/**
+ * ListItem component represents a list item with a link in the header.
+ *
+ * @component
+ */
 const ListItem = React.forwardRef<
     React.ElementRef<"a">,
     React.ComponentPropsWithoutRef<"a">
@@ -87,6 +105,10 @@ ListItem.displayName = "ListItem";
 
 interface HeaderProps { }
 
+/**
+ * Represents the header component of the application.
+ * @component
+ */
 const Header: FC<HeaderProps> = (): React.JSX.Element => {
 
     return (
@@ -194,7 +216,8 @@ const Header: FC<HeaderProps> = (): React.JSX.Element => {
                     </div>
                 </div>
             </div>
-        </header>);
+        </header>
+    );
 };
 
 export default Header;

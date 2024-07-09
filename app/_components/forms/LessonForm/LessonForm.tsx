@@ -12,58 +12,115 @@ import { Input } from '../../ui/input';
 import { Button } from '../../ui/button';
 import { Skeleton } from '../../ui/skeleton';
 
+/**
+ * Represents the form schema for the LessonForm component.
+ */
 const formSchema = z.object({
+    /**
+     * The title of the lesson.
+     * Must be at least 2 characters long.
+     */
     title: z.string().min(2, {
         message: "Title must be at least 2 characters.",
     }),
+
+    /**
+     * The description of the lesson (optional).
+     */
     description: z.string().optional(),
+
+    /**
+     * The content of the lesson (optional).
+     */
     content: z.string().optional(),
+
+    /**
+     * The experience gain for completing the lesson (optional).
+     * Must be a nonnegative number.
+     */
     exp_gain: z.coerce.number().int().nonnegative({
         message: "Experience gain must be a nonnegative number.",
     }).optional(),
+
+    /**
+     * The points gain for completing the lesson (optional).
+     * Must be a nonnegative number.
+     */
     points_gain: z.coerce.number().int().nonnegative({
         message: "Points gain must be a nonnegative number.",
     }).optional(),
+
+    /**
+     * The lesson number (optional).
+     * Must be a nonnegative number.
+     */
     lesson_number: z.coerce.number().int().nonnegative({
         message: "Lesson number must be a nonnegative number.",
     }).optional(),
+
+    /**
+     * The course number (optional).
+     * Must be a nonnegative number.
+     */
     course: z.coerce.number().int().nonnegative({
         message: "Course must be a nonnegative number.",
     }).optional(),
 });
 
 interface LessonFormProps {
-    lesson?: {
-        id: string,
-        title: string,
-        description: string,
-        content: string,
-        exp_gain: number,
-        points_gain: number,
-        lesson_number: number,
-        course: number,
-    },
-    courses: any[],
+    lesson?: Lesson,
+    courses: Course[],
 }
 
+/**
+ * Represents a form for creating or updating a lesson.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Object} props.lesson - The lesson object.
+ * @param {Array} props.courses - The array of courses.
+ * @returns {JSX.Element} - The LessonForm component.
+ */
 const LessonForm: FC<LessonFormProps> = ({
     lesson,
     courses,
-}): React.JSX.Element => {
+}: LessonFormProps): React.JSX.Element => {
 
+    /**
+     * Creates a form using the useForm hook from react-hook-form library.
+     * The form is initialized with default values based on the potentially provided lesson object.
+     *
+     * @param lesson - The lesson object to populate the form with.
+     * @returns The form object with resolver and default values.
+     */
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            title: lesson ? lesson.title : "",
-            description: lesson ? lesson.description : "",
-            content: lesson ? lesson.content : "",
-            exp_gain: lesson ? lesson.exp_gain : 0,
-            points_gain: lesson ? lesson.points_gain : 0,
-            lesson_number: lesson ? lesson.lesson_number : 0,
-            course: lesson ? lesson.course : 0,
-        },
+        defaultValues:
+            lesson ? {
+                title: lesson.title,
+                description: lesson.description,
+                content: lesson.content,
+                exp_gain: lesson.exp_gain,
+                points_gain: lesson.points_gain,
+                lesson_number: lesson.lesson_number,
+                course: lesson.course.id,
+            } : {
+                title: "",
+                description: "",
+                content: "",
+                exp_gain: 0,
+                points_gain: 0,
+                lesson_number: 0,
+                course: 0,
+            },
     });
 
+    /**
+     * Submits the form data to the server.
+     * 
+     * @param {any} values - The form values to be submitted.
+     * @returns {Promise<void>} - A promise that resolves when the submission is complete.
+     */
     const onSubmit: (values: any) => Promise<void> = async (values: any): Promise<void> => {
         try {
             if (lesson) {

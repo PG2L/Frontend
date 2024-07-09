@@ -16,6 +16,12 @@ import ResumeLesson from '../../_components/ResumeLesson/ResumeLesson';
  */
 export default async function Page(): Promise<React.JSX.Element> {
 
+    /**
+     * Fetches the course data from the server.
+     * 
+     * @param endpoint - The endpoint to fetch the data from.
+     * @returns An array of Course objects.
+     */
     const courses = await getData("courses") as Course[];
 
     return (

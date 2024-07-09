@@ -16,6 +16,11 @@ export default async function CoursesLayout({
     children: React.ReactNode,
 }): Promise<React.JSX.Element> {
 
+    /**
+     * Retrieves the list of courses from the server.
+     * 
+     * @returns {Promise<Course[]>} A promise that resolves to an array of Course objects.
+     */
     const courses: Course[] = await getData("courses") as Course[];
 
     return (

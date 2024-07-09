@@ -10,18 +10,62 @@ import { updateCourseProgress, updateCourseCompletion } from '../../_lib/courses
 import { updateUserExp } from '../../_lib/levels';
 import { updateUserPoints } from '../../_lib/points';
 import { useRouter } from 'next/navigation';
-import { getData } from '../../_lib/data';
 
 interface LessonContentProps { }
 
-const LessonContent: FC<LessonContentProps> = ({ }): React.JSX.Element => {
+/**
+ * Renders the lesson content component.
+ * @param {LessonContentProps} props - The component props.
+ * @returns {React.JSX.Element} The rendered component.
+ */
+const LessonContent: FC<LessonContentProps> = ({ }: LessonContentProps): React.JSX.Element => {
 
+    /**
+     * Retrieves the user from the UserContext.
+     * @returns The user object.
+     */
     const user: User = useContext(UserContext);
+
+    /**
+     * Retrieves the lesson from the LessonContext.
+     * @returns The lesson object.
+     */
     const lesson: Lesson = useContext(LessonContext);
+
+    /**
+     * Retrieves the course from the CourseContext.
+     * @returns The course object.
+     */
     const course: Course = useContext(CourseContext);
+
+    /**
+     * Finds the user's course based on the course ID.
+     *
+     * @param user - The user object containing the courses.
+     * @param course - The course object to search for.
+     * @returns The user's course if found, otherwise undefined.
+     */
     const userCourse: UserCourse | undefined = user.courses.find((c: UserCourse): boolean => c.course.id === course.id);
+
+    /**
+     * Checks if the lesson is unlocked based on the user's progress and the lesson number.
+     * @param userCourse - The user's course progress.
+     * @param lesson - The lesson information.
+     * @returns A boolean indicating whether the lesson is unlocked.
+     */
     const isUnlock: boolean = userCourse?.progress + 1 >= lesson.lesson_number;
+
+    /**
+     * Checks if the current lesson is the last lesson in the course.
+     * @param lesson - The current lesson object.
+     * @param course - The course object containing all the lessons.
+     * @returns A boolean value indicating whether the current lesson is the last lesson.
+     */
     const isLastLesson: boolean = lesson.lesson_number === course.lessons.length;
+
+    /**
+     * The router object used for navigation within the application.
+     */
     const router = useRouter();
 
     return (

@@ -13,20 +13,46 @@ import { z } from 'zod';
 
 interface SigninFormProps { }
 
+/**
+ * Represents the form schema for the SigninForm component.
+ */
 const formSchema = z.object({
+    /**
+     * Represents the username field in the form.
+     * Must be at least 2 characters long.
+     */
     username: z.string().min(2, {
         message: "Username must be at least 2 characters.",
     }),
+
+    /**
+     * Represents the email field in the form.
+     * Must be a valid email address.
+     */
     email: z.string().email({
         message: "Invalid email address.",
     }),
+
+    /**
+     * Represents the password field in the form.
+     * Must be at least 8 characters long.
+     */
     password: z.string().min(8, {
         message: "Password must be at least 8 characters.",
     }),
 });
 
-const SigninForm: FC<SigninFormProps> = (): React.JSX.Element => {
+/**
+ * Represents the login form component.
+ * @component
+ */
+const SigninForm: FC<SigninFormProps> = ({ }: SigninFormProps): React.JSX.Element => {
 
+    /**
+     * Creates a form instance with default values and a resolver.
+     *
+     * @returns The form instance.
+     */
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -36,6 +62,11 @@ const SigninForm: FC<SigninFormProps> = (): React.JSX.Element => {
         },
     });
 
+    /**
+     * Submits the form data to the server.
+     * @param values - The form values to be submitted.
+     * @returns A Promise that resolves when the data is successfully submitted.
+     */
     const onSubmit: (values: any) => Promise<void> = async (values: any): Promise<void> => {
         try {
             const response = await fetch(`http://localhost:8000/users/new`, {

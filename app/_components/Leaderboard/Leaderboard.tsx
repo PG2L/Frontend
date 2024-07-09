@@ -37,12 +37,14 @@ import {
 } from "../ui/table";
 import { UserHoverCard } from "../UserHoverCard/UserHoverCard";
 
-interface LeaderboardProps {
-    users: User[];
-}
-
+/**
+ * Represents the column definition for the leaderboard table.
+ */
 export const columns: ColumnDef<User>[] = [
     {
+        /**
+         * Represents the select column.
+         */
         id: "select",
         header: ({ table }): React.JSX.Element => (
             <Checkbox
@@ -65,6 +67,9 @@ export const columns: ColumnDef<User>[] = [
         enableHiding: false,
     },
     {
+        /**
+         * Represents the rank column.
+         */
         accessorKey: "rank",
         header: ({ column }): React.JSX.Element => {
             return (
@@ -82,6 +87,9 @@ export const columns: ColumnDef<User>[] = [
         ),
     },
     {
+        /**
+         * Represents the username column.
+         */
         accessorKey: "username",
         header: ({ column }): React.JSX.Element => {
             return (
@@ -97,6 +105,9 @@ export const columns: ColumnDef<User>[] = [
         cell: ({ row }): React.JSX.Element => <UserHoverCard user={ row.original }>{ row.getValue("username") }</UserHoverCard>,
     },
     {
+        /**
+         * Represents the email column.
+         */
         accessorKey: "email",
         header: ({ column }): React.JSX.Element => {
             return (
@@ -112,6 +123,9 @@ export const columns: ColumnDef<User>[] = [
         cell: ({ row }): React.JSX.Element => <div className="lowercase">{ row.getValue("email") }</div>,
     },
     {
+        /**
+         * Represents the total points column.
+         */
         accessorKey: "total_points",
         header: () => <div className="text-right">Points</div>,
         cell: ({ row }): React.JSX.Element => {
@@ -121,6 +135,9 @@ export const columns: ColumnDef<User>[] = [
         },
     },
     {
+        /**
+         * Represents the actions column.
+         */
         id: "actions",
         enableHiding: false,
         cell: ({ row }): React.JSX.Element => {
@@ -149,6 +166,16 @@ export const columns: ColumnDef<User>[] = [
     },
 ];
 
+interface LeaderboardProps {
+    users: User[];
+}
+
+/**
+ * Renders a leaderboard table with sorting, filtering, and pagination functionality.
+ *
+ * @param {LeaderboardProps} props - The component props.
+ * @returns {React.JSX.Element} The rendered leaderboard table.
+ */
 export default function DataTableDemo({
     users
 }: LeaderboardProps): React.JSX.Element {

@@ -3,17 +3,35 @@
 import React, { FC, useContext } from 'react';
 import styles from './CourseProgressBar.module.css';
 import { UserContext } from '../../_contexts/UserProvider';
-import { CourseContext } from '../../_contexts/CourseProvider';
 
 interface CourseProgressBarProps {
     course: Course;
 }
 
+/**
+ * Renders a progress bar for a course, indicating the user's progress.
+ *
+ * @component
+ * @param {CourseProgressBarProps} props - The component props.
+ * @param {Course} props.course - The course object.
+ * @returns {JSX.Element} - The rendered component.
+ */
 const CourseProgressBar: FC<CourseProgressBarProps> = ({
     course,
-}): React.JSX.Element => {
+}: CourseProgressBarProps): React.JSX.Element => {
 
+    /**
+     * Represents the user.
+     */
     const user: User = useContext(UserContext);
+
+    /**
+     * Finds the user's course based on the course ID.
+     *
+     * @param {UserCourse[]} courses - The array of user courses.
+     * @param {Course} course - The course to search for.
+     * @returns {UserCourse | undefined} - The user's course if found, otherwise undefined.
+     */
     const userCourse: UserCourse | undefined = user.courses.find((courseItem: UserCourse): boolean => courseItem.course.id === course.id);
 
     return (

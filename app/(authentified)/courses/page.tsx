@@ -9,6 +9,11 @@ import { getData } from '../../_lib/data';
  */
 export default async function Page(): Promise<React.JSX.Element> {
 
+    /**
+     * Fetches the course data from the server.
+     * 
+     * @returns {Promise<Course[]>} A promise that resolves to an array of Course objects.
+     */
     const courses: Course[] = await getData("courses") as Course[];
 
     return (

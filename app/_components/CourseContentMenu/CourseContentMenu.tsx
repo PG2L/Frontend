@@ -25,16 +25,13 @@ interface CourseContentMenuProps {
  */
 const CourseContentMenu: FC<CourseContentMenuProps> = ({
     course,
-}: {
-    course: Course,
-}): React.JSX.Element => {
+}: CourseContentMenuProps): React.JSX.Element => {
 
     /**
      * Retrieves the parameters from the current route.
      * @returns The parameters from the current route.
      */
     const params = useParams();
-
 
     /**
      * Checks if the current lesson is the first lesson in the course.
@@ -44,7 +41,6 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
      */
     const isFirstLesson: boolean = parseInt(params.lessonId) === course.lessons[0].id;
 
-
     /**
      * Checks if the current lesson is the last lesson in the course.
      * @param {string} params.lessonId - The ID of the current lesson.
@@ -53,13 +49,11 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
      */
     const isLastLesson: boolean = parseInt(params.lessonId) === course.lessons[course.lessons.length - 1].id;
 
-
     /**
      * Retrieves the user from the UserContext.
      * @returns The user object.
      */
     const user: User = useContext(UserContext);
-
 
     /**
      * Finds the user course that matches the given course ID.

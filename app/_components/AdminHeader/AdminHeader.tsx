@@ -35,8 +35,12 @@ const AdminHeader: FC<AdminHeaderProps> = ({
     lessons,
     user,
     users,
-}): React.JSX.Element => {
+}: AdminHeaderProps): React.JSX.Element => {
 
+    /**
+     * Determines the context of the page.
+     * @type {"course" | "lesson" | "user"}
+     */
     const pageContext: "course" | "lesson" | "user" = course ? "course" : lesson ? "lesson" : "user";
 
     return (
@@ -64,28 +68,19 @@ const AdminHeader: FC<AdminHeaderProps> = ({
                     </SelectTrigger>
                     <SelectContent>
                         { courses &&
-                            courses.map((courseItem: {
-                                id: string;
-                                title: string;
-                            }): React.JSX.Element => (
+                            courses.map((courseItem: Course): React.JSX.Element => (
                                 <SelectItem key={ courseItem.id } value={ courseItem.id }>
                                     { courseItem.id } - { courseItem.title }
                                 </SelectItem>
                             )) }
                         { lessons &&
-                            lessons.map((lessonItem: {
-                                id: string;
-                                title: string;
-                            }): React.JSX.Element => (
+                            lessons.map((lessonItem: Lesson): React.JSX.Element => (
                                 <SelectItem key={ lessonItem.id } value={ lessonItem.id }>
                                     { lessonItem.id } - { lessonItem.title }
                                 </SelectItem>
                             )) }
                         { users &&
-                            users.map((userItem: {
-                                id: string;
-                                email: string;
-                            }): React.JSX.Element => (
+                            users.map((userItem: User): React.JSX.Element => (
                                 <SelectItem key={ userItem.id } value={ userItem.id }>
                                     { userItem.id } - { userItem.email }
                                 </SelectItem>

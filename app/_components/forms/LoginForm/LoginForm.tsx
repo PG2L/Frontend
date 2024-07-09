@@ -17,9 +17,25 @@ import { setCookie } from "cookies-next";
 
 interface LoginFormProps { }
 
+/**
+ * Renders the login button component.
+ *
+ * @returns The JSX element representing the login button.
+ */
 function LoginButton(): React.JSX.Element {
+
+    /**
+     * Represents the status of the form submission.
+     */
     const { pending } = useFormStatus();
 
+    /**
+     * Handles the click event for the login button.
+     * If the form is in a pending state, prevents the default behavior of the event.
+     * 
+     * @param event - The click event object.
+     * @returns void
+     */
     function handleClick(event: any): void {
         if (pending) {
             event.preventDefault();
@@ -33,8 +49,17 @@ function LoginButton(): React.JSX.Element {
     );
 }
 
-const LoginForm: FC<LoginFormProps> = (): React.JSX.Element => {
+/**
+ * Represents the login form component.
+ * @component
+ */
+const LoginForm: FC<LoginFormProps> = ({ }: LoginFormProps): React.JSX.Element => {
 
+    /**
+     * Creates a form instance using the useForm hook from react-hook-form library.
+     *
+     * @returns {Object} - The form instance.
+     */
     const form = useForm({
         resolver: zodResolver(z.object({
             username: z.string().min(2, {
@@ -50,8 +75,16 @@ const LoginForm: FC<LoginFormProps> = (): React.JSX.Element => {
         },
     });
 
+    /**
+     * The router instance used for navigation.
+     */
     const router = useRouter();
 
+    /**
+     * Handles the form submission for the login form.
+     * @param values - The form values.
+     * @returns A Promise that resolves when the submission is complete.
+     */
     const onSubmit: (values: any) => Promise<void> = async (values: any): Promise<void> => {
         try {
             const response = await fetch('http://localhost:8000/api/login_check', {

@@ -1,20 +1,32 @@
 import React, { FC } from 'react';
-import { Badge } from '../ui/badge';
 import { Card, CardFooter, CardHeader } from '../ui/card';
 import * as icons from 'lucide-react';
 import Link from 'next/link';
-import { Progress } from '../ui/progress';
 
 interface LessonCardProps {
     userCourse: UserCourse;
     className?: string;
 }
 
+/**
+ * Renders a lesson card component.
+ *
+ * @component
+ * @param {LessonCardProps} props - The component props.
+ * @param {UserCourse} props.userCourse - The user's course data.
+ * @param {string} [props.className] - Additional CSS class for the component.
+ * @returns {React.JSX.Element} The rendered lesson card.
+ */
 const LessonCard: FC<LessonCardProps> = ({
     userCourse,
     className = '',
-}): React.JSX.Element => {
+}: LessonCardProps): React.JSX.Element => {
 
+    /**
+     * Retrieves the current lesson based on the user's progress in the course.
+     * @param userCourse - The user's course object.
+     * @returns The current lesson object.
+     */
     const currentLesson: Lesson = userCourse.course.lessons[userCourse.progress];
 
     return (

@@ -13,11 +13,35 @@ interface AdminMenuProps { }
  * Renders the admin menu component.
  * @component
  */
-const AdminMenu: FC<AdminMenuProps> = (): React.JSX.Element => {
+const AdminMenu: FC<AdminMenuProps> = ({ }: AdminMenuProps): React.JSX.Element => {
 
+    /**
+     * Retrieves the current pathname using the `usePathname` hook.
+     * If the pathname is not available, an empty string is returned.
+     *
+     * @returns The current pathname as a string.
+     */
     const path: string = usePathname() || "";
+
+    /**
+     * Retrieves the page context from the given path.
+     * 
+     * @param path - The path from which to extract the page context.
+     * @returns The page context extracted from the path.
+     */
     const pageContext: string = path.split("/")[2];
+
+    /**
+     * Extracts the context slug from the given path.
+     * 
+     * @param path - The path from which to extract the context slug.
+     * @returns The context slug extracted from the path.
+     */
     const contextSlug: string = path.split("/")[3];
+
+    /**
+     * Represents the menu items for the admin menu.
+     */
     const menuItems: {
         title: string;
         content: {

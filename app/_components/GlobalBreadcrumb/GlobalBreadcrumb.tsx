@@ -5,20 +5,41 @@ import styles from './GlobalBreadcrumb.module.css';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '../ui/breadcrumb';
-import { CourseContext } from '../../_contexts/CourseProvider';
 
 interface GlobalBreadcrumbProps {
     courses?: Course[],
 }
 
+/**
+ * Renders a global breadcrumb component.
+ *
+ * @param courses - An array of courses.
+ * @returns The rendered global breadcrumb component.
+ */
 const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = ({
     courses,
-}: {
-    courses: Course[],
-}): React.JSX.Element => {
+}: GlobalBreadcrumbProps): React.JSX.Element => {
 
+    /**
+     * Retrieves the current pathname using the `usePathname` hook.
+     * @returns The current pathname as a string.
+     */
     const paths: string = usePathname() || '';
+
+    /**
+     * Splits the given paths string by '/' and filters out any empty paths.
+     * 
+     * @param paths - The paths string to be split.
+     * @returns An array of non-empty path names.
+     */
     const pathNames: string[] = paths.split('/').filter(path => path);
+
+    /**
+     * Maps the path names to corresponding breadcrumb links.
+     * @param pathNames - An array of path names.
+     * @param courses - An array of courses.
+     * @returns An array of breadcrumb links.
+     */
     const itemsLinks: string[] = pathNames.map((link: string, index: number): string => {
         if (link.match(/^[0-9]+$/)) {
             if (index === 1) {

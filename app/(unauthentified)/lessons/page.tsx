@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Badge } from "../../_components/ui/badge";
 import { Avatar } from "../../_components/ui/avatar";
 import { Card, CardFooter, CardHeader } from '../../_components/ui/card';
@@ -14,6 +14,11 @@ import { getData } from '../../_lib/data';
  */
 export default async function Page(): Promise<React.JSX.Element> {
 
+    /**
+     * Fetches lessons data from the server.
+     * 
+     * @returns An array of Lesson objects.
+     */
     const lessons: Lesson[] = await getData("lessons") as Lesson[];
 
     return (

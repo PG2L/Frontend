@@ -22,6 +22,13 @@ export default async function Page({
     };
 }): Promise<React.JSX.Element> {
 
+    /**
+     * Retrieves the course data from the server.
+     * 
+     * @param {string} endpoint - The endpoint to fetch the data from.
+     * @param {string} courseId - The ID of the course to retrieve.
+     * @returns {Promise<Course>} - A promise that resolves to the course data.
+     */
     const course: Course = await getData("courses", params.courseId) as Course;
 
     return (

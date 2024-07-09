@@ -19,10 +19,18 @@ interface MainMenuProps { }
 
 const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
 
+    /**
+     * The router object used for navigation.
+     */
     const router = useRouter();
+
     const [isOpen, setIsOpen] = React.useState(true);
     const path: string = usePathname();
     const pageContext: string = path.split('/')[1];
+    /**
+     * Array of menu items.
+     * Each menu item has a title, link, icon, and filledIcon.
+     */
     const menuItems: {
         title: string;
         link: string;
@@ -84,10 +92,17 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                 filledIcon: "M 24 4 C 19.599415 4 16 7.599415 16 12 L 16 16 L 12.5 16 C 10.019 16 8 18.019 8 20.5 L 8 39.5 C 8 41.981 10.019 44 12.5 44 L 35.5 44 C 37.981 44 40 41.981 40 39.5 L 40 20.5 C 40 18.019 37.981 16 35.5 16 L 32 16 L 32 12 C 32 7.599415 28.400585 4 24 4 z M 24 7 C 26.779415 7 29 9.220585 29 12 L 29 16 L 19 16 L 19 12 C 19 9.220585 21.220585 7 24 7 z M 24 27 C 25.657 27 27 28.343 27 30 C 27 31.657 25.657 33 24 33 C 22.343 33 21 31.657 21 30 C 21 28.343 22.343 27 24 27 z"
             },
         ];
+
+    /**
+     * SVG element representing a logout button.
+     */
     const logoutButton: React.JSX.Element = <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="28" height="28" viewBox="0 0 48 48">
         <path d="M 24 4 C 12.972066 4 4 12.972074 4 24 C 4 35.027926 12.972066 44 24 44 C 35.027934 44 44 35.027926 44 24 C 44 12.972074 35.027934 4 24 4 z M 24 7 C 28.159946 7 31.91445 8.5434723 34.865234 11.013672 L 11.013672 34.863281 C 8.544055 31.912656 7 28.1594 7 24 C 7 14.593391 14.593385 7 24 7 z M 36.986328 13.134766 C 39.456525 16.085553 41 19.840056 41 24 C 41 33.406609 33.406615 41 24 41 C 19.840597 41 16.087341 39.455948 13.136719 36.986328 L 36.986328 13.134766 z"></path>
     </svg>;
 
+    /**
+     * Logs out the current user by deleting the 'currentUser' cookie and refreshing the router.
+     */
     const logout: () => void = (): void => {
         deleteCookie('currentUser');
         router.refresh();

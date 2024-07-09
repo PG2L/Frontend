@@ -12,24 +12,63 @@ import { z } from 'zod';
 import { Skeleton } from '../../ui/skeleton';
 import { RadioGroup, RadioGroupItem } from '../../ui/radio-group';
 
+/**
+ * Represents the form schema for the course form.
+ */
 const formSchema = z.object({
+    /**
+     * The title of the course.
+     * Must be at least 2 characters long.
+     */
     title: z.string().min(2, {
         message: "Title must be at least 2 characters.",
     }),
+
+    /**
+     * The description of the course (optionnal).
+     */
     description: z.string().optional(),
+
+    /**
+     * The experience points gain for the course (optionnal).
+     * Must be a nonnegative number.
+     */
     exp_gain: z.coerce.number().int().nonnegative({
         message: "Points gain must be a positive number.",
     }).optional(),
+
+    /**
+     * The points gain for the course (optionnal).
+     * Must be a nonnegative number.
+     */
     points_gain: z.coerce.number().int().nonnegative({
         message: "Points gain must be a positive number.",
     }).optional(),
+
+    /**
+     * The number of lessons in the course (optionnal).
+     * Must be a nonnegative number.
+     */
     lessons_count: z.coerce.number().int().nonnegative({
         message: "Lesson number must be a positive number.",
     }).optional(),
+
+    /**
+     * Indicates whether the course is free or not.
+     */
     is_free: z.coerce.boolean(),
+
+    /**
+     * The number of lessons in the course (optionnal).
+     * Must be a nonnegative number.
+     */
     lesson_count: z.coerce.number().int().nonnegative({
         message: "Lesson number must be a positive number.",
     }).optional(),
+
+    /**
+     * The difficulty level of the course (optionnal).
+     */
     difficulty: z.enum([
         'Beginner',
         'Novice',
@@ -39,63 +78,93 @@ const formSchema = z.object({
         'Master',
         'Master+',
     ]).optional(),
+
+    /**
+     * The price of the course (optionnal).
+     */
     price: z.coerce.number().int().nonnegative({
         message: "Price must be a positive number.",
     }).optional(),
+
+    /**
+     * The category of the course (optionnal).
+     * Must be a nonnegative number.
+     */
     category: z.coerce.number().int().nonnegative({
         message: "Category must be a positive number.",
     }).optional(),
+
+    /**
+     * The language of the course (optionnal).
+     * Must be a nonnegative number.
+     */
     language: z.coerce.number().int().nonnegative({
         message: "Language must be a positive number.",
     }).optional(),
 });
 
 interface CourseFormProps {
-    categories: {
-        id: number,
-        name: string;
-    }[];
-    languages: {
-        id: number,
-        name: string;
-    }[];
-    course?: {
-        id: number;
-        title: string;
-        description?: string;
-        exp_gain?: number;
-        points_gain?: number;
-        is_free?: boolean;
-        lesson_count?: number;
-        difficulty?: "Beginner" | "Novice" | "Intermediate" | "Advanced" | "Expert" | "Master" | "Master+";
-        price?: number;
-        category?: number;
-        language?: number;
-    };
+    categories: Category[];
+    languages: Language[];
+    course?: Course;
 }
 
+/**
+ * Represents a form for creating or updating a course.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Array} props.categories - The list of available categories.
+ * @param {Array} props.languages - The list of available languages.
+ * @param {Object} props.course - The course object to be updated (optional).
+ * @returns {JSX.Element} The rendered CourseForm component.
+ */
 const CourseForm: FC<CourseFormProps> = ({
     categories,
     languages,
     course,
-}): React.JSX.Element => {
+}: CourseFormProps): React.JSX.Element => {
 
+    /**
+     * Creates a form using the useForm hook from react-hook-form library.
+     * The form is initialized with default values based on the potentially provided course object.
+     *
+     * @param course - The course object to populate the form with.
+     * @returns The form object with resolver and default values.
+     */
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            title: course ? course.title : "",
-            description: course ? course.description : "",
-            exp_gain: course ? course.exp_gain : 0,
-            points_gain: course ? course.points_gain : 0,
-            is_free: course ? course.is_free : true,
-            lesson_count: course ? course.lesson_count : 0,
-            difficulty: course ? course.difficulty : "Beginner",
-            price: course ? course.price : 0,
-            category: course ? course.category : 0,
-            language: course ? course.language : 0,
-        },
+        defaultValues:
+            course ? {
+                title: course.title,
+                description: course.description,
+                exp_gain: course.exp_gain,
+                points_gain: course.points_gain,
+                is_free: course.is_free,
+                lesson_count: course.lessons_count,
+                difficulty: course.difficulty,
+                price: course.price,
+                category: course.category.id,
+                language: course.language.id,
+            } : {
+                title: "",
+                description: "",
+                exp_gain: 0,
+                points_gain: 0,
+                is_free: true,
+                lesson_count: 0,
+                difficulty: "Beginner",
+                price: 0,
+                category: 0,
+            }
     });
 
+    /**
+     * Submits the form data to the server.
+     * 
+     * @param {any} values - The form values to be submitted.
+     * @returns {Promise<void>} - A promise that resolves when the submission is complete.
+     */
     const onSubmit: (values: any) => Promise<void> = async (values: any): Promise<void> => {
         try {
             if (course) {

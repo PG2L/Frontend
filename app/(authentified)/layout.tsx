@@ -22,7 +22,22 @@ export default async function AuthentifiedLayout({
     children: React.ReactNode,
 }): Promise<React.JSX.Element> {
 
+    /**
+     * Retrieves the user ID from the cookie.
+     *
+     * @param {string} name - The name of the cookie.
+     * @param {object} options - The options for retrieving the cookie.
+     * @returns {string} The user ID stored in the cookie.
+     */
     const userId = getCookie('userId', { cookies });
+
+    /**
+     * Retrieves the user data from the server.
+     * 
+     * @param endpoint - The endpoint to fetch the data from.
+     * @param userId - The ID of the user to retrieve data for.
+     * @returns A Promise that resolves to the user data.
+     */
     const user: User = await getData("users", parseInt(userId)) as User;
 
     return (

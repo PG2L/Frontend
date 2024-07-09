@@ -24,7 +24,7 @@ interface CourseCardProps {
 const CourseCard: FC<CourseCardProps> = ({
     course,
     className = '',
-}): React.JSX.Element => {
+}: CourseCardProps): React.JSX.Element => {
 
     return (
         <Link href={ `/courses/${course.id}` } >

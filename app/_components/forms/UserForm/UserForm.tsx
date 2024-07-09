@@ -9,58 +9,123 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Skeleton } from '../../ui/skeleton';
 
+/**
+ * Represents the form schema for user data.
+ */
 const formSchema = z.object({
+    /**
+     * Represents the username field.
+     * Must be at least 2 characters.
+     */
     username: z.string().min(2, {
         message: "Username must be at least 2 characters.",
     }),
+
+    /**
+     * Represents the email field.
+     * Must be a valid email address.
+     */
     email: z.string().email({
         message: "Invalid email address.",
     }),
+
+    /**
+     * Represents the password field.
+     * Must be at least 8 characters.
+     */
     password: z.string().min(8, {
         message: "Password must be at least 8 characters.",
     }),
+
+    /**
+     * Represents the confirm password field.
+     * Must be at least 8 characters.
+     */
     confirmPassword: z.string().min(8, {
         message: "Password must be at least 8 characters.",
     }),
+
+    /**
+     * Represents the firstname field.
+     * Optional field.
+     */
     firstname: z.string().optional(),
+
+    /**
+     * Represents the lastname field.
+     * Optional field.
+     */
     lastname: z.string().optional(),
+
+    /**
+     * Represents the address field.
+     * Optional field.
+     */
     address: z.string().optional(),
+
+    /**
+     * Represents the country name field.
+     * Optional field.
+     */
     country_name: z.string().optional(),
+
+    /**
+     * Represents the role field.
+     * Optional field.
+     */
     role: z.string().optional(),
 });
 
 interface UserFormProps {
-    user?: {
-        id: string,
-        username: string,
-        email: string,
-        password: string,
-        firstname: string,
-        lastname: string,
-        address: string,
-        country_name: string,
-        role: string,
-    },
+    user?: User,
 }
 
+/**
+ * UserForm component represents a form for creating or updating a user.
+ *
+ * @component
+ * @param {UserFormProps} props - The props for the UserForm component.
+ * @returns {JSX.Element} The rendered UserForm component.
+ */
 const UserForm: FC<UserFormProps> = ({
     user,
-}): React.JSX.Element => {
+}: UserFormProps): React.JSX.Element => {
 
+    /**
+     * Creates a form instance using the useForm hook from react-hook-form library.
+     *
+     * @param {User} user - The user object containing the initial form values (optional).
+     * @returns {FormInstance} The form instance with the specified resolver and default values.
+     */
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            username: user ? user.username : "",
-            email: user ? user.email : "",
-            password: user ? user.password : "",
-            firstname: user ? user.firstname : "",
-            lastname: user ? user.lastname : "",
-            address: user ? user.address : "",
-            country_name: user ? user.country_name : "",
-            role: user ? user.role : "",
-        },
+        defaultValues:
+            user ? {
+                username: user.username,
+                email: user.email,
+                password: user.password,
+                firstname: user.firstname,
+                lastname: user.lastname,
+                address: user.address,
+                country_name: user.country_name,
+                role: user.role,
+            } : {
+                username: "",
+                email: "",
+                password: "",
+                firstname: "",
+                lastname: "",
+                address: "",
+                country_name: "",
+                role: "",
+            },
     });
 
+    /**
+     * Handles the form submission by making a PUT request to update an existing user or a POST request to create a new user.
+     * @param values - The form values to be submitted.
+     * @returns A Promise that resolves when the request is successful, or rejects with an error if the request fails.
+     */
     const onSubmit: (values: any) => Promise<void> = async (values: any): Promise<void> => {
         try {
             if (user) {

@@ -24,6 +24,13 @@ export default async function Page({
     };
 }): Promise<React.JSX.Element> {
 
+    /**
+     * Fetches the lesson data from the server.
+     *
+     * @param {string} resource - The resource to fetch data from.
+     * @param {string} lessonId - The ID of the lesson to fetch.
+     * @returns {Promise<Lesson>} - A promise that resolves to the fetched lesson data.
+     */
     const lesson: Lesson = await getData("lessons", params.lessonId) as Lesson;
 
     return (
