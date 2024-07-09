@@ -37,6 +37,7 @@ const LessonContent: FC<LessonContentProps> = ({ }): React.JSX.Element => {
                 :
                 !isLastLesson ?
                     <Button className="w-1/3 align-self-center justify-self-center" onClick={ async (): Promise<void> => {
+                        router.prefetch(`/courses/${course.id}/${lesson.id + 1}`);
                         await updateCourseProgress(userCourse);
                         await updateUserPoints(user.id, user.total_points + lesson.points_gain);
                         await updateUserExp(user.id, user.total_exp + lesson.exp_gain);
@@ -44,6 +45,7 @@ const LessonContent: FC<LessonContentProps> = ({ }): React.JSX.Element => {
                     } }>Next lesson</Button>
                     :
                     <Button className="w-1/3 align-self-center justify-self-center" onClick={ async (): Promise<void> => {
+                        router.prefetch(`/courses/${course.id}`);
                         await updateCourseCompletion(userCourse, "completed");
                         await updateUserPoints(user.id, user.total_points + course.points_gain);
                         await updateUserExp(user.id, user.total_exp + course.exp_gain);
