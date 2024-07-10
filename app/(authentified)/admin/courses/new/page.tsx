@@ -24,6 +24,8 @@ export default async function Page(): Promise<React.JSX.Element> {
     const languages: Language[] = await getData("languages") as Language[];
 
     return (
+
         <CourseForm categories={ categories } languages={ languages } />
+
     );
 }

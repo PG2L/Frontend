@@ -41,8 +41,10 @@ export default async function Page({
     const languages: Language[] = await getData("languages") as Language[];
 
     return (
+
         <div className="grid w-full">
             <CourseForm languages={ languages } categories={ categories } course={ course } />
         </div>
+
     );
 }

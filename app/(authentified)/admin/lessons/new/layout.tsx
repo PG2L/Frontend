@@ -13,9 +13,11 @@ export default async function NewLessonLayout({
 }): Promise<React.JSX.Element> {
 
     return (
+
         <div className="grid grid-cols-1 w-full">
             <h1 className="text-lg">Create a new lesson</h1>
             { children }
         </div>
+
     );
 }

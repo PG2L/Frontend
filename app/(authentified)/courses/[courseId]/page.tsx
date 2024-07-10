@@ -32,6 +32,7 @@ export default async function Page({
     const course: Course = await getData("courses", params.courseId) as Course;
 
     return (
+
         <>
             <Card className="border">
                 <CardHeader>
@@ -43,8 +44,20 @@ export default async function Page({
                         <div className="grid gap-4">
                             <h1 className="text-lg font-medium">{ course.title }</h1>
                             <div className="flex gap-1 flex-wrap">
-                                { course.language && course.language.name && <Badge variant={ course.language.name.toLowerCase() }>{ course.language.name }</Badge> }
-                                { course.difficulty && <Badge variant={ course.difficulty.toLowerCase() }>{ course.difficulty }</Badge> }
+                                {
+                                    // Render a language badge if the course has a language.
+                                    course.language.name &&
+                                    <Badge variant={ course.language.name as "Javascript" | "C#" | "C++" | "HTML/CSS" | "Ruby" | "Go" | "Php" | "Java" | "Mysql" | "Python" }>
+                                        { course.language.name }
+                                    </Badge>
+                                }
+                                {
+                                    // Render a category badge if the course has a category.
+                                    course.difficulty &&
+                                    <Badge variant={ course.difficulty }>
+                                        { course.difficulty }
+                                    </Badge>
+                                }
                                 <Badge>{ course.points_gain } points</Badge>
                                 <Badge>+{ course.exp_gain } xp</Badge>
                             </div>
@@ -100,17 +113,22 @@ export default async function Page({
                         </CollapsibleTrigger>
                         <CollapsibleContent>
                             <div className="grid gap-4 mt-4">
-                                { course.lessons && course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => (
-                                    <Card key={ index } className={ `${lesson.isFinished && "bg-secondary"} ${lesson.isUnlock && "outline outline-1 outline-primary"}` }>
-                                        <CardHeader>
-                                            <h2>{ lesson.title }</h2>
-                                        </CardHeader>
-                                        <CardFooter>
-                                            <div className="flex flex-wrap gap-1 justify-start items-center">
-                                            </div>
-                                        </CardFooter>
-                                    </Card>
-                                )) }
+                                {
+                                    // Render the lessons if they exist.
+                                    course.lessons &&
+                                    // Map over the lessons and render them.
+                                    course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => (
+                                        <Card key={ index }>
+                                            <CardHeader>
+                                                <h2>{ lesson.title }</h2>
+                                            </CardHeader>
+                                            <CardFooter>
+                                                <div className="flex flex-wrap gap-1 justify-start items-center">
+                                                </div>
+                                            </CardFooter>
+                                        </Card>
+                                    ))
+                                }
                             </div>
                         </CollapsibleContent>
                     </Collapsible>
@@ -120,5 +138,6 @@ export default async function Page({
                 { course.description }
             </div>
         </>
+
     );
 }

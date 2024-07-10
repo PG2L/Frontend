@@ -12,8 +12,8 @@ export async function getData(endpoint: string, id?: number): Promise<any> {
             {
                 next:
                 {
-                    tags: [`${endpoint}`],
-                    revalidate: 1800
+                    tags: [`${endpoint}`], // Add the endpoint to the tags array.
+                    revalidate: 1800, // Revalidate the data every 30 minutes.
                 }
             });
         if (!res.ok) {

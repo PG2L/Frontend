@@ -51,7 +51,7 @@ export async function updateCourseProgress(userCourse: UserCourse): Promise<any>
         }
         const data: any = await response.json();
         revalidatePath('/', 'layout');
-        revalidateTag('users');
+        revalidateTag('users'); // Revalidate the users tag.
         return data;
     } catch (error) {
         console.error(error);

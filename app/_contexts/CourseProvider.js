@@ -17,11 +17,14 @@ export const CourseContext = createContext();
  * @returns {ReactNode} The rendered component.
  */
 export default function CourseProvider({ children, course }) {
+
     return (
+
         <>
             <CourseContext.Provider value={course} >
                 { children }
             </CourseContext.Provider>
         </>
+
     )
 }

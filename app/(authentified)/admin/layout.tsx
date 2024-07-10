@@ -15,9 +15,11 @@ export default async function AdminLayout({
 }): Promise<React.JSX.Element> {
 
     return (
+
         <div className="flex gap-6">
             <AdminMenu />
             { children }
         </div>
+
     );
 };

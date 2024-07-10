@@ -181,57 +181,68 @@ export default async function Page(): Promise<React.JSX.Element> {
         ];
 
     return (
+
         <div className="flex gap-6 w-full">
             <div className="w-full flex gap-6">
                 <div className="grid gap-4 w-full">
-                    { menuContent.map((item: {
-                        name: string;
-                        content: {
+                    {
+                        // Mapping the first 4 elements of the menuContent array to JSX elements.
+                        menuContent.map((item: {
                             name: string;
-                            value: number;
-                        }[];
-                    }, index: number): false | React.JSX.Element => (
-                        index <= 3 && (
-                            <div key={ index } className="flex flex-col">
-                                <h2 className=" font-medium mb-2">{ item.name }</h2>
-                                { item.content.map((content: {
-                                    name: string;
-                                    value: number;
-                                }, index: number): React.JSX.Element => (
-                                    <div key={ index } className="flex justify-between border-b">
-                                        <h3 className="text-muted-foreground">{ content.name }</h3>
-                                        <h3 className="text-white">{ content.value }</h3>
-                                    </div>
-                                )) }
-                            </div>
-                        )
-                    )) }
+                            content: {
+                                name: string;
+                                value: number;
+                            }[];
+                        }, index: number): false | React.JSX.Element => (
+                            index <= 3 && ( // If the index is less than or equal to 3, render the JSX element.
+                                <div key={ index } className="flex flex-col">
+                                    <h2 className=" font-medium mb-2">{ item.name }</h2>
+                                    { item.content.map((content: {
+                                        name: string;
+                                        value: number;
+                                    }, index: number): React.JSX.Element => (
+                                        <div key={ index } className="flex justify-between border-b">
+                                            <h3 className="text-muted-foreground">{ content.name }</h3>
+                                            <h3 className="text-white">{ content.value }</h3>
+                                        </div>
+                                    )) }
+                                </div>
+                            )
+                        ))
+                    }
                 </div>
                 <div className="grid gap-4 w-full">
-                    { menuContent.map((item: {
-                        name: string;
-                        content: {
+                    {
+                        // Mapping the last 5 elements of the menuContent array to JSX elements.
+                        menuContent.map((item: {
                             name: string;
-                            value: number;
-                        }[];
-                    }, index: number): false | React.JSX.Element => (
-                        index > 3 && (
-                            <div key={ index } className="flex flex-col">
-                                <h2 className=" font-medium mb-2">{ item.name }</h2>
-                                { item.content.map((content: {
-                                    name: string;
-                                    value: number;
-                                }, index: number): React.JSX.Element => (
-                                    <div key={ index } className="flex justify-between border-b">
-                                        <h3 className="text-muted-foreground">{ content.name }</h3>
-                                        <h3 className="text-white">{ content.value }</h3>
-                                    </div>
-                                )) }
-                            </div>
-                        )
-                    )) }
+                            content: {
+                                name: string;
+                                value: number;
+                            }[];
+                        }, index: number): false | React.JSX.Element => (
+                            index > 3 && ( // If the index is greater than 3, render the JSX element.
+                                <div key={ index } className="flex flex-col">
+                                    <h2 className=" font-medium mb-2">{ item.name }</h2>
+                                    {
+                                        // Mapping over the content array to render the content.
+                                        item.content.map((content: {
+                                            name: string;
+                                            value: number;
+                                        }, index: number): React.JSX.Element => (
+                                            <div key={ index } className="flex justify-between border-b">
+                                                <h3 className="text-muted-foreground">{ content.name }</h3>
+                                                <h3 className="text-white">{ content.value }</h3>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            )
+                        ))
+                    }
                 </div>
             </div>
         </div>
+
     );
 }

@@ -41,10 +41,12 @@ export default function DarkModeProvider(props) {
     }, [darkMode]);
 
     return (
+
         <div>
             <DarkModeContext.Provider value={{darkMode, toggleDarkMode}}>
                 { props.children }
             </DarkModeContext.Provider>
         </div>
+
     )
 }

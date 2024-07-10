@@ -10,6 +10,7 @@ import { Skeleton } from '../../../_components/ui/skeleton';
 export default function Loading(): React.JSX.Element {
 
     return (
+
         <>
             <Card>
                 <CardHeader>
@@ -45,5 +46,6 @@ export default function Loading(): React.JSX.Element {
                 }) }
             </div>
         </>
+
     );
 }

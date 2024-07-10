@@ -42,6 +42,7 @@ export function getLevelByExp(totalExp: number): [{ level: number; name: string;
         }
         exp -= levels[i].expToNext;
     }
+    return [levels[levels.length - 1], 0];
 }
 
 /**

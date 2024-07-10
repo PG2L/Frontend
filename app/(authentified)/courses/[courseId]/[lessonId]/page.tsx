@@ -31,16 +31,22 @@ export default async function Page({
      * @param {string} lessonId - The ID of the lesson to fetch.
      * @returns {Promise<Lesson>} - A promise that resolves to the fetched lesson data.
      */
-    const lesson: Lesson = await getData("lessons", params.lessonId) as Lesson;
+    const lesson: Lesson = await getData("lessons", Number(params.lessonId)) as Lesson;
 
     return (
+
         <>
             <LessonProvider lesson={ lesson }>
                 <Card>
                     <CardHeader>
                         <div className="hidden sm:block py-36 bg-black/[0.1] border rounded"></div>
                         <h3 className="text-muted-foreground">
-                            <Link href={ `/courses/${lesson.course.id}` } className="hover:underline">{ lesson.course.title }</Link>
+                            <Link
+                                href={ `/courses/${lesson.course.id}` } // Link to the course page
+                                className="hover:underline"
+                            >
+                                { lesson.course.title }
+                            </Link>
                         </h3>
                     </CardHeader>
                     <CardContent>
@@ -52,8 +58,20 @@ export default async function Page({
                                     <h1>{ lesson.title }</h1>
                                 </div>
                                 <div className="flex gap-1 flex-wrap">
-                                    { lesson.course.language.name && <Badge variant={ lesson.course.language.name.toLowerCase() }>{ lesson.course.language.name }</Badge> }
-                                    { lesson.course.difficulty && <Badge variant={ lesson.course.difficulty.toLowerCase() }>{ lesson.course.difficulty }</Badge> }
+                                    {
+                                        // Renders a badge for the language if it exists
+                                        lesson.course.language.name &&
+                                        <Badge variant={ lesson.course.language.name as "Javascript" | "C#" | "C++" | "HTML/CSS" | "Ruby" | "Go" | "Php" | "Java" | "Mysql" | "Python" }>
+                                            { lesson.course.language.name }
+                                        </Badge>
+                                    }
+                                    {
+                                        // Renders a badge for the difficulty level if it exists
+                                        lesson.course.difficulty &&
+                                        <Badge variant={ lesson.course.difficulty }>
+                                            { lesson.course.difficulty }
+                                        </Badge>
+                                    }
                                     <Badge>5 000 points</Badge>
                                     <Badge>+100 000 xp</Badge>
                                 </div>
@@ -104,8 +122,9 @@ export default async function Page({
                         </Collapsible>
                     </CardHeader>
                 </Card>
-                <LessonContent description={ lesson.description } content={ lesson.content } />
+                <LessonContent />
             </LessonProvider>
         </>
+
     );
 };

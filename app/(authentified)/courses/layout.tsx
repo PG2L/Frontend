@@ -1,7 +1,6 @@
 import React from 'react';
 import GlobalBreadcrumb from '../../_components/GlobalBreadcrumb/GlobalBreadcrumb';
 import { getData } from '../../_lib/data';
-import CourseProvider from '../../_contexts/CourseProvider';
 
 /**
  * Renders the layout for the courses page.
@@ -24,9 +23,11 @@ export default async function CoursesLayout({
     const courses: Course[] = await getData("courses") as Course[];
 
     return (
+
         <div className="grid">
             <GlobalBreadcrumb courses={ courses } />
             { children }
         </div>
+
     );
 };

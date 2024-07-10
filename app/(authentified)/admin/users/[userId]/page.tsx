@@ -37,9 +37,11 @@ export default async function Page({
     const users: User[] = await getData("users") as User[];
 
     return (
+
         <div className="grid w-full grid-cols-1">
             <AdminHeader item={ user } content={ users } />
             <UserForm user={ user } />
         </div>
+
     );
 }

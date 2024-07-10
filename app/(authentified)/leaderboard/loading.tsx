@@ -9,6 +9,7 @@ import { Skeleton } from '../../_components/ui/skeleton';
 export default function Loading(): React.JSX.Element {
 
     return (
+
         <div className="grid items-center justify-center grid-cols-1 gap-6">
             <h1 className="text-xl font-medium text-center">Leaderboard</h1>
             <div className="grid gap-4">
@@ -19,11 +20,15 @@ export default function Loading(): React.JSX.Element {
                 <p>Keep learning, keep coding, and climb the ranks to become a web development superstar!</p>
                 <Skeleton className="h-10 w-1/4 mt-4" />
                 <div>
-                    { Array.from({ length: 10 }).map((_: unknown, index: number): React.JSX.Element => (
-                        <Skeleton key={ index } className="h-16 w-full mt-2" />
-                    )) }
+                    {
+                        // Mapping over an array of 10 undefined elements to render 10 skeleton placeholders.
+                        Array.from({ length: 10 }).map((_: unknown, index: number): React.JSX.Element => (
+                            <Skeleton key={ index } className="h-16 w-full mt-2" />
+                        ))
+                    }
                 </div>
             </div>
         </div>
+
     );
 }

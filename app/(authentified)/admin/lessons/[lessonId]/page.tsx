@@ -19,11 +19,11 @@ export default async function Page({
     /**
      * Retrieves the lesson data from the server.
      *
-     * @param {string} resource - The resource to fetch data from.
+     * @param {string} endpoint - The endpoint to fetch data from.
      * @param {string} lessonId - The ID of the lesson to retrieve.
      * @returns {Promise<Lesson>} - A promise that resolves to the lesson data.
      */
-    const lesson = await getData("lessons", params.lessonId) as Lesson;
+    const lesson: Lesson = await getData("lessons", Number(params.lessonId)) as Lesson;
 
 
     /**

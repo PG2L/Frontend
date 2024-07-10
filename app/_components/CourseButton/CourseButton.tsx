@@ -22,12 +22,12 @@ function StartButton(): React.JSX.Element {
     /**
      * Represents the current user.
      */
-    const user: User = useContext(UserContext);
+    const user: User = useContext(UserContext) as User;
 
     /**
      * Represents the current course.
      */
-    const course: Course = useContext(CourseContext);
+    const course: Course = useContext(CourseContext) as Course;
 
     /**
      * Represents the router instance used in the component.
@@ -35,12 +35,14 @@ function StartButton(): React.JSX.Element {
     const router: AppRouterInstance = useRouter();
 
     return (
+
         <Button className="w-1/2 " onClick={ async (): Promise<void> => {
             await addCourseToUser(course.id, user.id);
             router.push(`/courses/${course.id}/${course.lessons[0].id}`);
         } }>
             Start course
         </Button>
+
     );
 }
 

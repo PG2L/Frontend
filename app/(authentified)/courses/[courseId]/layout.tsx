@@ -33,9 +33,10 @@ export default async function CourseShowLayout({
      * @param {string} courseId - The ID of the course to retrieve.
      * @returns {Promise<Course>} - A promise that resolves to the course data.
      */
-    const course: Course = await getData("courses", params.courseId) as Course;
+    const course: Course = await getData("courses", Number(params.courseId)) as Course;
 
     return (
+
         <CourseProvider course={ course }>
             <div className="grid md:flex gap-4 lg:gap-6 grid-cols-1 rounded-lg mt-6">
                 <Suspense fallback={
@@ -50,9 +51,12 @@ export default async function CourseShowLayout({
                             <div className="p-4">
                                 <Separator />
                                 <ul className="grid gap-2 p-6">
-                                    { Array.from({ length: 6 }).map((_: unknown, index: number): React.JSX.Element => (
-                                        <Skeleton key={ index } className="h-12 w-full" />
-                                    )) }
+                                    {
+                                        // Create an array of 6 elements and map over it to render a skeleton element for each.
+                                        Array.from({ length: 6 }).map((_: unknown, index: number): React.JSX.Element => (
+                                            <Skeleton key={ index } className="h-12 w-full" />
+                                        ))
+                                    }
                                 </ul>
                                 <Separator />
                             </div>
@@ -65,7 +69,9 @@ export default async function CourseShowLayout({
                     <div className="hidden md:flex flex-col w-1/4 min-w-[250px]">
                         <div className="sticky top-6 h-fit">
                             <Card className="h-fit border-primary border hover:scale-[1.01]">
-                                <Link href={ `/courses/${params.courseId}` }>
+                                <Link
+                                    href={ `/courses/${params.courseId}` } // Link to the course page
+                                >
                                     <CardHeader className="flex justify-center items-center gap-4 rounded h-fit">
                                         <Suspense fallback={
                                             <Skeleton className="w-full h-6" />
@@ -81,8 +87,20 @@ export default async function CourseShowLayout({
                                             </div>
                                         }>
                                             <div className="flex flex-wrap gap-1 justify-center w-3/4">
-                                                { course.language && course.language.name && <Badge variant={ course.language.name.toLowerCase() }>{ course.language.name }</Badge> }
-                                                { course.difficulty && <Badge variant={ course.difficulty.toLowerCase() }>{ course.difficulty }</Badge> }
+                                                {
+                                                    // Renders a badge for the language if it exists
+                                                    course.language.name &&
+                                                    <Badge variant={ course.language.name as "Javascript" | "C#" | "C++" | "HTML/CSS" | "Ruby" | "Go" | "Php" | "Java" | "Mysql" | "Python" }>
+                                                        { course.language.name }
+                                                    </Badge>
+                                                }
+                                                {
+                                                    // Renders a badge for the difficulty level if it exists
+                                                    course.difficulty &&
+                                                    <Badge variant={ course.difficulty }>
+                                                        { course.difficulty }
+                                                    </Badge>
+                                                }
                                                 <Badge>{ course.points_gain } points</Badge>
                                                 <Badge>+{ course.exp_gain } xp</Badge>
                                             </div>
@@ -99,5 +117,6 @@ export default async function CourseShowLayout({
                 </div>
             </div>
         </CourseProvider>
+
     );
 }

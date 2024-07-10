@@ -25,6 +25,7 @@ export default async function Page(): Promise<React.JSX.Element> {
     const sortedUsers: User[] = users.sort((a: User, b: User): number => b.total_points - a.total_points);
 
     return (
+
         <div className="grid items-center justify-center grid-cols-1 gap-6">
             <h1 className="text-xl font-medium text-center">Leaderboard</h1>
             <div className="grid gap-4">
@@ -36,5 +37,6 @@ export default async function Page(): Promise<React.JSX.Element> {
             </div>
             <Leaderboard users={ sortedUsers } />
         </div>
+
     );
 }

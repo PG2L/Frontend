@@ -17,6 +17,7 @@ export default function UnauthentifiedLayout({
 }): React.JSX.Element {
 
     return (
+
         <>
             <div className="flex flex-col min-h-screen">
                 <Header />
@@ -27,5 +28,6 @@ export default function UnauthentifiedLayout({
                 <Footer />
             </div>
         </>
+
     );
 };

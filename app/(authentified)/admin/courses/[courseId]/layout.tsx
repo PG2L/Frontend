@@ -33,9 +33,10 @@ export default async function AdminCourseEditLayout({
      * @param {string} courseId - The ID of the course to retrieve.
      * @returns {Promise<Course>} - A promise that resolves to the course data.
      */
-    const course: Course = await getData("courses", params.courseId) as Course;
+    const course: Course = await getData("courses", Number(params.courseId)) as Course;
 
     return (
+
         <div className="grid w-full grid-cols-1">
             <Suspense fallback={
                 <div className="md:flex grid items-center gap-6">
@@ -47,5 +48,6 @@ export default async function AdminCourseEditLayout({
             </Suspense>
             { children }
         </div>
+
     );
 }

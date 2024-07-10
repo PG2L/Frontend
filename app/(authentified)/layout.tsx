@@ -38,22 +38,40 @@ export default async function AuthentifiedLayout({
      * @param userId - The ID of the user to retrieve data for.
      * @returns A Promise that resolves to the user data.
      */
-    const user: User = await getData("users", parseInt(userId)) as User;
+    const user: User = await getData("users", Number(userId)) as User;
 
     return (
+
         <div className="flex justify-between">
+
+            {/* UserProvider component wraps the layout to provide user context to all child components */ }
             <UserProvider user={ user }>
+
+                {/* MainMenu component, typically contains navigation links */ }
                 <MainMenu />
+
+                {/* ScrollArea component to allow scrolling through the main content area */ }
                 <ScrollArea className="grid w-full max-h-screen">
+
+                    {/* Main content area where child components are rendered */ }
                     <div className="p-6">
                         { children }
                     </div>
+
+                    {/* Frequently Asked Questions section */ }
                     <FAQ />
+
+                    {/* Footer component, typically contains copyright and other site information */ }
                     <Footer />
+
+                    {/* ScrollBar component to enhance the scrolling experience */ }
                     <ScrollBar />
                 </ScrollArea>
+
+                {/* ProfileSidebar component, provides user-specific navigation or information */ }
                 <ProfileSidebar />
             </UserProvider>
         </div>
+
     );
 };

@@ -5,7 +5,7 @@
  * @returns A Promise that resolves to void.
  */
 export async function updateUserPoints(userId: number, points: number): Promise<void> {
-    
+
     try {
         const res: Response = await fetch(
             `http://localhost:8000/users/${userId}`,

@@ -8,6 +8,7 @@ import { Skeleton } from '../../../../_components/ui/skeleton';
 export default function Loading(): React.JSX.Element {
 
     return (
+
         <div className="grid gap-10 md:gap-12 mt-12">
             <Skeleton className="w-full h-10" />
             <Skeleton className="w-full h-24" />
@@ -29,5 +30,6 @@ export default function Loading(): React.JSX.Element {
             </div>
             <Skeleton className="w-24 h-10 justify-self-center" />
         </div>
+
     );
 }

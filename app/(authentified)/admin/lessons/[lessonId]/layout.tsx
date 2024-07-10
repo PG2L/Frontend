@@ -34,12 +34,14 @@ export default async function AdminLessonEditLayout({
      * @param {string} lessonId - The ID of the lesson to retrieve.
      * @returns {Promise<Lesson>} - A promise that resolves to the lesson data.
      */
-    const lesson: Lesson = await getData("lessons", params.lessonId) as Lesson;
+    const lesson: Lesson = await getData("lessons", Number(params.lessonId)) as Lesson;
 
     return (
+
         <div className="grid w-full grid-cols-1">
             <AdminHeader item={ lesson } content={ lessons } />
             { children }
         </div>
+
     );
 }

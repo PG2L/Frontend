@@ -20,10 +20,15 @@ export default function RootLayout({
 }): React.JSX.Element {
 
     return (
+
         <html lang="en">
             <body>
+
+                {/* DarkModeProvider component wraps the entire application to provide dark mode context */ }
                 <DarkModeProvider>
                     <div className="flex flex-col" id="layout" data-testid="layout">
+
+                        {/* Main content area where child components are rendered */ }
                         <main>
                             { children }
                         </main>
@@ -31,5 +36,6 @@ export default function RootLayout({
                 </DarkModeProvider>
             </body>
         </html>
+
     );
 }

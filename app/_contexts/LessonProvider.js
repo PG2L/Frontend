@@ -19,10 +19,10 @@ export const LessonContext = createContext();
 export default function LessonProvider({ children, lesson }) {
 
     return (
-        <>
-            <LessonContext.Provider value={lesson} >
-                { children }
-            </LessonContext.Provider>
-        </>
+
+        <LessonContext.Provider value={lesson} >
+            { children }
+        </LessonContext.Provider>
+
     )
 }
