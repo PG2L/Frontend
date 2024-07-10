@@ -1,16 +1,36 @@
 "use client";
 
-import React, { FC, Suspense } from 'react';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form';
+import React, {
+    FC,
+    Suspense
+} from 'react';
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage
+} from '../../ui/form';
 import { Button } from '../../ui/button';
 import { Textarea } from '../../ui/textarea';
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '../../ui/select';
+import {
+    Select,
+    SelectTrigger,
+    SelectValue,
+    SelectContent,
+    SelectItem
+} from '../../ui/select';
 import { Input } from '../../ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Skeleton } from '../../ui/skeleton';
-import { RadioGroup, RadioGroupItem } from '../../ui/radio-group';
+import {
+    RadioGroup,
+    RadioGroupItem
+} from '../../ui/radio-group';
 
 /**
  * Represents the form schema for the course form.

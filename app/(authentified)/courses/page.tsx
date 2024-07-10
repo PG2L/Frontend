@@ -28,14 +28,12 @@ export default async function Page(): Promise<React.JSX.Element> {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between py-6 gap-4 lg:gap-6 bg-background w-full">
                 <Suspense fallback={
-                    // Create an array of 12 elements and map over it to render a skeleton element for each.
-                    Array.from({ length: 12 }).map((_: unknown, index: number): React.JSX.Element => (
+                    Array.from({ length: 12 }).map((_: unknown, index: number): React.JSX.Element => ( // Create an array of 12 elements and map over it to render a skeleton element for each.
                         <Skeleton key={ index } className="w-full rounded-lg h-72" />
                     ))
                 }>
                     {
-                        // Map over the courses array to render a CourseCard component for each course.
-                        courses.map((course: Course, index: number): React.JSX.Element => (
+                        courses.map((course: Course, index: number): React.JSX.Element => ( // Map over the courses array to render a CourseCard component for each course.
                             <CourseCard key={ index } course={ course } />
                         ))
                     }

@@ -1,10 +1,17 @@
 "use client";
 
-import React, { FC, useEffect, useState, useContext } from 'react';
+import React, { FC } from 'react';
 import styles from './GlobalBreadcrumb.module.css';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '../ui/breadcrumb';
+import {
+    Breadcrumb,
+    BreadcrumbList,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbSeparator,
+    BreadcrumbPage
+} from '../ui/breadcrumb';
 
 interface GlobalBreadcrumbProps {
     courses: Course[],
@@ -53,8 +60,9 @@ const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = ({
     });
 
     return (
+
         <>
-            { pathNames.length > 1 &&
+            { pathNames.length > 1 && // Conditional rendering based on the length of pathNames
                 <nav>
                     <Breadcrumb>
                         <BreadcrumbList>
@@ -88,6 +96,7 @@ const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = ({
                 </nav >
             }
         </>
+
     );
 };
 

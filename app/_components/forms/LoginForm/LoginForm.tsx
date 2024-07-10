@@ -2,11 +2,25 @@
 
 import React, { FC } from 'react';
 import styles from './LoginForm.module.css';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/card';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle
+} from '../../ui/card';
 import Link from 'next/link';
 import { Button } from '../../ui/button';
 import { Input } from '../../ui/input';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form';
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage
+} from '../../ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';

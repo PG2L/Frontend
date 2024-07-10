@@ -1,13 +1,30 @@
 "use client";
 
-import React, { FC, Suspense } from 'react';
+import React, {
+    FC,
+    Suspense
+} from 'react';
 import styles from './LessonForm.module.css';
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { FormControl, FormField, FormItem, FormLabel, Form, FormMessage, FormDescription } from '../../ui/form';
+import {
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    Form,
+    FormMessage,
+    FormDescription
+} from '../../ui/form';
 import { Textarea } from '../../ui/textarea';
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '../../ui/select';
+import {
+    Select,
+    SelectTrigger,
+    SelectValue,
+    SelectContent,
+    SelectItem
+} from '../../ui/select';
 import { Input } from '../../ui/input';
 import { Button } from '../../ui/button';
 import { Skeleton } from '../../ui/skeleton';

@@ -186,8 +186,7 @@ export default async function Page(): Promise<React.JSX.Element> {
             <div className="w-full flex gap-6">
                 <div className="grid gap-4 w-full">
                     {
-                        // Mapping the first 4 elements of the menuContent array to JSX elements.
-                        menuContent.map((item: {
+                        menuContent.map((item: { // Mapping the first 4 elements of the menuContent array to JSX elements.
                             name: string;
                             content: {
                                 name: string;
@@ -213,8 +212,7 @@ export default async function Page(): Promise<React.JSX.Element> {
                 </div>
                 <div className="grid gap-4 w-full">
                     {
-                        // Mapping the last 5 elements of the menuContent array to JSX elements.
-                        menuContent.map((item: {
+                        menuContent.map((item: { // Mapping the last 5 elements of the menuContent array to JSX elements.
                             name: string;
                             content: {
                                 name: string;
@@ -225,8 +223,7 @@ export default async function Page(): Promise<React.JSX.Element> {
                                 <div key={ index } className="flex flex-col">
                                     <h2 className=" font-medium mb-2">{ item.name }</h2>
                                     {
-                                        // Mapping over the content array to render the content.
-                                        item.content.map((content: {
+                                        item.content.map((content: { // Mapping over the content array to render the content.
                                             name: string;
                                             value: number;
                                         }, index: number): React.JSX.Element => (

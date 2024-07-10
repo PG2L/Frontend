@@ -1,10 +1,19 @@
 import React from 'react';
 import { Badge } from "../../../../_components/ui/badge";
-import { Card, CardContent, CardFooter, CardHeader } from '../../../../_components/ui/card';
+import {
+    Card,
+    CardContent,
+    CardFooter,
+    CardHeader
+} from '../../../../_components/ui/card';
 import * as icons from 'lucide-react';
 import { Button } from '../../../../_components/ui/button';
 import Link from 'next/link';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../../../_components/ui/collapsible';
+import {
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger
+} from '../../../../_components/ui/collapsible';
 import { getData } from '../../../../_lib/data';
 import LessonContent from '../../../../_components/LessonContent/LessonContent';
 import LessonProvider from '../../../../_contexts/LessonProvider';
@@ -59,15 +68,13 @@ export default async function Page({
                                 </div>
                                 <div className="flex gap-1 flex-wrap">
                                     {
-                                        // Renders a badge for the language if it exists
-                                        lesson.course.language.name &&
+                                        lesson.course.language.name && // Renders a badge for the language if it exists
                                         <Badge variant={ lesson.course.language.name as "Javascript" | "C#" | "C++" | "HTML/CSS" | "Ruby" | "Go" | "Php" | "Java" | "Mysql" | "Python" }>
                                             { lesson.course.language.name }
                                         </Badge>
                                     }
                                     {
-                                        // Renders a badge for the difficulty level if it exists
-                                        lesson.course.difficulty &&
+                                        lesson.course.difficulty && // Renders a badge for the difficulty level if it exists
                                         <Badge variant={ lesson.course.difficulty }>
                                             { lesson.course.difficulty }
                                         </Badge>

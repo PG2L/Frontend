@@ -1,4 +1,7 @@
-import React, { FC, useContext } from 'react';
+import React, {
+    FC,
+    useContext
+} from 'react';
 import { Switch } from '../ui/switch';
 import * as icons from 'lucide-react';
 import { DarkModeContext } from '../../_contexts/DarkModeProvider';
@@ -38,9 +41,10 @@ const DarkModeToggle: FC<DarkModeToggleProps> = ({ }: DarkModeToggleProps): Reac
                 aria-label="Dark mode toggle" // Accessibility label for the switch
                 id="dark-mode-toggle" // ID for the switch element
             />
-
-            {/* Moon icon indicating dark mode, with specified height and width */ }
-            <icons.Moon height={ 20 } width={ 20 } />
+            <icons.Moon // Moon icon for dark mode
+                height={ 20 }
+                width={ 20 }
+            />
         </div>
 
     );

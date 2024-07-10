@@ -1,4 +1,9 @@
-import { Card, CardHeader, CardContent, CardFooter } from '../../../_components/ui/card';
+import {
+    Card,
+    CardHeader,
+    CardContent,
+    CardFooter
+} from '../../../_components/ui/card';
 import React from 'react';
 import { Skeleton } from '../../../_components/ui/skeleton';
 
@@ -37,15 +42,20 @@ export default function Loading(): React.JSX.Element {
                 </CardFooter>
             </Card>
             <div className="grid gap-2">
-                { Array.from({ length: 25 }).map((_: unknown, index: number): React.JSX.Element => {
-                    if (index % 8 === 0) {
-                        return <br key={ index } />;
-                    } else {
-                        return <Skeleton key={ index } className={ `h-6 ${(index % 2 === 0) ? 'w-full' : 'w-[95%]'}` } />;
-                    }
-                }) }
+                {
+                    Array.from({ length: 25 }).map((_: unknown, index: number): React.JSX.Element => { // Create an array of 25 elements and map over it to render a skeleton element for each.
+                        if (index % 8 === 0) {
+                            return <br key={ index } />;
+                        } else {
+                            return <Skeleton key={ index } className={
+                                `h-6 ` +
+                                `${(index % 2 === 0) ? 'w-full' : 'w-[95%]'}` // Conditional width based on index
+                            } />;
+                        }
+                    })
+                }
             </div>
         </>
 
     );
-}
+};

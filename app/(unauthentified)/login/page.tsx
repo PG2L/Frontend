@@ -1,5 +1,10 @@
 import React from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../_components/ui/tabs';
+import {
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger
+} from '../../_components/ui/tabs';
 import LoginForm from '../../_components/forms/LoginForm/LoginForm';
 import SigninForm from '../../_components/forms/SigninForm/SigninForm';
 

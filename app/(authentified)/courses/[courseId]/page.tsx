@@ -1,7 +1,16 @@
 import { Badge } from '../../../_components/ui/badge';
 import { Button } from '../../../_components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader } from '../../../_components/ui/card';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../../_components/ui/collapsible';
+import {
+    Card,
+    CardContent,
+    CardFooter,
+    CardHeader
+} from '../../../_components/ui/card';
+import {
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger
+} from '../../../_components/ui/collapsible';
 import * as icons from 'lucide-react';
 import React from 'react';
 import { getData } from '../../../_lib/data';
@@ -45,15 +54,13 @@ export default async function Page({
                             <h1 className="text-lg font-medium">{ course.title }</h1>
                             <div className="flex gap-1 flex-wrap">
                                 {
-                                    // Render a language badge if the course has a language.
-                                    course.language.name &&
+                                    course.language.name && // Render a language badge if the course has a language.
                                     <Badge variant={ course.language.name as "Javascript" | "C#" | "C++" | "HTML/CSS" | "Ruby" | "Go" | "Php" | "Java" | "Mysql" | "Python" }>
                                         { course.language.name }
                                     </Badge>
                                 }
                                 {
-                                    // Render a category badge if the course has a category.
-                                    course.difficulty &&
+                                    course.difficulty && // Render a category badge if the course has a category.
                                     <Badge variant={ course.difficulty }>
                                         { course.difficulty }
                                     </Badge>
@@ -105,7 +112,7 @@ export default async function Page({
                     <Collapsible className="text-lg font-medium">
                         <CollapsibleTrigger asChild>
                             <div className="flex items-center justify-between">
-                                <h2 className=" font-medium">Included lessons</h2>
+                                <h2 className="font-medium">Included lessons</h2>
                                 <Button variant="ghost">
                                     <icons.ChevronDown />
                                 </Button>
@@ -114,10 +121,8 @@ export default async function Page({
                         <CollapsibleContent>
                             <div className="grid gap-4 mt-4">
                                 {
-                                    // Render the lessons if they exist.
-                                    course.lessons &&
-                                    // Map over the lessons and render them.
-                                    course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => (
+                                    course.lessons && // Render the lessons if they exist.
+                                    course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => ( // Map over the lessons and render them each in a card.
                                         <Card key={ index }>
                                             <CardHeader>
                                                 <h2>{ lesson.title }</h2>

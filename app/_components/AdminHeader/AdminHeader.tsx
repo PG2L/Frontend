@@ -72,8 +72,8 @@ const AdminHeader: FC<AdminHeaderProps> = ({
                         <SelectContent>
                             { content.map((contentItem: User | Course | Lesson): React.JSX.Element => (
                                 <SelectItem
-                                    key={ contentItem.id } // Unique key for each item
-                                    value={ contentItem.id.toString() } // Value of the item, converted to string
+                                    key={ contentItem.id }
+                                    value={ contentItem.id.toString() }
                                 >
                                     { contentItem.id } - { ("title" in contentItem) ? // Displaying the ID and title or email of the content item
                                         (contentItem as Course | Lesson).title

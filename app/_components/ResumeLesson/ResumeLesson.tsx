@@ -1,8 +1,14 @@
 "use client";
 
-import React, { FC, useContext } from 'react';
+import React, {
+    FC,
+    useContext
+} from 'react';
 import styles from './ResumeLesson.module.css';
-import { ScrollArea, ScrollBar } from '../ui/scroll-area';
+import {
+    ScrollArea,
+    ScrollBar
+} from '../ui/scroll-area';
 import { UserContext } from '../../_contexts/UserProvider';
 import LessonCard from '../LessonCard/LessonCard';
 
@@ -33,14 +39,11 @@ const ResumeLesson: FC<ResumeLessonProps> = (): React.JSX.Element => {
     return (
 
         <div className="grid">
-            {/* Title for the resume section */ }
             <h1 className="text-2xl">Resume</h1>
-            {/* Scrollable area to display course cards */ }
             <ScrollArea>
                 <div className="w-full p-6 flex gap-6 items-center justify-start">
                     {
-                        // Mapping over userCourses to create a LessonCard for each course
-                        userCourses.map((userCourse: any, index: number): React.JSX.Element => (
+                        userCourses.map((userCourse: any, index: number): React.JSX.Element => ( // Mapping over userCourses to create a LessonCard for each course
                             <LessonCard key={ index } className="min-w-72" userCourse={ userCourse } />
                         ))
                     }

@@ -220,7 +220,6 @@ export default function DataTableDemo({
                     className="max-w-sm"
                 />
             </div>
-            {/* Table container */ }
             <div className="rounded-md">
                 <Table>
                     {/* Table header rendering */ }

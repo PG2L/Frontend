@@ -1,15 +1,29 @@
 "use client";
 
-import React, { FC, useContext } from 'react';
+import React, {
+    FC,
+    useContext
+} from 'react';
 import { Badge } from '../ui/badge';
 import * as icons from 'lucide-react';
 import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
-import { Avatar, AvatarImage } from '../ui/avatar';
+import {
+    Avatar,
+    AvatarImage
+} from '../ui/avatar';
 import { Progress } from '../ui/progress';
-import { Select, SelectContent, SelectItem, SelectTrigger } from '../ui/select';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger
+} from '../ui/select';
 import DarkModeToggle from '../DarkModeToggle/DarkModeToggle';
-import { ScrollArea, ScrollBar } from '../ui/scroll-area';
+import {
+    ScrollArea,
+    ScrollBar
+} from '../ui/scroll-area';
 import { UserContext } from '../../_contexts/UserProvider';
 import { getLevelByExp } from '../../_lib/levels';
 
@@ -52,17 +66,15 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                         size="sm"
                     >
                         {
-                            // Ternary operator to display the correct icon based on the sidebar's open/closed status
-                            isOpen ?
+                            isOpen ? // Ternary operator to display the correct icon based on the sidebar's open/closed status
                                 <icons.ChevronRightIcon className="h-6 w-6" />
                                 : <icons.ChevronLeftIcon className="h-6 w-6" />
                         }
                     </Button>
                 </div>
                 {
-                    // Ternary operator to display the sidebar content based on the sidebar's open/closed status
-                    isOpen ?
-                        <ScrollArea className={ `flex flex-col items-start border-l min-h-screen gap-4 justify-between py-6 px-6 sticky` }>
+                    isOpen ? // Ternary operator to display the sidebar content based on the sidebar's open/closed status
+                        <ScrollArea className="flex flex-col items-start border-l min-h-screen gap-4 justify-between py-6 px-6 sticky">
                             <div>
                                 <div className="items-center justify-center flex">
                                     <icons.UserCircleIcon className={ `h-20 w-20` } strokeWidth={ 1 } color="#1461cc" />
@@ -70,15 +82,9 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                                 <div className="grid gap-4 justify-items-center">
                                     <div className="grid justify-items-center justify-center">
                                         <div className="grid items-center justify-items-center">
-                                            <h1 className="text-2xl font-medium text-center">{
-                                                // Displays the user's username
-                                                user.username
-                                            }</h1>
+                                            <h1 className="text-2xl font-medium text-center">{ user.username }</h1>
                                             <div className="flex items-center text-center justify-center ">
-                                                <div className="text-muted-foreground">Lvl {
-                                                    // Displays the user's level
-                                                    level.level
-                                                }</div>
+                                                <div className="text-muted-foreground">Lvl { level.level }</div>
                                                 <icons.Dot className="h-8 w-8 text-primary" />
                                                 <div className="text-muted-foreground">Rank 1</div>
                                             </div>
@@ -93,7 +99,7 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                                     </div>
                                 </div>
                                 <Separator className="mt-4" />
-                                <div className={ `mt-4 grid rounded-lg bg-background p-2 border !flex justify-around items-center` }>
+                                <div className="mt-4 grid rounded-lg bg-background p-2 border !flex justify-around items-center">
                                     <div className="flex">
                                         { user.total_exp }
                                         <icons.MedalIcon className="ms-1 h-6 w-6 text-primary" strokeWidth={ 1 } />
@@ -104,8 +110,7 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                                     </div>
                                     <div className="flex">
                                         {
-                                            // Filters the completed courses and counts them
-                                            user.courses.filter((course: UserCourse): boolean => course.completion_status === "completed").length
+                                            user.courses.filter((course: UserCourse): boolean => course.completion_status === "completed").length // Filters the completed courses and counts them
                                         }
                                         <icons.BookCheck className="ms-1 h-6 w-6 text-primary" strokeWidth={ 1 } />
                                     </div>
@@ -187,7 +192,7 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className={ `items-center w-full flex justify-between` }>
+                                <div className="items-center w-full flex justify-between">
                                     <DarkModeToggle />
                                     <Select>
                                         <SelectTrigger className="w-fit flex gap-2">
@@ -204,14 +209,17 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                             </div >
                             <ScrollBar />
                         </ScrollArea >
-                        :
+                        : // Sidebar content when closed
                         <div className="items-center flex flex-col justify-between py-6 px-2 border-l">
                             <div>
                                 <div className="items-center justify-center flex">
-                                    <icons.UserCircleIcon className={ `h-16 w-16` } strokeWidth={ 1 } color="#1461cc" />
+                                    <icons.UserCircleIcon className="h-16 w-16" strokeWidth={ 1 } color="#1461cc" />
                                 </div>
                                 <Separator className="mt-4" />
-                                <div className={ `mt-4 grid rounded-lg bg-background p-2 border ${isOpen ? '!flex justify-around items-center' : 'justify-items-end items-end gap-2'}` }>
+                                <div className={
+                                    `mt-4 grid rounded-lg bg-background p-2 border ` +
+                                    `${isOpen ? '!flex justify-around items-center' : 'justify-items-end items-end gap-2'}` // Conditional classes based on isOpen state
+                                }>
                                     <div className="flex">
                                         { user.total_exp }
                                         <icons.MedalIcon className="ms-1 h-6 w-6 text-primary" strokeWidth={ 1 } />
@@ -229,7 +237,7 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                                 </div>
                             </div>
                             <div>
-                                <div className={ `items-center w-full grid gap-4` }>
+                                <div className="items-center w-full grid gap-4">
                                     <DarkModeToggle />
                                     <Select>
                                         <SelectTrigger className="w-fit flex gap-2">

@@ -116,23 +116,17 @@ const Header: FC<HeaderProps> = (): React.JSX.Element => {
 
         <header className="py-3 bg-card border-solid border-b transition-all duration-0 w-full fixed top-0 z-50" id="header" data-testid="header">
             <div className="container flex justify-between items-center flex gap-6">
-                {/* Sidebar and logo section */ }
                 <div className="flex justify-between items-center">
-                    {/* Sidebar for mobile view */ }
                     <SideBar className="lg:hidden" />
-                    {/* Logo button for small to medium screens */ }
                     <Button asChild className="border-solid border border-black px-8 py-2 rounded hidden sm:block">
                         <Link href="/">Logo</Link>
                     </Button>
-                    {/* Navigation menu for large screens */ }
                     <NavigationMenu className="hidden lg:block ms-4">
                         <NavigationMenuList>
-                            {/* Getting started menu item */ }
                             <NavigationMenuItem>
                                 <NavigationMenuTrigger className="bg-card">Getting started</NavigationMenuTrigger>
                                 <NavigationMenuContent data-motion="horizontal">
                                     <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                                        {/* Featured section within the getting started menu */ }
                                         <li className="row-span-3">
                                             <NavigationMenuLink asChild>
                                                 <Link
@@ -150,7 +144,6 @@ const Header: FC<HeaderProps> = (): React.JSX.Element => {
                                                 </Link>
                                             </NavigationMenuLink>
                                         </li>
-                                        {/* List items for getting started section */ }
                                         <ListItem href="/docs" title="Introduction">
                                             Re-usable components built using Radix UI and Tailwind CSS.
                                         </ListItem>
@@ -163,7 +156,6 @@ const Header: FC<HeaderProps> = (): React.JSX.Element => {
                                     </ul>
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
-                            {/* Navigation menu item */ }
                             <NavigationMenuItem>
                                 <NavigationMenuTrigger className="bg-card">Navigation</NavigationMenuTrigger>
                                 <NavigationMenuContent>
@@ -184,7 +176,6 @@ const Header: FC<HeaderProps> = (): React.JSX.Element => {
                                     </ul>
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
-                            {/* Admin dashboard link */ }
                             <NavigationMenuItem>
                                 <Link href="/admin/courses/new" legacyBehavior passHref>
                                     <NavigationMenuLink className={ `${navigationMenuTriggerStyle()} bg-card` } >
@@ -195,21 +186,17 @@ const Header: FC<HeaderProps> = (): React.JSX.Element => {
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
-                {/* Search and user account section */ }
                 <div className="flex justify-between items-center">
                     <div className="flex justify-between items-center gap-4">
-                        {/* Search input for small to medium screens */ }
                         <div className="w-full max-w-sm items-center gap-2 hidden sm:flex">
                             <Input type="search" placeholder="Search..." />
                             <Button variant="ghost" type="submit" size="icon">
                                 <icons.Search />
                             </Button>
                         </div>
-                        {/* Dark mode toggle and user account menu */ }
                         <DarkModeToggle />
                         <NavigationMenu className="right-0">
                             <NavigationMenuList className="flex gap-2">
-                                {/* Sign in and log in menu items */ }
                                 <NavigationMenuItem>
                                     <NavigationMenuTrigger className="border-primary border bg-card">
                                         Sign In

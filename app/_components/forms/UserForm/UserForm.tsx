@@ -1,7 +1,18 @@
 "use client";
 
-import React, { FC, Suspense } from 'react';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form';
+import React, {
+    FC,
+    Suspense
+} from 'react';
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage
+} from '../../ui/form';
 import { Input } from '../../ui/input';
 import { Button } from '../../ui/button';
 import { useForm } from 'react-hook-form';

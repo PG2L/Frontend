@@ -1,6 +1,9 @@
 import React, { Suspense } from 'react';
 import Link from 'next/link';
-import { Card, CardHeader } from '../../../_components/ui/card';
+import {
+    Card,
+    CardHeader
+} from '../../../_components/ui/card';
 import { Badge } from '../../../_components/ui/badge';
 import { Skeleton } from '../../../_components/ui/skeleton';
 import CourseContentMenu from '../../../_components/CourseContentMenu/CourseContentMenu';
@@ -52,8 +55,7 @@ export default async function CourseShowLayout({
                                 <Separator />
                                 <ul className="grid gap-2 p-6">
                                     {
-                                        // Create an array of 6 elements and map over it to render a skeleton element for each.
-                                        Array.from({ length: 6 }).map((_: unknown, index: number): React.JSX.Element => (
+                                        Array.from({ length: 6 }).map((_: unknown, index: number): React.JSX.Element => ( // Create an array of 6 elements and map over it to render a skeleton element for each.
                                             <Skeleton key={ index } className="h-12 w-full" />
                                         ))
                                     }
@@ -88,15 +90,13 @@ export default async function CourseShowLayout({
                                         }>
                                             <div className="flex flex-wrap gap-1 justify-center w-3/4">
                                                 {
-                                                    // Renders a badge for the language if it exists
-                                                    course.language.name &&
+                                                    course.language.name && // Renders a badge for the language if it exists
                                                     <Badge variant={ course.language.name as "Javascript" | "C#" | "C++" | "HTML/CSS" | "Ruby" | "Go" | "Php" | "Java" | "Mysql" | "Python" }>
                                                         { course.language.name }
                                                     </Badge>
                                                 }
                                                 {
-                                                    // Renders a badge for the difficulty level if it exists
-                                                    course.difficulty &&
+                                                    course.difficulty && // Renders a badge for the difficulty level if it exists
                                                     <Badge variant={ course.difficulty }>
                                                         { course.difficulty }
                                                     </Badge>

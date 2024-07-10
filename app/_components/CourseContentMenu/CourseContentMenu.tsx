@@ -1,6 +1,10 @@
 "use client";
 
-import React, { FC, Suspense, useContext } from 'react';
+import React, {
+    FC,
+    Suspense,
+    useContext
+} from 'react';
 import styles from './CourseContentMenu.module.css';
 import { Skeleton } from '../ui/skeleton';
 import Link from 'next/link';
@@ -70,17 +74,23 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
             <nav className="px-6 mt-6 top-6 h-fit grid gap-6">
                 <Separator />
                 <ul className="grid gap-2">
-                    { course.lessons && course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => ( // Mapping over the lessons in the course
+                    { course.lessons && course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => ( // Mapping over the course lessons to create a list of skeleton buttons
                         <Suspense key={ index } fallback={
-                            <Skeleton className="w-full h-6" /> // Fallback loading skeleton for each lesson item
+                            <Skeleton className="w-full h-6" />
                         }>
                             <li>
                                 <Link
                                     href={ `/courses/${params.courseId}/${lesson.id}` } // Link to the lesson
                                 >
                                     <Button
-                                        variant={ `${userCourse && userCourse.progress === index ? 'outline' : 'ghost'}` } // Conditional variant based on the user's progress
-                                        className={ `text-muted-foreground w-full text-start font-normal text-wrap ${(lesson.id == Number(params.lessonId)) && "active"} ${userCourse && userCourse.progress <= index && "!text-foreground"}` } // Styles the button, highlighting if active
+                                        variant={
+                                            `${userCourse && userCourse.progress === index ? 'outline' : 'ghost'}` // Conditional variant based on the user's progress
+                                        }
+                                        className={
+                                            `text-muted-foreground w-full text-start font-normal text-wrap ` + // Common classes: text color, full width, text alignment, font, text wrapping
+                                            `${(lesson.id == Number(params.lessonId)) && "active"} ` + // Highlight the button if it's the current lesson
+                                            `${userCourse && userCourse.progress <= index && "!text-foreground"}` // Make text color more prominent if the lesson is within the user's progress
+                                        }
                                     >
                                         <h2 className="w-full">{ index + 1 } .  { lesson.title }</h2>
                                     </Button>
@@ -90,35 +100,36 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
                     )) }
                 </ul>
                 <Separator />
-                { params.hasOwnProperty('lessonId') ? // Check if the lessonId is present in the params
-                    <div className={ `flex gap-6 justify-between ${isFirstLesson && "!justify-end"}` }>
-                        { !isFirstLesson && // Check if the current lesson is the first lesson in the course
-                            <Link
-                                href={ `/courses/${params.courseId}/${Number(params.lessonId) - 1}` } // Link to the previous lesson
-                                className="justify-self-start"
-                            >
-                                <Button variant="ghost">
-                                    <icons.ChevronsLeft strokeWidth={ 1 } />
-                                </Button>
-                            </Link>
-                        }
-                        { !isLastLesson && // Check if the current lesson is the last lesson in the course 
-                            <Link
-                                href={ `/courses/${params.courseId}/${Number(params.lessonId) + 1}` } // Link to the next lesson
-                                className="justify-self-end"
-                            >
-                                <Button variant="ghost">
-                                    <icons.ChevronsRight strokeWidth={ 1 } />
-                                </Button>
-                            </Link>
-                        }
-                    </div>
-                    :
-                    <div className="w-full text-center px-6">
+                {
+                    params.hasOwnProperty('lessonId') ? // Check if the lessonId is present in the params
+                        <div className={ `flex gap-6 justify-between ${isFirstLesson && "!justify-end"}` }>
+                            { !isFirstLesson && // Check if the current lesson is the first lesson in the course
+                                <Link
+                                    href={ `/courses/${params.courseId}/${Number(params.lessonId) - 1}` } // Link to the previous lesson
+                                    className="justify-self-start"
+                                >
+                                    <Button variant="ghost">
+                                        <icons.ChevronsLeft strokeWidth={ 1 } />
+                                    </Button>
+                                </Link>
+                            }
+                            { !isLastLesson && // Check if the current lesson is the last lesson in the course 
+                                <Link
+                                    href={ `/courses/${params.courseId}/${Number(params.lessonId) + 1}` } // Link to the next lesson
+                                    className="justify-self-end"
+                                >
+                                    <Button variant="ghost">
+                                        <icons.ChevronsRight strokeWidth={ 1 } />
+                                    </Button>
+                                </Link>
+                            }
+                        </div>
+                        :
+                        <div className="w-full text-center px-6">
 
-                        {/* Button for course-related action, displayed if no lessonId is present in params */ }
-                        <CourseButton />
-                    </div>
+                            {/* Button for course-related action, displayed if no lessonId is present in params */ }
+                            <CourseButton />
+                        </div>
                 }
             </nav>
         </div>

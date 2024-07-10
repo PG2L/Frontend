@@ -1,4 +1,7 @@
-import { revalidatePath, revalidateTag } from "next/cache";
+import {
+    revalidatePath,
+    revalidateTag
+} from "next/cache";
 
 /**
  * Adds a course to a user.
