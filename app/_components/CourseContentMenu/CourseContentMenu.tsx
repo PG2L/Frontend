@@ -43,7 +43,7 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
      * @param {Course} course - The course object containing the lessons.
      * @returns {boolean} - True if the current lesson is the first lesson, false otherwise.
      */
-    const isFirstLesson: boolean = parseInt(params.lessonId.toString()) === course.lessons[0].id;
+    const isFirstLesson: boolean = parseInt(params.lessonId?.toString()) === course.lessons[0].id;
 
     /**
      * Checks if the current lesson is the last lesson in the course.
@@ -51,7 +51,7 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
      * @param {Course} course - The course object containing the lessons.
      * @returns {boolean} - True if the current lesson is the last lesson, false otherwise.
      */
-    const isLastLesson: boolean = parseInt(params.lessonId.toString()) === course.lessons[course.lessons.length - 1].id;
+    const isLastLesson: boolean = parseInt(params.lessonId?.toString()) === course.lessons[course.lessons.length - 1].id;
 
     /**
      * Retrieves the user from the UserContext.
@@ -87,9 +87,9 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
                                             `${userCourse && userCourse.progress === index ? 'outline' : 'ghost'}` // Conditional variant based on the user's progress
                                         }
                                         className={
-                                            `text-muted-foreground w-full text-start font-normal text-wrap ` + // Common classes: text color, full width, text alignment, font, text wrapping
+                                            `text-muted-foreground w-full text-start font-normal text-wrap ` +
                                             `${(lesson.id == Number(params.lessonId)) && "active"} ` + // Highlight the button if it's the current lesson
-                                            `${userCourse && userCourse.progress <= index && "!text-foreground"}` // Make text color more prominent if the lesson is within the user's progress
+                                            `${userCourse && userCourse.progress <= index && "!text-foreground"}` // Make text color more prominent if the lesson isn't completed
                                         }
                                     >
                                         <h2 className="w-full">{ index + 1 } .  { lesson.title }</h2>
