@@ -208,20 +208,20 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                     </Button>
                     <Separator className="mt-4" />
                 </div>
-                <div className="flex flex-col h-screen items-center justify-center z-50 ">
-                    <Button
-                        variant="ghost"
-                        onClick={ (): void => setIsOpen(!isOpen) } // Toggle the sidebar state on button click
-                        className="absolute !p-2 fixed"
-                        size="sm"
-                    >
-                        {
-                            isOpen ? // Conditional rendering of the chevron icons based on the sidebar state
-                                <icons.ChevronLeftIcon className="h-6 w-6" />
-                                : <icons.ChevronRightIcon className="h-6 w-6" />
-                        }
-                    </Button>
-                </div>
+            </div>
+            <div className="flex flex-col h-screen items-center justify-center z-50 ">
+                <Button
+                    variant="ghost"
+                    onClick={ (): void => setIsOpen(!isOpen) } // Toggle the sidebar state on button click
+                    className="absolute !p-2 fixed"
+                    size="sm"
+                >
+                    {
+                        isOpen ? // Conditional rendering of the chevron icons based on the sidebar state
+                            <icons.ChevronLeftIcon className="h-6 w-6" />
+                            : <icons.ChevronRightIcon className="h-6 w-6" />
+                    }
+                </Button>
             </div>
         </>
 
