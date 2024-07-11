@@ -1,6 +1,9 @@
 "use client";
 
-import React, { FC, Suspense } from "react";
+import React, {
+    FC,
+    Suspense
+} from "react";
 import styles from "./AdminHeader.module.css";
 import {
     Select,
@@ -13,8 +16,8 @@ import { redirect } from "next/navigation";
 import { Skeleton } from "../ui/skeleton";
 
 interface AdminHeaderProps {
-    item: Course | Lesson | User;
-    content: Course[] | Lesson[] | User[];
+    item: Course | Lesson | User | Assessment | Question;
+    content: Course[] | Lesson[] | User[] | Assessment[] | Question[];
 }
 
 /**
@@ -31,9 +34,9 @@ const AdminHeader: FC<AdminHeaderProps> = ({
 
     /**
      * Determines the context of the page.
-     * @type {"course" | "lesson" | "user"}
+     * @type {"course" | "lesson" | "user" | "assessment" | "question"}
      */
-    const pageContext: "course" | "lesson" | "user" = item.hasOwnProperty("email") ? "user" : item.hasOwnProperty("category") ? "course" : "lesson";
+    const pageContext: "user" | "course" | "lesson" | "assessment" | "question" = ("email" in item) ? "user" : ("language" in item) ? "course" : ("lesson_number" in item) ? "lesson" : ("questions" in item) ? "assessment" : "question";
 
     return (
 
@@ -52,9 +55,7 @@ const AdminHeader: FC<AdminHeaderProps> = ({
                     </h1>
                     <span className="text-foreground font-medium ms-2 w-full">
                         {
-                            ("title" in item) ? // Checking if the item has a title property
-                                (item as Course | Lesson).title // Casting item to Course or Lesson and displaying its title
-                                : item.email // If no title, display the item's email
+                            ("title" in item) ? item.title : ("email" in item) ? item.email : item.content // Displaying the title, email, or content of the item
                         }
                     </span>
                 </div>
@@ -70,15 +71,14 @@ const AdminHeader: FC<AdminHeaderProps> = ({
                             />
                         </SelectTrigger>
                         <SelectContent>
-                            { content.map((contentItem: User | Course | Lesson): React.JSX.Element => (
+                            { content.map((contentItem: User | Course | Lesson | Assessment | Question): React.JSX.Element => (
                                 <SelectItem
                                     key={ contentItem.id }
                                     value={ contentItem.id.toString() }
                                 >
                                     { contentItem.id } - { ("title" in contentItem) ? // Displaying the ID and title or email of the content item
-                                        (contentItem as Course | Lesson).title
-                                        : contentItem.email
-                                    }
+                                        contentItem.title
+                                        : ("email" in contentItem) ? contentItem.email : contentItem.content }
                                 </SelectItem>
                             )) }
                         </SelectContent>

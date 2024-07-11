@@ -81,6 +81,36 @@ const AdminMenu: FC<AdminMenuProps> = ({ }: AdminMenuProps): React.JSX.Element =
                 ]
             },
             {
+                title: "Assessments",
+                content: [
+                    {
+                        title: "Create a new assessment",
+                        href: "/admin/assessments/new",
+                        active: pageContext === "assessments" && contextSlug === "new",
+                    },
+                    {
+                        title: "Edit an existing assessment",
+                        href: "/admin/assessments/1",
+                        active: pageContext === "assessments" && contextSlug !== "new",
+                    }
+                ]
+            },
+            {
+                title: "Questions",
+                content: [
+                    {
+                        title: "Create a new question",
+                        href: "/admin/questions/new",
+                        active: pageContext === "questions" && contextSlug === "new",
+                    },
+                    {
+                        title: "Edit an existing question",
+                        href: "/admin/questions/1",
+                        active: pageContext === "questions" && contextSlug !== "new",
+                    }
+                ]
+            },
+            {
                 title: "Users",
                 content: [
                     {
