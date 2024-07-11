@@ -45,7 +45,9 @@ interface Assessment {
     id: number;
     title: string;
     description: string;
-    content: string;
+    questions: Question[];
+    max_score: number;
+    passing_score: number;
     lesson: Lesson;
 }
 
@@ -71,4 +73,14 @@ interface UserCourse {
     progress: number;
     completion_status: 'in-progress' | 'completed';
     completion_date: string;
+}
+
+interface Question {
+    id: number;
+    content: string;
+    type: 'mcq' | 'text';
+    description: string;
+    options: string[];
+    answer: string;
+    assessment: Assessment;
 }
