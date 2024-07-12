@@ -142,6 +142,7 @@ export default async function Page({
             <div className="text-muted-foreground">
                 { course.description }
             </div>
+            <CourseButton className="w-1/2 mx-auto" />
         </>
 
     );
