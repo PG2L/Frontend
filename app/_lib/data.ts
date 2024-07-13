@@ -4,11 +4,11 @@
  * @param id - Optional ID parameter for fetching specific data.
  * @returns A Promise that resolves to the fetched data.
  */
-export async function getData(endpoint: string, id?: number): Promise<any> {
+export async function getData(endpoint: string, id?: number, spec?: string): Promise<any> {
 
     try {
         const res: Response = await fetch(
-            `http://localhost:8000/${endpoint}${id ? `/${id}` : ''}`,
+            `http://localhost:8000/${endpoint}${id ? `/${id}` : ''}${spec ? `/${spec}` : '' }`,
             {
                 next:
                 {
