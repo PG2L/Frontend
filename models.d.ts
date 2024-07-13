@@ -80,7 +80,7 @@ interface Question {
     content: string;
     type: 'mcq' | 'text';
     description: string;
-    options: string[];
+    options: string;
     answer: string;
     assessment: Assessment;
 }

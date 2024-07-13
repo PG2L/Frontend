@@ -113,7 +113,7 @@ const QuestionForm: FC<QuestionFormProps> = ({
             } : {
                 content: '',
                 type: '',
-                options: [],
+                options: '',
                 answer: '',
                 assessment: 0,
             }
@@ -241,7 +241,7 @@ const QuestionForm: FC<QuestionFormProps> = ({
                                         <Input { ...field } />
                                     </FormControl>
                                     <FormDescription>
-                                        Enter the options for the question. This is required for multiple choice questions. There should be wrong answers only. Use &quot;/&quot; to add multiple options. (e.g: &quot;Option 1/Option 2/Option 3/Option 4&quot;)
+                                        Enter the options for the question. This is required for multiple choice questions. This must include the answer. Use &quot;/&quot; to add multiple options. (e.g: &quot;Option 1/Option 2/Option 3/Option 4&quot;)
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
