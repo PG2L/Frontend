@@ -66,12 +66,12 @@ const CourseButton: FC<CourseButtonProps> = ({
     /**
      * Represents the current user.
      */
-    const user: User = useContext(UserContext);
+    const user: User = useContext(UserContext) as User;
 
     /**
      * Represents the current course.
      */
-    const course: Course = useContext(CourseContext);
+    const course: Course = useContext(CourseContext) as Course;
 
     /**
      * Finds the user's course based on the course ID.
@@ -86,19 +86,17 @@ const CourseButton: FC<CourseButtonProps> = ({
         <>
             {
                 // Conditional rendering based on the user's course progress
-                userCourse && userCourse.completion_status === "in-progress" ?
-                    // If the course is in progress, display a "Continue" button linking to the next lesson
+                userCourse && userCourse.completion_status === "in-progress" ? // If the course is in progress, display a "Continue" button linking to the next lesson
                     <Link
                         href={ `/courses/${course.id}/${course.lessons[userCourse.progress].id}` } // Link to the next lesson
-                        className={ `w-full flex justify-end ${className}` }
+                        className={ `flex justify-end ${className}` }
                     >
                         <Button className="w-full">Continue</Button>
                     </Link>
                     :
-                    !userCourse ?
-                        <StartButton className={ className || '' } /> // If there is no userCourse, display the "StartButton" component
-                        :
-                        // If the course is completed, display a disabled "Completed" button
+                    !userCourse ? // If there is no userCourse, display the "StartButton" component
+                        <StartButton className={ `${className}` } />
+                        : // If the course is completed, display a disabled "Completed" button
                         <Button className={ `w-full ${className}` } disabled>
                             Completed
                         </Button>

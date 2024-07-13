@@ -1,6 +1,9 @@
 "use client";
 
-import React, { FC, useContext } from 'react';
+import React, {
+    FC,
+    useContext
+} from 'react';
 import { CourseContext } from '../../_contexts/CourseProvider';
 import { LessonContext } from '../../_contexts/LessonProvider';
 import { UserContext } from '../../_contexts/UserProvider';
@@ -13,6 +16,7 @@ import {
 import { updateUserExp } from '../../_lib/levels';
 import { updateUserPoints } from '../../_lib/points';
 import { useRouter } from 'next/navigation';
+import AssessmentModal from '../AssessmentModal/AssessmentModal';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 interface LessonContentProps { }
@@ -84,36 +88,39 @@ const LessonContent: FC<LessonContentProps> = ({ }: LessonContentProps): React.J
             { !isUnlock ? // Overlay if the lesson is locked
                 <div className="absolute h-full w-[102%] top-0 left-[-1%] backdrop-blur-sm select-none z-50 rounded"></div>
                 :
-                !isLastLesson ? // Button to navigate to the next lesson if it's not the last lesson
-                    <Button
-                        className="w-1/3 align-self-center justify-self-center"
-                        onClick={ async (): Promise<void> => {
-                            router.prefetch(`/courses/${course.id}/${lesson.id + 1}`);
-                            if (userCourse) {
-                                await updateCourseProgress(userCourse);
-                            }
-                            await updateUserPoints(user.id, user.total_points + lesson.points_gain);
-                            await updateUserExp(user.id, user.total_exp + lesson.exp_gain);
-                            router.push(`/courses/${course.id}/${lesson.id + 1}`); // Navigate to the next lesson
-                        } }
-                    >
-                        Next lesson
-                    </Button>
-                    : // Button to end the course if it's the last lesson
-                    <Button
-                        className="w-1/3 align-self-center justify-self-center"
-                        onClick={ async (): Promise<void> => {
-                            router.prefetch(`/courses/${course.id}`);
-                            if (userCourse) {
-                                await updateCourseCompletion(userCourse);
-                            }
-                            await updateUserPoints(user.id, user.total_points + course.points_gain);
-                            await updateUserExp(user.id, user.total_exp + course.exp_gain);
-                            router.push(`/courses/${course.id}`); // Navigate to the course page
-                        } }
-                    >
-                        End course
-                    </Button>
+                isUnlock && userCourse?.progress === lesson.lesson_number - 1 ? // Button to open assessment modal if the lesson is unlocked and the user hasn't completed it yet
+                    <AssessmentModal />
+                    :
+                    !isLastLesson ? // Button to navigate to the next lesson if it's not the last lesson
+                        <Button
+                            className="w-1/3 align-self-center justify-self-center"
+                            onClick={ async (): Promise<void> => {
+                                router.prefetch(`/courses/${course.id}/${lesson.id + 1}`);
+                                if (userCourse) {
+                                    await updateCourseProgress(userCourse);
+                                }
+                                await updateUserPoints(user.id, user.total_points + lesson.points_gain);
+                                await updateUserExp(user.id, user.total_exp + lesson.exp_gain);
+                                router.push(`/courses/${course.id}/${lesson.id + 1}`); // Navigate to the next lesson
+                            } }
+                        >
+                            Next lesson
+                        </Button>
+                        : // Button to end the course if it's the last lesson
+                        <Button
+                            className="w-1/3 align-self-center justify-self-center"
+                            onClick={ async (): Promise<void> => {
+                                router.prefetch(`/courses/${course.id}`);
+                                if (userCourse) {
+                                    await updateCourseCompletion(userCourse);
+                                }
+                                await updateUserPoints(user.id, user.total_points + course.points_gain);
+                                await updateUserExp(user.id, user.total_exp + course.exp_gain);
+                                router.push(`/courses/${course.id}`); // Navigate to the course page
+                            } }
+                        >
+                            End course
+                        </Button>
             }
         </div>
 
