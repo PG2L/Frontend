@@ -73,63 +73,68 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
         <div className="grid h-full gap-6">
             <nav className="px-6 mt-6 top-6 h-fit grid gap-6">
                 <Separator />
-                <ul className="grid gap-2">
-                    { course.lessons && course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => ( // Mapping over the course lessons to create a list of skeleton buttons
-                        <Suspense key={ index } fallback={
-                            <Skeleton className="w-full h-6" />
-                        }>
-                            <li>
-                                <Link
-                                    href={ `/courses/${params.courseId}/${lesson.id}` } // Link to the lesson
-                                >
-                                    <Button
-                                        variant={
-                                            `${userCourse && userCourse.progress === index ? 'outline' : 'ghost'}` // Conditional variant based on the user's progress
-                                        }
-                                        className={
-                                            `text-muted-foreground w-full text-start font-normal text-wrap ` +
-                                            `${(lesson.id == Number(params.lessonId)) && "active"} ` + // Highlight the button if it's the current lesson
-                                            `${userCourse && userCourse.progress <= index && "!text-foreground"}` // Make text color more prominent if the lesson isn't completed
-                                        }
+                <div className="flex relative">
+                    <ul className="grid gap-2 pe-6">
+                        { course.lessons && course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => ( // Mapping over the course lessons to create a list of skeleton buttons
+                            <Suspense key={ index } fallback={
+                                <Skeleton className="w-full h-6" />
+                            }>
+                                <li>
+                                    <Link
+                                        href={ `/courses/${params.courseId}/${lesson.id}` } // Link to the lesson
                                     >
-                                        <h2 className="w-full">{ index + 1 } .  { lesson.title }</h2>
-                                    </Button>
-                                </Link>
-                            </li>
-                        </Suspense>
-                    )) }
-                </ul>
-                <Separator />
-                {
-                    params.hasOwnProperty('lessonId') ? // Check if the lessonId is present in the params
-                        <div className={ `flex gap-6 justify-between ${isFirstLesson && "!justify-end"}` }>
-                            { !isFirstLesson && // Check if the current lesson is the first lesson in the course
+                                        <Button
+                                            variant={
+                                                `${userCourse && userCourse.progress === index ? 'outline' : 'ghost'}` // Conditional variant based on the user's progress
+                                            }
+                                            className={
+                                                `text-muted-foreground w-full text-start font-normal text-wrap ` +
+                                                `${(lesson.id == Number(params.lessonId)) && "active"} ` + // Highlight the button if it's the current lesson
+                                                `${userCourse && userCourse.progress <= index && "!text-foreground"}` // Make text color more prominent if the lesson isn't completed
+                                            }
+                                        >
+                                            <h2 className="w-full">{ index + 1 } .  { lesson.title }</h2>
+                                        </Button>
+                                    </Link>
+                                </li>
+                            </Suspense>
+                        )) }
+                    </ul>
+                    {
+                        params.hasOwnProperty('lessonId') && // Check if the lessonId is present in the params
+                        <div className={ `flex flex-col gap-6 justify-between absolute h-full right-[-36px] top-0 ${isFirstLesson && "!justify-end"}` }>
+                            {
+                                !isFirstLesson && // Check if the current lesson is the first lesson in the course
                                 <Link
                                     href={ `/courses/${params.courseId}/${Number(params.lessonId) - 1}` } // Link to the previous lesson
-                                    className="justify-self-start"
+                                    className="justify-self-start !h-fit"
                                 >
                                     <Button variant="ghost">
-                                        <icons.ChevronsLeft strokeWidth={ 1 } />
+                                        <icons.ChevronsUp strokeWidth={ 1 } />
                                     </Button>
                                 </Link>
                             }
-                            { !isLastLesson && // Check if the current lesson is the last lesson in the course 
+                            {
+                                !isLastLesson && // Check if the current lesson is the last lesson in the course 
                                 <Link
                                     href={ `/courses/${params.courseId}/${Number(params.lessonId) + 1}` } // Link to the next lesson
-                                    className="justify-self-end"
+                                    className="justify-self-end relative"
                                 >
                                     <Button variant="ghost">
-                                        <icons.ChevronsRight strokeWidth={ 1 } />
+                                        <icons.ChevronsDown strokeWidth={ 1 } />
                                     </Button>
                                 </Link>
                             }
                         </div>
-                        :
-                        <div className="w-full text-center px-6">
-
-                            {/* Button for course-related action, displayed if no lessonId is present in params */ }
-                            <CourseButton />
-                        </div>
+                    }
+                </div>
+                <Separator />
+                {
+                    !params.hasOwnProperty('lessonId') &&
+                    <div className="w-full text-center px-6">
+                        {/* Button for course-related action, displayed if no lessonId is present in params */ }
+                        <CourseButton />
+                    </div>
                 }
             </nav>
         </div>
