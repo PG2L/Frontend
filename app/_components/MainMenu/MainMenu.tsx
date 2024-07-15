@@ -15,6 +15,7 @@ import {
     TooltipTrigger,
 } from "@/_components/ui/tooltip";
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { Card } from '@/_components/ui/card';
 
 interface MainMenuProps { }
 
@@ -35,7 +36,7 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
      * @typedef {Object} MainMenuState
      * @property {boolean} isOpen - Indicates whether the MainMenu is open or closed.
      */
-    const [isOpen, setIsOpen] = React.useState(true);
+    const [isOpen, setIsOpen] = React.useState(false);
 
     /**
      * Retrieves the current pathname using the `usePathname` hook.
@@ -195,14 +196,25 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                     </div>
                 </div>
                 <div className="h-fit">
-                    <Button variant="ghost" onClick={ logout } className="w-full text-start fill-muted-foreground hover:fill-foreground text-muted-foreground hover:text-foreground">
-                        <div>
-                            { logoutButton }
-                        </div>
-                        { isOpen && // Conditionally rendered title based on sidebar state
-                            <span className="w-full ms-2">Logout</span>
-                        }
-                    </Button>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Card className="bg-background">
+                                    <Button variant="ghost" onClick={ logout } className="w-full text-start fill-muted-foreground hover:fill-foreground text-muted-foreground hover:text-foreground">
+                                        <div>
+                                            { logoutButton }
+                                        </div>
+                                        { isOpen && // Conditionally rendered title based on sidebar state
+                                            <span className="w-full ms-2">Logout</span>
+                                        }
+                                    </Button>
+                                </Card>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                Logout
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                     <Separator className="mt-4" />
                 </div>
             </div>
@@ -214,8 +226,8 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                     size="sm"
                 >
                     { isOpen ? // Conditional rendering of the chevron icons based on the sidebar state
-                        <icons.ChevronLeftIcon className="h-6 w-6" />
-                        : <icons.ChevronRightIcon className="h-6 w-6" />
+                        <icons.ChevronLeftIcon className="h-6 w-6" strokeWidth={ 1 } />
+                        : <icons.ChevronRightIcon className="h-6 w-6" strokeWidth={ 1 } />
                     }
                 </Button>
             </div>
