@@ -12,25 +12,21 @@ import {
     FormItem,
     FormLabel,
     FormMessage
-} from '../../ui/form';
-import { Button } from '../../ui/button';
-import { Textarea } from '../../ui/textarea';
+} from '@/_components/ui/form';
+import { Button } from '@/_components/ui/button';
+import { Textarea } from '@/_components/ui/textarea';
 import {
     Select,
     SelectTrigger,
     SelectValue,
     SelectContent,
     SelectItem
-} from '../../ui/select';
-import { Input } from '../../ui/input';
+} from '@/_components/ui/select';
+import { Input } from '@/_components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Skeleton } from '../../ui/skeleton';
-import {
-    RadioGroup,
-    RadioGroupItem
-} from '../../ui/radio-group';
+import { Skeleton } from '@/_components/ui/skeleton';
 
 /**
  * Represents the form schema for the assessment form.

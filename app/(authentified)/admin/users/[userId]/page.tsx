@@ -1,7 +1,7 @@
 import React from 'react';
-import UserForm from '../../../../_components/forms/UserForm/UserForm';
-import AdminHeader from '../../../../_components/AdminHeader/AdminHeader';
-import { getData } from '../../../../_lib/data';
+import UserForm from '@/_components/forms/UserForm/UserForm';
+import AdminHeader from '@/_components/AdminHeader/AdminHeader';
+import { getData } from '@/_lib/data';
 
 /**
  * Renders the page component for a specific user.

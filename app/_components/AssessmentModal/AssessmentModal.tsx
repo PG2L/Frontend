@@ -3,7 +3,7 @@ import React, {
     useContext
 } from 'react';
 import styles from './AssessmentModal.module.css';
-import { Button } from "../ui/button";
+import { Button } from "@/_components/ui/button";
 import {
     Dialog,
     DialogContent,
@@ -12,9 +12,9 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "../ui/dialog";
-import { AssessmentContext } from "../../_contexts/AssessmentProvider";
-import AssessmentModalForm from '../forms/AssessmentModalForm/AssessmentModalForm';
+} from "@/_components/ui/dialog";
+import { AssessmentContext } from "@/_contexts/AssessmentProvider";
+import AssessmentModalForm from '@/_components/forms/AssessmentModalForm/AssessmentModalForm';
 
 interface AssessmentModalProps { }
 

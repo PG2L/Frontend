@@ -15,8 +15,8 @@ import {
     useReactTable,
 } from "@tanstack/react-table";
 
-import { Button } from "../ui/button";
-import { Checkbox } from "../ui/checkbox";
+import { Button } from "@/_components/ui/button";
+import { Checkbox } from "@/_components/ui/checkbox";
 import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
@@ -25,8 +25,8 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { Input } from "../ui/input";
+} from "@/_components/ui/dropdown-menu";
+import { Input } from "@/_components/ui/input";
 import {
     Table,
     TableBody,
@@ -34,7 +34,7 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "../ui/table";
+} from "@/_components/ui/table";
 import { UserHoverCard } from "../UserHoverCard/UserHoverCard";
 
 /**

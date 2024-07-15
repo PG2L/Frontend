@@ -1,12 +1,12 @@
 import React from 'react';
-import { Badge } from "../../_components/ui/badge";
-import { Avatar } from "../../_components/ui/avatar";
-import { Card, CardFooter, CardHeader } from '../../_components/ui/card';
+import { Badge } from "@/_components/ui/badge";
+import { Avatar } from "@/_components/ui/avatar";
+import { Card, CardFooter, CardHeader } from '@/_components/ui/card';
 import * as icons from 'lucide-react';
-import { Skeleton } from '../../_components/ui/skeleton';
+import { Skeleton } from '@/_components/ui/skeleton';
 import Link from 'next/link';
-import { Button } from '../../_components/ui/button';
-import { getData } from '../../_lib/data';
+import { Button } from '@/_components/ui/button';
+import { getData } from '@/_lib/data';
 
 /**
  * Renders the page component for displaying lessons.

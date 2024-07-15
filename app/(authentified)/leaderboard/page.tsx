@@ -1,6 +1,6 @@
 import React from 'react';
-import Leaderboard from '../../_components/Leaderboard/Leaderboard';
-import { getData } from '../../_lib/data';
+import Leaderboard from '@/_components/Leaderboard/Leaderboard';
+import { getData } from '@/_lib/data';
 
 /**
  * Renders the Leaderboard page component.

@@ -3,7 +3,7 @@ import {
     Card,
     CardFooter,
     CardHeader
-} from '../ui/card';
+} from '@/_components/ui/card';
 import * as icons from 'lucide-react';
 import Link from 'next/link';
 

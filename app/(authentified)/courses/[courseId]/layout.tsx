@@ -3,13 +3,13 @@ import Link from 'next/link';
 import {
     Card,
     CardHeader
-} from '../../../_components/ui/card';
-import { Badge } from '../../../_components/ui/badge';
-import { Skeleton } from '../../../_components/ui/skeleton';
-import CourseContentMenu from '../../../_components/CourseContentMenu/CourseContentMenu';
-import { Separator } from '../../../_components/ui/separator';
-import { getData } from '../../../_lib/data';
-import CourseProvider from '../../../_contexts/CourseProvider';
+} from '@/_components/ui/card';
+import { Badge } from '@/_components/ui/badge';
+import { Skeleton } from '@/_components/ui/skeleton';
+import CourseContentMenu from '@/_components/CourseContentMenu/CourseContentMenu';
+import { Separator } from '@/_components/ui/separator';
+import { getData } from '@/_lib/data';
+import CourseProvider from '@/_contexts/CourseProvider';
 
 /**
  * Renders the layout for the course show page.
@@ -54,11 +54,9 @@ export default async function CourseShowLayout({
                             <div className="p-4">
                                 <Separator />
                                 <ul className="grid gap-2 p-6">
-                                    {
-                                        Array.from({ length: 6 }).map((_: unknown, index: number): React.JSX.Element => ( // Create an array of 6 elements and map over it to render a skeleton element for each.
-                                            <Skeleton key={ index } className="h-12 w-full" />
-                                        ))
-                                    }
+                                    { Array.from({ length: 6 }).map((_: unknown, index: number): React.JSX.Element => ( // Create an array of 6 elements and map over it to render a skeleton element for each.
+                                        <Skeleton key={ index } className="h-12 w-full" />
+                                    )) }
                                 </ul>
                                 <Separator />
                             </div>
@@ -89,14 +87,12 @@ export default async function CourseShowLayout({
                                             </div>
                                         }>
                                             <div className="flex flex-wrap gap-1 justify-center w-3/4">
-                                                {
-                                                    course.language.name && // Renders a badge for the language if it exists
+                                                { course.language.name && // Renders a badge for the language if it exists
                                                     <Badge variant={ course.language.name as "Javascript" | "C#" | "C++" | "HTML/CSS" | "Ruby" | "Go" | "Php" | "Java" | "Mysql" | "Python" }>
                                                         { course.language.name }
                                                     </Badge>
                                                 }
-                                                {
-                                                    course.difficulty && // Renders a badge for the difficulty level if it exists
+                                                { course.difficulty && // Renders a badge for the difficulty level if it exists
                                                     <Badge variant={ course.difficulty }>
                                                         { course.difficulty }
                                                     </Badge>

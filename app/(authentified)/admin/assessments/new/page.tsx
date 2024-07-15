@@ -1,6 +1,6 @@
 import React from 'react';
-import AssessmentForm from '../../../../_components/forms/AssessmentForm/AssessmentForm';
-import { getData } from '../../../../_lib/data';
+import AssessmentForm from '@/_components/forms/AssessmentForm/AssessmentForm';
+import { getData } from '@/_lib/data';
 
 /**
  * Renders the page for creating a new assessment.

@@ -12,13 +12,13 @@ import {
     FormItem,
     FormLabel,
     FormMessage
-} from '../../ui/form';
-import { Input } from '../../ui/input';
-import { Button } from '../../ui/button';
+} from '@/_components/ui/form';
+import { Input } from '@/_components/ui/input';
+import { Button } from '@/_components/ui/button';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Skeleton } from '../../ui/skeleton';
+import { Skeleton } from '@/_components/ui/skeleton';
 
 /**
  * Represents the form schema for user data.
@@ -176,6 +176,7 @@ const UserForm: FC<UserFormProps> = ({
     };
 
     return (
+
         <Suspense fallback={
             <div className="grid gap-10 md:gap-16 mt-12 w-full">
                 <div className="grid gap-10 sm:flex sm:gap-6 w-full">
@@ -198,9 +199,7 @@ const UserForm: FC<UserFormProps> = ({
                 <Skeleton className="w-24 h-10 justify-self-center" />
             </div>
         }>
-            <Form // Form component for user data
-                { ...form }
-            >
+            <Form { ...form }>
                 <form onSubmit={ form.handleSubmit(onSubmit) } className="grid gap-4 lg:gap-6 mt-6">
                     <div className="grid md:flex gap-4 lg:gap-6">
 
@@ -378,6 +377,7 @@ const UserForm: FC<UserFormProps> = ({
                 </form>
             </Form>
         </Suspense>
+
     );
 };
 

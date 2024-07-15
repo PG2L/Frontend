@@ -2,9 +2,9 @@
 
 import React, { FC } from 'react';
 import Link from 'next/link';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { Input } from '@/_components/ui/input';
+import { Button } from '@/_components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/_components/ui/avatar';
 
 interface FooterProps { }
 

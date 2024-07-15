@@ -2,9 +2,9 @@ import React, {
     FC,
     useContext
 } from 'react';
-import { Switch } from '../ui/switch';
+import { Switch } from '@/_components/ui/switch';
 import * as icons from 'lucide-react';
-import { DarkModeContext } from '../../_contexts/DarkModeProvider';
+import { DarkModeContext } from '@/_contexts/DarkModeProvider';
 
 interface DarkModeToggleProps { }
 

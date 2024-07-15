@@ -12,25 +12,13 @@ import {
     FormItem,
     FormLabel,
     FormMessage
-} from '../../ui/form';
-import { Button } from '../../ui/button';
-import { Textarea } from '../../ui/textarea';
-import {
-    Select,
-    SelectTrigger,
-    SelectValue,
-    SelectContent,
-    SelectItem
-} from '../../ui/select';
-import { Input } from '../../ui/input';
+} from '@/_components/ui/form';
+import { Button } from '@/_components/ui/button';
+import { Input } from '@/_components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Skeleton } from '../../ui/skeleton';
-import {
-    RadioGroup,
-    RadioGroupItem
-} from '../../ui/radio-group';
+import { Skeleton } from '@/_components/ui/skeleton';
 
 /**
  * Represents the form schema for the question form.
@@ -189,87 +177,85 @@ const QuestionForm: FC<QuestionFormProps> = ({
             </div>
         }>
 
-            {
-                // A form component with various fields for question creation or editing
-                <Form { ...form }>
-                    <form onSubmit={ form.handleSubmit(onSubmit) } className="grid gap-4 lg:gap-6 mt-6">
+            { <Form { ...form }>
+                <form onSubmit={ form.handleSubmit(onSubmit) } className="grid gap-4 lg:gap-6 mt-6">
 
-                        {/* Content field with validation and description */ }
-                        <FormField
-                            control={ form.control }
-                            name="content"
-                            render={ ({ field }): React.JSX.Element => (
-                                <FormItem className="w-full">
-                                    <FormLabel>Content <span className="text-xs text-muted-foreground font-normal">(required)</span></FormLabel>
-                                    <FormControl>
-                                        <Input { ...field } />
-                                    </FormControl>
-                                    <FormDescription>
-                                        Enter the content of the question. This will be displayed to learners when they view the question.
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            ) }
-                        />
+                    {/* Content field with validation and description */ }
+                    <FormField
+                        control={ form.control }
+                        name="content"
+                        render={ ({ field }): React.JSX.Element => (
+                            <FormItem className="w-full">
+                                <FormLabel>Content <span className="text-xs text-muted-foreground font-normal">(required)</span></FormLabel>
+                                <FormControl>
+                                    <Input { ...field } />
+                                </FormControl>
+                                <FormDescription>
+                                    Enter the content of the question. This will be displayed to learners when they view the question.
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        ) }
+                    />
 
-                        {/* Type field with validation and description */ }
-                        <FormField
-                            control={ form.control }
-                            name="type"
-                            render={ ({ field }): React.JSX.Element => (
-                                <FormItem className="w-full">
-                                    <FormLabel>Type <span className="text-xs text-muted-foreground font-normal">(required)</span></FormLabel>
-                                    <FormControl>
-                                        <Input { ...field } />
-                                    </FormControl>
-                                    <FormDescription>
-                                        Enter the type of the question. This will determine the format of the question.
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            ) }
-                        />
+                    {/* Type field with validation and description */ }
+                    <FormField
+                        control={ form.control }
+                        name="type"
+                        render={ ({ field }): React.JSX.Element => (
+                            <FormItem className="w-full">
+                                <FormLabel>Type <span className="text-xs text-muted-foreground font-normal">(required)</span></FormLabel>
+                                <FormControl>
+                                    <Input { ...field } />
+                                </FormControl>
+                                <FormDescription>
+                                    Enter the type of the question. This will determine the format of the question.
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        ) }
+                    />
 
-                        {/* Options field with validation and description */ }
-                        <FormField
-                            control={ form.control }
-                            name="options"
-                            render={ ({ field }): React.JSX.Element => (
-                                <FormItem className="w-full">
-                                    <FormLabel>Options</FormLabel>
-                                    <FormControl>
-                                        <Input { ...field } />
-                                    </FormControl>
-                                    <FormDescription>
-                                        Enter the options for the question. This is required for multiple choice questions. This must include the answer. Use &quot;/&quot; to add multiple options. (e.g: &quot;Option 1/Option 2/Option 3/Option 4&quot;)
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            ) }
-                        />
+                    {/* Options field with validation and description */ }
+                    <FormField
+                        control={ form.control }
+                        name="options"
+                        render={ ({ field }): React.JSX.Element => (
+                            <FormItem className="w-full">
+                                <FormLabel>Options</FormLabel>
+                                <FormControl>
+                                    <Input { ...field } />
+                                </FormControl>
+                                <FormDescription>
+                                    Enter the options for the question. This is required for multiple choice questions. This must include the answer. Use &quot;/&quot; to add multiple options. (e.g: &quot;Option 1/Option 2/Option 3/Option 4&quot;)
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        ) }
+                    />
 
-                        {/* Answer field with validation and description */ }
-                        <FormField
-                            control={ form.control }
-                            name="answer"
-                            render={ ({ field }): React.JSX.Element => (
-                                <FormItem className="w-full">
-                                    <FormLabel>Answer <span className="text-xs text-muted-foreground font-normal">(required)</span></FormLabel>
-                                    <FormControl>
-                                        <Input { ...field } />
-                                    </FormControl>
-                                    <FormDescription>
-                                        Enter the correct answer for the question.
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            ) }
-                        />
+                    {/* Answer field with validation and description */ }
+                    <FormField
+                        control={ form.control }
+                        name="answer"
+                        render={ ({ field }): React.JSX.Element => (
+                            <FormItem className="w-full">
+                                <FormLabel>Answer <span className="text-xs text-muted-foreground font-normal">(required)</span></FormLabel>
+                                <FormControl>
+                                    <Input { ...field } />
+                                </FormControl>
+                                <FormDescription>
+                                    Enter the correct answer for the question.
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        ) }
+                    />
 
-                        {/* Submit button for the form */ }
-                        <Button type="submit" size="lg" className="mt-4 justify-self-center">Submit</Button>
-                    </form>
-                </Form>
+                    {/* Submit button for the form */ }
+                    <Button type="submit" size="lg" className="mt-4 justify-self-center">Submit</Button>
+                </form>
+            </Form>
             }
 
         </Suspense>

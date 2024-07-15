@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import styles from './SideBar.module.css';
 import { icons } from 'lucide-react';
-import { cn } from '../../_lib/utils';
-import { Button } from '../ui/button';
-import { ScrollArea } from '../ui/scroll-area';
+import { cn } from '@/_lib/utils';
+import { Button } from '@/_components/ui/button';
 import {
     Sheet,
     SheetClose,
@@ -13,15 +12,15 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
-} from "../ui/sheet";
-import { Separator } from '../ui/separator';
+} from "@/_components/ui/sheet";
+import { Separator } from '@/_components/ui/separator';
 
 
 interface SideBarProps {
     className?: string;
 }
 
-const SideBar: FC<SideBarProps> = ({ className }) => (
+const SideBar: FC<SideBarProps> = ({ className }): React.JSX.Element => (
     <div className={ cn(className) }>
         <Sheet>
             <SheetTrigger asChild>

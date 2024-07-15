@@ -1,6 +1,6 @@
 import React from 'react';
-import GlobalBreadcrumb from '../../_components/GlobalBreadcrumb/GlobalBreadcrumb';
-import { getData } from '../../_lib/data';
+import GlobalBreadcrumb from '@/_components/GlobalBreadcrumb/GlobalBreadcrumb';
+import { getData } from '@/_lib/data';
 
 /**
  * Renders the layout for the courses page.

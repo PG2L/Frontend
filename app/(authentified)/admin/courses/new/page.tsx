@@ -1,6 +1,6 @@
 import React from 'react';
-import CourseForm from '../../../../_components/forms/CourseForm/CourseForm';
-import { getData } from '../../../../_lib/data';
+import CourseForm from '@/_components/forms/CourseForm/CourseForm';
+import { getData } from '@/_lib/data';
 
 /**
  * Renders the page for creating a new course.

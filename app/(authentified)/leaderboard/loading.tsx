@@ -1,5 +1,5 @@
 import React from 'react';
-import { Skeleton } from '../../_components/ui/skeleton';
+import { Skeleton } from '@/_components/ui/skeleton';
 
 /**
  * Renders a loading component with skeleton placeholders.
@@ -18,11 +18,9 @@ export default function Loading(): React.JSX.Element {
                 <p>Keep learning, keep coding, and climb the ranks to become a web development superstar!</p>
                 <Skeleton className="h-10 w-1/4 mt-4" />
                 <div>
-                    {
-                        Array.from({ length: 10 }).map((_: unknown, index: number): React.JSX.Element => ( // Mapping over an array of 10 undefined elements to render 10 skeleton placeholders.
-                            <Skeleton key={ index } className="h-16 w-full mt-2" />
-                        ))
-                    }
+                    { Array.from({ length: 10 }).map((_: unknown, index: number): React.JSX.Element => ( // Mapping over an array of 10 undefined elements to render 10 skeleton placeholders.
+                        <Skeleton key={ index } className="h-16 w-full mt-2" />
+                    )) }
                 </div>
             </div>
         </div>

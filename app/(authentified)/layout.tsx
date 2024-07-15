@@ -1,16 +1,16 @@
 import React from 'react';
-import MainMenu from '../_components/MainMenu/MainMenu';
-import ProfileSidebar from '../_components/ProfileSidebar/ProfileSidebar';
-import FAQ from '../_components/FAQ/FAQ';
-import Footer from '../_components/Footer/Footer';
+import MainMenu from '@/_components/MainMenu/MainMenu';
+import ProfileSidebar from '@/_components/ProfileSidebar/ProfileSidebar';
+import FAQ from '@/_components/FAQ/FAQ';
+import Footer from '@/_components/Footer/Footer';
 import {
     ScrollArea,
     ScrollBar
-} from '../_components/ui/scroll-area';
-import UserProvider from '../_contexts/UserProvider';
+} from '@/_components/ui/scroll-area';
+import UserProvider from '@/_contexts/UserProvider';
 import { getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
-import { getData } from '../_lib/data';
+import { getData } from '@/_lib/data';
 
 /**
  * Renders the layout for authenticated users.

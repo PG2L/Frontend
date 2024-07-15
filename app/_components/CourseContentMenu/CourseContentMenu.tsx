@@ -6,14 +6,14 @@ import React, {
     useContext
 } from 'react';
 import styles from './CourseContentMenu.module.css';
-import { Skeleton } from '../ui/skeleton';
+import { Skeleton } from '@/_components/ui/skeleton';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { Button } from '../ui/button';
-import { Separator } from '../ui/separator';
+import { Button } from '@/_components/ui/button';
+import { Separator } from '@/_components/ui/separator';
 import { icons } from 'lucide-react';
-import { UserContext } from '../../_contexts/UserProvider';
-import CourseButton from '../CourseButton/CourseButton';
+import { UserContext } from '@/_contexts/UserProvider';
+import CourseButton from '@/_components/CourseButton/CourseButton';
 
 interface CourseContentMenuProps {
     course: Course,
@@ -98,11 +98,9 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
                             </Suspense>
                         )) }
                     </ul>
-                    {
-                        params.hasOwnProperty('lessonId') && // Check if the lessonId is present in the params
+                    { params.hasOwnProperty('lessonId') && // Check if the lessonId is present in the params
                         <div className={ `flex flex-col gap-6 justify-between absolute h-full right-[-36px] top-0 ${isFirstLesson && "!justify-end"}` }>
-                            {
-                                !isFirstLesson && // Check if the current lesson is the first lesson in the course
+                            { !isFirstLesson && // Check if the current lesson is the first lesson in the course
                                 <Link
                                     href={ `/courses/${params.courseId}/${Number(params.lessonId) - 1}` } // Link to the previous lesson
                                     className="justify-self-start !h-fit"
@@ -112,8 +110,7 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
                                     </Button>
                                 </Link>
                             }
-                            {
-                                !isLastLesson && // Check if the current lesson is the last lesson in the course 
+                            { !isLastLesson && // Check if the current lesson is the last lesson in the course 
                                 <Link
                                     href={ `/courses/${params.courseId}/${Number(params.lessonId) + 1}` } // Link to the next lesson
                                     className="justify-self-end relative"
@@ -127,8 +124,7 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
                     }
                 </div>
                 <Separator />
-                {
-                    !params.hasOwnProperty('lessonId') &&
+                { !params.hasOwnProperty('lessonId') &&
                     <div className="w-full text-center px-6">
                         {/* Button for course-related action, displayed if no lessonId is present in params */ }
                         <CourseButton />

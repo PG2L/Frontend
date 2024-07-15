@@ -11,7 +11,7 @@ import {
     BreadcrumbLink,
     BreadcrumbSeparator,
     BreadcrumbPage
-} from '../ui/breadcrumb';
+} from '@/_components/ui/breadcrumb';
 
 interface GlobalBreadcrumbProps {
     courses: Course[],
@@ -66,31 +66,29 @@ const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = ({
                 <nav>
                     <Breadcrumb>
                         <BreadcrumbList>
-                            {
-                                itemsLinks.map((itemLink: string, index: number): React.JSX.Element => { // Mapping over itemsLinks to create breadcrumb items
-                                    let href: string = `/${pathNames.slice(0, index + 1).join('/')}`; // Constructing the href for the breadcrumb item
-                                    return (
-                                        <>
-                                            { itemsLinks.length !== index + 1 ? // Conditional rendering based on the index of the item
-                                                <>
-                                                    <BreadcrumbItem key={ index }>
-                                                        <BreadcrumbLink asChild>
-                                                            <Link
-                                                                href={ href } // Link to the item
-                                                            >{ itemLink }</Link>
-                                                        </BreadcrumbLink>
-                                                    </BreadcrumbItem>
-                                                    <BreadcrumbSeparator />
-                                                </>
-                                                :
+                            { itemsLinks.map((itemLink: string, index: number): React.JSX.Element => { // Mapping over itemsLinks to create breadcrumb items
+                                let href: string = `/${pathNames.slice(0, index + 1).join('/')}`; // Constructing the href for the breadcrumb item
+                                return (
+                                    <>
+                                        { itemsLinks.length !== index + 1 ? // Conditional rendering based on the index of the item
+                                            <>
                                                 <BreadcrumbItem key={ index }>
-                                                    <BreadcrumbPage>{ itemLink }</BreadcrumbPage>
+                                                    <BreadcrumbLink asChild>
+                                                        <Link
+                                                            href={ href } // Link to the item
+                                                        >{ itemLink }</Link>
+                                                    </BreadcrumbLink>
                                                 </BreadcrumbItem>
-                                            }
-                                        </>
-                                    );
-                                })
-                            }
+                                                <BreadcrumbSeparator />
+                                            </>
+                                            :
+                                            <BreadcrumbItem key={ index }>
+                                                <BreadcrumbPage>{ itemLink }</BreadcrumbPage>
+                                            </BreadcrumbItem>
+                                        }
+                                    </>
+                                );
+                            }) }
                         </BreadcrumbList>
                     </Breadcrumb>
                 </nav >

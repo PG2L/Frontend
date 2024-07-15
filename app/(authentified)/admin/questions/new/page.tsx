@@ -1,6 +1,6 @@
 import React from 'react';
-import QuestionForm from '../../../../_components/forms/QuestionForm/QuestionForm';
-import { getData } from '../../../../_lib/data';
+import QuestionForm from '@/_components/forms/QuestionForm/QuestionForm';
+import { getData } from '@/_lib/data';
 
 /**
  * Renders the page for creating a new question.

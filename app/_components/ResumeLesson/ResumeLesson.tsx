@@ -8,9 +8,9 @@ import styles from './ResumeLesson.module.css';
 import {
     ScrollArea,
     ScrollBar
-} from '../ui/scroll-area';
-import { UserContext } from '../../_contexts/UserProvider';
-import LessonCard from '../LessonCard/LessonCard';
+} from '@/_components/ui/scroll-area';
+import { UserContext } from '@/_contexts/UserProvider';
+import LessonCard from '@/_components/LessonCard/LessonCard';
 
 interface ResumeLessonProps { }
 
@@ -42,11 +42,9 @@ const ResumeLesson: FC<ResumeLessonProps> = (): React.JSX.Element => {
             <h1 className="text-2xl">Resume</h1>
             <ScrollArea>
                 <div className="w-full p-6 flex gap-6 items-center justify-start">
-                    {
-                        userCourses.map((userCourse: any, index: number): React.JSX.Element => ( // Mapping over userCourses to create a LessonCard for each course
-                            <LessonCard key={ index } className="min-w-72" userCourse={ userCourse } />
-                        ))
-                    }
+                    { userCourses.map((userCourse: any, index: number): React.JSX.Element => ( // Mapping over userCourses to create a LessonCard for each course
+                        <LessonCard key={ index } className="min-w-72" userCourse={ userCourse } />
+                    )) }
                 </div>
                 {/* Horizontal scrollbar for the scrollable area */ }
                 <ScrollBar orientation="horizontal" />

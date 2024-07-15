@@ -9,14 +9,14 @@ import {
     CarouselNext,
     CarouselPrevious,
     Carousel
-} from "../../ui/carousel";
+} from "@/_components/ui/carousel";
 import {
     RadioGroup,
     RadioGroupItem
-} from '../../ui/radio-group';
-import { Label } from '../../ui/label';
-import { Input } from '../../ui/input';
-import { AssessmentContext } from "../../../_contexts/AssessmentProvider";
+} from '@/_components/ui/radio-group';
+import { Label } from '@/_components/ui/label';
+import { Input } from '@/_components/ui/input';
+import { AssessmentContext } from "@/_contexts/AssessmentProvider";
 import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -27,16 +27,15 @@ import {
     FormItem,
     FormLabel,
     FormMessage
-} from '../../ui/form';
-import { Button } from '../../ui/button';
-import { UserContext } from '../../../_contexts/UserProvider';
-import { LessonContext } from '../../../_contexts/LessonProvider';
-import { updateUserPoints } from '../../../_lib/points';
-import { updateUserExp } from '../../../_lib/levels';
+} from '@/_components/ui/form';
+import { Button } from '@/_components/ui/button';
+import { UserContext } from '@/_contexts/UserProvider';
+import { LessonContext } from '@/_contexts/LessonProvider';
+import { updateUserPoints } from '@/_lib/points';
+import { updateUserExp } from '@/_lib/levels';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { useRouter } from 'next/navigation';
-import { updateCourseProgress } from '../../../_lib/courses';
-import { revalidateTag } from 'next/cache';
+import { updateCourseProgress } from '@/_lib/courses';
 
 interface AssessmentModalFormProps { }
 
@@ -203,7 +202,8 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
-                                        ) } />
+                                        ) }
+                                    />
                                 </CarouselItem>
                                 : // If the question type is text, render a text input.
                                 <CarouselItem key={ index }>

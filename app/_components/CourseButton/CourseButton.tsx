@@ -2,11 +2,11 @@
 
 import React, { FC, useContext } from 'react';
 import styles from './CourseButton.module.css';
-import { UserContext } from '../../_contexts/UserProvider';
-import { CourseContext } from '../../_contexts/CourseProvider';
-import { Button } from '../ui/button';
+import { UserContext } from '@/_contexts/UserProvider';
+import { CourseContext } from '@/_contexts/CourseProvider';
+import { Button } from '@/_components/ui/button';
 import Link from 'next/link';
-import { addCourseToUser } from '../../_lib/courses';
+import { addCourseToUser } from '@/_lib/courses';
 import { useRouter } from 'next/navigation';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
@@ -93,22 +93,20 @@ const CourseButton: FC<CourseButtonProps> = ({
     return (
 
         <>
-            {
-                // Conditional rendering based on the user's course progress
-                userCourse && userCourse.completion_status === "in-progress" ? // If the course is in progress, display a "Continue" button linking to the next lesson
-                    <Link
-                        href={ `/courses/${course.id}/${course.lessons[userCourse.progress].id}` } // Link to the next lesson
-                        className={ `flex justify-end ${className}` }
-                    >
-                        <Button className="w-full">Continue</Button>
-                    </Link>
-                    :
-                    !userCourse ? // If there is no userCourse, display the "StartButton" component
-                        <StartButton className={ `${className}` } />
-                        : // If the course is completed, display a disabled "Completed" button
-                        <Button className={ `w-full ${className}` } disabled>
-                            Completed
-                        </Button>
+            { userCourse && userCourse.completion_status === "in-progress" ? // If the course is in progress, display a "Continue" button linking to the next lesson
+                <Link
+                    href={ `/courses/${course.id}/${course.lessons[userCourse.progress].id}` } // Link to the next lesson
+                    className={ `flex justify-end ${className}` }
+                >
+                    <Button className="w-full">Continue</Button>
+                </Link>
+                :
+                !userCourse ? // If there is no userCourse, display the "StartButton" component
+                    <StartButton className={ `${className}` } />
+                    : // If the course is completed, display a disabled "Completed" button
+                    <Button className={ `w-full ${className}` } disabled>
+                        Completed
+                    </Button>
             }
         </>
 

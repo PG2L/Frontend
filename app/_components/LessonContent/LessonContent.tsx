@@ -4,17 +4,17 @@ import React, {
     FC,
     useContext
 } from 'react';
-import { CourseContext } from '../../_contexts/CourseProvider';
-import { LessonContext } from '../../_contexts/LessonProvider';
-import { UserContext } from '../../_contexts/UserProvider';
+import { CourseContext } from '@/_contexts/CourseProvider';
+import { LessonContext } from '@/_contexts/LessonProvider';
+import { UserContext } from '@/_contexts/UserProvider';
 import styles from './LessonContent.module.css';
-import { Button } from '../ui/button';
+import { Button } from '@/_components/ui/button';
 import {
     updateCourseProgress,
     updateCourseCompletion
-} from '../../_lib/courses';
-import { updateUserExp } from '../../_lib/levels';
-import { updateUserPoints } from '../../_lib/points';
+} from '@/_lib/courses';
+import { updateUserExp } from '@/_lib/levels';
+import { updateUserPoints } from '@/_lib/points';
 import { useRouter } from 'next/navigation';
 import AssessmentModal from '../AssessmentModal/AssessmentModal';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';

@@ -1,15 +1,15 @@
 "use client";
 
 import React, { FC } from 'react';
-import { Badge } from '../ui/badge';
+import { Badge } from '@/_components/ui/badge';
 import {
     Card,
     CardFooter,
     CardHeader
-} from '../ui/card';
+} from '@/_components/ui/card';
 import * as icons from 'lucide-react';
 import Link from 'next/link';
-import CourseProgressBar from '../CourseProgressBar/CourseProgressBar';
+import CourseProgressBar from '@/_components/CourseProgressBar/CourseProgressBar';
 
 interface CourseCardProps {
     course: Course;
@@ -51,14 +51,11 @@ const CourseCard: FC<CourseCardProps> = ({
                         </CardHeader>
                         <CardFooter className="flex justify-between items-start p-1">
                             <div className="flex justify-start items-start gap-1 flex-wrap">
-                                {
-                                    course.lessons_count && <Badge>{ course.lessons_count } lessons</Badge> // Display lesson count badge for course details
+                                { course.lessons_count && <Badge>{ course.lessons_count } lessons</Badge> // Display lesson count badge for course details
                                 }
-                                {
-                                    course.difficulty && <Badge variant={ course.difficulty }>{ course.difficulty }</Badge> // Display difficulty badge for course details
+                                { course.difficulty && <Badge variant={ course.difficulty }>{ course.difficulty }</Badge> // Display difficulty badge for course details
                                 }
-                                {
-                                    course.language && <Badge variant={ languageName }>{ languageName }</Badge> // Display language badge for course details
+                                { course.language && <Badge variant={ languageName }>{ languageName }</Badge> // Display language badge for course details
                                 }
                             </div>
                             <div className="grid text-nowrap gap-1 text-primary">

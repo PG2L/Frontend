@@ -2,7 +2,7 @@
 
 import React, { FC, useContext } from 'react';
 import styles from './CourseProgressBar.module.css';
-import { UserContext } from '../../_contexts/UserProvider';
+import { UserContext } from '@/_contexts/UserProvider';
 
 interface CourseProgressBarProps {
     course: Course;

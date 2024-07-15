@@ -1,21 +1,21 @@
-import { Badge } from '../../../_components/ui/badge';
-import { Button } from '../../../_components/ui/button';
+import { Badge } from '@/_components/ui/badge';
+import { Button } from '@/_components/ui/button';
 import {
     Card,
     CardContent,
     CardFooter,
     CardHeader
-} from '../../../_components/ui/card';
+} from '@/_components/ui/card';
 import {
     Collapsible,
     CollapsibleContent,
     CollapsibleTrigger
-} from '../../../_components/ui/collapsible';
+} from '@/_components/ui/collapsible';
 import * as icons from 'lucide-react';
 import React from 'react';
-import { getData } from '../../../_lib/data';
-import CourseButton from '../../../_components/CourseButton/CourseButton';
-import CourseProgressBar from '../../../_components/CourseProgressBar/CourseProgressBar';
+import { getData } from '@/_lib/data';
+import CourseButton from '@/_components/CourseButton/CourseButton';
+import CourseProgressBar from '@/_components/CourseProgressBar/CourseProgressBar';
 
 /**
  * Renders a page component for a specific course.
@@ -53,14 +53,12 @@ export default async function Page({
                         <div className="grid gap-4">
                             <h1 className="text-lg font-medium">{ course.title }</h1>
                             <div className="flex gap-1 flex-wrap">
-                                {
-                                    course.language.name && // Render a language badge if the course has a language.
+                                { course.language.name && // Render a language badge if the course has a language.
                                     <Badge variant={ course.language.name as "Javascript" | "C#" | "C++" | "HTML/CSS" | "Ruby" | "Go" | "Php" | "Java" | "Mysql" | "Python" }>
                                         { course.language.name }
                                     </Badge>
                                 }
-                                {
-                                    course.difficulty && // Render a category badge if the course has a category.
+                                { course.difficulty && // Render a category badge if the course has a category.
                                     <Badge variant={ course.difficulty }>
                                         { course.difficulty }
                                     </Badge>
@@ -120,8 +118,7 @@ export default async function Page({
                         </CollapsibleTrigger>
                         <CollapsibleContent>
                             <div className="grid gap-4 mt-4">
-                                {
-                                    course.lessons && // Render the lessons if they exist.
+                                { course.lessons && // Render the lessons if they exist.
                                     course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => ( // Map over the lessons and render them each in a card.
                                         <Card key={ index }>
                                             <CardHeader>

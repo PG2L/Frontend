@@ -1,7 +1,11 @@
 "use client";
 
 import React, { FC } from 'react';
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '../ui/collapsible';
+import {
+    Collapsible,
+    CollapsibleTrigger,
+    CollapsibleContent
+} from '@/_components/ui/collapsible';
 import { icons } from 'lucide-react';
 
 const faqs: {

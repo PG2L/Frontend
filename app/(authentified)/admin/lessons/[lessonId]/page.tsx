@@ -1,6 +1,6 @@
 import React from 'react';
-import LessonForm from '../../../../_components/forms/LessonForm/LessonForm';
-import { getData } from '../../../../_lib/data';
+import LessonForm from '@/_components/forms/LessonForm/LessonForm';
+import { getData } from '@/_lib/data';
 
 /**
  * Renders the page component for a specific lesson.

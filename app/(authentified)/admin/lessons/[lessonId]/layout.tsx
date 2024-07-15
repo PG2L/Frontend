@@ -1,6 +1,6 @@
 import React from 'react';
-import AdminHeader from '../../../../_components/AdminHeader/AdminHeader';
-import { getData } from '../../../../_lib/data';
+import AdminHeader from '@/_components/AdminHeader/AdminHeader';
+import { getData } from '@/_lib/data';
 
 /**
  * Renders the layout for editing an admin lesson.

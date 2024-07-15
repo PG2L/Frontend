@@ -4,9 +4,9 @@ import {
     TabsContent,
     TabsList,
     TabsTrigger
-} from '../../_components/ui/tabs';
-import LoginForm from '../../_components/forms/LoginForm/LoginForm';
-import SigninForm from '../../_components/forms/SigninForm/SigninForm';
+} from '@/_components/ui/tabs';
+import LoginForm from '@/_components/forms/LoginForm/LoginForm';
+import SigninForm from '@/_components/forms/SigninForm/SigninForm';
 
 /**
  * Renders the login page component.

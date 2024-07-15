@@ -3,14 +3,14 @@
 import React, { FC } from 'react';
 import styles from './SigninForm.module.css';
 import Link from 'next/link';
-import { Button } from '../../ui/button';
+import { Button } from '@/_components/ui/button';
 import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle
-} from '../../ui/card';
+} from '@/_components/ui/card';
 import {
     Form,
     FormControl,
@@ -19,8 +19,8 @@ import {
     FormItem,
     FormLabel,
     FormMessage
-} from '../../ui/form';
-import { Input } from '../../ui/input';
+} from '@/_components/ui/form';
+import { Input } from '@/_components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';

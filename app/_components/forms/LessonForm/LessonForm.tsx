@@ -16,18 +16,18 @@ import {
     Form,
     FormMessage,
     FormDescription
-} from '../../ui/form';
-import { Textarea } from '../../ui/textarea';
+} from '@/_components/ui/form';
+import { Textarea } from '@/_components/ui/textarea';
 import {
     Select,
     SelectTrigger,
     SelectValue,
     SelectContent,
     SelectItem
-} from '../../ui/select';
-import { Input } from '../../ui/input';
-import { Button } from '../../ui/button';
-import { Skeleton } from '../../ui/skeleton';
+} from '@/_components/ui/select';
+import { Input } from '@/_components/ui/input';
+import { Button } from '@/_components/ui/button';
+import { Skeleton } from '@/_components/ui/skeleton';
 
 /**
  * Represents the form schema for the LessonForm component.

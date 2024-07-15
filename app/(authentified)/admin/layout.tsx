@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminMenu from '../../_components/AdminMenu/AdminMenu';
+import AdminMenu from '@/_components/AdminMenu/AdminMenu';
 
 /**
  * Renders the layout for the admin section of the application.

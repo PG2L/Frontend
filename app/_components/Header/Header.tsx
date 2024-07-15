@@ -2,8 +2,8 @@
 
 import React, { FC } from 'react';
 import Link from "next/link";
-import { Button } from "../ui/button";
-import { cn } from "../../_lib/utils";
+import { Button } from "@/_components/ui/button";
+import { cn } from "@/_lib/utils";
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -12,13 +12,13 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
-} from "../ui/navigation-menu";
-import { Input } from '../ui/input';
+} from "@/_components/ui/navigation-menu";
+import { Input } from '@/_components/ui/input';
 import { icons } from 'lucide-react';
-import SideBar from '../SideBar/SideBar';
-import LoginForm from '../forms/LoginForm/LoginForm';
-import SigninForm from '../forms/SigninForm/SigninForm';
-import DarkModeToggle from '../DarkModeToggle/DarkModeToggle';
+import SideBar from '@/_components/SideBar/SideBar';
+import LoginForm from '@/_components/forms/LoginForm/LoginForm';
+import SigninForm from '@/_components/forms/SigninForm/SigninForm';
+import DarkModeToggle from '@/_components/DarkModeToggle/DarkModeToggle';
 
 /**
  * Represents an array of components with their title, href, and description.

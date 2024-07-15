@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
-import { Skeleton } from '../../_components/ui/skeleton';
-import CourseCard from '../../_components/CourseCard/CourseCard';
-import { getData } from '../../_lib/data';
+import { Skeleton } from '@/_components/ui/skeleton';
+import CourseCard from '@/_components/CourseCard/CourseCard';
+import { getData } from '@/_lib/data';
 
 /**
  * Renders the Courses Page of the Web Development E-Learning Platform.
@@ -32,11 +32,9 @@ export default async function Page(): Promise<React.JSX.Element> {
                         <Skeleton key={ index } className="w-full rounded-lg h-72" />
                     ))
                 }>
-                    {
-                        courses.map((course: Course, index: number): React.JSX.Element => ( // Map over the courses array to render a CourseCard component for each course.
-                            <CourseCard key={ index } course={ course } />
-                        ))
-                    }
+                    { courses.map((course: Course, index: number): React.JSX.Element => ( // Map over the courses array to render a CourseCard component for each course.
+                        <CourseCard key={ index } course={ course } />
+                    )) }
                 </Suspense>
             </div >
         </>

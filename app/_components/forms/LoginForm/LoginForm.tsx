@@ -8,10 +8,10 @@ import {
     CardDescription,
     CardHeader,
     CardTitle
-} from '../../ui/card';
+} from '@/_components/ui/card';
 import Link from 'next/link';
-import { Button } from '../../ui/button';
-import { Input } from '../../ui/input';
+import { Button } from '@/_components/ui/button';
+import { Input } from '@/_components/ui/input';
 import {
     Form,
     FormControl,
@@ -20,7 +20,7 @@ import {
     FormItem,
     FormLabel,
     FormMessage
-} from '../../ui/form';
+} from '@/_components/ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -122,80 +122,75 @@ const LoginForm: FC<LoginFormProps> = ({ }: LoginFormProps): React.JSX.Element =
 
     return (
 
-        <>
-            {
-                // Card component for the login form
-                <Card className="min-w-80">
+        <Card className="min-w-80">
 
-                    {/* CardHeader contains the title and description for the login form */ }
-                    <CardHeader>
-                        <CardTitle className="text-lg">Log In</CardTitle>
-                        <CardDescription>
-                            Enter your email below to login to your account
-                        </CardDescription>
-                    </CardHeader>
+            {/* CardHeader contains the title and description for the login form */ }
+            <CardHeader>
+                <CardTitle className="text-lg">Log In</CardTitle>
+                <CardDescription>
+                    Enter your email below to login to your account
+                </CardDescription>
+            </CardHeader>
 
-                    {/* CardContent wraps the form elements */ }
-                    <CardContent>
-                        <Form { ...form }>
-                            <form onSubmit={ form.handleSubmit(onSubmit) }>
-                                <div className="grid gap-4">
+            {/* CardContent wraps the form elements */ }
+            <CardContent>
+                <Form { ...form }>
+                    <form onSubmit={ form.handleSubmit(onSubmit) }>
+                        <div className="grid gap-4">
 
-                                    {/* FormField for username input */ }
-                                    <FormField
-                                        control={ form.control }
-                                        name="username"
-                                        render={ ({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Username</FormLabel>
-                                                <FormControl>
-                                                    <Input placeholder="Nakkarst" { ...field } />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        ) }
-                                    />
+                            {/* FormField for username input */ }
+                            <FormField
+                                control={ form.control }
+                                name="username"
+                                render={ ({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Username</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Nakkarst" { ...field } />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                ) }
+                            />
 
-                                    {/* FormField for password input, with a description for requirements */ }
-                                    <FormField
-                                        control={ form.control }
-                                        name="password"
-                                        render={ ({ field }) => (
-                                            <FormItem className="w-full">
-                                                <FormLabel>Password</FormLabel>
-                                                <FormControl>
-                                                    <Input type="password" { ...field } />
-                                                </FormControl>
-                                                <FormDescription>
-                                                    Must be at least 8 characters.
-                                                </FormDescription>
-                                                <FormMessage />
-                                            </FormItem>
-                                        ) }
-                                    />
+                            {/* FormField for password input, with a description for requirements */ }
+                            <FormField
+                                control={ form.control }
+                                name="password"
+                                render={ ({ field }) => (
+                                    <FormItem className="w-full">
+                                        <FormLabel>Password</FormLabel>
+                                        <FormControl>
+                                            <Input type="password" { ...field } />
+                                        </FormControl>
+                                        <FormDescription>
+                                            Must be at least 8 characters.
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                ) }
+                            />
 
-                                    {/* LoginButton component to submit form data */ }
-                                    <LoginButton />
+                            {/* LoginButton component to submit form data */ }
+                            <LoginButton />
 
-                                    {/* Button for alternative login method with GitHub */ }
-                                    <Button variant="outline" className="w-full">
-                                        Log in with GitHub
-                                    </Button>
-                                </div>
+                            {/* Button for alternative login method with GitHub */ }
+                            <Button variant="outline" className="w-full">
+                                Log in with GitHub
+                            </Button>
+                        </div>
 
-                                {/* Link for users to sign up if they don't have an account */ }
-                                <div className="mt-4 text-center ">
-                                    Don&apos;t have an account?{ " " }
-                                    <Link href="#" className="underline">
-                                        Sign in
-                                    </Link>
-                                </div>
-                            </form>
-                        </Form>
-                    </CardContent>
-                </Card>
-            }
-        </>
+                        {/* Link for users to sign up if they don't have an account */ }
+                        <div className="mt-4 text-center ">
+                            Don&apos;t have an account?{ " " }
+                            <Link href="#" className="underline">
+                                Sign in
+                            </Link>
+                        </div>
+                    </form>
+                </Form>
+            </CardContent>
+        </Card>
 
     );
 };

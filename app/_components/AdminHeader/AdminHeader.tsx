@@ -11,9 +11,9 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "../ui/select";
+} from "@/_components/ui/select";
 import { redirect } from "next/navigation";
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "@/_components/ui/skeleton";
 
 interface AdminHeaderProps {
     item: Course | Lesson | User | Assessment | Question;
@@ -54,37 +54,32 @@ const AdminHeader: FC<AdminHeaderProps> = ({
                         { " " }
                     </h1>
                     <span className="text-foreground font-medium ms-2 w-full">
-                        {
-                            ("title" in item) ? item.title : ("email" in item) ? item.email : item.content // Displaying the title, email, or content of the item
+                        { ("title" in item) ? item.title : ("email" in item) ? item.email : item.content // Displaying the title, email, or content of the item
                         }
                     </span>
                 </div>
-
-                {
-                    // A Select component for navigating to different admin pages based on the selected value
-                    <Select
-                        onValueChange={ (value: string): never => redirect(`/admin/${pageContext}s/${value}`) } // Redirects to the selected page context
-                    >
-                        <SelectTrigger className="md:w-1/3">
-                            <SelectValue
-                                placeholder={ `Select a ${pageContext}` }
-                            />
-                        </SelectTrigger>
-                        <SelectContent>
-                            { content.map((contentItem: User | Course | Lesson | Assessment | Question): React.JSX.Element => (
-                                <SelectItem
-                                    key={ contentItem.id }
-                                    value={ contentItem.id.toString() }
-                                >
-                                    { contentItem.id } - { ("title" in contentItem) ? // Displaying the ID and title or email of the content item
-                                        contentItem.title
-                                        : ("email" in contentItem) ? contentItem.email : contentItem.content }
-                                </SelectItem>
-                            )) }
-                        </SelectContent>
-                    </Select>
+                { <Select // A Select component for navigating to different admin pages based on the selected value
+                    onValueChange={ (value: string): never => redirect(`/admin/${pageContext}s/${value}`) } // Redirects to the selected page context
+                >
+                    <SelectTrigger className="md:w-1/3">
+                        <SelectValue
+                            placeholder={ `Select a ${pageContext}` }
+                        />
+                    </SelectTrigger>
+                    <SelectContent>
+                        { content.map((contentItem: User | Course | Lesson | Assessment | Question): React.JSX.Element => (
+                            <SelectItem
+                                key={ contentItem.id }
+                                value={ contentItem.id.toString() }
+                            >
+                                { contentItem.id } - { ("title" in contentItem) ? // Displaying the ID and title or email of the content item
+                                    contentItem.title
+                                    : ("email" in contentItem) ? contentItem.email : contentItem.content }
+                            </SelectItem>
+                        )) }
+                    </SelectContent>
+                </Select>
                 }
-
             </div>
         </Suspense >
 

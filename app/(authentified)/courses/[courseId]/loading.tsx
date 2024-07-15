@@ -3,9 +3,9 @@ import {
     CardHeader,
     CardContent,
     CardFooter
-} from '../../../_components/ui/card';
+} from '@/_components/ui/card';
 import React from 'react';
-import { Skeleton } from '../../../_components/ui/skeleton';
+import { Skeleton } from '@/_components/ui/skeleton';
 
 /**
  * Renders a loading component with skeleton placeholders.

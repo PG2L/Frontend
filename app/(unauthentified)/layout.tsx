@@ -1,7 +1,7 @@
 import React from 'react';
-import FAQ from '../_components/FAQ/FAQ';
-import Footer from '../_components/Footer/Footer';
-import Header from '../_components/Header/Header';
+import FAQ from '@/_components/FAQ/FAQ';
+import Footer from '@/_components/Footer/Footer';
+import Header from '@/_components/Header/Header';
 
 /**
  * Renders the layout for unauthenticated users.

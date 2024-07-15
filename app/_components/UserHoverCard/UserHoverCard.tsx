@@ -3,13 +3,13 @@ import {
     Avatar,
     AvatarFallback,
     AvatarImage,
-} from "../ui/avatar";
-import { Button } from "../ui/button";
+} from "@/_components/ui/avatar";
+import { Button } from "@/_components/ui/button";
 import {
     HoverCard,
     HoverCardContent,
     HoverCardTrigger,
-} from "../ui/hover-card";
+} from "@/_components/ui/hover-card";
 
 interface UserHoverCardProps {
     user: User;

@@ -1,5 +1,5 @@
 import React from 'react';
-import UserForm from '../../../../_components/forms/UserForm/UserForm';
+import UserForm from '@/_components/forms/UserForm/UserForm';
 
 /**
  * Renders the page for creating a new user.
