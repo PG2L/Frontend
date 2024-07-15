@@ -13,24 +13,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "../ui/dialog";
-import {
-    RadioGroup,
-    RadioGroupItem
-} from "../ui/radio-group";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
 import { AssessmentContext } from "../../_contexts/AssessmentProvider";
-import {
-    Card,
-    CardContent
-} from "../ui/card";
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "../ui/carousel";
 import AssessmentModalForm from '../forms/AssessmentModalForm/AssessmentModalForm';
 
 interface AssessmentModalProps { }
@@ -50,6 +33,7 @@ const AssessmentModal: FC<AssessmentModalProps> = (): React.JSX.Element => {
 
     return (
 
+        assessment &&
         <Dialog>
             <DialogTrigger asChild>
                 <Button className="w-1/2 mx-auto">Take assessment !</Button>
@@ -65,7 +49,7 @@ const AssessmentModal: FC<AssessmentModalProps> = (): React.JSX.Element => {
                     <AssessmentModalForm />
                 </DialogFooter>
             </DialogContent >
-        </Dialog >
+        </Dialog>
 
     );
 };

@@ -84,9 +84,7 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
                                         href={ `/courses/${params.courseId}/${lesson.id}` } // Link to the lesson
                                     >
                                         <Button
-                                            variant={
-                                                `${userCourse && userCourse.progress === index ? 'outline' : 'ghost'}` // Conditional variant based on the user's progress
-                                            }
+                                            variant="ghost"
                                             className={
                                                 `text-muted-foreground w-full text-start font-normal text-wrap ` +
                                                 `${(lesson.id == Number(params.lessonId)) && "active"} ` + // Highlight the button if it's the current lesson

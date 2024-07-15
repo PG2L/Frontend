@@ -24,7 +24,6 @@ export async function addCourseToUser(courseId: number, userId: number): Promise
         if (!response.ok) {
             throw new Error('Failed to put data');
         }
-        revalidatePath('/', 'layout');
         revalidateTag('users');
         const data = await response.json();
         return data;
@@ -40,6 +39,7 @@ export async function addCourseToUser(courseId: number, userId: number): Promise
  */
 export async function updateCourseProgress(userCourse: UserCourse): Promise<any> {
     try {
+        console.log("Updating course progress");
         const response = await fetch(`http://localhost:8000/user-courses/${userCourse.id}`, {
             method: 'PUT',
             headers: {
@@ -53,8 +53,7 @@ export async function updateCourseProgress(userCourse: UserCourse): Promise<any>
             throw new Error('Failed to put data');
         }
         const data: any = await response.json();
-        revalidatePath('/', 'layout');
-        revalidateTag('users'); // Revalidate the users tag.
+        revalidateTag('users'); 
         return data;
     } catch (error) {
         console.error(error);
@@ -83,7 +82,6 @@ export async function updateCourseCompletion(userCourse: UserCourse): Promise<an
             throw new Error('Failed to put data');
         }
         const data: any = await response.json();
-        revalidatePath('/', 'layout');
         revalidateTag('users');
         return data;
     } catch (error) {

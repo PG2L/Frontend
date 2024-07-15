@@ -95,12 +95,6 @@ const LessonContent: FC<LessonContentProps> = ({ }: LessonContentProps): React.J
                         <Button
                             className="w-1/3 align-self-center justify-self-center"
                             onClick={ async (): Promise<void> => {
-                                router.prefetch(`/courses/${course.id}/${lesson.id + 1}`);
-                                if (userCourse) {
-                                    await updateCourseProgress(userCourse);
-                                }
-                                await updateUserPoints(user.id, user.total_points + lesson.points_gain);
-                                await updateUserExp(user.id, user.total_exp + lesson.exp_gain);
                                 router.push(`/courses/${course.id}/${lesson.id + 1}`); // Navigate to the next lesson
                             } }
                         >

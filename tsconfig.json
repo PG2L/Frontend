@@ -23,7 +23,7 @@
         ],
         "paths": {
             "@/*": [
-                "./src/*"
+                "./app/*"
             ]
         }
     },
@@ -36,7 +36,9 @@
         "jest.config.js",
         "__mocks__/styleMock.js", 
         "app/_lib/auth/AuthProvider.js", 
-        "app/_components/_contexts/DarkModeProvider.js"    ],
+        "app/_components/_contexts/DarkModeProvider.js",
+        "app/**/*.ts",
+        ],
     "exclude": [
         "node_modules"
     ]

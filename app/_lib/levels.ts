@@ -52,7 +52,7 @@ export function getLevelByExp(totalExp: number): [{ level: number; name: string;
  * @returns A Promise that resolves to void.
  */
 export async function updateUserExp(userId: number, exp: number): Promise<void> {
-    
+    console.log("Updating user exp");
     try {
         const res: Response = await fetch(
             `http://localhost:8000/users/${userId}`,

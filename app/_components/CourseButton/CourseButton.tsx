@@ -40,11 +40,20 @@ const StartButton: FC<StartButtonProps> = ({ className }: StartButtonProps): Rea
      */
     const router: AppRouterInstance = useRouter();
 
+    /**
+     * Navigates to the first lesson of a course.
+     * @returns A Promise that resolves when the navigation is complete.
+     */
+    const navigateToFirstLesson: () => Promise<void> = async (): Promise<void> => {
+        router.push(`/courses/${course.id}/${course.lessons[0].id}`);
+        router.refresh();
+    };
+
     return (
 
         <Button className={ `w-full ${className}` } onClick={ async (): Promise<void> => {
             await addCourseToUser(course.id, user.id);
-            router.push(`/courses/${course.id}/${course.lessons[0].id}`);
+            navigateToFirstLesson();
         } }>
             Start course
         </Button>

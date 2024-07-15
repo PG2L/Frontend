@@ -5,7 +5,6 @@
  * @returns A Promise that resolves to the fetched data.
  */
 export async function getData(endpoint: string, id?: number, spec?: string): Promise<any> {
-
     try {
         const res: Response = await fetch(
             `http://localhost:8000/${endpoint}${id ? `/${id}` : ''}${spec ? `/${spec}` : '' }`,
@@ -19,7 +18,7 @@ export async function getData(endpoint: string, id?: number, spec?: string): Pro
         if (!res.ok) {
             throw new Error('Failed to fetch data');
         }
-        return res.json();
+        return await res.json();
     } catch (error) {
         console.error(error);
     }
