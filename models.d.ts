@@ -12,6 +12,7 @@ interface User {
     total_points: number;
     role: 'User' | 'Admin';
     courses: UserCourse[];
+    achievements: UserAchievement[];
 }
 
 interface Course {
@@ -39,6 +40,7 @@ interface Lesson {
     lesson_number: number;
     course: Course;
     assessment: Assessment;
+    type: Type;
 }
 
 interface Assessment {
@@ -91,6 +93,7 @@ interface Achievement {
     description: string;
     points_gain: number;
     criteria: Criteria;
+    users: UserAchievement[];
 }
 
 interface Criteria {
@@ -98,4 +101,18 @@ interface Criteria {
     type: 'reach' | 'complete_lesson' | 'complete_course';
     requirement?: string;
     amount: number;
+}
+
+interface UserAchievement {
+    id: number;
+    user: User;
+    achievement: Achievement;
+    completion_date: string;
+    completion_status: 'in-progress' | 'completed';
+    progress: number;
+}
+
+interface Type {
+    id: number;
+    name: string;
 }
