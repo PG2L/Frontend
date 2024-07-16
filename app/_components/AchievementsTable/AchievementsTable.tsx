@@ -88,7 +88,7 @@ export const columns: ColumnDef<Achievement>[] = [
             const value: number = (0 / row.original.criteria.amount) * 100; // TODO: Calculate progress value
             return (
                 <div className="grid">
-                    <Label className="justify-self-center text-muted-foreground">{ `(0/${row.original.criteria.amount})` }</Label>
+                    <Label className="justify-self-center text-muted-foreground">{ `0/${row.original.criteria.amount}` }</Label>
                     <Progress value={ value } className="mt-2" />
                 </div>
             );
