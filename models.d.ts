@@ -84,3 +84,18 @@ interface Question {
     answer: string;
     assessment: Assessment;
 }
+
+interface Achievement {
+    id: number;
+    title: string;
+    description: string;
+    points_gain: number;
+    criteria: Criteria;
+}
+
+interface Criteria {
+    id: number;
+    type: 'reach' | 'complete_lesson' | 'complete_course';
+    requirement?: string;
+    amount: number;
+}
