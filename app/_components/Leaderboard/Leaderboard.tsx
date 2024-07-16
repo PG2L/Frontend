@@ -176,7 +176,7 @@ interface LeaderboardProps {
  * @param {LeaderboardProps} props - The component props.
  * @returns {React.JSX.Element} The rendered leaderboard table.
  */
-export default function DataTableDemo({
+export default function LeaderBoard({
     users
 }: LeaderboardProps): React.JSX.Element {
 
