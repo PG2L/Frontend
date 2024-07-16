@@ -2,6 +2,7 @@
  * Fetches data from the server.
  * @param endpoint - The endpoint to fetch data from.
  * @param id - Optional ID parameter for fetching specific data.
+ * @param spec - Optional parameter for fetching specific data.
  * @returns A Promise that resolves to the fetched data.
  */
 export async function getData(endpoint: string, id?: number, spec?: string): Promise<any> {
@@ -13,7 +14,8 @@ export async function getData(endpoint: string, id?: number, spec?: string): Pro
                 {
                     tags: [`${endpoint}`], // Add the endpoint to the tags array.
                     revalidate: 1800, // Revalidate the data every 30 minutes.
-                }
+                },
+                // cache:  'force-cache',
             });
         if (!res.ok) {
             throw new Error('Failed to fetch data');

@@ -1,7 +1,4 @@
-import {
-    revalidatePath,
-    revalidateTag
-} from "next/cache";
+import { revalidatePath } from "next/cache";
 
 /**
  * Adds a course to a user.
@@ -24,7 +21,7 @@ export async function addCourseToUser(courseId: number, userId: number): Promise
         if (!response.ok) {
             throw new Error('Failed to put data');
         }
-        revalidateTag('users');
+        // revalidatePath('/', 'layout')
         const data = await response.json();
         return data;
     } catch (error) {
@@ -52,8 +49,8 @@ export async function updateCourseProgress(userCourse: UserCourse): Promise<any>
         if (!response.ok) {
             throw new Error('Failed to put data');
         }
+        revalidatePath('/', 'layout')
         const data: any = await response.json();
-        revalidateTag('users'); 
         return data;
     } catch (error) {
         console.error(error);
@@ -81,8 +78,8 @@ export async function updateCourseCompletion(userCourse: UserCourse): Promise<an
         if (!response.ok) {
             throw new Error('Failed to put data');
         }
+        revalidatePath('/', 'layout')
         const data: any = await response.json();
-        revalidateTag('users');
         return data;
     } catch (error) {
         console.error(error);
