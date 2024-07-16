@@ -5,39 +5,41 @@
 @layer base {
     :root {
         --gradient: linear-gradient(to top left, #1488CC, #2B32B2);
-
-        --background: 0 0% 100%;
-        --foreground: 222.2 84% 4.9%;
-
-        --card: 210 14% 96.1%;
-        --card-foreground: 222.2 84% 4.9%;
-
-        --popover: 0 0% 100%;
-        --popover-foreground: 222.2 84% 4.9%;
-
-        --primary: 221.2 83.2% 53.3%;
-        --primary-foreground: 210 40% 98%;
-
-        --secondary: 210 4% 90%;
-        --secondary-foreground: 222.2 47.4% 11.2%;
-
-        --muted: 210 4% 90%;
-        --muted-foreground: 215.4 16.3% 46.9%;
-
-        --accent: 210 4% 90%;
-        --accent-foreground: 222.2 47.4% 11.2%;
-
-        --destructive: 0 84.2% 60.2%;
-        --destructive-foreground: 210 40% 98%;
-
-        --border: 214.3 31.8% 91.4%;
-        --input: 214.3 31.8% 91.4%;
         
-        --ring: 221.2 83.2% 53.3%;
+        --background: 215 20% 95%;
+        --foreground: 215 5% 10%;
+
+        --card: 215 20% 90%;
+        --card-foreground: 215 5% 15%;
+
+        --popover: 215 20% 95%;
+        --popover-foreground: 215 95% 10%;
+
+        --primary: 215 82.1% 43.9%;
+        --primary-foreground: 0 0% 100%;
+
+        --secondary: 215 20% 86%;
+        --secondary-foreground: 0 0% 0%;
+
+        --muted: 177 20% 86%;
+        --muted-foreground: 215 5% 40%;
+
+        --accent: 177 20% 86%;
+        --accent-foreground: 215 5% 15%;
+
+        --destructive: 0 50% 50%;
+        --destructive-foreground: 215 5% 90%;
+
+        --border: 215 20% 82%;
+        --input: 215 20% 50%;
+        --ring: 215 82.1% 43.9%;
+
         --radius: 0.5rem;
     }
 
     .dark {
+        --gradient: linear-gradient(to top left, #1488CC, #2B32B2);
+
         --background: 215 53.3% 3.52%;
         --foreground: 215 8.2% 97.2%;
 
@@ -64,8 +66,8 @@
         
         --border: 215 41% 13.2%;
         --input: 215 41% 13.2%;
-
         --ring: 215 82% 44%;
+
         --radius: 0.5rem;
     } 
 }
