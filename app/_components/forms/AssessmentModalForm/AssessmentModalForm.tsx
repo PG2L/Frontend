@@ -40,6 +40,7 @@ import { useRouter } from 'next/navigation';
 import { updateCourseProgress } from '@/_lib/courses';
 import { useToast } from "@/_components/ui/use-toast";
 import { Spinner } from '@/_components/ui/spinner';
+import handleAchievementItems from '@/_lib/achievements';
 
 interface AssessmentModalFormProps { }
 
@@ -162,10 +163,11 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
                 throw new Error('Network response was not ok');
             }
             if (userCourse) {
-                await updateCourseProgress(userCourse);
+                updateCourseProgress(userCourse);
             }
-            await updateUserPoints(user.id, user.total_points + lesson.points_gain);
-            await updateUserExp(user.id, user.total_exp + lesson.exp_gain);
+            updateUserPoints(user.id, user.total_points + lesson.points_gain);
+            updateUserExp(user.id, user.total_exp + lesson.exp_gain);
+            handleAchievementItems(lesson, user);
         });
         navigateToNextLesson();
     }
