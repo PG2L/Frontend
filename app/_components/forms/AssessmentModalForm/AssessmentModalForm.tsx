@@ -39,6 +39,7 @@ import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.share
 import { useRouter } from 'next/navigation';
 import { updateCourseProgress } from '@/_lib/courses';
 import { useToast } from "@/_components/ui/use-toast";
+import { Spinner } from '@/_components/ui/spinner';
 
 interface AssessmentModalFormProps { }
 
@@ -180,20 +181,31 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
             title: "Assessment failed !",
             description: `You have failed the assessment with a score of ${score}/${assessment.questions.length}. Try again !`,
         });
-        form.reset();
     }
 
     /**
-     * Represents the state of whether the assessment is pending or not.
+     * Represents the state of whether the assessment is valid or not.
      */
-    const [pending, setPending] = useState(true);
+    const [isValid, setIsValid] = useState(false);
+
+    /**
+     * The state variable that holds the number of answered questions.
+     */
+    const [answeredQuestions, setAnsweredQuestions] = useState(0);
 
     useEffect((): void => {
-        // If all questions have been answered, set pending to false
-        if (Object.values(form.getValues()).filter((value: string): boolean => value !== '').length >= assessment.questions.length) {
-            setPending(false);
+        const answeredQuestions: number = Object.values(form.getValues()).filter((value: string): boolean => value !== '').length;
+        setAnsweredQuestions(answeredQuestions);
+        // If all questions have been answered, set isValid to true
+        if (answeredQuestions >= assessment.questions.length) {
+            setIsValid(true);
         }
     }, [form.getValues()]);
+
+    /**
+     * Represents the state of whether the form is pending or not.
+     */
+    const [isPending, setIsPending] = useState(false);
 
     /**
      * Handles the form submission for the assessment modal form.
@@ -203,6 +215,7 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
      * @returns void
      */
     const onSubmit: (values: any) => void = (values: any): void => {
+        setIsPending(true);
         /**
          * Calculates the score for the assessment based on the given answers.
          * 
@@ -218,6 +231,7 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
             handleSuccess(score);
         } else {
             handleFailure(score);
+            setIsPending(false);
         }
     };
 
@@ -273,7 +287,12 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
                                 </CarouselItem>
                         )) }
                     </CarouselContent>
-                    <Button type="submit" className="w-1/3 justify-self-end mt-2" disabled={ pending }>Submit</Button>
+                    <Button type="submit" className="w-1/3 justify-self-end mt-2" disabled={ !isValid }>{
+                        !isValid ?
+                            `(${answeredQuestions}/${assessment.questions.length})` :
+                            isPending ?
+                                <Spinner className="text-foreground" /> : "Submit"
+                    }</Button>
                 </form>
             </Form >
             <CarouselPrevious />
