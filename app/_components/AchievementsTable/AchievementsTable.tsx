@@ -33,100 +33,144 @@ import {
 } from "@/_components/ui/table";
 import { Progress } from "@/_components/ui/progress";
 import { Label } from "@/_components/ui/label";
-
-/**
- * Represents the column definition for the achievementsTable table.
- */
-export const columns: ColumnDef<Achievement>[] = [
-    {
-        /**
-         * Represents the name column.
-         */
-        accessorKey: "name",
-        header: ({ column }: HeaderContext<Achievement, unknown>): React.JSX.Element => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={ (): void => column.toggleSorting(column.getIsSorted() === "asc") }
-                >
-                    Name
-                    <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            );
-        },
-        cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => <div className="font-medium">{ row.getValue("name") }</div>,
-    },
-    {
-        /**
-         * Represents the description column.
-         */
-        accessorKey: "description",
-        header: ({ column }: HeaderContext<Achievement, unknown>): React.JSX.Element => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={ (): void => column.toggleSorting(column.getIsSorted() === "asc") }
-                >
-                    Description
-                    <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            );
-        },
-        cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => <div>{ row.getValue("description") }</div>,
-    },
-    {
-        /**
-         * Represents the progress column.
-         */
-        accessorKey: "progress",
-        header: ({ column }: HeaderContext<Achievement, unknown>): React.JSX.Element => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={ (): void => column.toggleSorting(column.getIsSorted() === "asc") }
-                >
-                    Progress
-                    <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            );
-        },
-        cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => {
-            const value: number = (0 / row.original.criteria.amount) * 100; // TODO: Calculate progress value
-            return (
-                <div className="grid">
-                    <Label className="justify-self-center text-muted-foreground">{ `0/${row.original.criteria.amount}` }</Label>
-                    <Progress value={ value } className="mt-2" />
-                </div>
-            );
-        },
-    },
-    {
-        /**
-         * Represents the points_gain column.
-         */
-        accessorKey: "points_gain",
-        header: (): React.JSX.Element => <div className="text-right">Points</div>,
-        cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => {
-            const points_gain: number = parseFloat(row.getValue("points_gain"));
-
-            return <div className="text-right">{ points_gain }</div>;
-        },
-    },
-];
+import { UserContext } from "@/_contexts/UserProvider";
 
 interface AchievementsTableProps {
     achievements: Achievement[];
 }
 
 /**
- * Renders a achievementsTable table with sorting, filtering, and pagination functionality.
+ * Renders a achievements table with sorting, filtering, and pagination functionality.
  *
  * @param { AchievementsTableProps } props - The component props.
-            * @returns { React.JSX.Element } The rendered achievements table.
-            */
-export default function DataTableDemo({
-    achievements
+ * @returns { React.JSX.Element } The rendered achievements table.
+ */
+export default function AchievementsTable({
+    achievements,
 }: AchievementsTableProps): React.JSX.Element {
+
+    /**
+     * Retrieves the user from the UserContext.
+     * @returns The user object.
+     */
+    const user: User = React.useContext(UserContext);
+    console.log(user);
+
+    /**
+     * Represents the column definition for the achievements table.
+     */
+    const columns: ColumnDef<Achievement>[] = [
+        {
+            /**
+             * Represents the name column.
+             */
+            accessorKey: "name",
+            header: ({ column }: HeaderContext<Achievement, unknown>): React.JSX.Element => {
+                return (
+                    <Button
+                        variant="ghost"
+                        onClick={ (): void => column.toggleSorting(column.getIsSorted() === "asc") }
+                    >
+                        Name
+                        <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
+                    </Button>
+                );
+            },
+            cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => <div className="font-medium">{ row.getValue("name") }</div>,
+        },
+        {
+            /**
+             * Represents the description column.
+             */
+            accessorKey: "description",
+            header: ({ column }: HeaderContext<Achievement, unknown>): React.JSX.Element => {
+                return (
+                    <Button
+                        variant="ghost"
+                        onClick={ (): void => column.toggleSorting(column.getIsSorted() === "asc") }
+                    >
+                        Description
+                        <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
+                    </Button>
+                );
+            },
+            cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => <div>{ row.getValue("description") }</div>,
+        },
+        {
+            /**
+             * Represents the progress column.
+             */
+            accessorKey: "progress",
+            header: ({ column }: HeaderContext<Achievement, unknown>): React.JSX.Element => {
+                return (
+                    <Button
+                        variant="ghost"
+                        onClick={ (): void => column.toggleSorting(column.getIsSorted() === "asc") }
+                    >
+                        Progress
+                        <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
+                    </Button>
+                );
+            },
+            cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => {
+                const value: number = user.achievements.find(
+                    (achievement: UserAchievement): boolean => achievement.achievement.id === row.original.id
+                )?.progress ?? 0;
+                const progress: number = (value / row.original.criteria.amount) * 100;
+
+                return (
+                    <div className="grid">
+                        <Label className="justify-self-center text-muted-foreground">{ `${value}/${row.original.criteria.amount}` }</Label>
+                        <Progress value={ progress } className="mt-2" />
+                    </div>
+                );
+            },
+        },
+        {
+            /**
+             * Represents the points_gain column.
+             */
+            accessorKey: "points_gain",
+            header: (): React.JSX.Element => <div className="text-right">Points</div>,
+            cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => {
+                const points_gain: number = parseFloat(row.getValue("points_gain"));
+                const userAchievement: UserAchievement | undefined = user.achievements.find(
+                    (achievement: UserAchievement): boolean => achievement.achievement.id === row.original.id
+                );
+
+                return (
+                    <>
+                        { userAchievement?.completion_status === "completed" ?
+                            <>
+                                <div className="flex text-right text-muted-foreground justify-end items-center">
+                                    { points_gain }
+                                    <icons.Medal className="ml-2 h-6 w-6 text-primary" strokeWidth={ 1 } />
+                                </div>
+                                <div className="text-right text-muted-foreground">Completed on { userAchievement.completion_date.slice(0, 10) }</div>
+                            </>
+                            :
+                            <div className="flex text-right justify-end items-center">
+                                { points_gain }
+                                <icons.Medal className="ml-2 h-6 w-6 text-primary" strokeWidth={ 1 } />
+                            </div>
+                        }
+                    </>
+                );
+            },
+        },
+    ];
+
+    // Sort the achievements by completion status
+    achievements.sort((a: Achievement, b: Achievement): number => {
+        const aCompleted: boolean = user.achievements.find(
+            (achievement: UserAchievement): boolean => achievement.achievement.id === a.id
+        )?.progress === a.criteria.amount;
+        const bCompleted: boolean = user.achievements.find(
+            (achievement: UserAchievement): boolean => achievement.achievement.id === b.id
+        )?.progress === b.criteria.amount;
+
+        return aCompleted === bCompleted ? 0 : aCompleted ? 1 : -1;
+    });
 
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -192,21 +236,27 @@ export default function DataTableDemo({
                     {/* Table body rendering */ }
                     <TableBody>
                         { table.getRowModel().rows?.length ? (
-                            table.getRowModel().rows.map((row: Row<Achievement>): React.JSX.Element => (
-                                <TableRow
-                                    key={ row.id }
-                                    data-state={ row.getIsSelected() && "selected" }
-                                >
-                                    { row.getVisibleCells().map((cell: Cell<Achievement, unknown>): React.JSX.Element => (
-                                        <TableCell key={ cell.id }>
-                                            { flexRender(
-                                                cell.column.columnDef.cell,
-                                                cell.getContext()
-                                            ) }
-                                        </TableCell>
-                                    )) }
-                                </TableRow>
-                            ))
+                            table.getRowModel().rows.map((row: Row<Achievement>): React.JSX.Element => {
+                                const isCompleted: boolean = user.achievements.find(
+                                    (achievement: UserAchievement): boolean => achievement.achievement.id === row.original.id
+                                )?.completion_status === "completed";
+                                return (
+                                    <TableRow
+                                        key={ row.id }
+                                        data-state={ row.getIsSelected() && "selected" }
+                                        className={ isCompleted ? "bg-secondary" : "" }
+                                    >
+                                        { row.getVisibleCells().map((cell: Cell<Achievement, unknown>): React.JSX.Element => (
+                                            <TableCell key={ cell.id }>
+                                                { flexRender(
+                                                    cell.column.columnDef.cell,
+                                                    cell.getContext()
+                                                ) }
+                                            </TableCell>
+                                        )) }
+                                    </TableRow>
+                                );
+                            })
                         ) : (
                             <TableRow>
                                 <TableCell
