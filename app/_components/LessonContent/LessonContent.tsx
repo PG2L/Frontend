@@ -93,6 +93,7 @@ const LessonContent: FC<LessonContentProps> = ({ }: LessonContentProps): React.J
                     :
                     !isLastLesson ? // Button to navigate to the next lesson if it's not the last lesson
                         <Button
+                            variant="outline"
                             className="w-1/3 align-self-center justify-self-center"
                             onClick={ async (): Promise<void> => {
                                 router.push(`/courses/${course.id}/${lesson.id + 1}`); // Navigate to the next lesson
