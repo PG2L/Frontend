@@ -3,8 +3,14 @@
 import * as React from "react";
 import * as icons from "lucide-react";
 import {
+    Cell,
+    CellContext,
     ColumnDef,
     ColumnFiltersState,
+    Header,
+    HeaderContext,
+    HeaderGroup,
+    Row,
     SortingState,
     VisibilityState,
     flexRender,
@@ -46,7 +52,7 @@ export const columns: ColumnDef<User>[] = [
          * Represents the select column.
          */
         id: "select",
-        header: ({ table }): React.JSX.Element => (
+        header: ({ table }: HeaderContext<User, unknown>): React.JSX.Element => (
             <Checkbox
                 checked={
                     table.getIsAllPageRowsSelected() ||
@@ -56,7 +62,7 @@ export const columns: ColumnDef<User>[] = [
                 aria-label="Select all"
             />
         ),
-        cell: ({ row }): React.JSX.Element => (
+        cell: ({ row }: CellContext<User, unknown>): React.JSX.Element => (
             <Checkbox
                 checked={ row.getIsSelected() }
                 onCheckedChange={ (value): void => row.toggleSelected(!!value) }
@@ -71,7 +77,7 @@ export const columns: ColumnDef<User>[] = [
          * Represents the rank column.
          */
         accessorKey: "rank",
-        header: ({ column }): React.JSX.Element => {
+        header: ({ column }: HeaderContext<User, unknown>): React.JSX.Element => {
             return (
                 <Button
                     variant="ghost"
@@ -82,7 +88,7 @@ export const columns: ColumnDef<User>[] = [
                 </Button>
             );
         },
-        cell: ({ row }): React.JSX.Element => (
+        cell: ({ row }: CellContext<User, unknown>): React.JSX.Element => (
             <div className="ps-6">{ row.index + 1 }</div>
         ),
     },
@@ -91,7 +97,7 @@ export const columns: ColumnDef<User>[] = [
          * Represents the username column.
          */
         accessorKey: "username",
-        header: ({ column }): React.JSX.Element => {
+        header: ({ column }: HeaderContext<User, unknown>): React.JSX.Element => {
             return (
                 <Button
                     variant="ghost"
@@ -102,14 +108,14 @@ export const columns: ColumnDef<User>[] = [
                 </Button>
             );
         },
-        cell: ({ row }): React.JSX.Element => <UserHoverCard user={ row.original } />,
+        cell: ({ row }: CellContext<User, unknown>): React.JSX.Element => <UserHoverCard user={ row.original } />,
     },
     {
         /**
          * Represents the email column.
          */
         accessorKey: "email",
-        header: ({ column }): React.JSX.Element => {
+        header: ({ column }: HeaderContext<User, unknown>): React.JSX.Element => {
             return (
                 <Button
                     variant="ghost"
@@ -120,7 +126,7 @@ export const columns: ColumnDef<User>[] = [
                 </Button>
             );
         },
-        cell: ({ row }): React.JSX.Element => <div className="lowercase">{ row.getValue("email") }</div>,
+        cell: ({ row }: CellContext<User, unknown>): React.JSX.Element => <div className="lowercase">{ row.getValue("email") }</div>,
     },
     {
         /**
@@ -128,7 +134,7 @@ export const columns: ColumnDef<User>[] = [
          */
         accessorKey: "total_points",
         header: () => <div className="text-right">Points</div>,
-        cell: ({ row }): React.JSX.Element => {
+        cell: ({ row }: CellContext<User, unknown>): React.JSX.Element => {
             const total_points: number = parseFloat(row.getValue("total_points"));
 
             return <div className="text-right">{ total_points }</div>;
@@ -140,8 +146,8 @@ export const columns: ColumnDef<User>[] = [
          */
         id: "actions",
         enableHiding: false,
-        cell: ({ row }): React.JSX.Element => {
-            const payment = row.original;
+        cell: ({ row }: CellContext<User, unknown>): React.JSX.Element => {
+            const user: User = row.original;
 
             return (
                 <DropdownMenu>
@@ -214,7 +220,7 @@ export default function LeaderBoard({
                 <Input
                     placeholder="Search..."
                     value={ (table.getColumn("username")?.getFilterValue() as string) ?? "" }
-                    onChange={ (event): void | undefined =>
+                    onChange={ (event: React.ChangeEvent<HTMLInputElement>): void | undefined =>
                         table.getColumn("username")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
@@ -224,9 +230,9 @@ export default function LeaderBoard({
                 <Table>
                     {/* Table header rendering */ }
                     <TableHeader>
-                        { table.getHeaderGroups().map((headerGroup): React.JSX.Element => (
+                        { table.getHeaderGroups().map((headerGroup: HeaderGroup<User>): React.JSX.Element => (
                             <TableRow key={ headerGroup.id }>
-                                { headerGroup.headers.map((header): React.JSX.Element => {
+                                { headerGroup.headers.map((header: Header<User, unknown>): React.JSX.Element => {
                                     return (
                                         <TableHead key={ header.id }>
                                             { header.isPlaceholder
@@ -244,12 +250,12 @@ export default function LeaderBoard({
                     {/* Table body rendering */ }
                     <TableBody>
                         { table.getRowModel().rows?.length ? (
-                            table.getRowModel().rows.map((row): React.JSX.Element => (
+                            table.getRowModel().rows.map((row: Row<User>): React.JSX.Element => (
                                 <TableRow
                                     key={ row.id }
                                     data-state={ row.getIsSelected() && "selected" }
                                 >
-                                    { row.getVisibleCells().map((cell): React.JSX.Element => (
+                                    { row.getVisibleCells().map((cell: Cell<User, unknown>): React.JSX.Element => (
                                         <TableCell key={ cell.id }>
                                             { flexRender(
                                                 cell.column.columnDef.cell,

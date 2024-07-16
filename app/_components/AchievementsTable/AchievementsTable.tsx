@@ -3,8 +3,14 @@
 import * as React from "react";
 import * as icons from "lucide-react";
 import {
+    Cell,
+    CellContext,
     ColumnDef,
     ColumnFiltersState,
+    Header,
+    HeaderContext,
+    HeaderGroup,
+    Row,
     SortingState,
     VisibilityState,
     flexRender,
@@ -37,7 +43,7 @@ export const columns: ColumnDef<Achievement>[] = [
          * Represents the name column.
          */
         accessorKey: "name",
-        header: ({ column }): React.JSX.Element => {
+        header: ({ column }: HeaderContext<Achievement, unknown>): React.JSX.Element => {
             return (
                 <Button
                     variant="ghost"
@@ -48,14 +54,14 @@ export const columns: ColumnDef<Achievement>[] = [
                 </Button>
             );
         },
-        cell: ({ row }): React.JSX.Element => <div className="font-medium">{ row.getValue("name") }</div>,
+        cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => <div className="font-medium">{ row.getValue("name") }</div>,
     },
     {
         /**
          * Represents the description column.
          */
         accessorKey: "description",
-        header: ({ column }): React.JSX.Element => {
+        header: ({ column }: HeaderContext<Achievement, unknown>): React.JSX.Element => {
             return (
                 <Button
                     variant="ghost"
@@ -66,14 +72,14 @@ export const columns: ColumnDef<Achievement>[] = [
                 </Button>
             );
         },
-        cell: ({ row }): React.JSX.Element => <div>{ row.getValue("description") }</div>,
+        cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => <div>{ row.getValue("description") }</div>,
     },
     {
         /**
          * Represents the progress column.
          */
         accessorKey: "progress",
-        header: ({ column }): React.JSX.Element => {
+        header: ({ column }: HeaderContext<Achievement, unknown>): React.JSX.Element => {
             return (
                 <Button
                     variant="ghost"
@@ -84,7 +90,7 @@ export const columns: ColumnDef<Achievement>[] = [
                 </Button>
             );
         },
-        cell: ({ row }): React.JSX.Element => {
+        cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => {
             const value: number = (0 / row.original.criteria.amount) * 100; // TODO: Calculate progress value
             return (
                 <div className="grid">
@@ -100,7 +106,7 @@ export const columns: ColumnDef<Achievement>[] = [
          */
         accessorKey: "points_gain",
         header: (): React.JSX.Element => <div className="text-right">Points</div>,
-        cell: ({ row }): React.JSX.Element => {
+        cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => {
             const points_gain: number = parseFloat(row.getValue("points_gain"));
 
             return <div className="text-right">{ points_gain }</div>;
@@ -156,7 +162,7 @@ export default function DataTableDemo({
                 <Input
                     placeholder="Search..."
                     value={ (table.getColumn("name")?.getFilterValue() as string) ?? "" }
-                    onChange={ (event): void | undefined =>
+                    onChange={ (event: React.ChangeEvent<HTMLInputElement>): void | undefined =>
                         table.getColumn("name")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
@@ -166,9 +172,9 @@ export default function DataTableDemo({
                 <Table>
                     {/* Table header rendering */ }
                     <TableHeader>
-                        { table.getHeaderGroups().map((headerGroup): React.JSX.Element => (
+                        { table.getHeaderGroups().map((headerGroup: HeaderGroup<Achievement>): React.JSX.Element => (
                             <TableRow key={ headerGroup.id }>
-                                { headerGroup.headers.map((header): React.JSX.Element => {
+                                { headerGroup.headers.map((header: Header<Achievement, unknown>): React.JSX.Element => {
                                     return (
                                         <TableHead key={ header.id }>
                                             { header.isPlaceholder
@@ -186,12 +192,12 @@ export default function DataTableDemo({
                     {/* Table body rendering */ }
                     <TableBody>
                         { table.getRowModel().rows?.length ? (
-                            table.getRowModel().rows.map((row): React.JSX.Element => (
+                            table.getRowModel().rows.map((row: Row<Achievement>): React.JSX.Element => (
                                 <TableRow
                                     key={ row.id }
                                     data-state={ row.getIsSelected() && "selected" }
                                 >
-                                    { row.getVisibleCells().map((cell): React.JSX.Element => (
+                                    { row.getVisibleCells().map((cell: Cell<Achievement, unknown>): React.JSX.Element => (
                                         <TableCell key={ cell.id }>
                                             { flexRender(
                                                 cell.column.columnDef.cell,
@@ -214,13 +220,8 @@ export default function DataTableDemo({
                     </TableBody>
                 </Table>
             </div>
-            {/* Pagination and row selection info */ }
+            {/* Pagination buttons */ }
             <div className="flex items-center justify-end space-x-2 py-4">
-                <div className="flex-1 text-sm text-muted-foreground">
-                    { table.getFilteredSelectedRowModel().rows.length } of{ " " }
-                    { table.getFilteredRowModel().rows.length } row(s) selected.
-                </div>
-                {/* Pagination buttons */ }
                 <div className="space-x-2">
                     <Button
                         variant="outline"
