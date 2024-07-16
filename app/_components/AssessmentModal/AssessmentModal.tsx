@@ -15,6 +15,7 @@ import {
 } from "@/_components/ui/dialog";
 import { AssessmentContext } from "@/_contexts/AssessmentProvider";
 import AssessmentModalForm from '@/_components/forms/AssessmentModalForm/AssessmentModalForm';
+import { useToast } from '../ui/use-toast';
 
 interface AssessmentModalProps { }
 
@@ -24,6 +25,8 @@ interface AssessmentModalProps { }
  * @returns {React.JSX.Element} The rendered component.
  */
 const AssessmentModal: FC<AssessmentModalProps> = (): React.JSX.Element => {
+
+    const { toast } = useToast();
 
     /**
      * Represents the current assessment.
@@ -36,7 +39,7 @@ const AssessmentModal: FC<AssessmentModalProps> = (): React.JSX.Element => {
         assessment &&
         <Dialog>
             <DialogTrigger asChild>
-                <Button className="w-1/2 mx-auto">Take assessment !</Button>
+                <Button className="w-1/3 mx-auto">Take assessment !</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>

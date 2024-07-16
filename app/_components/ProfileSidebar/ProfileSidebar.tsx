@@ -53,7 +53,7 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
     /**
      * Represents the state of the sidebar's open/closed status.
      */
-    const [isOpen, setIsOpen] = React.useState(true);
+    const [isOpen, setIsOpen] = React.useState(false);
 
     return (
 
@@ -66,8 +66,8 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                         size="sm"
                     >
                         { isOpen ? // Ternary operator to display the correct icon based on the sidebar's open/closed status
-                            <icons.ChevronRightIcon className="h-6 w-6" />
-                            : <icons.ChevronLeftIcon className="h-6 w-6" />
+                            <icons.ChevronRightIcon className="h-6 w-6" strokeWidth={ 1 } />
+                            : <icons.ChevronLeftIcon className="h-6 w-6" strokeWidth={ 1 } />
                         }
                     </Button>
                 </div>

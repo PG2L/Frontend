@@ -1,6 +1,8 @@
 import React, {
     FC,
-    useContext
+    useContext,
+    useEffect,
+    useState
 } from 'react';
 import styles from './AssessmentModalForm.module.css';
 import {
@@ -36,6 +38,7 @@ import { updateUserExp } from '@/_lib/levels';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { useRouter } from 'next/navigation';
 import { updateCourseProgress } from '@/_lib/courses';
+import { useToast } from "@/_components/ui/use-toast";
 
 interface AssessmentModalFormProps { }
 
@@ -114,59 +117,107 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
     });
 
     /**
+     * The toast object used for displaying notifications.
+     */
+    const { toast } = useToast();
+
+    /**
      * Navigates to the next lesson if there is one, otherwise navigates to the course page.
      */
     const navigateToNextLesson: () => void = (): void => {
         if (lesson.lesson_number === lesson.course.lessons.length) {
-            // router.push(`/courses/${lesson.course.id}`); // If the current lesson is the last lesson, navigate to the course page.
-            router.refresh();
+            router.push(`/courses/${lesson.course.id}`); // If the current lesson is the last lesson, navigate to the course page.
         } else {
-            // router.push(`/courses/${lesson.course.id}/${lesson.course.lessons[lesson.lesson_number].id}`); // Otherwise, navigate to the next lesson.
-            router.refresh();
+            router.push(`/courses/${lesson.course.id}/${lesson.course.lessons[lesson.lesson_number].id}`); // Otherwise, navigate to the next lesson.
         }
     };
 
     /**
-     * Handles the form submission for the assessment modal.
-     * Calculates the score for the assessment based on the given answers and posts the solution to the server if the score is sufficient.
+     * Handles the success of the assessment.
+     * Displays a toast message with the score and updates the user's progress, points, and experience.
+     *
+     * @param score - The score obtained in the assessment.
+     * @returns A Promise that resolves when the user's progress, points, and experience are updated.
+     */
+    async function handleSuccess(score: number): Promise<void> {
+        toast({
+            title: "Congratulations !",
+            description: `You have successfully passed the assessment with a score of ${score}/${assessment.questions.length} and can now access the next lesson !`,
+        });
+
+        await fetch('http://localhost:8000/solutions/new', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                score: score,
+                is_accepted: true,
+                author: user.id,
+                assessment: assessment.id,
+            }),
+        }).then(async (response: Response): Promise<void> => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            if (userCourse) {
+                await updateCourseProgress(userCourse);
+            }
+            await updateUserPoints(user.id, user.total_points + lesson.points_gain);
+            await updateUserExp(user.id, user.total_exp + lesson.exp_gain);
+        });
+        navigateToNextLesson();
+    }
+
+    /**
+     * Handles the failure of an assessment.
+     * Displays a toast notification with the failure message and reset the form fields.
+     *
+     * @param score - The score obtained in the assessment.
+     */
+    function handleFailure(score: number): void {
+        toast({
+            title: "Assessment failed !",
+            description: `You have failed the assessment with a score of ${score}/${assessment.questions.length}. Try again !`,
+        });
+        form.reset();
+    }
+
+    /**
+     * Represents the state of whether the assessment is pending or not.
+     */
+    const [pending, setPending] = useState(true);
+
+    useEffect((): void => {
+        // If all questions have been answered, set pending to false
+        if (Object.values(form.getValues()).filter((value: string): boolean => value !== '').length >= assessment.questions.length) {
+            setPending(false);
+        }
+    }, [form.getValues()]);
+
+    /**
+     * Handles the form submission for the assessment modal form.
+     * Calculates the score for the assessment based on the given answers and performs appropriate actions.
      * 
      * @param values - The user's answers for each question.
-     * @returns A Promise that resolves when the submission is complete.
+     * @returns void
      */
-    const onSubmit: (values: any) => Promise<void> = async (values: any): Promise<void> => {
-
+    const onSubmit: (values: any) => void = (values: any): void => {
         /**
          * Calculates the score for the assessment based on the given answers.
          * 
          * @param assessment - The assessment object containing the questions.
          * @param values - The user's answers for each question.
          * @returns The score for the assessment.
-        */
+         */
         const score: number = assessment.questions.reduce((acc: number, question: Question, index: number): number => {
             return question.answer === values[`answer${index + 1}`] ? acc + 1 : acc;
         }, 0);
 
         if (score >= assessment.passing_score) { // If the user's score is greater than or equal to the passing score, post the solution to the server.
-            await fetch('http://localhost:8000/solutions/new', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    score: score,
-                    is_accepted: true,
-                    author: user.id,
-                    assessment: assessment.id,
-                }),
-            }).then(async (response: Response): Promise<void> => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                await updateCourseProgress(userCourse);
-                await updateUserPoints(user.id, user.total_points + lesson.points_gain);
-                await updateUserExp(user.id, user.total_exp + lesson.exp_gain);
-                navigateToNextLesson();
-            });
+            handleSuccess(score);
+        } else {
+            handleFailure(score);
         }
     };
 
@@ -174,14 +225,14 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
 
         <Carousel>
             <Form { ...form }>
-                <form onSubmit={ form.handleSubmit(onSubmit) }>
+                <form onSubmit={ form.handleSubmit(onSubmit) } className="grid">
                     <CarouselContent>
                         { assessment.questions.map((question: Question, index: number): React.JSX.Element => ( // Mapping through the questions array to render the questions.
                             question.type === 'mcq' ? // If the question type is multiple choice question, render a radio group.
                                 <CarouselItem key={ index }>
                                     <FormField
                                         control={ form.control }
-                                        name={ `answer${index + 1}` } // Dynamically setting the name of the field.
+                                        name={ `answer${index + 1}` as "answer1" | "answer2" | "answer3" | "answer4" | "answer5" } // Dynamically setting the name of the field.
                                         render={ ({ field }): React.JSX.Element => (
                                             <FormItem className="w-full">
                                                 <FormLabel>{ question.content } </FormLabel>
@@ -209,7 +260,7 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
                                 <CarouselItem key={ index }>
                                     <FormField
                                         control={ form.control }
-                                        name={ `answer${index + 1}` }
+                                        name={ `answer${index + 1}` as "answer1" | "answer2" | "answer3" | "answer4" | "answer5" }
                                         render={ ({ field }): React.JSX.Element => (
                                             <>
                                                 <Label>{ question.content }</Label>
@@ -222,7 +273,7 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
                                 </CarouselItem>
                         )) }
                     </CarouselContent>
-                    <Button type="submit" className="w-1/3 justify-self-end mt-2">Submit</Button>
+                    <Button type="submit" className="w-1/3 justify-self-end mt-2" disabled={ pending }>Submit</Button>
                 </form>
             </Form >
             <CarouselPrevious />

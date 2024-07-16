@@ -205,8 +205,7 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                                             { logoutButton }
                                         </div>
                                         { isOpen && // Conditionally rendered title based on sidebar state
-                                            <span className="w-full ms-2">Logout</span>
-                                        }
+                                            <span className="w-full ms-2">Logout</span> }
                                     </Button>
                                 </Card>
                             </TooltipTrigger>
@@ -218,7 +217,7 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                     <Separator className="mt-4" />
                 </div>
             </div>
-            <div className="flex flex-col h-screen items-center justify-center z-50 ">
+            <div className="flex flex-col h-screen items-center justify-center z-50">
                 <Button
                     variant="ghost"
                     onClick={ (): void => setIsOpen(!isOpen) } // Toggle the sidebar state on button click

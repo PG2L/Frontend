@@ -1,6 +1,7 @@
 import React from 'react';
-import DarkModeProvider from "./_contexts/DarkModeProvider";
+import DarkModeProvider from "@/_contexts/DarkModeProvider";
 import './globals.css';
+import { Toaster } from '@/_components/ui/toaster';
 
 export const metadata = {
     title: 'Next.js',
@@ -23,17 +24,14 @@ export default function RootLayout({
 
         <html lang="en">
             <body>
-
-                {/* DarkModeProvider component wraps the entire application to provide dark mode context */ }
                 <DarkModeProvider>
                     <div className="flex flex-col" id="layout" data-testid="layout">
-
-                        {/* Main content area where child components are rendered */ }
                         <main>
                             { children }
                         </main>
                     </div>
                 </DarkModeProvider>
+                <Toaster />
             </body>
         </html>
 
