@@ -154,7 +154,7 @@ const QuestionForm: FC<QuestionFormProps> = ({
     return (
 
         <Suspense fallback={
-            <div className="grid gap-10 md:gap-12 mt-12">
+            <div className="space-y-10 md:space-y-12 mt-12">
                 <Skeleton className="w-full h-10" />
                 <Skeleton className="w-full h-24" />
                 <div className="grid gap-10 sm:flex sm:gap-6">

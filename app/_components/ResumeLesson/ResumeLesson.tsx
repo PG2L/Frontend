@@ -38,7 +38,7 @@ const ResumeLesson: FC<ResumeLessonProps> = (): React.JSX.Element => {
 
     return (
 
-        <div className="grid">
+        <>
             <h1 className="text-2xl">Resume</h1>
             <ScrollArea>
                 <div className="w-full p-6 flex gap-6 items-center justify-start">
@@ -49,7 +49,7 @@ const ResumeLesson: FC<ResumeLessonProps> = (): React.JSX.Element => {
                 {/* Horizontal scrollbar for the scrollable area */ }
                 <ScrollBar orientation="horizontal" />
             </ScrollArea>
-        </div>
+        </>
     );
 };
 

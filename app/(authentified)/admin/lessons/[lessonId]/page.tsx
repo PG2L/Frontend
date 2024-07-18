@@ -33,7 +33,6 @@ export default async function Page({
      */
     const courses = await getData("courses") as Course[];
 
-    return (
-        <LessonForm lesson={ lesson } courses={ courses } />
-    );
+    return <LessonForm lesson={ lesson } courses={ courses } />;
+
 }

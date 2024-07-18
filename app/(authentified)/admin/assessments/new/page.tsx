@@ -16,9 +16,6 @@ export default async function Page(): Promise<React.JSX.Element> {
      */
     const lessons: Lesson[] = await getData("lessons") as Lesson[];
 
-    return (
+    return <AssessmentForm lessons={ lessons } />;
 
-        <AssessmentForm lessons={ lessons } />
-
-    );
 }

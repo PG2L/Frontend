@@ -10,6 +10,7 @@ import CourseContentMenu from '@/_components/CourseContentMenu/CourseContentMenu
 import { Separator } from '@/_components/ui/separator';
 import { getData } from '@/_lib/data';
 import CourseProvider from '@/_contexts/CourseProvider';
+import GlobalBreadcrumb from '@/_components/GlobalBreadcrumb/GlobalBreadcrumb';
 
 /**
  * Renders the layout for the course show page.
@@ -38,9 +39,19 @@ export default async function CourseShowLayout({
      */
     const course: Course = await getData("courses", Number(params.courseId)) as Course;
 
+    /**
+     * Retrieves the course data from the server.
+     * 
+     * @param {string} endpoint - The API endpoint to fetch the data from.
+     * @param {string} courseId - The ID of the course to retrieve.
+     * @returns {Promise<Course>} - A promise that resolves to the course data.
+     */
+    const courses: Course[] = await getData("courses") as Course[];
+
     return (
 
         <CourseProvider course={ course }>
+            <GlobalBreadcrumb courses={ courses } />
             <div className="grid md:flex gap-4 lg:gap-6 grid-cols-1 rounded-lg mt-6">
                 <Suspense fallback={
                     <div className="hidden md:flex flex-col w-1/4">

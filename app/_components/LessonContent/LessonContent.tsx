@@ -78,13 +78,13 @@ const LessonContent: FC<LessonContentProps> = ({ }: LessonContentProps): React.J
 
     return (
 
-        <div className="grid gap-6 relative rounded">
-            <div>
+        <div className="grid gap-6 relative">
+            <p>
                 { lesson.description }
-            </div>
-            <div className="text-muted-foreground">
+            </p>
+            <p className="text-muted-foreground">
                 { lesson.content }
-            </div>
+            </p>
             { !isUnlock ? // Overlay if the lesson is locked
                 <div className="absolute h-full w-[102%] top-0 left-[-1%] backdrop-blur-sm select-none z-50 rounded"></div>
                 :

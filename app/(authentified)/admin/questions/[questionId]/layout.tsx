@@ -37,7 +37,7 @@ export default async function AdminQuestionEditLayout({
 
     return (
 
-        <div className="grid w-full grid-cols-1">
+        <div className="w-full">
             <Suspense fallback={
                 <div className="md:flex grid items-center gap-6">
                     <Skeleton className="md:w-1/2 w-2/3 h-10" />

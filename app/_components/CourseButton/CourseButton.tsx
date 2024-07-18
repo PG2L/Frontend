@@ -92,23 +92,20 @@ const CourseButton: FC<CourseButtonProps> = ({
 
     return (
 
-        <>
-            { userCourse && userCourse.completion_status === "in-progress" ? // If the course is in progress, display a "Continue" button linking to the next lesson
-                <Link
-                    href={ `/courses/${course.id}/${course.lessons[userCourse.progress].id}` } // Link to the next lesson
-                    className={ `flex justify-end ${className}` }
-                >
-                    <Button className="w-full">Continue</Button>
-                </Link>
+        userCourse && userCourse.completion_status === "in-progress" ? // If the course is in progress, display a "Continue" button linking to the next lesson
+            <Link
+                href={ `/courses/${course.id}/${course.lessons[userCourse.progress].id}` } // Link to the next lesson
+                className={ `flex justify-end ${className}` }
+            >
+                <Button className="w-full">Continue</Button>
+            </Link>
+            :
+            !userCourse ? // If there is no userCourse, display the "StartButton" component, else display a disabled "Completed" button
+                <StartButton className={ `${className}` } />
                 :
-                !userCourse ? // If there is no userCourse, display the "StartButton" component
-                    <StartButton className={ `${className}` } />
-                    : // If the course is completed, display a disabled "Completed" button
-                    <Button className={ `w-full ${className}` } disabled>
-                        Completed
-                    </Button>
-            }
-        </>
+                <Button className={ `w-full ${className}` } disabled>
+                    Completed
+                </Button>
 
     );
 };

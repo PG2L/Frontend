@@ -38,7 +38,7 @@ export default async function Page({
 
     return (
 
-        <div className="grid w-full grid-cols-1">
+        <div className="w-full">
             <AdminHeader item={ user } content={ users } />
             <UserForm user={ user } />
         </div>

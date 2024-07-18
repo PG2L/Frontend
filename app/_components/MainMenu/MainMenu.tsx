@@ -121,7 +121,7 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
     /**
      * SVG element representing a logout button.
      */
-    const logoutButton: React.JSX.Element = <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="28" height="28" viewBox="0 0 48 48">
+    const logoutButton: React.JSX.Element = <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 48 48">
         <path d="M 24 4 C 12.972066 4 4 12.972074 4 24 C 4 35.027926 12.972066 44 24 44 C 35.027934 44 44 35.027926 44 24 C 44 12.972074 35.027934 4 24 4 z M 24 7 C 28.159946 7 31.91445 8.5434723 34.865234 11.013672 L 11.013672 34.863281 C 8.544055 31.912656 7 28.1594 7 24 C 7 14.593391 14.593385 7 24 7 z M 36.986328 13.134766 C 39.456525 16.085553 41 19.840056 41 24 C 41 33.406609 33.406615 41 24 41 C 19.840597 41 16.087341 39.455948 13.136719 36.986328 L 36.986328 13.134766 z"></path>
     </svg>;
 
@@ -137,61 +137,55 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
 
         <>
             <div className={
-                `flex flex-col bg-card border-r sticky left-0 top-0 h-screen justify-between py-6 ` +
+                `flex flex-col bg-card border-r left-0 top-0 h-screen justify-between py-6 ` +
                 `${isOpen ? 'px-6' : 'px-2'}` // Conditional padding based on isOpen state
             }>
-                <div className="sticky top-6">
-                    <div className="items-start mb-2">
-                        <div className="rounded grid justify-items-center">
-                            <Link href="/">
-                                <span className="text-xl">PG<span className="text-3xl text-primary font-medium">2</span>L</span>
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                        <Separator className="mb-4" />
-                        <div className="flex items-center justify-center">
-                            <div className="grid items-center justify-center gap-4">
-                                { menuItems.map((item: { // Iterate over the menu items and create a navigation link for each
-                                    title: string;
-                                    link: string;
-                                    icon: string;
-                                    filledIcon: string;
-                                }, index: number): React.JSX.Element => {
-                                    const active: boolean = pageContext === item.link.slice(1, pageContext.length + 1); // Determine if the current item is active based on the page context
-                                    return (
-                                        <Link key={ index } href={ item.link }>
-                                            <TooltipProvider>
-                                                <Tooltip>
-                                                    <TooltipTrigger asChild>
-                                                        <Button
-                                                            variant="ghost"
-                                                            className={
-                                                                `w-full text-start fill-muted-foreground text-muted-foreground ` +
-                                                                `hover:text-foreground hover:fill-foreground ` + // Hover classes: text and fill color on hover
-                                                                `${active && "active fill-foreground text-foreground"}` // Active state classes: additional styles for active state
-                                                            }
-                                                        >
-                                                            <div>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="28" height="28" viewBox="0 0 48 48">
-                                                                    <path className={ `${active ? "opacity-100" : "opacity-0"}` } d={ item.filledIcon }></path>
-                                                                    <path className={ `${active ? "opacity-0" : "opacity-100"}` } d={ item.icon }></path>
-                                                                </svg>
-                                                            </div>
-                                                            { isOpen && // Conditionally rendered title based on sidebar state
-                                                                <span className="w-full ms-2">{ item.title }</span>
-                                                            }
-                                                        </Button>
-                                                    </TooltipTrigger>
-                                                    <TooltipContent>
-                                                        { item.title }
-                                                    </TooltipContent>
-                                                </Tooltip>
-                                            </TooltipProvider>
-                                        </Link>
-                                    );
-                                }) }
-                            </div>
+                <div className="w-full text-center">
+                    <Link href="/">
+                        <span className="text-xl">PG<span className="text-3xl text-primary font-medium">2</span>L</span>
+                    </Link>
+                    <div>
+                        <Separator className="my-4" />
+                        <div className="flex flex-col items-start justify-center gap-2">
+                            { menuItems.map((item: { // Iterate over the menu items and create a navigation link for each
+                                title: string;
+                                link: string;
+                                icon: string;
+                                filledIcon: string;
+                            }, index: number): React.JSX.Element => {
+                                const active: boolean = pageContext === item.link.slice(1, pageContext.length + 1); // Determine if the current item is active based on the page context
+                                return (
+                                    <Link key={ index } href={ item.link } className="w-full">
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    <Button
+                                                        variant="ghost"
+                                                        className={
+                                                            `w-full text-start fill-muted-foreground text-muted-foreground` +
+                                                            `hover:text-foreground hover:fill-foreground ` + // Hover classes: text and fill color on hover
+                                                            `${active && "active fill-foreground text-foreground"}` // Active state classes: additional styles for active state
+                                                        }
+                                                    >
+                                                        <div>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 48 48">
+                                                                <path className={ `${active ? "opacity-100" : "opacity-0"}` } d={ item.filledIcon }></path>
+                                                                <path className={ `${active ? "opacity-0" : "opacity-100"}` } d={ item.icon }></path>
+                                                            </svg>
+                                                        </div>
+                                                        { isOpen && // Conditionally rendered title based on sidebar state
+                                                            <span className="w-full ms-2">{ item.title }</span>
+                                                        }
+                                                    </Button>
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    { item.title }
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
+                                    </Link>
+                                );
+                            }) }
                         </div>
                     </div>
                 </div>
@@ -226,7 +220,8 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                 >
                     { isOpen ? // Conditional rendering of the chevron icons based on the sidebar state
                         <icons.ChevronLeftIcon className="h-6 w-6" strokeWidth={ 1 } />
-                        : <icons.ChevronRightIcon className="h-6 w-6" strokeWidth={ 1 } />
+                        :
+                        <icons.ChevronRightIcon className="h-6 w-6" strokeWidth={ 1 } />
                     }
                 </Button>
             </div>

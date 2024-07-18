@@ -14,7 +14,7 @@ export default async function NewQuestionLayout({
 
     return (
 
-        <div className="grid grid-cols-1 w-full">
+        <div className="w-full">
             <h1 className="text-lg">Create a new question</h1>
             { children }
         </div>

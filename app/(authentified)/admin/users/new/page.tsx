@@ -9,7 +9,7 @@ export default async function Page(): Promise<React.JSX.Element> {
 
     return (
 
-        <div className="grid w-full grid-cols-1">
+        <div className="w-full">
             <h1 className="text-lg">Create a new user</h1>
             <UserForm />
         </div>

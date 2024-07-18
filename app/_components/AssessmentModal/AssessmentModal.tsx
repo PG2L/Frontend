@@ -15,7 +15,6 @@ import {
 } from "@/_components/ui/dialog";
 import { AssessmentContext } from "@/_contexts/AssessmentProvider";
 import AssessmentModalForm from '@/_components/forms/AssessmentModalForm/AssessmentModalForm';
-import { useToast } from '../ui/use-toast';
 
 interface AssessmentModalProps { }
 
@@ -25,8 +24,6 @@ interface AssessmentModalProps { }
  * @returns {React.JSX.Element} The rendered component.
  */
 const AssessmentModal: FC<AssessmentModalProps> = (): React.JSX.Element => {
-
-    const { toast } = useToast();
 
     /**
      * Represents the current assessment.

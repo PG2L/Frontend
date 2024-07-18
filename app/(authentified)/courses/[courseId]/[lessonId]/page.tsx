@@ -60,14 +60,14 @@ export default async function Page({
                 <Card>
                     <CardHeader>
                         <div className="hidden sm:block py-36 bg-black/[0.1] border rounded"></div>
-                        <h3 className="text-muted-foreground">
-                            <Link
-                                href={ `/courses/${lesson.course.id}` } // Link to the course page
-                                className="hover:underline"
-                            >
+                        <Link
+                            href={ `/courses/${lesson.course.id}` } // Link to the course page
+                            className="hover:underline"
+                        >
+                            <h3 className="text-muted-foreground">
                                 { lesson.course.title }
-                            </Link>
-                        </h3>
+                            </h3>
+                        </Link>
                     </CardHeader>
                     <CardContent>
                         <div className="flex justify-between items-center">
@@ -105,16 +105,14 @@ export default async function Page({
                         </div>
                     </CardContent>
                     <CardFooter>
-                        <div className="grid w-full grid-cols-1 sm:flex sm:justify-between gap-6">
-                            <div className="flex items-end gap-6">
-                                <div className="flex gap-1">
-                                    <icons.BookUser strokeWidth={ 1 } color="#1461cc" />
-                                    <span className="text-muted-foreground">7 000+ students</span>
-                                </div>
-                                <div className="flex gap-1">
-                                    <icons.Clock strokeWidth={ 1 } color="#1461cc" />
-                                    <span className="text-muted-foreground">30 min</span>
-                                </div>
+                        <div className="flex items-end gap-6">
+                            <div className="flex gap-1">
+                                <icons.BookUser strokeWidth={ 1 } color="#1461cc" />
+                                <span className="text-muted-foreground">7 000+ students</span>
+                            </div>
+                            <div className="flex gap-1">
+                                <icons.Clock strokeWidth={ 1 } color="#1461cc" />
+                                <span className="text-muted-foreground">30 min</span>
                             </div>
                         </div>
                     </CardFooter>

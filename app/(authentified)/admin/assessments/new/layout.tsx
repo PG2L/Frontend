@@ -14,7 +14,7 @@ export default async function NewAssessmentLayout({
 
     return (
 
-        <div className="grid grid-cols-1 w-full">
+        <div className="w-full">
             <h1 className="text-lg">Create a new assessment</h1>
             { children }
         </div>

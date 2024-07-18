@@ -10,7 +10,7 @@ export default function Loading(): React.JSX.Element {
 
     return (
 
-        <div className="grid gap-10 md:gap-24 w-full">
+        <div className="space-y-10 md:space-y-24 w-full">
             <div className="grid gap-10 sm:flex sm:gap-6">
                 <Skeleton className="w-full h-10" />
                 <Skeleton className="w-full h-10" />

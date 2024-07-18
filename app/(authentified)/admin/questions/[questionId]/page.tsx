@@ -33,11 +33,6 @@ export default async function Page({
      */
     const assessments: Assessment[] = await getData("assessments") as Assessment[];
 
-    return (
+    return <QuestionForm question={ question } assessments={ assessments } />;
 
-        <div className="grid w-full">
-            <QuestionForm question={ question } assessments={ assessments } />
-        </div>
-
-    );
 }

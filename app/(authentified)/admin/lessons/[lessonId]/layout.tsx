@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import AdminHeader from '@/_components/AdminHeader/AdminHeader';
 import { getData } from '@/_lib/data';
+import { Skeleton } from '@/_components/ui/skeleton';
 
 /**
  * Renders the layout for editing an admin lesson.
@@ -38,8 +39,15 @@ export default async function AdminLessonEditLayout({
 
     return (
 
-        <div className="grid w-full grid-cols-1">
-            <AdminHeader item={ lesson } content={ lessons } />
+        <div className="w-full">
+            <Suspense fallback={
+                <div className="md:flex grid items-center gap-6">
+                    <Skeleton className="md:w-1/2 w-2/3 h-10" />
+                    <Skeleton className="md:w-1/2 h-10" />
+                </div>
+            }>
+                <AdminHeader item={ lesson } content={ lessons } />
+            </Suspense>
             { children }
         </div>
 

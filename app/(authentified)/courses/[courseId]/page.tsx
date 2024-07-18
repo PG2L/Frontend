@@ -43,7 +43,7 @@ export default async function Page({
     return (
 
         <>
-            <Card className="border">
+            <Card>
                 <CardHeader>
                     <div className="hidden sm:block py-36 bg-black/[0.1] border rounded"></div>
                     <CourseProgressBar course={ course } />
@@ -68,36 +68,28 @@ export default async function Page({
                             </div>
                         </div>
                         <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end">
-                            <div className="flex gap-2">
+                            <p className="flex gap-2">
                                 { course.points_gain }
-                                <span className="text-primary">
-                                    <icons.LucideStar strokeWidth={ 1 } />
-                                </span>
-                            </div>
-                            <div className="flex gap-2">
+                                <icons.LucideStar strokeWidth={ 1 } className="text-primary" />
+                            </p>
+                            <p className="flex gap-2">
                                 { course.exp_gain }
-                                <span className="text-primary">
-                                    <icons.LucideMedal strokeWidth={ 1 } />
-                                </span>
-                            </div>
+                                <icons.LucideMedal strokeWidth={ 1 } className="text-primary" />
+                            </p>
                         </div>
                     </div>
                 </CardContent>
                 <CardFooter>
                     <div className="grid w-full grid-cols-1 sm:flex sm:justify-between gap-6">
                         <div className="flex items-end gap-6 w-1/2">
-                            <div className="flex gap-1">
-                                <span className="text-primary">
-                                    <icons.BookUser strokeWidth={ 1 } />
-                                </span>
+                            <p className="flex gap-1">
+                                <icons.BookUser strokeWidth={ 1 } className="text-primary" />
                                 <span className="text-muted-foreground">18 000+ students</span>
-                            </div>
-                            <div className="flex gap-1">
-                                <span className="text-primary">
-                                    <icons.Clock strokeWidth={ 1 } />
-                                </span>
+                            </p>
+                            <p className="flex gap-1">
+                                <icons.Clock strokeWidth={ 1 } className="text-primary" />
                                 <span className="text-muted-foreground">5h</span>
-                            </div>
+                            </p>
                         </div>
                         <div className="w-1/2 text-end">
                             <CourseButton />

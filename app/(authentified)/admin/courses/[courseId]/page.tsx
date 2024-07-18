@@ -42,7 +42,7 @@ export default async function Page({
 
     return (
 
-        <div className="grid w-full">
+        <div className="w-full">
             <CourseForm languages={ languages } categories={ categories } course={ course } />
         </div>
 
