@@ -47,24 +47,6 @@ export default async function Page(): Promise<React.JSX.Element> {
                         <h2 className="text-2xl">Activity</h2>
                         <Calendar mode="single" />
                     </div>
-                    <div className="w-full">
-                        <h3 className="text-2xl">Level</h3>
-                        <Card className="mt-4 w-40">
-                            <CardHeader>
-                                <div className="mx-autop-6 border border-primary bg-secondary border-t-border rounded-full flex items-center justify-center">
-                                    <Avatar className="text-3xl">68</Avatar>
-                                </div>
-                            </CardHeader>
-                            <CardFooter>
-                                <div className="flex justify-between items-center w-full gap-2 text-muted-foreground">
-                                    68
-                                    <Progress value={ 50 } />
-                                    69
-                                </div>
-                            </CardFooter>
-                        </Card>
-                    </div>
-                    <LanguagesPieChart />
                 </div>
                 <div className="grid">
                     <h1 className="text-2xl">Suggestions</h1>

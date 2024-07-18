@@ -23,7 +23,7 @@ const CourseProgressBar: FC<CourseProgressBarProps> = ({
     /**
      * Represents the user.
      */
-    const user: User = useContext(UserContext);
+    const user: User = useContext(UserContext) as User;
 
     /**
      * Finds the user's course based on the course ID.
@@ -36,7 +36,7 @@ const CourseProgressBar: FC<CourseProgressBarProps> = ({
 
     return (
 
-        <div className="grid grid-cols-1">
+        <>
             <div className="flex gap-2">
                 { course.lessons.map((_: Lesson, index: number): React.JSX.Element => ( // Mapping over course.lessons to create a div for each lesson
                     <div
@@ -51,13 +51,9 @@ const CourseProgressBar: FC<CourseProgressBarProps> = ({
                 }
             </div>
             <p className="text-muted-foreground text-end">
-                {
-                    userCourse ?
-                        Math.round((userCourse.progress / course.lessons_count) * 100) // If userCourse exists, calculate progress percentage
-                        : '0' // Default to '0%' if userCourse does not exist
-                }%
+                { userCourse ? `${userCourse.progress}/${course.lessons.length}` : `0/${course.lessons.length}` }
             </p>
-        </div>
+        </>
 
     );
 };

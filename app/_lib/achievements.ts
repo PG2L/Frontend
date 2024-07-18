@@ -1,8 +1,15 @@
 import { getData } from "./data";
 import { updateUserPoints } from "./points";
 
+/**
+ * Handles the achievement items based on the provided item and user.
+ * 
+ * @param item - The item to handle. It can be a Lesson, Course, or an object with "item" and "amount" properties.
+ * @param user - The user for whom the achievements are being handled.
+ * @returns A Promise that resolves to an array of Achievement objects.
+ */
 export default async function handleAchievementItems(item: Lesson | Course | {
-    item: "exp" | "points",
+    item: "lvl" | "points",
     amount: number;
 }, user: User): Promise<Achievement[]> {
     const achievements: Achievement[] = await getData("achievements") as Achievement[];
@@ -11,7 +18,7 @@ export default async function handleAchievementItems(item: Lesson | Course | {
     } else if (item.hasOwnProperty("language")) {
         return await handleCourse(item as Course, user, achievements);
     } else if (item.hasOwnProperty("item")) {
-        return await handleNumb(item as {item: "exp" | "points",
+        return await handleNumb(item as {item: "lvl" | "points",
             amount: number}, user, achievements);
     }
     return [];
@@ -59,6 +66,7 @@ async function handleLesson(lesson: Lesson, user: User, achievements: Achievemen
         } else {
             createUserAchievement(user, achievement, 1);
             if (1 >= achievement.criteria.amount) {
+                updateUserPoints(user, user.total_points += achievement.points_gain);
                 newlyCompletedAchievements.push(achievement);
             }
         }
@@ -111,9 +119,9 @@ async function handleCourse(course: Course, user: User, achievements: Achievemen
 }
 
 /**
- * Handles exp and points for a user and updates their achievements accordingly.
- * @param exp - The exp to handle.
- * @param user - The user for whom to handle the exp.
+ * Handles lvl and points for a user and updates their achievements accordingly.
+ * @param lvl - The lvl to handle.
+ * @param user - The user for whom to handle the lvl.
  * @param achievements - The list of achievements to consider.
  * @returns A promise that resolves to an array of newly completed achievements.
  */
@@ -129,7 +137,7 @@ async function handleNumb(numb: { item: string, amount: number; }, user: User, a
                 return userAchievement.achievement.id === achievement.id;
             });
             if (userAchievement) { // Update the progress of the achievement if it exists, otherwise create a new one.
-                userAchievement.progress+=numb.amount;
+                numb.item === "lvl" ? userAchievement.progress = numb.amount : userAchievement.progress += numb.amount;
                 if ((userAchievement.progress >= achievement.criteria.amount) && (userAchievement.completion_status === "in-progress")) {
                     userAchievement.completion_status = "completed";
                     updateUserPoints(user, user.total_points += achievement.points_gain);

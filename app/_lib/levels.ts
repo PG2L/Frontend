@@ -9,7 +9,7 @@ const levels: {
     name: string;
     expToNext: number;
 }[] = [
-    { level: 1, name: "Newbie", expToNext: 200 },
+    { level: 1, name: "Newbie", expToNext: 250 },
     { level: 2, name: "Beginner", expToNext: 350 },
     { level: 3, name: "Novice", expToNext: 500 },
     { level: 4, name: "Learner", expToNext: 700 },
@@ -37,14 +37,13 @@ const levels: {
  * @returns An array containing the level object and the remaining experience points.
  */
 export function getLevelByExp(totalExp: number): [{ level: number; name: string; expToNext: number }, number] {
-    let exp: number = totalExp;
     for (let i: number = 0; i < levels.length; i++) {
-        if (exp < levels[i].expToNext) {
-            return [levels[i], exp];
+        if (totalExp < levels[i].expToNext) {
+            return [levels[i], totalExp];
         }
-        exp -= levels[i].expToNext;
+        totalExp -= levels[i].expToNext;
     }
-    return [levels[levels.length - 1], 0];
+    return [levels[levels.length - 1], totalExp];
 }
 
 /**
@@ -73,7 +72,8 @@ export async function updateUserExp(user: User, exp: number): Promise<void> {
         if (!res.ok) {
             throw new Error('Failed to update user exp');
         }
-        handleAchievementItems({item: "exp", amount: exp}, user)
+        const lvl: number = getLevelByExp(exp)[0].level;
+        handleAchievementItems({item: "lvl", amount: lvl}, user)
         return await res.json();
     } catch (error) {
         console.error(error);

@@ -118,9 +118,9 @@ export default function AchievementsTable({
                 const progressPercent: number = (progress / row.original.criteria.amount) * 100;
 
                 return (
-                    <div className="grid">
+                    <div className="grid w-80">
                         <Label className="justify-self-center text-muted-foreground">{ `${progress}/${row.original.criteria.amount}` }</Label>
-                        <Progress value={ progressPercent } className="mt-2" />
+                        <Progress value={ progressPercent } className="mt-2 justify-self-center" />
                     </div>
                 );
             },
@@ -138,22 +138,19 @@ export default function AchievementsTable({
                 );
 
                 return (
-                    <>
-                        { userAchievement?.completion_status === "completed" ?
-                            <>
-                                <div className="flex text-right text-muted-foreground justify-end items-center">
-                                    { points_gain }
-                                    <icons.Medal className="ml-2 h-6 w-6 text-primary" strokeWidth={ 1 } />
-                                </div>
-                                <div className="text-right text-muted-foreground">Completed on { userAchievement.completion_date.slice(0, 10) }</div>
-                            </>
-                            :
-                            <div className="flex text-right justify-end items-center">
+                    userAchievement?.completion_status === "completed" ?
+                        <>
+                            <div className="flex text-right text-muted-foreground justify-end items-center">
                                 { points_gain }
-                                <icons.Medal className="ml-2 h-6 w-6 text-primary" strokeWidth={ 1 } />
+                                <icons.Star className="ml-2 h-6 w-6" strokeWidth={ 1 } />
                             </div>
-                        }
-                    </>
+                            <div className="text-right text-muted-foreground">Completed on <span className="text-nowrap">{ userAchievement.completion_date.slice(0, 10) }</span></div>
+                        </>
+                        :
+                        <div className="flex text-right justify-end items-center">
+                            { points_gain }
+                            <icons.Star className="ml-2 h-6 w-6 text-primary" strokeWidth={ 1 } />
+                        </div>
                 );
             },
         },
@@ -175,6 +172,10 @@ export default function AchievementsTable({
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
     );
+    const [pagination, setPagination] = React.useState({
+        pageIndex: 0, //initial page index
+        pageSize: 10, //default page size
+    });
     const [columnVisibility, setColumnVisibility] =
         React.useState<VisibilityState>({});
     const [rowSelection, setRowSelection] = React.useState({});
@@ -189,11 +190,13 @@ export default function AchievementsTable({
         getFilteredRowModel: getFilteredRowModel(),
         onColumnVisibilityChange: setColumnVisibility,
         onRowSelectionChange: setRowSelection,
+        onPaginationChange: setPagination,
         state: {
             sorting,
             columnFilters,
             columnVisibility,
             rowSelection,
+            pagination,
         },
     });
 
@@ -246,7 +249,7 @@ export default function AchievementsTable({
                                         className={ isCompleted ? "bg-secondary" : "" }
                                     >
                                         { row.getVisibleCells().map((cell: Cell<Achievement, unknown>): React.JSX.Element => (
-                                            <TableCell key={ cell.id }>
+                                            <TableCell key={ cell.id } className={ cell.column.id === "points_gain" ? "w-[15%]" : "w-[28%]" }>
                                                 { flexRender(
                                                     cell.column.columnDef.cell,
                                                     cell.getContext()
@@ -270,7 +273,8 @@ export default function AchievementsTable({
                 </Table>
             </div>
             {/* Pagination buttons */ }
-            <div className="flex items-center justify-end space-x-2 py-4">
+            <div className="flex items-center justify-between space-x-2 py-4">
+                <p className="text-muted-foreground">Page { pagination.pageIndex + 1 } of { table.getPageCount() }</p>
                 <div className="space-x-2">
                     <Button
                         variant="outline"
