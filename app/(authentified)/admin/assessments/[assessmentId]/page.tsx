@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import AssessmentForm from '@/_components/forms/AssessmentForm/AssessmentForm';
 import { getData } from '@/_lib/data';
+import { Skeleton } from '@/_components/ui/skeleton';
+import AdminHeader from '@/_components/AdminHeader/AdminHeader';
 
 /**
  * Renders the page component for a specific assessment.
@@ -33,6 +35,19 @@ export default async function Page({
      */
     const lessons: Lesson[] = await getData("lessons") as Lesson[];
 
-    return <AssessmentForm assessment={ assessment } lessons={ lessons } />;
+    /**
+     * Fetches the list of assessments from the server.
+     * 
+     * @returns {Promise<Assessment>} A promise that resolves to the list of assessments.
+     */
+    const assessments: Assessment[] = await getData("assessments") as Assessment[];
 
-}
+    return (
+
+        <div className="w-full">
+            <AdminHeader item={ assessment } content={ assessments } />
+            <AssessmentForm assessment={ assessment } lessons={ lessons } />
+        </div>
+
+    );
+};

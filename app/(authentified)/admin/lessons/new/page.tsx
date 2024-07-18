@@ -15,6 +15,12 @@ export default async function Page(): Promise<React.JSX.Element> {
      */
     const courses: Course[] = await getData('courses') as Course[];
 
-    return <LessonForm courses={ courses } />;
+    return (
 
+        <div className="w-full">
+            <h1 className="text-lg">Create a new lesson</h1>
+            <LessonForm courses={ courses } />
+        </div>
+
+    );
 }

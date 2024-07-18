@@ -25,7 +25,7 @@ export default async function Page(): Promise<React.JSX.Element> {
 
     return (
 
-        <div className="grid gap-6">
+        <div className="space-y-6">
             <div className="flex justify-between items-center w-full">
                 <div className="grid gap-4">
                     <p className="text-xl">Welcome back,
@@ -48,7 +48,7 @@ export default async function Page(): Promise<React.JSX.Element> {
                 <ScrollArea>
                     <div className="w-full flex gap-6 items-center justify-start p-6">
                         { courses.map((_: any, index: number): React.JSX.Element => ( // Map over the courses array to render a CourseCard component for each course.
-                            <CourseCard key={ index } course={ courses[courses.length - index - 1] } className="w-[300px]" />
+                            <CourseCard key={ index } course={ courses[courses.length - index - 1] } className=" w-[300px]" />
                         )) }
                     </div>
                     <ScrollBar orientation="horizontal" />

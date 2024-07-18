@@ -23,6 +23,12 @@ export default async function Page(): Promise<React.JSX.Element> {
      */
     const languages: Language[] = await getData("languages") as Language[];
 
-    return <CourseForm categories={ categories } languages={ languages } />;
+    return (
 
-}
+        <div className="w-full">
+            <h1 className="text-lg">Create a new course</h1>
+            <CourseForm categories={ categories } languages={ languages } />
+        </div>
+
+    );
+};

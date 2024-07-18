@@ -32,12 +32,12 @@ const LessonCard: FC<LessonCardProps> = ({
      * @param userCourse - The user's course object.
      * @returns The current lesson object.
      */
-    const currentLesson: Lesson = userCourse.course.lessons[userCourse.progress];
+    const lesson: Lesson = userCourse.course.lessons[userCourse.progress];
 
     return (
 
         <Link
-            href={ `/courses/${userCourse.course.id}/${currentLesson.id}` } // Link to the current lesson
+            href={ `/courses/${userCourse.course.id}/${lesson.id}` } // Link to the current lesson
         >
             <Card className={ `hover:border-primary hover:scale-[1.01] min-h-[310px] w-[300px] ${className}` }>
                 <CardHeader>
@@ -49,21 +49,21 @@ const LessonCard: FC<LessonCardProps> = ({
                         href={ `/courses/${userCourse.course.id}` } // Link to the course
                         className="text-muted-foreground text-nowrap overflow-hidden hover:underline text-ellipsis"
                     >
-                        { currentLesson.lesson_number }/{ userCourse.course.lessons.length } { userCourse.course.title }
+                        { lesson.lesson_number }/{ userCourse.course.lessons.length } { userCourse.course.title }
                     </Link>
                 </CardHeader>
                 <CardContent>
-                    <h3 className=" text-nowrap overflow-hidden text-ellipsis text-lg font-medium">{ currentLesson.title }</h3>
+                    <h3 className="text-nowrap overflow-hidden text-ellipsis text-lg font-medium">{ lesson.title }</h3>
                 </CardContent>
                 <CardFooter>
-                    <div className="flex justify-end w-full flex-col">
-                        <p className="flex items-center justify-end gap-2">
-                            <span className="text-foreground">{ currentLesson.points_gain }</span>
-                            <icons.MedalIcon strokeWidth={ 1 } className="text-primary size-7" />
+                    <div className="flex w-full justify-end items-end text-nowrap space-y-1 text-primary gap-2 [&_p]:flex [&_p]:items-center [&_p]:justify-end [&_p]:gap-2 [&_p>span]:text-foreground">
+                        <p>
+                            <span>{ lesson.points_gain }</span>
+                            <icons.MedalIcon strokeWidth={ 1 } />
                         </p>
-                        <p className="flex items-center gap-2 justify-end">
-                            <span className="text-foreground">{ currentLesson.exp_gain }</span>
-                            <icons.StarIcon strokeWidth={ 1 } className="text-primary size-7" />
+                        <p>
+                            <span>{ lesson.exp_gain }</span>
+                            <icons.StarIcon strokeWidth={ 1 } />
                         </p>
                     </div>
                 </CardFooter>

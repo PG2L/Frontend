@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import CourseForm from '@/_components/forms/CourseForm/CourseForm';
 import { getData } from '@/_lib/data';
+import { Skeleton } from '@/_components/ui/skeleton';
+import AdminHeader from '@/_components/AdminHeader/AdminHeader';
 
 /**
  * Renders the page component for a specific course.
@@ -40,11 +42,19 @@ export default async function Page({
      */
     const languages: Language[] = await getData("languages") as Language[];
 
+    /**
+     * Fetches the list of courses from the server.
+     * 
+     * @returns {Promise<Course>} A promise that resolves to the list of courses.
+     */
+    const courses: Course[] = await getData("courses") as Course[];
+
     return (
 
         <div className="w-full">
+            <AdminHeader item={ course } content={ courses } />
             <CourseForm languages={ languages } categories={ categories } course={ course } />
-        </div>
+        </div >
 
     );
 }

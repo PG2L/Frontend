@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import LessonForm from '@/_components/forms/LessonForm/LessonForm';
 import { getData } from '@/_lib/data';
+import { Skeleton } from '@/_components/ui/skeleton';
+import AdminHeader from '@/_components/AdminHeader/AdminHeader';
 
 /**
  * Renders the page component for a specific lesson.
@@ -33,6 +35,19 @@ export default async function Page({
      */
     const courses = await getData("courses") as Course[];
 
-    return <LessonForm lesson={ lesson } courses={ courses } />;
+    /**
+     * Retrieves the list of lessons from the server.
+     * 
+     * @returns {Promise<Lesson[]>} A promise that resolves to an array of Lesson objects.
+     */
+    const lessons = await getData("lessons") as Lesson[];
 
+    return (
+
+        <div className="w-full">
+            <AdminHeader item={ lesson } content={ lessons } />
+            <LessonForm lesson={ lesson } courses={ courses } />
+        </div>
+
+    );
 }

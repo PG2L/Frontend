@@ -77,10 +77,10 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                     <icons.UserCircleIcon className="size-20 mx-auto" strokeWidth={ 1 } color="#1461cc" />
                     <div>
                         <h1 className="text-2xl font-medium text-center">{ user.username }</h1>
-                        <div className="flex items-center text-center justify-center">
-                            <p className="text-muted-foreground">Lvl { level.level }</p>
+                        <div className="flex items-center text-center justify-center [&_p]:text-muted-foreground">
+                            <p>Lvl { level.level }</p>
                             <icons.Dot className="size-8 text-primary" />
-                            <p className="text-muted-foreground">Rank 1</p>
+                            <p>Rank 1</p>
                         </div>
                         <div className="flex flex-wrap justify-center items-center gap-1">
                             <Badge>Beginner</Badge>
@@ -91,16 +91,16 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                         </div>
                     </div>
                     <Separator className="my-4" />
-                    <Card className="bg-background flex justify-around items-center py-1">
-                        <div className="flex gap-1">
+                    <Card className="bg-background flex justify-around items-center py-1 [&_div]:flex [&_div]:gap-1">
+                        <div>
                             { user.total_exp }
                             <icons.MedalIcon className="size-6 text-primary" strokeWidth={ 1 } />
                         </div>
-                        <div className="flex gap-1">
+                        <div>
                             { user.total_points }
                             <icons.Star className="size-6 text-primary" strokeWidth={ 1 } />
                         </div>
-                        <div className="flex gap-1">
+                        <div>
                             { user.courses.filter((course: UserCourse): boolean => course.completion_status === "completed").length // Filters the completed courses and counts them
                             }
                             <icons.BookCheck className="size-6 text-primary" strokeWidth={ 1 } />
@@ -128,25 +128,25 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                     </Card>
                     <div>
                         <h3 className="text-lg font-medium mt-4">Daily Goals</h3>
-                        <div className="py-2">
-                            <div className="space-y-2">
-                                <p className="flex justify-between items-center">
+                        <div className="py-2 [&_div]:space-y-2 [&_div>p]:flex [&_div>p]:justify-between [&_div>p]:items-center last:[&_div>p>span]:text-muted-foreground last:[&_div>p>span]:w-1/3 last:[&_div>p>span]:text-end last:[&_div>p>span]:content-end">
+                            <div>
+                                <p>
                                     <span>Complete 3 lessons</span>
-                                    <span className="text-muted-foreground w-1/3 text-end content-end">+100 XP</span>
+                                    <span>+100 XP</span>
                                 </p>
                                 <Progress value={ 0 } />
                             </div>
-                            <div className="mt-4 space-y-2">
-                                <p className="flex justify-between items-center">
+                            <div className="mt-4">
+                                <p>
                                     <span>Complete one lesson without any mistake</span>
-                                    <span className="text-muted-foreground w-1/3 text-end content-end">+50 XP</span>
+                                    <span>+50 XP</span>
                                 </p>
                                 <Progress value={ 0 } />
                             </div>
-                            <div className="mt-4 space-y-2">
-                                <p className="flex justify-between items-center">
+                            <div className="mt-4">
+                                <p>
                                     <span>Duel a friend</span>
-                                    <span className="text-muted-foreground w-1/3 text-end content-end">+150 XP</span>
+                                    <span>+150 XP</span>
                                 </p>
                                 <Progress value={ 0 } />
                             </div>
@@ -160,32 +160,32 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                                     <p className="text-muted-foreground text-center">View all</p>
                                 </div>
                             </CardHeader>
-                            <CardContent className="space-y-2">
-                                <div className="flex gap-2">
+                            <CardContent className="space-y-2 [&_div]:flex [&_div]:gap-2 [&_div>p]:flex [&_div>p]:w-full [&_div>p]:justify-between [&_div>p]:items-center [&_div>p>span]:text-muted-foreground">
+                                <div>
                                     <Avatar>
                                         <AvatarImage src="https://avatars.githubusercontent.com/u/142035?v=4" />
                                     </Avatar>
-                                    <p className="flex w-full justify-between items-center">
+                                    <p>
                                         <span>Nakkarst</span>
-                                        <span className="text-muted-foreground">14670</span>
+                                        <span>14670</span>
                                     </p>
                                 </div>
-                                <div className="flex gap-2">
+                                <div>
                                     <Avatar>
                                         <AvatarImage src="https://avatars.githubusercontent.com/u/142095?v=4" />
                                     </Avatar>
-                                    <p className="flex w-full justify-between items-center">
+                                    <p>
                                         <span>Tekky</span>
-                                        <span className="text-muted-foreground">9452</span>
+                                        <span>9452</span>
                                     </p>
                                 </div>
-                                <div className="flex gap-2">
+                                <div>
                                     <Avatar>
                                         <AvatarImage src="https://avatars.githubusercontent.com/u/142045?v=4" />
                                     </Avatar>
-                                    <p className="flex w-full justify-between items-center">
+                                    <p>
                                         <span>Vilou21</span>
-                                        <span className="text-muted-foreground">3589</span>
+                                        <span>3589</span>
                                     </p>
                                 </div>
                             </CardContent>
@@ -212,22 +212,20 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                     <div>
                         <icons.UserCircleIcon className="size-16 mx-auto" strokeWidth={ 1 } color="#1461cc" />
                         <Separator className="my-4" />
-                        <Card className="bg-background">
-                            <div className="flex flex-col items-end p-2 gap-2">
-                                <p className="flex">
-                                    { user.total_exp }
-                                    <icons.MedalIcon className="ms-1 size-6 text-primary" strokeWidth={ 1 } />
-                                </p>
-                                <p className="flex justify-self-end">
-                                    { user.total_points }
-                                    <icons.Star className="ms-1 size-6 text-primary" strokeWidth={ 1 } />
-                                </p>
-                                <p className="flex">
-                                    { user.courses.filter((course: UserCourse): boolean => course.completion_status === "completed").length
-                                    }
-                                    <icons.BookCheck className="ms-1 size-6 text-primary" strokeWidth={ 1 } />
-                                </p>
-                            </div>
+                        <Card className="bg-background flex flex-col items-end p-2 gap-2 [&_p]:flex">
+                            <p>
+                                { user.total_exp }
+                                <icons.MedalIcon className="ms-1 size-6 text-primary" strokeWidth={ 1 } />
+                            </p>
+                            <p>
+                                { user.total_points }
+                                <icons.Star className="ms-1 size-6 text-primary" strokeWidth={ 1 } />
+                            </p>
+                            <p>
+                                { user.courses.filter((course: UserCourse): boolean => course.completion_status === "completed").length
+                                }
+                                <icons.BookCheck className="ms-1 size-6 text-primary" strokeWidth={ 1 } />
+                            </p>
                         </Card>
                     </div>
                     <div className="items-center w-full grid gap-4">
