@@ -54,7 +54,6 @@ export default function AchievementsTable({
      * @returns The user object.
      */
     const user: User = React.useContext(UserContext);
-    console.log(user);
 
     /**
      * Represents the column definition for the achievements table.
@@ -113,15 +112,15 @@ export default function AchievementsTable({
                 );
             },
             cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => {
-                const value: number = user.achievements.find(
+                const progress: number = user.achievements.find(
                     (achievement: UserAchievement): boolean => achievement.achievement.id === row.original.id
                 )?.progress ?? 0;
-                const progress: number = (value / row.original.criteria.amount) * 100;
+                const progressPercent: number = (progress / row.original.criteria.amount) * 100;
 
                 return (
                     <div className="grid">
-                        <Label className="justify-self-center text-muted-foreground">{ `${value}/${row.original.criteria.amount}` }</Label>
-                        <Progress value={ progress } className="mt-2" />
+                        <Label className="justify-self-center text-muted-foreground">{ `${progress}/${row.original.criteria.amount}` }</Label>
+                        <Progress value={ progressPercent } className="mt-2" />
                     </div>
                 );
             },
@@ -164,10 +163,10 @@ export default function AchievementsTable({
     achievements.sort((a: Achievement, b: Achievement): number => {
         const aCompleted: boolean = user.achievements.find(
             (achievement: UserAchievement): boolean => achievement.achievement.id === a.id
-        )?.progress === a.criteria.amount;
+        )?.completion_status === "completed";
         const bCompleted: boolean = user.achievements.find(
             (achievement: UserAchievement): boolean => achievement.achievement.id === b.id
-        )?.progress === b.criteria.amount;
+        )?.completion_status === "completed";
 
         return aCompleted === bCompleted ? 0 : aCompleted ? 1 : -1;
     });
