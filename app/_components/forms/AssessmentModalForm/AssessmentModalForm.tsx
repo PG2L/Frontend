@@ -165,9 +165,23 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
             if (userCourse) {
                 updateCourseProgress(userCourse);
             }
-            updateUserPoints(user.id, user.total_points + lesson.points_gain);
-            updateUserExp(user.id, user.total_exp + lesson.exp_gain);
-            handleAchievementItems(lesson, user);
+            updateUserPoints(user, user.total_points + lesson.points_gain);
+            updateUserExp(user, user.total_exp + lesson.exp_gain);
+            const newlyCompletedAchievements: Achievement[] = await handleAchievementItems(lesson, user);
+            if (newlyCompletedAchievements.length > 0) {
+                newlyCompletedAchievements.forEach((achievement: Achievement, index: number): void => {
+                    setTimeout((): void => {
+                        toast({
+                            title: achievement.name,
+                            description:
+                                <div>
+                                    <p className="text-muted-foreground">{ achievement.description }</p>
+                                    <p className="mt-2">Congratulations ! You've unlocked an achievement and earned <span className="text-primary">{ achievement.points_gain } points</span> !</p>
+                                </div>,
+                        });
+                    }, ((index * 5000) + 2000));
+                });
+            }
         });
         navigateToNextLesson();
     }
