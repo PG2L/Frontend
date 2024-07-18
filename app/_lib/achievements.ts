@@ -4,55 +4,147 @@ import { updateUserPoints } from "./points";
 export default async function handleAchievementItems(item: Lesson | Course | {
     item: "exp" | "points",
     amount: number;
-}, user: User): Promise<void> {
-    console.log("Handling achievement items");
-    /**
-     * Represents an array of achievements.
-     * @type {Achievement[]}
-     */
+}, user: User): Promise<Achievement[]> {
     const achievements: Achievement[] = await getData("achievements") as Achievement[];
     if (item.hasOwnProperty("lesson_number")) {
-        handleLesson(item as Lesson, user, achievements);
+        return await handleLesson(item as Lesson, user, achievements);
+    } else if (item.hasOwnProperty("language")) {
+        return await handleCourse(item as Course, user, achievements);
+    } else if (item.hasOwnProperty("item")) {
+        return await handleNumb(item as {item: "exp" | "points",
+            amount: number}, user, achievements);
     }
+    return [];
 }
 
 /**
- * Handles the lesson completion for a user and updates the related achievements.
- * @param {Lesson} lesson - The lesson that was completed.
- * @param {User} user - The user who completed the lesson.
- * @param {Achievement[]} achievements - The achievements array.
- * @returns {Promise<void>}
+ * Handles a lesson for a user and updates their achievements accordingly.
+ * @param lesson - The lesson to handle.
+ * @param user - The user for whom to handle the lesson.
+ * @param achievements - The list of achievements to consider.
+ * @returns A promise that resolves to an array of newly completed achievements.
  */
-async function handleLesson(lesson: Lesson, user: User, achievements: Achievement[]): Promise<void> {
-    console.log(achievements)
+async function handleLesson(lesson: Lesson, user: User, achievements: Achievement[]): Promise<Achievement[]> {
     const relatedAchievements: Achievement[] = achievements.filter((achievement: Achievement): boolean => {
         return achievement.criteria.type === "complete_lesson";
     });
-    console.log(relatedAchievements)
+    const newlyCompletedAchievements: Achievement[] = [];
     relatedAchievements.forEach((achievement: Achievement): void => {
         // Check if the achievement has a requirement and if it is met.
         if (achievement.criteria.requirement) { 
             const requirements: string[] = achievement.criteria.requirement.split(":");
-            if ((requirements[0] === "language") && (lesson.course.language?.name.toLowerCase() !== requirements[1])) {
+            if (
+                (requirements[0] === "language")
+                && (lesson.course.language?.name.toLowerCase() !== requirements[1])
+            ) {
                 return;
-            } else if ((requirements[0] === "type") && (lesson.type?.name.toLowerCase() !== requirements[1])) {
+            } else if (
+                (requirements[0] === "type")
+                && (lesson.types?.find((lessonType: LessonType): boolean => { return lessonType.type.name.toLowerCase() === requirements[1]; }) === undefined)
+            ) {
                 return;
             }
         }
         const userAchievement: UserAchievement | undefined = user.achievements.find((userAchievement: UserAchievement): boolean => { 
             return userAchievement.achievement.id === achievement.id;
         });
-        if (userAchievement) {
+        if (userAchievement) { // Update the progress of the achievement if exists, otherwise create a new one.
             userAchievement.progress++;
             if ((userAchievement.progress >= achievement.criteria.amount) && (userAchievement.completion_status === "in-progress")) {
                 userAchievement.completion_status = "completed";
-                updateUserPoints(user.id, user.total_points+=achievement.points_gain);
+                updateUserPoints(user, user.total_points += achievement.points_gain);
+                newlyCompletedAchievements.push(achievement);
             }
             updateUserAchievement(userAchievement);
         } else {
             createUserAchievement(user, achievement, 1);
+            if (1 >= achievement.criteria.amount) {
+                newlyCompletedAchievements.push(achievement);
+            }
         }
     });
+    return newlyCompletedAchievements;
+}
+
+/**
+ * Handles a course for a user and updates their achievements accordingly.
+ * @param course - The course to handle.
+ * @param user - The user for whom to handle the course.
+ * @param achievements - The list of achievements to consider.
+ * @returns A promise that resolves to an array of newly completed achievements.
+ */
+async function handleCourse(course: Course, user: User, achievements: Achievement[]): Promise<Achievement[]> {
+    const relatedAchievements: Achievement[] = achievements.filter((achievement: Achievement): boolean => {
+        return achievement.criteria.type === "complete_course";
+    });
+    const newlyCompletedAchievements: Achievement[] = [];
+    relatedAchievements.forEach((achievement: Achievement): void => {
+        // Check if the achievement has a requirement and if it is met.
+        if (achievement.criteria.requirement) { 
+            const requirements: string[] = achievement.criteria.requirement.split(":");
+            if (
+                (requirements[0] === "language")
+                && (course.language?.name.toLowerCase() !== requirements[1])
+            ) {
+                return;
+            }
+        }
+        const userAchievement: UserAchievement | undefined = user.achievements.find((userAchievement: UserAchievement): boolean => { 
+            return userAchievement.achievement.id === achievement.id;
+        });
+        if (userAchievement) { // Update the progress of the achievement if exists, otherwise create a new one.
+            userAchievement.progress++;
+            if ((userAchievement.progress >= achievement.criteria.amount) && (userAchievement.completion_status === "in-progress")) {
+                userAchievement.completion_status = "completed";
+                updateUserPoints(user, user.total_points += achievement.points_gain);
+                newlyCompletedAchievements.push(achievement);
+            }
+            updateUserAchievement(userAchievement);
+        } else {
+            createUserAchievement(user, achievement, 1);
+            if (1 >= achievement.criteria.amount) {
+                newlyCompletedAchievements.push(achievement);
+            }
+        }
+    });
+    return newlyCompletedAchievements;
+}
+
+/**
+ * Handles exp and points for a user and updates their achievements accordingly.
+ * @param exp - The exp to handle.
+ * @param user - The user for whom to handle the exp.
+ * @param achievements - The list of achievements to consider.
+ * @returns A promise that resolves to an array of newly completed achievements.
+ */
+async function handleNumb(numb: { item: string, amount: number; }, user: User, achievements: Achievement[]): Promise<Achievement[]> {
+    const relatedAchievements: Achievement[] = achievements.filter((achievement: Achievement): boolean => {
+        return achievement.criteria.type === "reach";
+    });
+    const newlyCompletedAchievements: Achievement[] = [];
+    relatedAchievements.forEach((achievement: Achievement): void => {
+        // Check the requirement type and updates or create the user achievement accordingly.
+        if (achievement.criteria.requirement === numb.item) { 
+            const userAchievement: UserAchievement | undefined = user.achievements.find((userAchievement: UserAchievement): boolean => { 
+                return userAchievement.achievement.id === achievement.id;
+            });
+            if (userAchievement) { // Update the progress of the achievement if it exists, otherwise create a new one.
+                userAchievement.progress+=numb.amount;
+                if ((userAchievement.progress >= achievement.criteria.amount) && (userAchievement.completion_status === "in-progress")) {
+                    userAchievement.completion_status = "completed";
+                    updateUserPoints(user, user.total_points += achievement.points_gain);
+                    newlyCompletedAchievements.push(achievement);
+                }
+                updateUserAchievement(userAchievement);
+            } else {
+                createUserAchievement(user, achievement, numb.amount);
+                if (numb.amount >= achievement.criteria.amount) {
+                    newlyCompletedAchievements.push(achievement);
+                }
+            }
+        }
+    });
+    return newlyCompletedAchievements;
 }
 
 /**
@@ -63,7 +155,6 @@ async function handleLesson(lesson: Lesson, user: User, achievements: Achievemen
  */
 async function updateUserAchievement(userAchievement: UserAchievement): Promise<any> {
     try {
-        console.log("Updating achievement progress");
         const response = await fetch(`http://localhost:8000/user-achievements/${userAchievement.id}`, {
             method: 'PUT',
             headers: {
@@ -93,7 +184,6 @@ async function updateUserAchievement(userAchievement: UserAchievement): Promise<
  */
 async function createUserAchievement(user: User, achievement: Achievement, progress: number): Promise<any> {
     try {
-        console.log("Creating user achievement");
         const response = await fetch(`http://localhost:8000/user-achievements/new`, {
             method: 'POST',
             headers: {

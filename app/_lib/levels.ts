@@ -1,3 +1,5 @@
+import handleAchievementItems from "./achievements";
+
 /**
  * Represents an array of levels with their corresponding information.
  * Each level object contains the level number, name, and experience points required to reach the next level.
@@ -51,11 +53,10 @@ export function getLevelByExp(totalExp: number): [{ level: number; name: string;
  * @param exp - The new total experience points to set for the user.
  * @returns A Promise that resolves to void.
  */
-export async function updateUserExp(userId: number, exp: number): Promise<void> {
-    console.log("Updating user exp");
+export async function updateUserExp(user: User, exp: number): Promise<void> {
     try {
         const res: Response = await fetch(
-            `http://localhost:8000/users/${userId}`,
+            `http://localhost:8000/users/${user.id}`,
             {
                 method: 'PUT',
                 headers: {
@@ -72,8 +73,9 @@ export async function updateUserExp(userId: number, exp: number): Promise<void> 
         if (!res.ok) {
             throw new Error('Failed to update user exp');
         }
+        handleAchievementItems({item: "exp", amount: exp}, user)
         return await res.json();
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }

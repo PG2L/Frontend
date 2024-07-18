@@ -1,14 +1,15 @@
+import handleAchievementItems from './achievements';
+
 /**
  * Updates the points of a user.
  * @param userId - The ID of the user.
  * @param points - The new total points for the user.
  * @returns A Promise that resolves to void.
  */
-export async function updateUserPoints(userId: number, points: number): Promise<void> {
-    console.log("Updating user points");
+export async function updateUserPoints(user: User, points: number): Promise<void> {
     try {
         const res: Response = await fetch(
-            `http://localhost:8000/users/${userId}`,
+            `http://localhost:8000/users/${user.id}`,
             {
                 method: 'PUT',
                 headers: {
@@ -25,8 +26,9 @@ export async function updateUserPoints(userId: number, points: number): Promise<
         if (!res.ok) {
             throw new Error('Failed to update user points');
         }
+        handleAchievementItems({item: "points", amount: points}, user)
         return await res.json();
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
