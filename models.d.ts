@@ -40,7 +40,8 @@ interface Lesson {
     lesson_number: number;
     course: Course;
     assessment: Assessment;
-    type: Type;
+    types: LessonType[];
+    skills: LessonSkill[];
 }
 
 interface Assessment {
@@ -51,21 +52,6 @@ interface Assessment {
     max_score: number;
     passing_score: number;
     lesson: Lesson;
-}
-
-interface Category {
-    id: number;
-    name: string;
-}
-
-interface Language {
-    id: number;
-    name: string;
-}
-
-interface Skill {
-    id: number;
-    name: string;
 }
 
 interface UserCourse {
@@ -89,7 +75,7 @@ interface Question {
 
 interface Achievement {
     id: number;
-    title: string;
+    name: string;
     description: string;
     points_gain: number;
     criteria: Criteria;
@@ -112,7 +98,34 @@ interface UserAchievement {
     progress: number;
 }
 
+interface Category {
+    id: number;
+    name: string;
+}
+
+interface Language {
+    id: number;
+    name: string;
+}
+
+interface Skill {
+    id: number;
+    name: string;
+}
+
+interface LessonSkill {
+    id: number;
+    lesson: Lesson;
+    skill: Skill;
+}
+
 interface Type {
     id: number;
     name: string;
+}
+
+interface LessonType {
+    id: number;
+    lesson: Lesson;
+    type: Type;
 }
