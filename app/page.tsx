@@ -127,7 +127,7 @@ export default function Page(): React.JSX.Element {
                         <Badge>Announcing: Uniswap Hook Incubator - do you have what it takes ?</Badge>
                         <span className="text-muted-foreground text-3xl text-center">Lead the charge to new frontiers</span>
                         <h1 className="text-7xl font-medium text-center">Welcome to PG2L</h1>
-                        <span className="text-muted-foreground text-m font-medium">The future is now</span>
+                        <span className="text-muted-foreground font-medium">The future is now</span>
                         <Button size="lg" className="text-lg px-12 py-8 !mt-16">Get started</Button>
                     </div>
                 </div>
@@ -136,18 +136,12 @@ export default function Page(): React.JSX.Element {
                     <div className="overflow-hidden mt-6 w-full border-b border-t bg-card whitespace-nowrap flex items-center">
                         <div className="slide-track animate-[slide_60s_linear_infinite] inline-block whitespace-nowrap content-center py-2">
                             <div className="flex gap-48 justify-center">
-                                {
-                                    // Mapping over the sponsors array to render each sponsor as an image
-                                    sponsors.map((sponsor: string, index: number): React.JSX.Element => (
-                                        <Image key={ index } src={ sponsor } alt="" width="64" height="64" />
-                                    ))
-                                }
-                                {
-                                    // Mapping over the sponsors array a second time to create a continuous loop of sponsors
-                                    sponsors.map((sponsor: string, index: number): React.JSX.Element => (
-                                        <Image key={ index + sponsors.length } src={ sponsor } alt="" width="64" height="64" />
-                                    ))
-                                }
+                                { sponsors.map((sponsor: string, index: number): React.JSX.Element => (
+                                    <Image key={ index } src={ sponsor } alt="" width="64" height="64" />
+                                )) }
+                                { sponsors.map((sponsor: string, index: number): React.JSX.Element => (
+                                    <Image key={ index + sponsors.length } src={ sponsor } alt="" width="64" height="64" />
+                                )) }
                             </div>
                         </div>
                     </div>
@@ -170,26 +164,26 @@ export default function Page(): React.JSX.Element {
                                             { content.description }
                                         </CardDescription>
                                     </CardContent>
-                                    <CardFooter className="flex items-end justify-end">
+                                    <CardFooter className="flex justify-end">
                                         <Link href="/" className="underline">Start learning</Link>
                                     </CardFooter>
                                 </Card>
                             ))
                         }
                     </div>
-                    <div className="flex flex-col md:flex-row justify-center items-center gap-1">
+                    <div className="flex flex-col md:flex-row justify-center items-center gap-2 [&_a>button]:text-lg [&_a>button]:h-24 [&_a>button]:w-48">
                         <Link href="/leaderboard">
-                            <Button className="h-24 w-48 text-lg">
+                            <Button>
                                 Leaderboard
                             </Button>
                         </Link>
                         <Link href="/courses">
-                            <Button className="h-24 w-48 text-lg">
+                            <Button>
                                 Courses
                             </Button>
                         </Link>
                         <Link href="/lessons">
-                            <Button className="h-24 w-48 text-lg">
+                            <Button>
                                 Lessons
                             </Button>
                         </Link>
@@ -206,7 +200,7 @@ export default function Page(): React.JSX.Element {
                         </div>
                         <div className="dummy h-40 lg:w-full lg:h-[auto] bg-secondary rounded"></div>
                     </div>
-                    <div className="grid gap-12">
+                    <div className="space-y-12">
                         <h2 className="text-center text-3xl font-medium">Unlock your learning potential</h2>
                         <div className="grid justify-center md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {
@@ -241,12 +235,12 @@ export default function Page(): React.JSX.Element {
                         <div className="dummy bg-secondary h-40 lg:h-auto rounded"></div>
                         <div className="grid gap-10">
                             <h2 className="text-3xl">Empowering learners with immersive, gamified experiences that make education exciting and unforgettable.</h2>
-                            <div className="space-y-2">
-                                <p className="text-muted-foreground">Welcome to PG2L, your ultimate destination for gamified web development learning. PG2L turns the learning process into an exciting journey, where you conquer new skills as you would conquer levels in a game.</p>
-                                <p className="text-muted-foreground">Our platform offers a wide range of courses, from HTML and CSS basics to advanced JavaScript and React. Each course is structured as a quest, where you earn points, badges, and unlock new levels as you progress.</p>
-                                <p className="text-muted-foreground">The interactive lessons are designed to keep you engaged and motivated. You can track your progress, compete with friends, and even share your achievements on socal media.</p>
-                                <p className="text-muted-foreground">But that&apos;s not all! PG2L also offers personalized learning paths, tailored to your goals and skill level. Whether you&apos;re a beginner looking to get started in web development, or a seasoned developer wanting to upskill, PG2L has something for you.</p>
-                                <p className="text-muted-foreground">Join PG2L today and turn your learning journey into an adventure!</p>
+                            <div className="space-y-2 [&_p]:text-muted-foreground">
+                                <p>Welcome to PG2L, your ultimate destination for gamified web development learning. PG2L turns the learning process into an exciting journey, where you conquer new skills as you would conquer levels in a game.</p>
+                                <p>Our platform offers a wide range of courses, from HTML and CSS basics to advanced JavaScript and React. Each course is structured as a quest, where you earn points, badges, and unlock new levels as you progress.</p>
+                                <p>The interactive lessons are designed to keep you engaged and motivated. You can track your progress, compete with friends, and even share your achievements on socal media.</p>
+                                <p>But that&apos;s not all! PG2L also offers personalized learning paths, tailored to your goals and skill level. Whether you&apos;re a beginner looking to get started in web development, or a seasoned developer wanting to upskill, PG2L has something for you.</p>
+                                <p>Join PG2L today and turn your learning journey into an adventure!</p>
                             </div>
                             <div className="flex justify-center items-center space-x-4">
                                 <Button size="lg">Get started</Button>
@@ -289,7 +283,7 @@ export default function Page(): React.JSX.Element {
                             ))
                         }
                     </div>
-                    <div className="grid gap-6">
+                    <div className="space-y-6">
                         <h2 className="text-center text-3xl font-medium">Join the community</h2>
                         <p className="text-center ">Stay up to date with the latest news, events, and announcements</p>
                         <div className="flex justify-center gap-2 items-center">

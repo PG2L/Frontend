@@ -40,48 +40,37 @@ const AdminHeader: FC<AdminHeaderProps> = ({
 
     return (
 
-        <Suspense fallback={
-            <div className="md:flex grid items-center gap-6">
-                <Skeleton className="md:w-1/2 w-2/3 h-10" />
-                <Skeleton className="md:w-1/2 h-10" />
+        <div className="md:flex grid items-center gap-6 w-full">
+            <div className="flex md:w-2/3 text-lg">
+                <h1 className="text-muted-foreground text-nowrap">
+                    Edit { pageContext } #
+                    { item.id } -
+                    { " " }
+                </h1>
+                <span className="text-foreground font-medium ms-2 w-full">
+                    { ("title" in item) ? item.title : ("email" in item) ? item.email : item.content
+                    }
+                </span>
             </div>
-        }>
-            <div className="md:flex grid items-center gap-6 w-full">
-                <div className="flex md:w-2/3 text-lg">
-                    <h1 className="text-muted-foreground text-nowrap">
-                        Edit { pageContext } #
-                        { item.id } -
-                        { " " }
-                    </h1>
-                    <span className="text-foreground font-medium ms-2 w-full">
-                        { ("title" in item) ? item.title : ("email" in item) ? item.email : item.content // Displaying the title, email, or content of the item
-                        }
-                    </span>
-                </div>
-                { <Select // A Select component for navigating to different admin pages based on the selected value
-                    onValueChange={ (value: string): never => redirect(`/admin/${pageContext}s/${value}`) } // Redirects to the selected page context
-                >
-                    <SelectTrigger className="md:w-1/3">
-                        <SelectValue
-                            placeholder={ `Select a ${pageContext}` }
-                        />
-                    </SelectTrigger>
-                    <SelectContent>
-                        { content.map((contentItem: User | Course | Lesson | Assessment | Question): React.JSX.Element => (
-                            <SelectItem
-                                key={ contentItem.id }
-                                value={ contentItem.id.toString() }
-                            >
-                                { contentItem.id } - { ("title" in contentItem) ? // Displaying the ID and title or email of the content item
-                                    contentItem.title
-                                    : ("email" in contentItem) ? contentItem.email : contentItem.content }
-                            </SelectItem>
-                        )) }
-                    </SelectContent>
-                </Select>
-                }
-            </div>
-        </Suspense >
+            <Select // Redirects to the selected item page
+                onValueChange={ (value: string): never => redirect(`/admin/${pageContext}s/${value}`) }>
+                <SelectTrigger className="md:w-1/3">
+                    <SelectValue placeholder={ `Select a ${pageContext}` } />
+                </SelectTrigger>
+                <SelectContent>
+                    { content.map((contentItem: User | Course | Lesson | Assessment | Question): React.JSX.Element => (
+                        <SelectItem
+                            key={ contentItem.id }
+                            value={ contentItem.id.toString() }
+                        >
+                            { contentItem.id } - { ("title" in contentItem) ?
+                                contentItem.title
+                                : ("email" in contentItem) ? contentItem.email : contentItem.content }
+                        </SelectItem>
+                    )) }
+                </SelectContent>
+            </Select>
+        </div>
 
     );
 };

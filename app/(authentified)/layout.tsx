@@ -48,7 +48,7 @@ export default async function AuthentifiedLayout({
         <div className="flex justify-between">
             <UserProvider user={ user }>
                 <MainMenu />
-                <ScrollArea className="grid w-full max-h-screen">
+                <ScrollArea className="max-h-screen">
                     <div className="p-6">
                         { children }
                     </div>

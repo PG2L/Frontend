@@ -36,24 +36,19 @@ const CourseProgressBar: FC<CourseProgressBarProps> = ({
 
     return (
 
-        <>
-            <div className="flex gap-2">
-                { course.lessons.map((_: Lesson, index: number): React.JSX.Element => ( // Mapping over course.lessons to create a div for each lesson
-                    <div
-                        key={ index }
-                        className={
-                            `h-3 w-1/3 rounded ` +
-                            `${userCourse && index < userCourse?.progress ? "bg-primary " : "bg-primary/[0.1] "}` + // Background color based on progress
-                            `${userCourse && index < userCourse?.progress + 1 && "outline outline-1 outline-primary"}` // Outline for the next lesson to complete
-                        }>
-                    </div>
-                ))
-                }
-            </div>
-            <p className="text-muted-foreground text-end">
-                { userCourse ? `${userCourse.progress}/${course.lessons.length}` : `0/${course.lessons.length}` }
-            </p>
-        </>
+        <div className="flex gap-2">
+            { course.lessons.map((_: Lesson, index: number): React.JSX.Element => ( // Mapping over course.lessons to create a div for each lesson
+                <div
+                    key={ index }
+                    className={
+                        `h-3 w-1/3 rounded ` +
+                        `${userCourse && index < userCourse?.progress ? "bg-primary " : "bg-primary/[0.1] "}` + // Background color based on progress
+                        `${userCourse && index < userCourse?.progress + 1 && "outline outline-1 outline-primary"}` // Outline for the next lesson to complete
+                    }>
+                </div>
+            ))
+            }
+        </div>
 
     );
 };

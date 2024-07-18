@@ -59,61 +59,54 @@ export default async function Page({
             <AssessmentProvider assessment={ assessment }>
                 <Card>
                     <CardHeader>
-                        <div className="hidden sm:block py-36 bg-black/[0.1] border rounded"></div>
-                        <Link
-                            href={ `/courses/${lesson.course.id}` } // Link to the course page
-                            className="hover:underline"
-                        >
-                            <h3 className="text-muted-foreground">
+                        <div className="hidden sm:block py-36 bg-black/[0.1] border rounded" />
+                        <h3 className="text-muted-foreground w-fit transition-colors hover:text-foreground">
+                            <Link href={ `/courses/${lesson.course.id}` } >
                                 { lesson.course.title }
-                            </h3>
-                        </Link>
+                            </Link>
+                        </h3>
                     </CardHeader>
-                    <CardContent>
-                        <div className="flex justify-between items-center">
-                            <div className="grid gap-2">
-                                <div className="flex items-end font-medium">
-                                    <p>{ lesson.lesson_number }</p>
-                                    <icons.Dot className="size-6 text-primary" />
-                                    <h1>{ lesson.title }</h1>
-                                </div>
-                                <div className="flex gap-1 flex-wrap">
-                                    { lesson.course.language.name && // Renders a badge for the language if it exists
-                                        <Badge variant={ lesson.course.language.name as "Javascript" | "C#" | "C++" | "HTML/CSS" | "Ruby" | "Go" | "Php" | "Java" | "Mysql" | "Python" }>
-                                            { lesson.course.language.name }
-                                        </Badge>
-                                    }
-                                    { lesson.course.difficulty && // Renders a badge for the difficulty level if it exists
-                                        <Badge variant={ lesson.course.difficulty }>
-                                            { lesson.course.difficulty }
-                                        </Badge>
-                                    }
-                                    <Badge>5 000 points</Badge>
-                                    <Badge>+100 000 xp</Badge>
-                                </div>
+                    <CardContent className="flex justify-between items-center">
+                        <div>
+                            <div className="flex items-end font-medium">
+                                <p>{ lesson.lesson_number }</p>
+                                <icons.Dot className="size-6 text-primary" />
+                                <h1>{ lesson.title }</h1>
                             </div>
-                            <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end">
-                                <div className="flex gap-2">
-                                    { lesson.points_gain?.toString() }
-                                    <icons.LucideStar strokeWidth={ 1 } color="#1461cc" />
-                                </div>
-                                <div className="flex gap-2">
-                                    { lesson.exp_gain?.toString() }
-                                    <icons.LucideMedal strokeWidth={ 1 } color="#1461cc" />
-                                </div>
+                            <div className="flex gap-1 flex-wrap mt-2">
+                                { lesson.course.language.name && // Renders a badge for the language if it exists
+                                    <Badge variant={ lesson.course.language.name as "Javascript" | "C#" | "C++" | "HTML/CSS" | "Ruby" | "Go" | "Php" | "Java" | "Mysql" | "Python" }>
+                                        { lesson.course.language.name }
+                                    </Badge>
+                                }
+                                { lesson.course.difficulty && // Renders a badge for the difficulty level if it exists
+                                    <Badge variant={ lesson.course.difficulty }>
+                                        { lesson.course.difficulty }
+                                    </Badge>
+                                }
+                                <Badge>5 000 points</Badge>
+                                <Badge>+100 000 xp</Badge>
+                            </div>
+                        </div>
+                        <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end [&_div]:flex [&_div]:gap-2">
+                            <div>
+                                { lesson.points_gain?.toString() }
+                                <icons.LucideStar strokeWidth={ 1 } color="#1461cc" />
+                            </div>
+                            <div>
+                                { lesson.exp_gain?.toString() }
+                                <icons.LucideMedal strokeWidth={ 1 } color="#1461cc" />
                             </div>
                         </div>
                     </CardContent>
-                    <CardFooter>
-                        <div className="flex items-end gap-6">
-                            <div className="flex gap-1">
-                                <icons.BookUser strokeWidth={ 1 } color="#1461cc" />
-                                <span className="text-muted-foreground">7 000+ students</span>
-                            </div>
-                            <div className="flex gap-1">
-                                <icons.Clock strokeWidth={ 1 } color="#1461cc" />
-                                <span className="text-muted-foreground">30 min</span>
-                            </div>
+                    <CardFooter className="flex items-end gap-6 [&_div]:flex [&_div]:gap-2 [&_div>span]:text-muted-foreground">
+                        <div>
+                            <icons.BookUser strokeWidth={ 1 } color="#1461cc" />
+                            <span>7 000+ students</span>
+                        </div>
+                        <div>
+                            <icons.Clock strokeWidth={ 1 } color="#1461cc" />
+                            <span>30 min</span>
                         </div>
                     </CardFooter>
                 </Card>

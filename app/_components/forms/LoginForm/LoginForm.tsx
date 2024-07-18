@@ -24,44 +24,10 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { useFormStatus } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import { setCookie } from "cookies-next";
 
-
 interface LoginFormProps { }
-
-/**
- * Renders the login button component.
- *
- * @returns The JSX element representing the login button.
- */
-function LoginButton(): React.JSX.Element {
-
-    /**
-     * Represents the status of the form submission.
-     */
-    const { pending } = useFormStatus();
-
-    /**
-     * Handles the click event for the login button.
-     * If the form is in a pending state, prevents the default behavior of the event.
-     * 
-     * @param event - The click event object.
-     * @returns void
-     */
-    function handleClick(event: any): void {
-        if (pending) {
-            event.preventDefault();
-        }
-    }
-
-    return (
-        <Button aria-disabled={ pending } type="submit" onClick={ handleClick }>
-            Login
-        </Button>
-    );
-}
 
 /**
  * Represents the login form component.
@@ -123,26 +89,20 @@ const LoginForm: FC<LoginFormProps> = ({ }: LoginFormProps): React.JSX.Element =
     return (
 
         <Card className="min-w-80">
-
-            {/* CardHeader contains the title and description for the login form */ }
             <CardHeader>
                 <CardTitle className="text-lg">Log In</CardTitle>
                 <CardDescription>
                     Enter your email below to login to your account
                 </CardDescription>
             </CardHeader>
-
-            {/* CardContent wraps the form elements */ }
             <CardContent>
                 <Form { ...form }>
                     <form onSubmit={ form.handleSubmit(onSubmit) }>
                         <div className="grid gap-4">
-
-                            {/* FormField for username input */ }
                             <FormField
                                 control={ form.control }
                                 name="username"
-                                render={ ({ field }) => (
+                                render={ ({ field }): React.JSX.Element => (
                                     <FormItem>
                                         <FormLabel>Username</FormLabel>
                                         <FormControl>
@@ -152,12 +112,10 @@ const LoginForm: FC<LoginFormProps> = ({ }: LoginFormProps): React.JSX.Element =
                                     </FormItem>
                                 ) }
                             />
-
-                            {/* FormField for password input, with a description for requirements */ }
                             <FormField
                                 control={ form.control }
                                 name="password"
-                                render={ ({ field }) => (
+                                render={ ({ field }): React.JSX.Element => (
                                     <FormItem className="w-full">
                                         <FormLabel>Password</FormLabel>
                                         <FormControl>
@@ -170,17 +128,13 @@ const LoginForm: FC<LoginFormProps> = ({ }: LoginFormProps): React.JSX.Element =
                                     </FormItem>
                                 ) }
                             />
-
-                            {/* LoginButton component to submit form data */ }
-                            <LoginButton />
-
-                            {/* Button for alternative login method with GitHub */ }
+                            <Button type="submit">
+                                Login
+                            </Button>
                             <Button variant="outline" className="w-full">
                                 Log in with GitHub
                             </Button>
                         </div>
-
-                        {/* Link for users to sign up if they don't have an account */ }
                         <div className="mt-4 text-center ">
                             Don&apos;t have an account?{ " " }
                             <Link href="#" className="underline">

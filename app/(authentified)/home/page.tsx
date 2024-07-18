@@ -26,15 +26,13 @@ export default async function Page(): Promise<React.JSX.Element> {
     return (
 
         <div className="space-y-6">
-            <div className="flex justify-between items-center w-full">
-                <div className="grid gap-4">
-                    <p className="text-xl">Welcome back,
-                        <span className="text-3xl font-medium"> Nakkarst!</span>
-                    </p>
-                    <p>You already have completed
-                        <span className="text-primary font-medium"> 50% of your daily goals !</span>
-                    </p>
-                </div>
+            <div className="grid gap-4">
+                <p className="text-xl">Welcome back,
+                    <span className="text-3xl font-medium"> Nakkarst!</span>
+                </p>
+                <p>You already have completed
+                    <span className="text-primary font-medium"> 50% of your daily goals !</span>
+                </p>
             </div>
             <ResumeLesson />
             <div className="flex justify-between w-full gap-6">

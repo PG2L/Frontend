@@ -114,12 +114,10 @@ const SigninForm: FC<SigninFormProps> = ({ }: SigninFormProps): React.JSX.Elemen
             <CardContent>
                 <Form { ...form }>
                     <form onSubmit={ form.handleSubmit(onSubmit) } className="grid gap-4">
-
-                        {/* Username field for account creation */ }
                         <FormField
                             control={ form.control }
                             name="username"
-                            render={ ({ field }) => (
+                            render={ ({ field }): React.JSX.Element => (
                                 <FormItem>
                                     <FormLabel>Username</FormLabel>
                                     <FormControl>
@@ -129,12 +127,10 @@ const SigninForm: FC<SigninFormProps> = ({ }: SigninFormProps): React.JSX.Elemen
                                 </FormItem>
                             ) }
                         />
-
-                        {/* Email field for account creation */ }
                         <FormField
                             control={ form.control }
                             name="email"
-                            render={ ({ field }) => (
+                            render={ ({ field }): React.JSX.Element => (
                                 <FormItem>
                                     <FormLabel>Email</FormLabel>
                                     <FormControl>
@@ -144,12 +140,10 @@ const SigninForm: FC<SigninFormProps> = ({ }: SigninFormProps): React.JSX.Elemen
                                 </FormItem>
                             ) }
                         />
-
-                        {/* Password field with validation and description */ }
                         <FormField
                             control={ form.control }
                             name="password"
-                            render={ ({ field }) => (
+                            render={ ({ field }): React.JSX.Element => (
                                 <FormItem className="w-full">
                                     <FormLabel>Password</FormLabel>
                                     <FormControl>
@@ -162,17 +156,14 @@ const SigninForm: FC<SigninFormProps> = ({ }: SigninFormProps): React.JSX.Elemen
                                 </FormItem>
                             ) }
                         />
-                        {/* Button to submit the form and create an account */ }
                         <Button type="submit" className="w-full">
                             Create an account
                         </Button>
-                        {/* Alternative option to sign up using GitHub */ }
                         <Button variant="outline" className="w-full">
                             Sign up with GitHub
                         </Button>
                     </form>
                     <div className="mt-4 text-center ">
-                        {/* Link for users who already have an account to log in */ }
                         Already have an account?{ " " }
                         <Link href="#" className="underline">
                             Log in

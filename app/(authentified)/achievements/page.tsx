@@ -18,9 +18,9 @@ export default async function Page(): Promise<React.JSX.Element> {
 
     return (
 
-        <div className="grid items-center justify-center grid-cols-1 gap-6">
+        <div className="space-y-6">
             <h1 className="text-xl font-medium text-center">Achievements</h1>
-            <div className="space-y-4">
+            <div className="space-y-2">
                 <p>Welcome to the Achievements page! Here, you can track and celebrate your milestones in our web development e-learning community. Achievements are designed to recognize your hard work and dedication as you progress through various courses and challenges.</p>
                 <p className="text-muted-foreground">Earn badges, complete projects, and participate in discussions to unlock new achievements. Each milestone you reach is a testament to your commitment to learning and growing as a web developer.</p>
                 <p>Keep pushing forward, and showcase your accomplishments proudly!</p>

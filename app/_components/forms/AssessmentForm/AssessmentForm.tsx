@@ -160,138 +160,100 @@ const AssessmentForm: FC<AssessmentFormProps> = ({
 
     return (
 
-        <Suspense fallback={
-            <div className="space-y-10 md:space-y-12 mt-12">
-                <Skeleton className="w-full h-10" />
-                <Skeleton className="w-full h-24" />
-                <div className="grid gap-10 sm:flex sm:gap-6">
-                    <Skeleton className="w-full h-10" />
-                    <Skeleton className="w-full h-10" />
-                </div>
-                <div className="grid gap-10 sm:flex sm:gap-6">
-                    <Skeleton className="w-full h-10" />
-                    <Skeleton className="w-full h-10" />
-                </div>
-                <div className="grid gap-10 sm:flex sm:gap-6">
-                    <Skeleton className="w-full h-10" />
-                    <Skeleton className="w-full h-10" />
-                </div>
-                <div className="grid gap-10 sm:flex sm:gap-6">
-                    <Skeleton className="w-full h-10" />
-                    <Skeleton className="w-full h-10" />
-                </div>
-                <Skeleton className="w-24 h-10 justify-self-center" />
-            </div>
-        }>
-
-            { <Form { ...form }>
-                <form onSubmit={ form.handleSubmit(onSubmit) } className="grid gap-4 lg:gap-6 mt-6">
-
-                    {/* Title field with validation and description */ }
-                    <FormField
-                        control={ form.control }
-                        name="title"
-                        render={ ({ field }): React.JSX.Element => (
-                            <FormItem className="w-full">
-                                <FormLabel>Title <span className="text-xs text-muted-foreground font-normal">(required)</span></FormLabel>
-                                <FormControl>
-                                    <Input { ...field } />
-                                </FormControl>
-                                <FormDescription>
-                                    Enter the title of the assessment. This will be displayed to learners when they view the assessment.
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        ) }
-                    />
-
-                    {/* Description field with a larger text area for detailed assessment information */ }
-                    <FormField
-                        control={ form.control }
-                        name="description"
-                        render={ ({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Description</FormLabel>
-                                <FormControl>
-                                    <Textarea { ...field } />
-                                </FormControl>
-                                <FormDescription>
-                                    Enter a description for the assessment. This will provide learners with additional information about the assessment.
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        ) }
-                    />
-
-                    {/* Max score field with validation and description */ }
-                    <FormField
-                        control={ form.control }
-                        name="max_score"
-                        render={ ({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Max Score</FormLabel>
-                                <FormControl>
-                                    <Input { ...field } type="number" />
-                                </FormControl>
-                                <FormDescription>
-                                    Enter the maximum score for the assessment. This will determine the total number of points that learners can earn.
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        ) }
-                    />
-
-                    {/* Passing score field with validation and description */ }
-                    <FormField
-                        control={ form.control }
-                        name="passing_score"
-                        render={ ({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Passing Score</FormLabel>
-                                <FormControl>
-                                    <Input { ...field } type="number" />
-                                </FormControl>
-                                <FormDescription>
-                                    Enter the passing score for the assessment. Learners must score above this threshold to successfully complete the assessment.
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        ) }
-                    />
-
-                    {/* Lesson field with validation and description */ }
-                    <FormField
-                        control={ form.control }
-                        name="lesson"
-                        render={ ({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Lesson <span className="text-xs text-muted-foreground font-normal">(required)</span></FormLabel>
-                                <FormControl>
-                                    <Select onValueChange={ field.onChange } defaultValue={ field.value?.toString() }>
-                                        <SelectTrigger />
-                                        <SelectContent>
-                                            { lessons.map((lesson: Lesson, index: number): React.JSX.Element => (
-                                                <SelectItem key={ index } value={ lesson.id.toString() }>
-                                                    { lesson.title }
-                                                </SelectItem>
-                                            )) }
-                                        </SelectContent>
-                                    </Select>
-                                </FormControl>
-                                <FormDescription>
-                                    Select the lesson that this assessment is associated with. The assessment will be displayed to learners after they complete this lesson.
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        ) }
-                    />
-
-                    {/* Submit button for the form */ }
-                    <Button type="submit" size="lg" className="mt-4 justify-self-center">Submit</Button>
-                </form>
-            </Form> }
-
-        </Suspense>
+        <Form { ...form }>
+            <form onSubmit={ form.handleSubmit(onSubmit) } className="grid gap-4 lg:gap-6 mt-6 w-full">
+                <FormField
+                    control={ form.control }
+                    name="title"
+                    render={ ({ field }): React.JSX.Element => (
+                        <FormItem className="w-full">
+                            <FormLabel>Title <span className="text-xs text-muted-foreground font-normal">(required)</span></FormLabel>
+                            <FormControl>
+                                <Input { ...field } />
+                            </FormControl>
+                            <FormDescription>
+                                Enter the title of the assessment. This will be displayed to learners when they view the assessment.
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    ) }
+                />
+                <FormField
+                    control={ form.control }
+                    name="description"
+                    render={ ({ field }): React.JSX.Element => (
+                        <FormItem className="w-full">
+                            <FormLabel>Description</FormLabel>
+                            <FormControl>
+                                <Textarea { ...field } />
+                            </FormControl>
+                            <FormDescription>
+                                Enter a description for the assessment. This will provide learners with additional information about the assessment.
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    ) }
+                />
+                <FormField
+                    control={ form.control }
+                    name="max_score"
+                    render={ ({ field }): React.JSX.Element => (
+                        <FormItem className="w-full">
+                            <FormLabel>Max Score</FormLabel>
+                            <FormControl>
+                                <Input { ...field } type="number" />
+                            </FormControl>
+                            <FormDescription>
+                                Enter the maximum score for the assessment. This will determine the total number of points that learners can earn.
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    ) }
+                />
+                <FormField
+                    control={ form.control }
+                    name="passing_score"
+                    render={ ({ field }): React.JSX.Element => (
+                        <FormItem className="w-full">
+                            <FormLabel>Passing Score</FormLabel>
+                            <FormControl>
+                                <Input { ...field } type="number" />
+                            </FormControl>
+                            <FormDescription>
+                                Enter the passing score for the assessment. Learners must score above this threshold to successfully complete the assessment.
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    ) }
+                />
+                <FormField
+                    control={ form.control }
+                    name="lesson"
+                    render={ ({ field }): React.JSX.Element => (
+                        <FormItem className="w-full">
+                            <FormLabel>Lesson <span className="text-xs text-muted-foreground font-normal">(required)</span></FormLabel>
+                            <FormControl>
+                                <Select onValueChange={ field.onChange } defaultValue={ field.value?.toString() }>
+                                    <SelectTrigger />
+                                    <SelectContent>
+                                        { lessons.map((lesson: Lesson, index: number): React.JSX.Element => (
+                                            <SelectItem key={ index } value={ lesson.id.toString() }>
+                                                { lesson.title }
+                                            </SelectItem>
+                                        )) }
+                                    </SelectContent>
+                                </Select>
+                            </FormControl>
+                            <FormDescription>
+                                Select the lesson that this assessment is associated with. The assessment will be displayed to learners after they complete this lesson.
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    ) }
+                />
+                <Button type="submit" size="lg" className="mt-4 justify-self-center">Submit</Button>
+            </form>
+        </Form>
 
     );
 };

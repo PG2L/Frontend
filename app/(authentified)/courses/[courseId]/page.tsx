@@ -45,55 +45,51 @@ export default async function Page({
         <>
             <Card>
                 <CardHeader>
-                    <div className="hidden sm:block py-36 bg-black/[0.1] border rounded"></div>
+                    <div className="hidden sm:block py-36 bg-black/[0.1] border rounded" />
                     <CourseProgressBar course={ course } />
                 </CardHeader>
-                <CardContent>
-                    <div className="flex justify-between items-center">
-                        <div className="grid gap-4">
-                            <h1 className="text-lg font-medium">{ course.title }</h1>
-                            <div className="flex gap-1 flex-wrap">
-                                { course.language.name && // Render a language badge if the course has a language.
-                                    <Badge variant={ course.language.name as "Javascript" | "C#" | "C++" | "HTML/CSS" | "Ruby" | "Go" | "Php" | "Java" | "Mysql" | "Python" }>
-                                        { course.language.name }
-                                    </Badge>
-                                }
-                                { course.difficulty && // Render a category badge if the course has a category.
-                                    <Badge variant={ course.difficulty }>
-                                        { course.difficulty }
-                                    </Badge>
-                                }
-                                <Badge>{ course.points_gain } points</Badge>
-                                <Badge>+{ course.exp_gain } xp</Badge>
-                            </div>
-                        </div>
-                        <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end [&_p]:flex [&_p]:gap-2">
-                            <p>
-                                { course.points_gain }
-                                <icons.LucideStar strokeWidth={ 1 } className="text-primary" />
-                            </p>
-                            <p>
-                                { course.exp_gain }
-                                <icons.LucideMedal strokeWidth={ 1 } className="text-primary" />
-                            </p>
+                <CardContent className="flex justify-between items-center">
+                    <div className="grid gap-4">
+                        <h1 className="text-lg font-medium">{ course.title }</h1>
+                        <div className="flex gap-1 flex-wrap">
+                            { course.language.name && // Render a language badge if the course has a language.
+                                <Badge variant={ course.language.name as "Javascript" | "C#" | "C++" | "HTML/CSS" | "Ruby" | "Go" | "Php" | "Java" | "Mysql" | "Python" }>
+                                    { course.language.name }
+                                </Badge>
+                            }
+                            { course.difficulty && // Render a category badge if the course has a category.
+                                <Badge variant={ course.difficulty }>
+                                    { course.difficulty }
+                                </Badge>
+                            }
+                            <Badge>{ course.points_gain } points</Badge>
+                            <Badge>+{ course.exp_gain } xp</Badge>
                         </div>
                     </div>
+                    <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end [&_p]:flex [&_p]:gap-2">
+                        <p>
+                            { course.points_gain }
+                            <icons.LucideStar strokeWidth={ 1 } className="text-primary" />
+                        </p>
+                        <p>
+                            { course.exp_gain }
+                            <icons.LucideMedal strokeWidth={ 1 } className="text-primary" />
+                        </p>
+                    </div>
                 </CardContent>
-                <CardFooter>
-                    <div className="grid w-full grid-cols-1 sm:flex sm:justify-between gap-6">
-                        <div className="flex items-end gap-6 w-1/2 [&_p]:flex [&_p]:gap-1 [&_p>span]:text-muted-foreground">
-                            <p>
-                                <icons.BookUser strokeWidth={ 1 } className="text-primary" />
-                                <span>18 000+ students</span>
-                            </p>
-                            <p>
-                                <icons.Clock strokeWidth={ 1 } className="text-primary" />
-                                <span>5h</span>
-                            </p>
-                        </div>
-                        <div className="w-1/2 text-end">
-                            <CourseButton />
-                        </div>
+                <CardFooter className="grid w-full grid-cols-1 sm:flex sm:justify-between gap-6">
+                    <div className="flex items-end gap-6 w-1/2 [&_p]:flex [&_p]:gap-1 [&_p>span]:text-muted-foreground">
+                        <p>
+                            <icons.BookUser strokeWidth={ 1 } className="text-primary" />
+                            <span>18 000+ students</span>
+                        </p>
+                        <p>
+                            <icons.Clock strokeWidth={ 1 } className="text-primary" />
+                            <span>5h</span>
+                        </p>
+                    </div>
+                    <div className="w-1/2 text-end">
+                        <CourseButton />
                     </div>
                 </CardFooter>
             </Card>

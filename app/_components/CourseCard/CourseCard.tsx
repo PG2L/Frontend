@@ -4,6 +4,7 @@ import React, { FC } from 'react';
 import { Badge } from '@/_components/ui/badge';
 import {
     Card,
+    CardContent,
     CardFooter,
     CardHeader
 } from '@/_components/ui/card';
@@ -45,8 +46,10 @@ const CourseCard: FC<CourseCardProps> = ({
                         className="h-32 rounded bg-secondary" // Course image placeholder
                     />
                     <CourseProgressBar course={ course } />
-                    <h3 className="text-nowrap overflow-hidden text-ellipsis text-lg font-medium">{ course.title }</h3>
                 </CardHeader>
+                <CardContent>
+                    <h3 className="text-nowrap overflow-hidden text-ellipsis text-lg font-medium">{ course.title }</h3>
+                </CardContent>
                 <CardFooter className="flex justify-between items-start">
                     <div className="flex justify-start items-start gap-1 flex-wrap">
                         { course.lessons_count && <Badge>{ course.lessons_count } lessons</Badge> }
