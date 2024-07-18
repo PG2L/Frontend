@@ -118,7 +118,7 @@ const Footer: FC<FooterProps> = (): React.JSX.Element => {
                             href: string;
                             url: string;
                         }, index: number): React.JSX.Element => (
-                            <Avatar key={ index } className="h-6 w-6">
+                            <Avatar key={ index } className="size-6">
                                 <AvatarImage src={ link['url'] } alt={ link['title'] } />
                                 <AvatarFallback>CN</AvatarFallback>
                             </Avatar>

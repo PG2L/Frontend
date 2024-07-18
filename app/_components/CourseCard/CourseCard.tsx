@@ -39,7 +39,7 @@ const CourseCard: FC<CourseCardProps> = ({
     return (
 
         <Link href={ `/courses/${course.id}` }>
-            <Card className={ `hover:border-primary hover:scale-[1.01] min-h-[310px] w-[300px] ${className}` }>
+            <Card className={ `hover:border-primary hover:scale-[1.01] min-h-[310px] ${className}` }>
                 <CardHeader>
                     <div
                         className="h-32 rounded bg-secondary" // Course image placeholder
@@ -56,11 +56,11 @@ const CourseCard: FC<CourseCardProps> = ({
                     <div className="text-nowrap space-y-1 text-primary">
                         <p className="flex items-center justify-end gap-2">
                             <span className="text-foreground">{ course.points_gain }</span>
-                            <icons.MedalIcon strokeWidth={ 1 } className="h-7 w-7" />
+                            <icons.MedalIcon strokeWidth={ 1 } className="size-7" />
                         </p>
                         <p className="flex items-center gap-2 justify-end">
                             <span className="text-foreground">{ course.exp_gain }</span>
-                            <icons.StarIcon strokeWidth={ 1 } className="h-7 w-7" />
+                            <icons.StarIcon strokeWidth={ 1 } className="size-7" />
                         </p>
                     </div>
                 </CardFooter>

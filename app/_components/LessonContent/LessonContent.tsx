@@ -10,13 +10,12 @@ import { UserContext } from '@/_contexts/UserProvider';
 import styles from './LessonContent.module.css';
 import { Button } from '@/_components/ui/button';
 import {
-    updateCourseProgress,
     updateCourseCompletion
 } from '@/_lib/courses';
 import { updateUserExp } from '@/_lib/levels';
 import { updateUserPoints } from '@/_lib/points';
 import { useRouter } from 'next/navigation';
-import AssessmentModal from '../AssessmentModal/AssessmentModal';
+import AssessmentModal from '@/_components/AssessmentModal/AssessmentModal';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 interface LessonContentProps { }
@@ -78,7 +77,7 @@ const LessonContent: FC<LessonContentProps> = ({ }: LessonContentProps): React.J
 
     return (
 
-        <div className="grid gap-6 relative">
+        <div className="space-y-2 relative">
             <p>
                 { lesson.description }
             </p>
@@ -86,7 +85,7 @@ const LessonContent: FC<LessonContentProps> = ({ }: LessonContentProps): React.J
                 { lesson.content }
             </p>
             { !isUnlock ? // Overlay if the lesson is locked
-                <div className="absolute h-full w-[102%] top-0 left-[-1%] backdrop-blur-sm select-none z-50 rounded"></div>
+                <div className="absolute h-full w-[102%] top-0 left-[-1%] backdrop-blur-sm select-none z-50 rounded" />
                 :
                 isUnlock && userCourse?.progress === lesson.lesson_number - 1 ? // Button to open assessment modal if the lesson is unlocked and the user hasn't completed it yet
                     <AssessmentModal />

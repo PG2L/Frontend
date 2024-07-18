@@ -71,7 +71,7 @@ export default function AchievementsTable({
                         onClick={ (): void => column.toggleSorting(column.getIsSorted() === "asc") }
                     >
                         Name
-                        <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
+                        <icons.ChevronsUpDown className="ml-2 size-4" />
                     </Button>
                 );
             },
@@ -89,7 +89,7 @@ export default function AchievementsTable({
                         onClick={ (): void => column.toggleSorting(column.getIsSorted() === "asc") }
                     >
                         Description
-                        <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
+                        <icons.ChevronsUpDown className="ml-2 size-4" />
                     </Button>
                 );
             },
@@ -107,7 +107,7 @@ export default function AchievementsTable({
                         onClick={ (): void => column.toggleSorting(column.getIsSorted() === "asc") }
                     >
                         Progress
-                        <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
+                        <icons.ChevronsUpDown className="ml-2 size-4" />
                     </Button>
                 );
             },
@@ -142,14 +142,14 @@ export default function AchievementsTable({
                         <>
                             <div className="flex text-right text-muted-foreground justify-end items-center">
                                 { points_gain }
-                                <icons.Star className="ml-2 h-6 w-6" strokeWidth={ 1 } />
+                                <icons.Star className="ml-2 size-6" strokeWidth={ 1 } />
                             </div>
                             <div className="text-right text-muted-foreground">Completed on <span className="text-nowrap">{ userAchievement.completion_date.slice(0, 10) }</span></div>
                         </>
                         :
                         <div className="flex text-right justify-end items-center">
                             { points_gain }
-                            <icons.Star className="ml-2 h-6 w-6 text-primary" strokeWidth={ 1 } />
+                            <icons.Star className="ml-2 size-6 text-primary" strokeWidth={ 1 } />
                         </div>
                 );
             },

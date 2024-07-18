@@ -66,20 +66,20 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                     size="sm"
                 >
                     { isOpen ? // Ternary operator to display the correct icon based on the sidebar's open/closed status
-                        <icons.ChevronRightIcon className="h-6 w-6" strokeWidth={ 1 } />
+                        <icons.ChevronRightIcon className="size-6" strokeWidth={ 1 } />
                         :
-                        <icons.ChevronLeftIcon className="h-6 w-6" strokeWidth={ 1 } />
+                        <icons.ChevronLeftIcon className="size-6" strokeWidth={ 1 } />
                     }
                 </Button>
             </div>
             { isOpen ? // Ternary operator to display the sidebar content based on the sidebar's open/closed status
                 <ScrollArea className="min-h-screen py-6 px-6 sticky">
-                    <icons.UserCircleIcon className="h-20 w-20 mx-auto" strokeWidth={ 1 } color="#1461cc" />
+                    <icons.UserCircleIcon className="size-20 mx-auto" strokeWidth={ 1 } color="#1461cc" />
                     <div>
                         <h1 className="text-2xl font-medium text-center">{ user.username }</h1>
                         <div className="flex items-center text-center justify-center">
                             <p className="text-muted-foreground">Lvl { level.level }</p>
-                            <icons.Dot className="h-8 w-8 text-primary" />
+                            <icons.Dot className="size-8 text-primary" />
                             <p className="text-muted-foreground">Rank 1</p>
                         </div>
                         <div className="flex flex-wrap justify-center items-center gap-1">
@@ -94,16 +94,16 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                     <Card className="bg-background flex justify-around items-center py-1">
                         <div className="flex gap-1">
                             { user.total_exp }
-                            <icons.MedalIcon className="h-6 w-6 text-primary" strokeWidth={ 1 } />
+                            <icons.MedalIcon className="size-6 text-primary" strokeWidth={ 1 } />
                         </div>
                         <div className="flex gap-1">
                             { user.total_points }
-                            <icons.Star className="h-6 w-6 text-primary" strokeWidth={ 1 } />
+                            <icons.Star className="size-6 text-primary" strokeWidth={ 1 } />
                         </div>
                         <div className="flex gap-1">
                             { user.courses.filter((course: UserCourse): boolean => course.completion_status === "completed").length // Filters the completed courses and counts them
                             }
-                            <icons.BookCheck className="h-6 w-6 text-primary" strokeWidth={ 1 } />
+                            <icons.BookCheck className="size-6 text-primary" strokeWidth={ 1 } />
                         </div>
                     </Card>
                     <Card className="mt-4 bg-background">
@@ -115,7 +115,7 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                         </CardHeader>
                         <CardContent>
                             <div className="flex gap-4 items-center">
-                                <Avatar className="h-16 w-16">
+                                <Avatar className="size-16">
                                     <AvatarImage src="https://avatars.githubusercontent.com/u/242085?v=4" />
                                 </Avatar>
                                 <div className="space-y-2 w-full">
@@ -210,22 +210,22 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                 : // Sidebar content when closed
                 <div className="items-center flex flex-col justify-between py-6 px-2">
                     <div>
-                        <icons.UserCircleIcon className="h-16 w-16 mx-auto" strokeWidth={ 1 } color="#1461cc" />
+                        <icons.UserCircleIcon className="size-16 mx-auto" strokeWidth={ 1 } color="#1461cc" />
                         <Separator className="my-4" />
                         <Card className="bg-background">
                             <div className="flex flex-col items-end p-2 gap-2">
                                 <p className="flex">
                                     { user.total_exp }
-                                    <icons.MedalIcon className="ms-1 h-6 w-6 text-primary" strokeWidth={ 1 } />
+                                    <icons.MedalIcon className="ms-1 size-6 text-primary" strokeWidth={ 1 } />
                                 </p>
                                 <p className="flex justify-self-end">
                                     { user.total_points }
-                                    <icons.Star className="ms-1 h-6 w-6 text-primary" strokeWidth={ 1 } />
+                                    <icons.Star className="ms-1 size-6 text-primary" strokeWidth={ 1 } />
                                 </p>
                                 <p className="flex">
                                     { user.courses.filter((course: UserCourse): boolean => course.completion_status === "completed").length
                                     }
-                                    <icons.BookCheck className="ms-1 h-6 w-6 text-primary" strokeWidth={ 1 } />
+                                    <icons.BookCheck className="ms-1 size-6 text-primary" strokeWidth={ 1 } />
                                 </p>
                             </div>
                         </Card>

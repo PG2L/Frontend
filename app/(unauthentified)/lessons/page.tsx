@@ -41,7 +41,7 @@ export default async function Page(): Promise<React.JSX.Element> {
                                 <div className={ `${lesson.isFinished ? "bg-card" : "bg-secondary"} h-32 rounded flex justify-center items-center` }>
                                     { lesson.isFinished &&
                                         <Avatar className="h-32 w-32 flex justify-center items-center">
-                                            <icons.Check strokeWidth={ 1 } className="h-16 w-16 text-white"></icons.Check>
+                                            <icons.Check strokeWidth={ 1 } className="size-16 text-white"></icons.Check>
                                         </Avatar>
                                     }
                                 </div>

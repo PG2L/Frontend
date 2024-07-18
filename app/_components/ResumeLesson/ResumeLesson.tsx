@@ -43,10 +43,9 @@ const ResumeLesson: FC<ResumeLessonProps> = (): React.JSX.Element => {
             <ScrollArea>
                 <div className="w-full p-6 flex gap-6 items-center justify-start">
                     { userCourses.map((userCourse: any, index: number): React.JSX.Element => ( // Mapping over userCourses to create a LessonCard for each course
-                        <LessonCard key={ index } className="min-w-72" userCourse={ userCourse } />
+                        <LessonCard key={ index } className="w-[300px]" userCourse={ userCourse } />
                     )) }
                 </div>
-                {/* Horizontal scrollbar for the scrollable area */ }
                 <ScrollBar orientation="horizontal" />
             </ScrollArea>
         </>

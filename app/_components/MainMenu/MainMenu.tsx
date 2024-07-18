@@ -219,9 +219,9 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                     size="sm"
                 >
                     { isOpen ? // Conditional rendering of the chevron icons based on the sidebar state
-                        <icons.ChevronLeftIcon className="h-6 w-6" strokeWidth={ 1 } />
+                        <icons.ChevronLeftIcon className="size-6" strokeWidth={ 1 } />
                         :
-                        <icons.ChevronRightIcon className="h-6 w-6" strokeWidth={ 1 } />
+                        <icons.ChevronRightIcon className="size-6" strokeWidth={ 1 } />
                     }
                 </Button>
             </div>

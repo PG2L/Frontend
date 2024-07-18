@@ -29,10 +29,10 @@ export default async function Page(): Promise<React.JSX.Element> {
             <div className="flex justify-between items-center w-full">
                 <div className="grid gap-4">
                     <p className="text-xl">Welcome back,
-                        <span className="text-3xl font-medium">Nakkarst!</span>
+                        <span className="text-3xl font-medium"> Nakkarst!</span>
                     </p>
                     <p>You already have completed
-                        <span className="text-primary font-medium">50% of your daily goals !</span>
+                        <span className="text-primary font-medium"> 50% of your daily goals !</span>
                     </p>
                 </div>
             </div>
@@ -48,7 +48,7 @@ export default async function Page(): Promise<React.JSX.Element> {
                 <ScrollArea>
                     <div className="w-full flex gap-6 items-center justify-start p-6">
                         { courses.map((_: any, index: number): React.JSX.Element => ( // Map over the courses array to render a CourseCard component for each course.
-                            <CourseCard key={ index } course={ courses[courses.length - index - 1] } className="min-w-72" />
+                            <CourseCard key={ index } course={ courses[courses.length - index - 1] } className="w-[300px]" />
                         )) }
                     </div>
                     <ScrollBar orientation="horizontal" />

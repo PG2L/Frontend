@@ -59,11 +59,11 @@ const LessonCard: FC<LessonCardProps> = ({
                     <div className="flex justify-end w-full flex-col">
                         <p className="flex items-center justify-end gap-2">
                             <span className="text-foreground">{ currentLesson.points_gain }</span>
-                            <icons.MedalIcon strokeWidth={ 1 } className="text-primary h-7 w-7" />
+                            <icons.MedalIcon strokeWidth={ 1 } className="text-primary size-7" />
                         </p>
                         <p className="flex items-center gap-2 justify-end">
                             <span className="text-foreground">{ currentLesson.exp_gain }</span>
-                            <icons.StarIcon strokeWidth={ 1 } className="text-primary h-7 w-7" />
+                            <icons.StarIcon strokeWidth={ 1 } className="text-primary size-7" />
                         </p>
                     </div>
                 </CardFooter>

@@ -74,7 +74,7 @@ export default async function Page({
                             <div className="grid gap-2">
                                 <div className="flex items-end font-medium">
                                     <p>{ lesson.lesson_number }</p>
-                                    <icons.Dot className="h-6 w-6 text-primary" />
+                                    <icons.Dot className="size-6 text-primary" />
                                     <h1>{ lesson.title }</h1>
                                 </div>
                                 <div className="flex gap-1 flex-wrap">

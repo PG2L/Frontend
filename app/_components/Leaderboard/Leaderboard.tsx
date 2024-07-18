@@ -84,7 +84,7 @@ export const columns: ColumnDef<User>[] = [
                     onClick={ (): void => column.toggleSorting(column.getIsSorted() === "asc") }
                 >
                     Rank
-                    <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
+                    <icons.ChevronsUpDown className="ml-2 size-4" />
                 </Button>
             );
         },
@@ -104,7 +104,7 @@ export const columns: ColumnDef<User>[] = [
                     onClick={ (): void => column.toggleSorting(column.getIsSorted() === "asc") }
                 >
                     Username
-                    <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
+                    <icons.ChevronsUpDown className="ml-2 size-4" />
                 </Button>
             );
         },
@@ -122,7 +122,7 @@ export const columns: ColumnDef<User>[] = [
                     onClick={ (): void => column.toggleSorting(column.getIsSorted() === "asc") }
                 >
                     Email
-                    <icons.ChevronsUpDown className="ml-2 h-4 w-4" />
+                    <icons.ChevronsUpDown className="ml-2 size-4" />
                 </Button>
             );
         },
@@ -152,7 +152,7 @@ export const columns: ColumnDef<User>[] = [
             return (
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
+                        <Button variant="ghost" className="size-8 p-0">
                             <span className="sr-only">Open menu</span>
                             ...
                         </Button>
