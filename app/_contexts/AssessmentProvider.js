@@ -20,7 +20,7 @@ export default function AssessmentProvider({ children, assessment }) {
 
     return (
 
-        <AssessmentContext.Provider value={assessment} >
+        <AssessmentContext.Provider value={assessment}>
             { children }
         </AssessmentContext.Provider>
 

@@ -67,12 +67,12 @@ export default async function Page({
                                 <Badge>+{ course.exp_gain } xp</Badge>
                             </div>
                         </div>
-                        <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end">
-                            <p className="flex gap-2">
+                        <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end [&_p]:flex [&_p]:gap-2">
+                            <p>
                                 { course.points_gain }
                                 <icons.LucideStar strokeWidth={ 1 } className="text-primary" />
                             </p>
-                            <p className="flex gap-2">
+                            <p>
                                 { course.exp_gain }
                                 <icons.LucideMedal strokeWidth={ 1 } className="text-primary" />
                             </p>
@@ -81,14 +81,14 @@ export default async function Page({
                 </CardContent>
                 <CardFooter>
                     <div className="grid w-full grid-cols-1 sm:flex sm:justify-between gap-6">
-                        <div className="flex items-end gap-6 w-1/2">
-                            <p className="flex gap-1">
+                        <div className="flex items-end gap-6 w-1/2 [&_p]:flex [&_p]:gap-1 [&_p>span]:text-muted-foreground">
+                            <p>
                                 <icons.BookUser strokeWidth={ 1 } className="text-primary" />
-                                <span className="text-muted-foreground">18 000+ students</span>
+                                <span>18 000+ students</span>
                             </p>
-                            <p className="flex gap-1">
+                            <p>
                                 <icons.Clock strokeWidth={ 1 } className="text-primary" />
-                                <span className="text-muted-foreground">5h</span>
+                                <span>5h</span>
                             </p>
                         </div>
                         <div className="w-1/2 text-end">

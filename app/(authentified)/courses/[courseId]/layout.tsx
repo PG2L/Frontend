@@ -90,11 +90,11 @@ export default async function CourseShowLayout({
                                             <h1 className="font-medium text-center">{ course['title'] }</h1>
                                         </Suspense>
                                         <Suspense fallback={
-                                            <div className="flex flex-wrap gap-1 justify-center w-3/4">
-                                                <Skeleton className="h-5 w-14" />
-                                                <Skeleton className="h-5 w-24" />
-                                                <Skeleton className="h-5 w-20" />
-                                                <Skeleton className="h-5 w-16" />
+                                            <div className="flex flex-wrap gap-1 justify-center w-3/4 [&_*]:h-5">
+                                                <Skeleton className="w-14" />
+                                                <Skeleton className="w-24" />
+                                                <Skeleton className="w-20" />
+                                                <Skeleton className="w-16" />
                                             </div>
                                         }>
                                             <div className="flex flex-wrap gap-1 justify-center w-3/4">

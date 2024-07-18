@@ -20,11 +20,9 @@ export default function CourseProvider({ children, course }) {
 
     return (
 
-        <>
-            <CourseContext.Provider value={course} >
-                { children }
-            </CourseContext.Provider>
-        </>
+        <CourseContext.Provider value={course}>
+            { children }
+        </CourseContext.Provider>
 
     )
 }
