@@ -33,7 +33,6 @@ export async function addCourseToUser(courseId: number, userId: number): Promise
  */
 export async function updateCourseProgress(userCourse: UserCourse): Promise<any> {
     try {
-        console.log("Updating course progress");
         const response = await fetch(`http://localhost:8000/user-courses/${userCourse.id}`, {
             method: 'PUT',
             headers: {

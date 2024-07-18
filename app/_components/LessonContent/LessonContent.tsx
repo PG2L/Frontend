@@ -109,8 +109,8 @@ const LessonContent: FC<LessonContentProps> = ({ }: LessonContentProps): React.J
                                 if (userCourse) {
                                     await updateCourseCompletion(userCourse);
                                 }
-                                await updateUserPoints(user.id, user.total_points + course.points_gain);
-                                await updateUserExp(user.id, user.total_exp + course.exp_gain);
+                                await updateUserPoints(user, user.total_points + course.points_gain);
+                                await updateUserExp(user, user.total_exp + course.exp_gain);
                                 router.push(`/courses/${course.id}`); // Navigate to the course page
                             } }
                         >
