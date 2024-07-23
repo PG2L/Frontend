@@ -75,7 +75,7 @@ export default async function CourseShowLayout({
                         <CourseContentMenu course={ course } />
                     </div>
                 </div>
-                <div className="md:w-3/4 space-y-4 lg:space-y-6">
+                <div className="md:w-3/4">
                     { children }
                 </div>
             </div>

@@ -20,7 +20,7 @@ export default function Loading(): React.JSX.Element {
             <Card>
                 <CardHeader>
                     <Skeleton className="hidden sm:block py-36" />
-                    <Skeleton className="rounded h-4 w-full !mt-2" />
+                    <Skeleton className="rounded h-4 w-1/2 !mt-2" />
                 </CardHeader>
                 <CardContent>
                     <div className="flex w-full justify-between">
@@ -35,9 +35,8 @@ export default function Loading(): React.JSX.Element {
                     </div>
                 </CardContent>
                 <CardFooter>
-                    <div className="grid w-full grid-cols-1 sm:flex sm:justify-between gap-6 sm:items-end [&_*]:w-full">
-                        <Skeleton className="sm:w-1/3 h-6" />
-                        <Skeleton className="sm:w-1/2 h-12" />
+                    <div className="grid w-full grid-cols-1 sm:flex sm:justify-between gap-6 sm:items-end">
+                        <Skeleton className="w-full sm:w-1/3 h-6" />
                     </div>
                 </CardFooter>
             </Card>
@@ -46,7 +45,8 @@ export default function Loading(): React.JSX.Element {
                     <br key={ index } />
                     :
                     <Skeleton key={ index } className={ `h-6 mt-2 ${(index % 2 === 0) ? 'w-full' : 'w-[95%]'}` } />
-            )) }
+            )
+            ) }
         </>
 
     );

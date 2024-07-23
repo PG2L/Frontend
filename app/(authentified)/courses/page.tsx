@@ -26,13 +26,13 @@ export default async function Page(): Promise<React.JSX.Element> {
                 </p>
                 <p>Navigate through our catalog to find courses tailored to your skill level and interests. Whether you aim to build responsive websites, dynamic web applications, or scalable back-end services, our platform supports your growth every step of the way. Start learning today and join a community of developers making an impact in the digital world.</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-4 lg:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 items-center justify-between gap-4 lg:gap-6">
                 <Suspense fallback={
-                    Array.from({ length: 12 }).map((_: unknown, index: number): React.JSX.Element => ( // Create an array of 12 elements and map over it to render a skeleton element for each.
+                    Array.from({ length: 12 }).map((_: unknown, index: number): React.JSX.Element => (
                         <Skeleton key={ index } className="w-full rounded-lg h-72" />
                     ))
                 }>
-                    { courses.map((course: Course, index: number): React.JSX.Element => ( // Map over the courses array to render a CourseCard component for each course.
+                    { courses.map((course: Course, index: number): React.JSX.Element => (
                         <CourseCard key={ index } course={ course } />
                     )) }
                 </Suspense>

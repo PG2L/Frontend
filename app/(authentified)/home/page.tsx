@@ -26,12 +26,12 @@ export default async function Page(): Promise<React.JSX.Element> {
     return (
 
         <div className="space-y-6">
-            <div className="grid gap-4">
+            <div className="grid gap-4 [&_p>span]:font-medium">
                 <p className="text-xl">Welcome back,
-                    <span className="text-3xl font-medium"> Nakkarst!</span>
+                    <span className="text-3xl"> Nakkarst!</span>
                 </p>
                 <p>You already have completed
-                    <span className="text-primary font-medium"> 50% of your daily goals !</span>
+                    <span className="text-primary"> 50% of your daily goals !</span>
                 </p>
             </div>
             <ResumeLesson />
