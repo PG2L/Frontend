@@ -13,7 +13,12 @@ import { Button } from '@/_components/ui/button';
 import { Separator } from '@/_components/ui/separator';
 import { icons } from 'lucide-react';
 import { UserContext } from '@/_contexts/UserProvider';
+import {
+    Card,
+    CardHeader
+} from '@/_components/ui/card';
 import CourseButton from '@/_components/CourseButton/CourseButton';
+import { Badge } from '@/_components/ui/badge';
 
 interface CourseContentMenuProps {
     course: Course,
@@ -70,18 +75,33 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
 
     return (
 
-        <nav className="px-6 mt-6 top-6 space-y-6">
-            <Separator />
-            <div className="flex relative">
-                <ul className="space-y-2 pe-6">
-                    { course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => ( // Mapping over the course lessons to create a list of skeleton buttons
-                        <Suspense key={ index } fallback={
-                            <Skeleton className="w-full h-6" />
-                        }>
+        <>
+            <Card className="h-fit border-primary border hover:scale-[1.01]">
+                <Link href={ `/courses/${course.id}` }>
+                    <CardHeader className="flex justify-center items-center gap-4 rounded h-fit">
+                        <h1 className="font-medium text-center">{ course.title }</h1>
+                        <div className="flex flex-wrap gap-1 justify-center w-3/4">
+                            { course.language.name && // Renders a badge for the language if it exists
+                                <Badge variant={ course.language.name as "Javascript" | "C#" | "C++" | "HTML/CSS" | "Ruby" | "Go" | "Php" | "Java" | "Mysql" | "Python" }>
+                                    { course.language.name }
+                                </Badge> }
+                            { course.difficulty && // Renders a badge for the difficulty level if it exists
+                                <Badge variant={ course.difficulty }>
+                                    { course.difficulty }
+                                </Badge> }
+                            <Badge>{ course.points_gain } points</Badge>
+                            <Badge>+{ course.exp_gain } xp</Badge>
+                        </div>
+                    </CardHeader>
+                </Link>
+            </Card>
+            <nav className="px-6 mt-6 top-6 space-y-6">
+                <Separator />
+                <div className="flex relative">
+                    <ul className="space-y-2 pe-6">
+                        { course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => (
                             <li>
-                                <Link
-                                    href={ `/courses/${params.courseId}/${lesson.id}` } // Link to the lesson
-                                >
+                                <Link href={ `/courses/${params.courseId}/${lesson.id}` }>
                                     <Button
                                         variant="ghost"
                                         className={
@@ -94,42 +114,36 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
                                     </Button>
                                 </Link>
                             </li>
-                        </Suspense>
-                    )) }
-                </ul>
-                { params.hasOwnProperty('lessonId') && // Check if the lessonId is present in the params
-                    <div className={ `flex flex-col justify-between absolute h-full right-[-36px] top-0 ${isFirstLesson && "!justify-end"}` }>
-                        { !isFirstLesson && // Check if the current lesson is the first lesson in the course
-                            <Link
-                                href={ `/courses/${params.courseId}/${Number(params.lessonId) - 1}` } // Link to the previous lesson
-                                className="justify-self-start !h-fit"
-                            >
-                                <Button variant="ghost">
-                                    <icons.ChevronsUp strokeWidth={ 1 } />
-                                </Button>
-                            </Link>
-                        }
-                        { !isLastLesson && // Check if the current lesson is the last lesson in the course 
-                            <Link
-                                href={ `/courses/${params.courseId}/${Number(params.lessonId) + 1}` } // Link to the next lesson
-                                className="justify-self-end"
-                            >
-                                <Button variant="ghost">
-                                    <icons.ChevronsDown strokeWidth={ 1 } />
-                                </Button>
-                            </Link>
-                        }
+                        )) }
+                    </ul>
+                    { params.hasOwnProperty('lessonId') &&
+                        <div className={ `flex flex-col justify-between absolute h-full right-[-36px] top-0 ${isFirstLesson && "!justify-end"}` }>
+                            { !isFirstLesson &&
+                                <Link href={ `/courses/${params.courseId}/${Number(params.lessonId) - 1}` } className="justify-self-start !h-fit">
+                                    <Button variant="ghost">
+                                        <icons.ChevronsUp strokeWidth={ 1 } />
+                                    </Button>
+                                </Link>
+                            }
+                            { !isLastLesson &&
+                                <Link href={ `/courses/${params.courseId}/${Number(params.lessonId) + 1}` } className="justify-self-end">
+                                    <Button variant="ghost">
+                                        <icons.ChevronsDown strokeWidth={ 1 } />
+                                    </Button>
+                                </Link>
+                            }
+                        </div>
+                    }
+                </div>
+                <Separator />
+                { !params.hasOwnProperty('lessonId') &&
+                    <div className="w-full text-center px-6">
+                        {/* Button for course-related action, displayed if no lessonId is present in params */ }
+                        <CourseButton />
                     </div>
                 }
-            </div>
-            <Separator />
-            { !params.hasOwnProperty('lessonId') &&
-                <div className="w-full text-center px-6">
-                    {/* Button for course-related action, displayed if no lessonId is present in params */ }
-                    <CourseButton />
-                </div>
-            }
-        </nav>
+            </nav >
+        </>
 
     );
 };

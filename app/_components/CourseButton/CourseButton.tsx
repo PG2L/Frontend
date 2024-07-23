@@ -1,6 +1,10 @@
 "use client";
 
-import React, { FC, useContext } from 'react';
+import React, {
+    FC,
+    useContext,
+    useState
+} from 'react';
 import styles from './CourseButton.module.css';
 import { UserContext } from '@/_contexts/UserProvider';
 import { CourseContext } from '@/_contexts/CourseProvider';
@@ -9,6 +13,8 @@ import Link from 'next/link';
 import { addCourseToUser } from '@/_lib/courses';
 import { useRouter } from 'next/navigation';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { useToast } from "@/_components/ui/use-toast";
+import { Spinner } from '@/_components/ui/spinner';
 
 interface CourseButtonProps {
     className?: string;
@@ -41,6 +47,16 @@ const CourseButton: FC<CourseButtonProps> = ({
     const router: AppRouterInstance = useRouter();
 
     /**
+     * Represents the state of whether the form is pending or not.
+     */
+    const [isPending, setIsPending] = useState(false);
+
+    /**
+     * The toast object used for displaying notifications.
+     */
+    const { toast } = useToast();
+
+    /**
      * Navigates to the first lesson of a course.
      * @returns A Promise that resolves when the navigation is complete.
      */
@@ -66,10 +82,19 @@ const CourseButton: FC<CourseButtonProps> = ({
             :
             !userCourse &&
             <Button className={ `w-full ${className}` } onClick={ async (): Promise<void> => {
-                await addCourseToUser(course.id, user.id);
-                navigateToFirstLesson();
+                setIsPending(true);
+                await addCourseToUser(course.id, user.id)
+                    .then((): void => {
+                        toast({
+                            title: "Course added",
+                            description: `You've successfully purchased ${course.title}. You can now start learning !`,
+                        });
+                        navigateToFirstLesson();
+                    });
             } }>
-                Start course
+                { isPending ?
+                    <Spinner className="text-foreground" /> : "Start course"
+                }
             </Button>
 
     );

@@ -64,16 +64,14 @@ const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = ({
         <nav>
             <Breadcrumb>
                 <BreadcrumbList>
-                    { itemsLinks.map((itemLink: string, index: number): React.JSX.Element => { // Mapping over itemsLinks to create breadcrumb items
-                        let href: string = `/${pathNames.slice(0, index + 1).join('/')}`; // Constructing the href for the breadcrumb item
+                    { itemsLinks.map((itemLink: string, index: number): React.JSX.Element => {
+                        let href: string = `/${pathNames.slice(0, index + 1).join('/')}`;
                         return (
-                            itemsLinks.length !== index + 1 ? // Conditional rendering based on the index of the item
+                            itemsLinks.length !== index + 1 ?
                                 <>
                                     <BreadcrumbItem key={ index }>
                                         <BreadcrumbLink asChild>
-                                            <Link
-                                                href={ href } // Link to the item
-                                            >
+                                            <Link href={ href }>
                                                 { itemLink }
                                             </Link>
                                         </BreadcrumbLink>

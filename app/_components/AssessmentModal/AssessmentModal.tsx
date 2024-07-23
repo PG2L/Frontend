@@ -36,7 +36,7 @@ const AssessmentModal: FC<AssessmentModalProps> = (): React.JSX.Element => {
         assessment &&
         <Dialog>
             <DialogTrigger asChild>
-                <Button className="w-1/3 mx-auto">Take assessment !</Button>
+                <Button className="w-1/3 mt-6">Take assessment !</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>

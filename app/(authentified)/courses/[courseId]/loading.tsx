@@ -20,22 +20,22 @@ export default function Loading(): React.JSX.Element {
             <Card>
                 <CardHeader>
                     <Skeleton className="hidden sm:block py-36" />
-                    <Skeleton className="rounded h-4 w-full !mt-2" />
+                    <Skeleton className="rounded h-4 !mt-2" />
                 </CardHeader>
                 <CardContent>
-                    <div className="flex w-full justify-between">
-                        <div className="grid w-full gap-2 [&_*]:h-6">
+                    <div className="flex justify-between [&_div]:grid [&_div]:gap-2 [&_div>*]:h-6">
+                        <div className="w-full">
                             <Skeleton className="w-3/5" />
                             <Skeleton className="w-2/5" />
                         </div>
-                        <div className="grid w-[15%] gap-2 [&_*]:h-6 [&_*]:w-full">
+                        <div className="w-[15%] [&_*]:w-full">
                             <Skeleton />
                             <Skeleton />
                         </div>
                     </div>
                 </CardContent>
                 <CardFooter>
-                    <div className="grid w-full grid-cols-1 sm:flex sm:justify-between gap-6 sm:items-end [&_*]:w-full">
+                    <div className="grid grid-cols-1 w-full sm:flex sm:justify-between gap-6 sm:items-end [&_*]:w-full">
                         <Skeleton className="sm:w-1/3 h-6" />
                         <Skeleton className="sm:w-1/2 h-12" />
                     </div>

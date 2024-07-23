@@ -20,9 +20,11 @@ export default function UserProvider({ children, user }) {
 
     return (
 
-        <UserContext.Provider value={user} >
-            { children }
-        </UserContext.Provider>
+        <>
+            <UserContext.Provider value={user} >
+                { children }
+            </UserContext.Provider>
+        </>
         
     )
 }

@@ -142,11 +142,6 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
      * @returns A Promise that resolves when the user's progress, points, and experience are updated.
      */
     async function handleSuccess(score: number): Promise<void> {
-        toast({
-            title: "Congratulations !",
-            description: `You have successfully passed the assessment with a score of ${score}/${assessment.questions.length} and can now access the next lesson !`,
-        });
-
         await fetch('http://localhost:8000/solutions/new', {
             method: 'POST',
             headers: {
@@ -165,6 +160,8 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
             if (userCourse) {
                 updateCourseProgress(userCourse);
             }
+            user.total_exp += lesson.exp_gain;
+            user.total_points += lesson.points_gain;
             updateUserPoints(user, user.total_points + lesson.points_gain);
             updateUserExp(user, user.total_exp + lesson.exp_gain);
             const newlyCompletedAchievements: Achievement[] = await handleAchievementItems(lesson, user);
@@ -174,29 +171,16 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
                         toast({
                             title: achievement.name,
                             description:
-                                <div>
+                                <>
                                     <p className="text-muted-foreground">{ achievement.description }</p>
                                     <p className="mt-2">Congratulations ! You've unlocked an achievement and earned <span className="text-primary">{ achievement.points_gain } points</span> !</p>
-                                </div>,
+                                </>,
                         });
                     }, ((index * 5000) + 2000));
                 });
             }
         });
         navigateToNextLesson();
-    }
-
-    /**
-     * Handles the failure of an assessment.
-     * Displays a toast notification with the failure message and reset the form fields.
-     *
-     * @param score - The score obtained in the assessment.
-     */
-    function handleFailure(score: number): void {
-        toast({
-            title: "Assessment failed !",
-            description: `You have failed the assessment with a score of ${score}/${assessment.questions.length}. Try again !`,
-        });
     }
 
     /**
@@ -243,10 +227,17 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
             return question.answer === values[`answer${index + 1}`] ? acc + 1 : acc;
         }, 0);
 
-        if (score >= assessment.passing_score) { // If the user's score is greater than or equal to the passing score, post the solution to the server.
+        if (score >= assessment.passing_score) {
+            toast({
+                title: "Congratulations !",
+                description: `You have successfully passed the assessment with a score of ${score}/${assessment.questions.length} and can now access the next lesson !`,
+            });
             handleSuccess(score);
         } else {
-            handleFailure(score);
+            toast({
+                title: "Assessment failed !",
+                description: `You have failed the assessment with a score of ${score}/${assessment.questions.length}. Try again !`,
+            });
             setIsPending(false);
         }
     };
@@ -267,15 +258,12 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
                                             <FormItem className="w-full">
                                                 <FormLabel>{ question.content } </FormLabel>
                                                 <FormControl>
-                                                    <RadioGroup
-                                                        className="mt-2"
-                                                        onValueChange={ field.onChange }
-                                                    >
+                                                    <RadioGroup className="mt-2" onValueChange={ field.onChange }>
                                                         { question.options.split('/')
-                                                            .map((option: string, index: number): React.JSX.Element => ( // Mapping through the options array to render the options.
-                                                                <div key={ index } className="flex gap-4 mt-1">
-                                                                    <RadioGroupItem key={ index } value={ option } />
-                                                                    <Label>{ option }</Label>
+                                                            .map((option: string, questIndex: number): React.JSX.Element => ( // Mapping through the options array to render the options.
+                                                                <div key={ `${index}-${questIndex}` } className="flex gap-4 mt-1">
+                                                                    <RadioGroupItem key={ `${index}-${questIndex}` } value={ option } id={ `rg${index}-${questIndex}` } />
+                                                                    <Label htmlFor={ `rg${index}-${questIndex}` }>{ option }</Label>
                                                                 </div>
                                                             ))
                                                         }
@@ -303,17 +291,21 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
                                 </CarouselItem>
                         )) }
                     </CarouselContent>
-                    <Button type="submit" className="w-1/3 justify-self-end mt-2" disabled={ !isValid }>{
-                        !isValid ?
-                            `(${answeredQuestions}/${assessment.questions.length})` :
-                            isPending ?
+                    <div className="flex justify-between w-full items-center mt-4">
+                        <p className="text-muted-foreground">
+                            { `${answeredQuestions}/${assessment.questions.length}` }
+                        </p>
+                        <Button type="submit" className="w-1/3 justify-self-end mt-2" disabled={ !isValid }>
+                            { isPending ?
                                 <Spinner className="text-foreground" /> : "Submit"
-                    }</Button>
+                            }
+                        </Button>
+                    </div>
                 </form>
             </Form >
             <CarouselPrevious />
             <CarouselNext />
-        </Carousel>
+        </Carousel >
 
     );
 };

@@ -42,14 +42,14 @@ export default async function Page({
 
     return (
 
-        <>
+        <div className="space-y-6">
             <Card>
                 <CardHeader>
                     <div className="hidden sm:block py-36 bg-black/[0.1] border rounded" />
                     <CourseProgressBar course={ course } />
                 </CardHeader>
                 <CardContent className="flex justify-between items-center">
-                    <div className="grid gap-4">
+                    <div className="space-y-4">
                         <h1 className="text-lg font-medium">{ course.title }</h1>
                         <div className="flex gap-1 flex-wrap">
                             { course.language.name && // Render a language badge if the course has a language.
@@ -105,9 +105,9 @@ export default async function Page({
                             </div>
                         </CollapsibleTrigger>
                         <CollapsibleContent>
-                            <div className="grid gap-4 mt-4">
-                                { course.lessons && // Render the lessons if they exist.
-                                    course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => ( // Map over the lessons and render them each in a card.
+                            <div className="space-y-4 mt-4">
+                                { course.lessons &&
+                                    course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => (
                                         <Card key={ index }>
                                             <CardHeader>
                                                 <h2>{ lesson.title }</h2>
@@ -127,8 +127,8 @@ export default async function Page({
             <div className="text-muted-foreground">
                 { course.description }
             </div>
-            <CourseButton className="w-1/2 mx-auto" />
-        </>
+            <CourseButton className="w-1/3 !mx-auto" />
+        </div>
 
     );
 }

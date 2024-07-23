@@ -77,30 +77,30 @@ const LessonContent: FC<LessonContentProps> = ({ }: LessonContentProps): React.J
 
     return (
 
-        <div className="space-y-2 relative">
+        <div className="relative mt-6 flex flex-col items-center justify-center">
             <p>
                 { lesson.description }
             </p>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground mt-4">
                 { lesson.content }
             </p>
-            { !isUnlock ? // Overlay if the lesson is locked
-                <div className="absolute h-full w-[102%] top-0 left-[-1%] backdrop-blur-sm select-none z-50 rounded" />
+            { !isUnlock ?
+                <div className="absolute h-[102%] w-[102%] top-[-1%] left-[-1%] backdrop-blur-sm select-none z-50 rounded" />
                 :
-                isUnlock && userCourse?.progress === lesson.lesson_number - 1 ? // Button to open assessment modal if the lesson is unlocked and the user hasn't completed it yet
+                isUnlock && userCourse?.progress === lesson.lesson_number - 1 ?
                     <AssessmentModal />
                     :
-                    !isLastLesson ? // Button to navigate to the next lesson if it's not the last lesson
+                    !isLastLesson ?
                         <Button
                             variant="outline"
                             className="w-1/3 align-self-center justify-self-center"
                             onClick={ async (): Promise<void> => {
-                                router.push(`/courses/${course.id}/${lesson.id + 1}`); // Navigate to the next lesson
+                                router.push(`/courses/${course.id}/${lesson.id + 1}`);
                             } }
                         >
                             Next lesson
                         </Button>
-                        : // Button to end the course if it's the last lesson
+                        :
                         <Button
                             className="w-1/3 align-self-center justify-self-center"
                             onClick={ async (): Promise<void> => {
@@ -110,7 +110,7 @@ const LessonContent: FC<LessonContentProps> = ({ }: LessonContentProps): React.J
                                 }
                                 await updateUserPoints(user, user.total_points + course.points_gain);
                                 await updateUserExp(user, user.total_exp + course.exp_gain);
-                                router.push(`/courses/${course.id}`); // Navigate to the course page
+                                router.push(`/courses/${course.id}`);
                             } }
                         >
                             End course

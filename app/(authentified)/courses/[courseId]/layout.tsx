@@ -53,25 +53,6 @@ export default async function CourseShowLayout({
             <div className="grid md:flex gap-4 lg:gap-6 grid-cols-1 rounded-lg mt-6">
                 <div className="hidden md:flex flex-col w-1/4 min-w-[250px]">
                     <div className="sticky top-6 h-fit">
-                        <Card className="h-fit border-primary border hover:scale-[1.01]">
-                            <Link href={ `/courses/${params.courseId}` }>
-                                <CardHeader className="flex justify-center items-center gap-4 rounded h-fit">
-                                    <h1 className="font-medium text-center">{ course['title'] }</h1>
-                                    <div className="flex flex-wrap gap-1 justify-center w-3/4">
-                                        { course.language.name && // Renders a badge for the language if it exists
-                                            <Badge variant={ course.language.name as "Javascript" | "C#" | "C++" | "HTML/CSS" | "Ruby" | "Go" | "Php" | "Java" | "Mysql" | "Python" }>
-                                                { course.language.name }
-                                            </Badge> }
-                                        { course.difficulty && // Renders a badge for the difficulty level if it exists
-                                            <Badge variant={ course.difficulty }>
-                                                { course.difficulty }
-                                            </Badge> }
-                                        <Badge>{ course.points_gain } points</Badge>
-                                        <Badge>+{ course.exp_gain } xp</Badge>
-                                    </div>
-                                </CardHeader>
-                            </Link>
-                        </Card>
                         <CourseContentMenu course={ course } />
                     </div>
                 </div>
