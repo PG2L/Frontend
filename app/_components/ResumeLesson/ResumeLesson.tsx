@@ -26,7 +26,7 @@ const ResumeLesson: FC<ResumeLessonProps> = (): React.JSX.Element => {
      * Retrieves the user from the UserContext.
      * @returns The user object.
      */
-    const user: User = useContext(UserContext);
+    const user: User = useContext(UserContext) as User;
 
     /**
      * Sorts the user's courses based on their progress in descending order.
@@ -34,17 +34,20 @@ const ResumeLesson: FC<ResumeLessonProps> = (): React.JSX.Element => {
      * @param {UserCourse[]} userCourses - The array of user courses to be sorted.
      * @returns {UserCourse[]} - The sorted array of user courses.
      */
-    const userCourses: UserCourse[] = user.courses.sort((a: UserCourse, b: UserCourse): number => b.progress - a.progress);
+    const userCourses: UserCourse[] = user.courses.sort((a: UserCourse, b: UserCourse): number => b.progress - a.progress) as UserCourse[];
 
     return (
 
         <>
             <h1 className="text-2xl">Resume</h1>
             <ScrollArea>
-                <div className="w-full p-6 flex gap-6 items-center justify-start">
-                    { userCourses.map((userCourse: any, index: number): React.JSX.Element => ( // Mapping over userCourses to create a LessonCard for each course
+                <div className="w-full p-6 flex gap-6 items-center justify-start text-center min-h-[250px]">
+                    { userCourses.length > 0 ? userCourses.map((userCourse: any, index: number): React.JSX.Element => (
                         <LessonCard key={ index } className="w-[300px]" userCourse={ userCourse } />
-                    )) }
+                    ))
+                        :
+                        <p className="text-muted-foreground text-center">You have not started any courses yet.</p>
+                    }
                 </div>
                 <ScrollBar orientation="horizontal" />
             </ScrollArea>

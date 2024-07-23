@@ -14,16 +14,16 @@ interface CourseButtonProps {
     className?: string;
 }
 
-interface StartButtonProps {
-    className?: string;
-}
-
 /**
- * Renders a button to start a course.
+ * Renders a button component for a course, based on the user's progress and completion status.
  *
- * @returns The JSX element representing the start button.
+ * @component CourseButton
+ * @param {CourseButtonProps} props - The props for the CourseButton component.
+ * @returns {React.JSX.Element} The rendered CourseButton component.
  */
-const StartButton: FC<StartButtonProps> = ({ className }: StartButtonProps): React.JSX.Element => {
+const CourseButton: FC<CourseButtonProps> = ({
+    className,
+}: CourseButtonProps): React.JSX.Element | false => {
 
     /**
      * Represents the current user.
@@ -49,39 +49,6 @@ const StartButton: FC<StartButtonProps> = ({ className }: StartButtonProps): Rea
         router.refresh();
     };
 
-    return (
-
-        <Button className={ `w-full ${className}` } onClick={ async (): Promise<void> => {
-            await addCourseToUser(course.id, user.id);
-            navigateToFirstLesson();
-        } }>
-            Start course
-        </Button>
-
-    );
-};
-
-/**
- * Renders a button component for a course, based on the user's progress and completion status.
- *
- * @component CourseButton
- * @param {CourseButtonProps} props - The props for the CourseButton component.
- * @returns {React.JSX.Element} The rendered CourseButton component.
- */
-const CourseButton: FC<CourseButtonProps> = ({
-    className,
-}: CourseButtonProps): React.JSX.Element => {
-
-    /**
-     * Represents the current user.
-     */
-    const user: User = useContext(UserContext) as User;
-
-    /**
-     * Represents the current course.
-     */
-    const course: Course = useContext(CourseContext) as Course;
-
     /**
      * Finds the user's course based on the course ID.
      * @param user - The user object containing the courses.
@@ -92,22 +59,20 @@ const CourseButton: FC<CourseButtonProps> = ({
 
     return (
 
-        userCourse && userCourse.completion_status === "in-progress" ? // If the course is in progress, display a "Continue" button linking to the next lesson
-            <Link
-                href={ `/courses/${course.id}/${course.lessons[userCourse.progress].id}` } // Link to the next lesson
-                className={ `flex justify-end ${className}` }
-            >
+        userCourse && userCourse.completion_status === "in-progress" ?
+            <Link href={ `/courses/${course.id}/${course.lessons[userCourse.progress].id}` } className={ `flex justify-end ${className}` }>
                 <Button className="w-full">Continue</Button>
             </Link>
             :
-            !userCourse ? // If there is no userCourse, display the "StartButton" component, else display a disabled "Completed" button
-                <StartButton className={ `${className}` } />
-                :
-                <Button className={ `w-full ${className}` } disabled>
-                    Completed
-                </Button>
+            !userCourse &&
+            <Button className={ `w-full ${className}` } onClick={ async (): Promise<void> => {
+                await addCourseToUser(course.id, user.id);
+                navigateToFirstLesson();
+            } }>
+                Start course
+            </Button>
 
     );
 };
 
-export default CourseButton;
+export default CourseButton;;

@@ -2,7 +2,6 @@
 
 import React, {
     FC,
-    Suspense
 } from "react";
 import styles from "./AdminHeader.module.css";
 import {
@@ -13,7 +12,6 @@ import {
     SelectValue,
 } from "@/_components/ui/select";
 import { redirect } from "next/navigation";
-import { Skeleton } from "@/_components/ui/skeleton";
 
 interface AdminHeaderProps {
     item: Course | Lesson | User | Assessment | Question;

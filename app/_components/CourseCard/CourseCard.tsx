@@ -1,5 +1,3 @@
-"use client";
-
 import React, { FC } from 'react';
 import { Badge } from '@/_components/ui/badge';
 import {
@@ -28,7 +26,7 @@ interface CourseCardProps {
  */
 const CourseCard: FC<CourseCardProps> = ({
     course,
-    className = '',
+    className,
 }: CourseCardProps): React.JSX.Element => {
 
     /**
