@@ -75,7 +75,7 @@ export default function AchievementsTable({
                     </Button>
                 );
             },
-            cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => <div className="font-medium">{ row.getValue("name") }</div>,
+            cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => <p className="font-medium">{ row.getValue("name") }</p>,
         },
         {
             /**
@@ -93,7 +93,7 @@ export default function AchievementsTable({
                     </Button>
                 );
             },
-            cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => <div>{ row.getValue("description") }</div>,
+            cell: ({ row }: CellContext<Achievement, unknown>): React.JSX.Element => <p>{ row.getValue("description") }</p>,
         },
         {
             /**
@@ -119,7 +119,7 @@ export default function AchievementsTable({
 
                 return (
                     <div className="grid w-80">
-                        <Label className="justify-self-center text-muted-foreground">{ `${progress}/${row.original.criteria.amount}` }</Label>
+                        <p className="justify-self-center text-muted-foreground">{ `${progress}/${row.original.criteria.amount}` }</p>
                         <Progress value={ progressPercent } className="mt-2 justify-self-center" />
                     </div>
                 );
@@ -140,17 +140,17 @@ export default function AchievementsTable({
                 return (
                     userAchievement?.completion_status === "completed" ?
                         <>
-                            <div className="flex text-right text-muted-foreground justify-end items-center">
+                            <p className="flex text-right text-muted-foreground justify-end items-center">
                                 { points_gain }
                                 <icons.Star className="ml-2 size-6" strokeWidth={ 1 } />
-                            </div>
-                            <div className="text-right text-muted-foreground">Completed on <span className="text-nowrap">{ userAchievement.completion_date.slice(0, 10) }</span></div>
+                            </p>
+                            <p className="text-right text-muted-foreground">Completed on <span className="text-nowrap">{ userAchievement.completion_date.slice(0, 10) }</span></p>
                         </>
                         :
-                        <div className="flex text-right justify-end items-center">
+                        <p className="flex text-right justify-end items-center">
                             { points_gain }
                             <icons.Star className="ml-2 size-6 text-primary" strokeWidth={ 1 } />
-                        </div>
+                        </p>
                 );
             },
         },

@@ -8,6 +8,9 @@ import { Calendar } from '@/_components/ui/calendar';
 import { getData } from '@/_lib/data';
 import ResumeLesson from '@/_components/ResumeLesson/ResumeLesson';
 import LastAchievements from '@/_components/LastAchievements/LastAchievements';
+import { Card, CardContent, CardHeader } from '@/_components/ui/card';
+import { ActivityChart } from '@/_components/ActivityChart/ActivityChart';
+import { LevelDisplayer } from '@/_components/LevelDisplayer/LevelDisplayer';
 
 /**
  * Renders the home page.
@@ -32,22 +35,39 @@ export default async function Page(): Promise<React.JSX.Element> {
                 <p>You already have completed <span className="text-primary"> 50% of your daily goals !</span></p>
             </div>
             <ResumeLesson />
-            <div className="flex w-full gap-6">
-                <div>
-                    <h2 className="text-2xl">Activity</h2>
-                    <Calendar mode="single" />
-                </div>
-                <div className="w-full max-w-[800px]">
-                    <h2 className="text-2xl">Last achievements</h2>
-                    <LastAchievements />
-                </div>
-            </div>
+            <div className="flex flex-wrap w-full gap-6">
+                <Card className="grow min-w-[450px]">
+                    <CardHeader>
+                        <h2 className="text-2xl mb-2">Activity</h2>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="flex gap-6 items-center">
+                            <Calendar mode="single" />
+                            <ActivityChart />
+                        </div>
+                    </CardContent>
+                </Card>
+                <Card className="grow min-w-[250px]">
+                    <CardHeader>
+                        <h2 className="text-2xl mb-2">Progression</h2>
+                    </CardHeader>
+                    <LevelDisplayer />
+                </Card>
+                <Card className="min-w-[800px] grow">
+                    <CardHeader>
+                        <h2 className="text-2xl mb-2">Last earned achievements</h2>
+                    </CardHeader>
+                    <CardContent>
+                        <LastAchievements />
+                    </CardContent>
+                </Card>
+            </div >
             <div className="grid">
                 <h1 className="text-2xl">Suggestions</h1>
                 <ScrollArea>
                     <div className="w-full flex gap-6 items-center justify-start p-6">
-                        { courses.map((_: Course, index: number): React.JSX.Element => ( // Map over the courses array to render a CourseCard component for each course.
-                            <CourseCard key={ index } course={ courses[courses.length - index - 1] } className=" w-[300px]" />
+                        { courses.map((_: Course, index: number): React.JSX.Element => (
+                            <CourseCard key={ index } course={ courses[courses.length - index - 1] } className="w-[300px]" />
                         )) }
                     </div>
                     <ScrollBar orientation="horizontal" />

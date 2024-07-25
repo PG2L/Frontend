@@ -1,62 +1,88 @@
 "use client";
 
-import React, { FC } from 'react';
-import styles from './ActivityChart.module.css';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import * as React from "react";
+import { Bar, BarChart, CartesianGrid, Rectangle, XAxis } from "recharts";
+import {
+    ChartConfig,
+    ChartContainer,
+    ChartTooltip,
+    ChartTooltipContent,
+} from "@/_components/ui/chart";
 
-interface ActivityChartProps { }
+const chartData = [
+    { day: "monday", lessons: 3, fill: "var(--color-monday)" },
+    { day: "tuesday", lessons: 5, fill: "var(--color-tuesday)" },
+    { day: "wednesday", lessons: 1, fill: "var(--color-wednesday)" },
+    { day: "thursday", lessons: 4, fill: "var(--color-thursday)" },
+    { day: "friday", lessons: 2, fill: "var(--color-friday)" },
+];
 
-const ActivityChart: FC<ActivityChartProps> = () => {
+const chartConfig = {
+    lessons: {
+        label: "Lessons",
+    },
+    monday: {
+        label: "Monday",
+        color: "hsl(var(--chart-1))",
+    },
+    tuesday: {
+        label: "Tuesday",
+        color: "hsl(var(--chart-2))",
+    },
+    wednesday: {
+        label: "Wednesday",
+        color: "hsl(var(--chart-3))",
+    },
+    thursday: {
+        label: "Thursday",
+        color: "hsl(var(--chart-4))",
+    },
+    friday: {
+        label: "Friday",
+        color: "hsl(var(--chart-5))",
+    },
+} satisfies ChartConfig;
 
-    const data = [
-        {
-            Day: 'Monday',
-            Lessons: 4,
-        },
-        {
-            Day: 'Tuesday',
-            Lessons: 8,
-        },
-        {
-            Day: 'Wednesday',
-            Lessons: 7,
-        },
-        {
-            Day: 'Thursday',
-            Lessons: 5,
-        },
-        {
-            Day: 'Friday',
-            Lessons: 9,
-        },
-        {
-            Day: 'Saturday',
-            Lessons: 1,
-        },
-        {
-            Day: 'Sunday',
-            Lessons: 6,
-        },
-    ];
-
+export function ActivityChart() {
     return (
-        <ResponsiveContainer width="100%" height="100%" className="max-w-80">
-            <BarChart
-                data={ data }
-                margin={ {
-                    top: 10,
-                    right: 30,
-                    left: 0,
-                    bottom: 0,
-                } }
-            >
-                <XAxis dataKey="Day" />
-                <YAxis dataKey="Lessons" />
-                <Tooltip />
-                <Bar type="rounded" dataKey="Lessons" stroke="#141F2F" fill="#1461cc" />
-            </BarChart>
-        </ResponsiveContainer>
+        <div className="grid min-w-[400px] w-full">
+            <div className="w-full">
+                <ChartContainer config={ chartConfig }>
+                    <BarChart accessibilityLayer data={ chartData }>
+                        <CartesianGrid vertical={ false } />
+                        <XAxis
+                            dataKey="day"
+                            tickLine={ false }
+                            tickMargin={ 10 }
+                            axisLine={ false }
+                            tickFormatter={ (value) =>
+                                chartConfig[value as keyof typeof chartConfig]?.label
+                            }
+                        />
+                        <ChartTooltip
+                            cursor={ false }
+                            content={ <ChartTooltipContent hideLabel /> }
+                        />
+                        <Bar
+                            dataKey="lessons"
+                            strokeWidth={ 2 }
+                            radius={ 8 }
+                            activeIndex={ 4 }
+                            activeBar={ ({ ...props }) => {
+                                return (
+                                    <Rectangle
+                                        { ...props }
+                                        fillOpacity={ 0.8 }
+                                        stroke={ props.payload.fill }
+                                        strokeDasharray={ 4 }
+                                        strokeDashoffset={ 4 }
+                                    />
+                                );
+                            } }
+                        />
+                    </BarChart>
+                </ChartContainer>
+            </div>
+        </div>
     );
-};
-
-export default ActivityChart;
+}

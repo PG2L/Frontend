@@ -51,7 +51,7 @@ export default function LastAchievements({ }: LastAchievementsProps): React.JSX.
      */
     const user: User = React.useContext(UserContext) as User;
 
-    const completedAchievements: UserAchievement[] = user.achievements.filter((userAchievement: UserAchievement): boolean => userAchievement.completion_status === "completed").slice(0, 4);
+    const completedAchievements: UserAchievement[] = user.achievements.filter((userAchievement: UserAchievement): boolean => userAchievement.completion_status === "completed").slice(0, 3);
 
     completedAchievements.sort((a: UserAchievement, b: UserAchievement): number => {
         if (a.completion_status === "completed" && b.completion_status === "completed") {
@@ -81,7 +81,7 @@ export default function LastAchievements({ }: LastAchievementsProps): React.JSX.
 
                 return (
                     <>
-                        <Label className="justify-self-center text-muted-foreground text-center">{ `${row.getValue('progress')}/${row.original.achievement.criteria.amount}` }</Label>
+                        <p className="w-full text-muted-foreground text-center">{ `${row.getValue('progress')}/${row.original.achievement.criteria.amount}` }</p>
                         <Progress value={ 100 } className="mt-2 justify-self-center" />
                     </>
                 );
@@ -93,12 +93,12 @@ export default function LastAchievements({ }: LastAchievementsProps): React.JSX.
 
                 return (
                     <>
-                        <div className="flex text-right text-muted-foreground justify-end items-center">
+                        <p className="flex text-right text-foreground justify-end items-center">
                             { row.original.achievement.points_gain }
-                            <icons.Star className="ml-2 size-6" strokeWidth={ 1 } />
-                        </div>
-                        <div className="text-right text-muted-foreground">Completed on <span className="text-nowrap">{ row.original.completion_date.slice(0, 10) }</span>
-                        </div>
+                            <icons.Star className="ml-2 size-6 text-primary" strokeWidth={ 1 } />
+                        </p>
+                        <p className="text-right text-muted-foreground">Completed on <span className="text-nowrap">{ row.original.completion_date.slice(0, 10) }</span>
+                        </p>
                     </>
                 );
             },
@@ -114,13 +114,13 @@ export default function LastAchievements({ }: LastAchievementsProps): React.JSX.
     return (
 
         <Table>
-            <TableBody className="max-w-[500px]">
+            <TableBody>
                 { table.getRowModel().rows?.length ? (
                     table.getRowModel().rows.map((row: Row<UserAchievement>): React.JSX.Element => {
                         return (
-                            <TableRow key={ row.id } className="bg-secondary w-full">
+                            <TableRow key={ row.id }>
                                 { row.getVisibleCells().map((cell: Cell<UserAchievement, unknown>): React.JSX.Element => (
-                                    <TableCell key={ cell.id } className={ cell.column.id === "points_gain" ? "w-[15%]" : "w-[28%]" }>
+                                    <TableCell key={ cell.id } className={ cell.column.id === "points_gain" ? "w-[20%]" : "w-[25%]" }>
                                         { flexRender(
                                             cell.column.columnDef.cell,
                                             cell.getContext()
@@ -133,7 +133,7 @@ export default function LastAchievements({ }: LastAchievementsProps): React.JSX.
                 ) : (
                     <TableRow>
                         <TableCell colSpan={ columns.length } className="h-24 text-center">
-                            No results.
+                            You haven't completed any achievement.
                         </TableCell>
                     </TableRow>
                 ) }
