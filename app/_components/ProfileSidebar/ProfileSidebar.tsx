@@ -200,12 +200,12 @@ const ProfileSidebar: FC<ProfileSidebarProps> = (): React.JSX.Element => {
                                     <SelectItem value="eng">English</SelectItem>
                                     <SelectItem value="fr">Français</SelectItem>
                                 </SelectContent>
-                            </Select >
-                        </div >
+                            </Select>
+                        </div>
                         <Separator />
-                    </div >
+                    </div>
                     <ScrollBar />
-                </ScrollArea >
+                </ScrollArea>
                 : // Sidebar content when closed
                 <div className="items-center flex flex-col justify-between py-6 px-2">
                     <div>

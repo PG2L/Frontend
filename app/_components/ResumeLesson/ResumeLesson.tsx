@@ -42,9 +42,10 @@ const ResumeLesson: FC<ResumeLessonProps> = (): React.JSX.Element => {
             <h1 className="text-2xl">Resume</h1>
             <ScrollArea>
                 <div className="w-full p-6 flex gap-6 items-center justify-start text-center min-h-[250px]">
-                    { userCourses.length > 0 ? userCourses.map((userCourse: any, index: number): React.JSX.Element => (
-                        <LessonCard key={ index } className="w-[300px]" userCourse={ userCourse } />
-                    ))
+                    { userCourses.length > 0 ?
+                        userCourses.map((userCourse: any, index: number): React.JSX.Element => (
+                            <LessonCard key={ index } className="w-[300px]" userCourse={ userCourse } />
+                        ))
                         :
                         <p className="text-muted-foreground text-center">You have not started any courses yet.</p>
                     }

@@ -1,6 +1,9 @@
 "use client";
 
-import React, { FC } from 'react';
+import React, {
+    FC,
+    useState
+} from 'react';
 import styles from './LoginForm.module.css';
 import {
     Card,
@@ -26,6 +29,8 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { setCookie } from "cookies-next";
+import { useToast } from '@/_components/ui/use-toast';
+import { Spinner } from '@/_components/ui/spinner';
 
 interface LoginFormProps { }
 
@@ -61,11 +66,22 @@ const LoginForm: FC<LoginFormProps> = ({ }: LoginFormProps): React.JSX.Element =
     const router = useRouter();
 
     /**
+     * Represents the state of whether the form is pending or not.
+     */
+    const [isPending, setIsPending] = useState(false);
+
+    /**
+     * The toast object used for displaying notifications.
+     */
+    const { toast } = useToast();
+
+    /**
      * Handles the form submission for the login form.
      * @param values - The form values.
      * @returns A Promise that resolves when the submission is complete.
      */
     const onSubmit: (values: any) => Promise<void> = async (values: any): Promise<void> => {
+        setIsPending(true);
         try {
             const response = await fetch('http://localhost:8000/api/login_check', {
                 method: 'POST',
@@ -77,6 +93,10 @@ const LoginForm: FC<LoginFormProps> = ({ }: LoginFormProps): React.JSX.Element =
             const data: any = await response.json();
             console.log(data);
             if (data.token) {
+                toast({
+                    title: 'Login successful',
+                    description: 'You have successfully logged in.',
+                });
                 setCookie('currentUser', data.token);
                 setCookie('userId', data.userId);
                 router.push('/home');
@@ -129,13 +149,15 @@ const LoginForm: FC<LoginFormProps> = ({ }: LoginFormProps): React.JSX.Element =
                                 ) }
                             />
                             <Button type="submit">
-                                Login
+                                { isPending ?
+                                    <Spinner /> : "Login"
+                                }
                             </Button>
                             <Button variant="outline" className="w-full">
                                 Log in with GitHub
                             </Button>
                         </div>
-                        <div className="mt-4 text-center ">
+                        <div className="mt-4 text-center">
                             Don&apos;t have an account?{ " " }
                             <Link href="#" className="underline">
                                 Sign in

@@ -10,25 +10,16 @@ export default function Loading(): React.JSX.Element {
 
     return (
 
-        <div className="space-y-10 md:space-y-12 mt-12">
-            <Skeleton className="w-full h-10" />
-            <Skeleton className="w-full h-24" />
-            <div className="grid gap-10 sm:flex sm:gap-6">
-                <Skeleton className="w-full h-10" />
-                <Skeleton className="w-full h-10" />
+        <div className="space-y-10 sm:space-y-12 mt-12 [&_*]:w-full">
+            <Skeleton className="h-10" />
+            <Skeleton className="h-24" />
+            <Skeleton className="h-24" />
+            <div className="grid gap-10 sm:flex sm:gap-6 [&_*]:w-full [&_*]:h-10">
+                <Skeleton />
+                <Skeleton />
             </div>
-            <div className="grid gap-10 sm:flex sm:gap-6">
-                <Skeleton className="w-full h-10" />
-                <Skeleton className="w-full h-10" />
-            </div>
-            <div className="grid gap-10 sm:flex sm:gap-6">
-                <Skeleton className="w-full h-10" />
-                <Skeleton className="w-full h-10" />
-            </div>
-            <div className="grid gap-10 sm:flex sm:gap-6">
-                <Skeleton className="w-full h-10" />
-                <Skeleton className="w-full h-10" />
-            </div>
+            <Skeleton className="h-10" />
+            <Skeleton className="h-10" />
             <Skeleton className="w-24 h-10 justify-self-center" />
         </div>
 

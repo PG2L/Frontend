@@ -297,7 +297,7 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
                         </p>
                         <Button type="submit" className="w-1/3 justify-self-end mt-2" disabled={ !isValid }>
                             { isPending ?
-                                <Spinner className="text-foreground" /> : "Submit"
+                                <Spinner /> : "Submit"
                             }
                         </Button>
                     </div>

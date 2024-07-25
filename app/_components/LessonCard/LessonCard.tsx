@@ -40,9 +40,9 @@ const LessonCard: FC<LessonCardProps> = ({
             <Card className={ `hover:border-primary hover:scale-[1.01] min-h-[310px] w-[300px] ${className}` }>
                 <CardHeader>
                     <div className="h-32 rounded bg-secondary" />
-                    <Link href={ `/courses/${userCourse.course.id}` } className="text-muted-foreground text-nowrap overflow-hidden hover:text-foreground transition-colors text-ellipsis">
+                    <p className="text-muted-foreground text-nowrap overflow-hidden text-ellipsis">
                         { lesson.lesson_number }/{ userCourse.course.lessons.length } { userCourse.course.title }
-                    </Link>
+                    </p>
                 </CardHeader>
                 <CardContent>
                     <h3 className="text-nowrap overflow-hidden text-ellipsis text-lg font-medium">{ lesson.title }</h3>

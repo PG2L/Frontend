@@ -40,9 +40,7 @@ const CourseCard: FC<CourseCardProps> = ({
         <Link href={ `/courses/${course.id}` }>
             <Card className={ `hover:border-primary hover:scale-[1.01] min-h-[310px] ${className}` }>
                 <CardHeader>
-                    <div
-                        className="h-32 rounded bg-secondary" // Course image placeholder
-                    />
+                    <div className="h-32 rounded bg-secondary" />
                     <CourseProgressBar course={ course } />
                 </CardHeader>
                 <CardContent>

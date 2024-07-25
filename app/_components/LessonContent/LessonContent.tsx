@@ -17,6 +17,7 @@ import { updateUserPoints } from '@/_lib/points';
 import { useRouter } from 'next/navigation';
 import AssessmentModal from '@/_components/AssessmentModal/AssessmentModal';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import Link from 'next/link';
 
 interface LessonContentProps { }
 
@@ -91,14 +92,10 @@ const LessonContent: FC<LessonContentProps> = ({ }: LessonContentProps): React.J
                     <AssessmentModal />
                     :
                     !isLastLesson ?
-                        <Button
-                            variant="outline"
-                            className="w-1/3 align-self-center justify-self-center"
-                            onClick={ async (): Promise<void> => {
-                                router.push(`/courses/${course.id}/${lesson.id + 1}`);
-                            } }
-                        >
-                            Next lesson
+                        <Button variant="outline" className="w-1/3 align-self-center justify-self-center" asChild>
+                            <Link href={ `/courses/${course.id}/${course.lessons[lesson.lesson_number].id}` }>
+                                Next lesson
+                            </Link>
                         </Button>
                         :
                         <Button

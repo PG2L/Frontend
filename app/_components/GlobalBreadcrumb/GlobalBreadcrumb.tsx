@@ -70,13 +70,11 @@ const GlobalBreadcrumb: FC<GlobalBreadcrumbProps> = ({
                             itemsLinks.length !== index + 1 ?
                                 <>
                                     <BreadcrumbItem key={ index }>
-                                        <BreadcrumbLink asChild>
-                                            <Link href={ href }>
-                                                { itemLink }
-                                            </Link>
+                                        <BreadcrumbLink href={ href }>
+                                            { itemLink }
                                         </BreadcrumbLink>
                                     </BreadcrumbItem>
-                                    <BreadcrumbSeparator />
+                                    <BreadcrumbSeparator key={ `s${index}` } />
                                 </>
                                 :
                                 <BreadcrumbItem key={ index }>

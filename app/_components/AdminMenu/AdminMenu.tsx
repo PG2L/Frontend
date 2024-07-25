@@ -149,11 +149,11 @@ const AdminMenu: FC<AdminMenuProps> = ({ }: AdminMenuProps): React.JSX.Element =
                             href: string;
                             active: boolean;
                         }, index: number): React.JSX.Element => (
-                            <Link href={ content.href } key={ index }>
-                                <Button variant="ghost" className={ `!w-full text-start text-wrap text-muted-foreground hover:text-foreground ${content.active && "active"}` }>
+                            <Button key={ index } variant="ghost" className={ `!w-full text-start text-wrap text-muted-foreground hover:text-foreground ${content.active && "active"}` } asChild>
+                                <Link href={ content.href }>
                                     <span className="w-full">{ content.title }</span>
-                                </Button>
-                            </Link>
+                                </Link>
+                            </Button>
                         )) }
                     </>
                 )) }

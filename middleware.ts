@@ -9,6 +9,8 @@ export function middleware(request: NextRequest): Response | undefined {
     if (!currentUser && !request.nextUrl.pathname.startsWith('/login') && request.nextUrl.pathname !== '/') {
         return Response.redirect(new URL('/login', request.url))
     }
+
+    console.log(currentUser);
 }
 
 export const config = {

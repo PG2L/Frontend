@@ -1,6 +1,9 @@
 "use client";
 
-import React, { FC } from 'react';
+import React, {
+    FC,
+    useState,
+} from 'react';
 import styles from './SigninForm.module.css';
 import Link from 'next/link';
 import { Button } from '@/_components/ui/button';
@@ -24,6 +27,9 @@ import { Input } from '@/_components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { Spinner } from '@/_components/ui/spinner';
+import { useRouter } from 'next/navigation';
+import { useToast } from "@/_components/ui/use-toast";
 
 interface SigninFormProps { }
 
@@ -77,29 +83,39 @@ const SigninForm: FC<SigninFormProps> = ({ }: SigninFormProps): React.JSX.Elemen
     });
 
     /**
+     * Represents the state of whether the form is pending or not.
+     */
+    const [isPending, setIsPending] = useState(false);
+
+    /**
+     * The toast object used for displaying notifications.
+     */
+    const { toast } = useToast();
+
+    /**
      * Submits the form data to the server.
      * @param values - The form values to be submitted.
      * @returns A Promise that resolves when the data is successfully submitted.
      */
     const onSubmit: (values: any) => Promise<void> = async (values: any): Promise<void> => {
-        try {
-            const response = await fetch(`http://localhost:8000/users/new`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(values),
-            });
-
+        setIsPending(true);
+        await fetch(`http://localhost:8000/users/new`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(values),
+        }).then((response: Response): void => {
             if (!response.ok) {
                 throw new Error('Failed to post data');
             }
-
-            const data: any = await response.json();
-            console.log(data);
-        } catch (error) {
-            console.error(error);
-        }
+            toast({
+                title: 'Account created',
+                description: 'You can now log in with your new account.',
+            });
+            window.location.reload();
+            setIsPending(false);
+        });
     };
 
     return (
@@ -157,7 +173,9 @@ const SigninForm: FC<SigninFormProps> = ({ }: SigninFormProps): React.JSX.Elemen
                             ) }
                         />
                         <Button type="submit" className="w-full">
-                            Create an account
+                            { isPending ?
+                                <Spinner /> : "Create an account"
+                            }
                         </Button>
                         <Button variant="outline" className="w-full">
                             Sign up with GitHub

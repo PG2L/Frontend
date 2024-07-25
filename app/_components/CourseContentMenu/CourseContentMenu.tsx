@@ -62,7 +62,7 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
      * Retrieves the user from the UserContext.
      * @returns The user object.
      */
-    const user: User = useContext(UserContext);
+    const user: User = useContext(UserContext) as User;
 
     /**
      * Finds the user course that matches the given course ID.
@@ -100,37 +100,38 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
                 <div className="flex relative">
                     <ul className="space-y-2 pe-6">
                         { course.lessons.map((lesson: Lesson, index: number): React.JSX.Element => (
-                            <li>
-                                <Link href={ `/courses/${params.courseId}/${lesson.id}` }>
-                                    <Button
-                                        variant="ghost"
-                                        className={
-                                            `text-muted-foreground w-full text-start font-normal text-wrap ` +
-                                            `${(lesson.id == Number(params.lessonId)) && "active"} ` + // Highlight the button if it's the current lesson
-                                            `${userCourse && userCourse.progress <= index && "!text-foreground"}` // Make text color more prominent if the lesson isn't completed
-                                        }
-                                    >
-                                        <h2 className="w-full">{ index + 1 } .  { lesson.title }</h2>
-                                    </Button>
-                                </Link>
+                            <li key={ index }>
+                                <Button
+                                    variant="ghost"
+                                    className={
+                                        `text-muted-foreground w-full text-start font-normal text-wrap ` +
+                                        `${(lesson.id == Number(params.lessonId)) && "active"} ` + // Highlight the button if it's the current lesson
+                                        `${userCourse && userCourse.progress <= index && "!text-foreground"}` // Make text color more prominent if the lesson isn't completed
+                                    }
+                                    asChild
+                                >
+                                    <Link href={ `/courses/${params.courseId}/${lesson.id}` }>
+                                        <span className="w-full">{ index + 1 } .  { lesson.title }</span>
+                                    </Link>
+                                </Button>
                             </li>
                         )) }
                     </ul>
                     { params.hasOwnProperty('lessonId') &&
                         <div className={ `flex flex-col justify-between absolute h-full right-[-36px] top-0 ${isFirstLesson && "!justify-end"}` }>
                             { !isFirstLesson &&
-                                <Link href={ `/courses/${params.courseId}/${Number(params.lessonId) - 1}` } className="justify-self-start !h-fit">
-                                    <Button variant="ghost">
+                                <Button variant="ghost" asChild>
+                                    <Link href={ `/courses/${params.courseId}/${Number(params.lessonId) - 1}` } className="justify-self-start !h-fit">
                                         <icons.ChevronsUp strokeWidth={ 1 } />
-                                    </Button>
-                                </Link>
+                                    </Link>
+                                </Button>
                             }
                             { !isLastLesson &&
-                                <Link href={ `/courses/${params.courseId}/${Number(params.lessonId) + 1}` } className="justify-self-end">
-                                    <Button variant="ghost">
+                                <Button variant="ghost" asChild>
+                                    <Link href={ `/courses/${params.courseId}/${Number(params.lessonId) + 1}` } className="justify-self-end">
                                         <icons.ChevronsDown strokeWidth={ 1 } />
-                                    </Button>
-                                </Link>
+                                    </Link>
+                                </Button>
                             }
                         </div>
                     }

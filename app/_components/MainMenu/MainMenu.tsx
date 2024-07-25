@@ -155,18 +155,18 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                             }, index: number): React.JSX.Element => {
                                 const active: boolean = pageContext === item.link.slice(1, pageContext.length + 1); // Determine if the current item is active based on the page context
                                 return (
-                                    <Link key={ index } href={ item.link } className="w-full">
-                                        <TooltipProvider>
-                                            <Tooltip>
-                                                <TooltipTrigger asChild>
-                                                    <Button
-                                                        variant="ghost"
-                                                        className={
-                                                            `w-full text-start fill-muted-foreground text-muted-foreground` +
-                                                            `hover:text-foreground hover:fill-foreground ` + // Hover classes: text and fill color on hover
-                                                            `${active && "active fill-foreground text-foreground"}` // Active state classes: additional styles for active state
-                                                        }
-                                                    >
+                                    <TooltipProvider key={ index }>
+                                        <Tooltip>
+                                            <TooltipTrigger asChild>
+                                                <Button
+                                                    variant="ghost"
+                                                    className={
+                                                        `w-full text-start fill-muted-foreground text-muted-foreground` +
+                                                        `hover:text-foreground hover:fill-foreground ` + // Hover classes: text and fill color on hover
+                                                        `${active && "active fill-foreground text-foreground"}` // Active state classes: additional styles for active state
+                                                    }
+                                                    asChild>
+                                                    <Link href={ item.link } className="w-full">
                                                         <div>
                                                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 48 48">
                                                                 <path className={ `${active ? "opacity-100" : "opacity-0"}` } d={ item.filledIcon }></path>
@@ -176,14 +176,14 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                                                         { isOpen && // Conditionally rendered title based on sidebar state
                                                             <span className="w-full ms-2">{ item.title }</span>
                                                         }
-                                                    </Button>
-                                                </TooltipTrigger>
-                                                <TooltipContent>
-                                                    { item.title }
-                                                </TooltipContent>
-                                            </Tooltip>
-                                        </TooltipProvider>
-                                    </Link>
+                                                    </Link>
+                                                </Button>
+                                            </TooltipTrigger>
+                                            <TooltipContent>
+                                                { item.title }
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </TooltipProvider>
                                 );
                             }) }
                         </div>

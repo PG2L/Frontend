@@ -23,7 +23,7 @@ export default function RootLayout({
     return (
 
         <html lang="en">
-            <body>
+            <body suppressHydrationWarning={ true }>
                 <DarkModeProvider>
                     <div className="flex flex-col" id="layout" data-testid="layout">
                         <main>

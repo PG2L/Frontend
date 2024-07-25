@@ -76,9 +76,11 @@ const CourseButton: FC<CourseButtonProps> = ({
     return (
 
         userCourse && userCourse.completion_status === "in-progress" ?
-            <Link href={ `/courses/${course.id}/${course.lessons[userCourse.progress].id}` } className={ `flex justify-end ${className}` }>
-                <Button className="w-full">Continue</Button>
-            </Link>
+            <Button className="w-full" asChild>
+                <Link href={ `/courses/${course.id}/${course.lessons[userCourse.progress].id}` } className={ `flex justify-end ${className}` }>
+                    Continue
+                </Link>
+            </Button>
             :
             !userCourse &&
             <Button className={ `w-full ${className}` } onClick={ async (): Promise<void> => {
@@ -93,7 +95,7 @@ const CourseButton: FC<CourseButtonProps> = ({
                     });
             } }>
                 { isPending ?
-                    <Spinner className="text-foreground" /> : "Start course"
+                    <Spinner /> : "Start course"
                 }
             </Button>
 
