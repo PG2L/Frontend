@@ -53,7 +53,7 @@ export default function AchievementsTable({
      * Retrieves the user from the UserContext.
      * @returns The user object.
      */
-    const user: User = React.useContext(UserContext);
+    const user: User = React.useContext(UserContext) as User;
 
     /**
      * Represents the column definition for the achievements table.

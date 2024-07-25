@@ -45,9 +45,9 @@ const LessonCard: FC<LessonCardProps> = ({
                     </p>
                 </CardHeader>
                 <CardContent>
-                    <h3 className="text-nowrap overflow-hidden text-ellipsis text-lg font-medium">{ lesson.title }</h3>
+                    <h3 className="text-nowrap overflow-hidden text-ellipsis text-lg font-medium text-start">{ lesson.title }</h3>
                 </CardContent>
-                <CardFooter className="flex w-full justify-end items-end text-nowrap space-y-1 text-primary gap-2 [&_p]:flex [&_p]:items-center [&_p]:justify-end [&_p]:gap-2 [&_p>span]:text-foreground">
+                <CardFooter className="flex w-full justify-end items-end text-nowrap text-primary gap-2 [&_p]:flex [&_p]:items-center [&_p]:justify-end [&_p]:gap-2 [&_p>span]:text-foreground">
                     <p>
                         <span>{ lesson.points_gain }</span>
                         <icons.MedalIcon strokeWidth={ 1 } />

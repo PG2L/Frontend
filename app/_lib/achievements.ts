@@ -120,7 +120,7 @@ async function handleNumb(numb: { item: string, amount: number; }, user: User, a
                 numb.item === "lvl" ? userAchievement.progress = numb.amount : userAchievement.progress += numb.amount;
                 if ((userAchievement.progress >= achievement.criteria.amount) && (userAchievement.completion_status === "in-progress")) {
                     userAchievement.completion_status = "completed";
-                    updateUserPoints(user, user.total_points += achievement.points_gain);
+                    // updateUserPoints(user, user.total_points += achievement.points_gain);
                     newlyCompletedAchievements.push(achievement);
                 }
                 updateUserAchievement(userAchievement);
@@ -149,14 +149,14 @@ function handleProgressionAndCheckIsCompleted(achievement: Achievement, user: Us
         userAchievement.progress++;
         if ((userAchievement.progress >= achievement.criteria.amount) && (userAchievement.completion_status === "in-progress")) {
             userAchievement.completion_status = "completed";
-            updateUserPoints(user, user.total_points += achievement.points_gain);
+            // updateUserPoints(user, user.total_points += achievement.points_gain);
             return true;
         }
         updateUserAchievement(userAchievement);
     } else {
         createUserAchievement(user, achievement, 1);
         if (1 >= achievement.criteria.amount) {
-            updateUserPoints(user, user.total_points += achievement.points_gain);
+            // updateUserPoints(user, user.total_points += achievement.points_gain);
             return true;
         }
     }

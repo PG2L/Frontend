@@ -139,7 +139,6 @@ const CourseContentMenu: FC<CourseContentMenuProps> = ({
                 <Separator />
                 { !params.hasOwnProperty('lessonId') &&
                     <div className="w-full text-center px-6">
-                        {/* Button for course-related action, displayed if no lessonId is present in params */ }
                         <CourseButton />
                     </div>
                 }

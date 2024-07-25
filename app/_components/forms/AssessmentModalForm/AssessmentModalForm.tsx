@@ -132,6 +132,7 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
         } else {
             router.push(`/courses/${lesson.course.id}/${lesson.course.lessons[lesson.lesson_number].id}`); // Otherwise, navigate to the next lesson.
         }
+        router.refresh();
     };
 
     /**
@@ -196,7 +197,6 @@ const AssessmentModalForm: FC<AssessmentModalFormProps> = function AssessmentMod
     useEffect((): void => {
         const answeredQuestions: number = Object.values(form.getValues()).filter((value: string): boolean => value !== '').length;
         setAnsweredQuestions(answeredQuestions);
-        // If all questions have been answered, set isValid to true
         if (answeredQuestions >= assessment.questions.length) {
             setIsValid(true);
         }

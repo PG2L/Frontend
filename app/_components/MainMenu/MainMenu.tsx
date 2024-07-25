@@ -173,9 +173,7 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                                                                 <path className={ `${active ? "opacity-0" : "opacity-100"}` } d={ item.icon }></path>
                                                             </svg>
                                                         </div>
-                                                        { isOpen && // Conditionally rendered title based on sidebar state
-                                                            <span className="w-full ms-2">{ item.title }</span>
-                                                        }
+                                                        { isOpen && <span className="w-full ms-2">{ item.title }</span> }
                                                     </Link>
                                                 </Button>
                                             </TooltipTrigger>
@@ -198,8 +196,7 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                                         <div>
                                             { logoutButton }
                                         </div>
-                                        { isOpen && // Conditionally rendered title based on sidebar state
-                                            <span className="w-full ms-2">Logout</span> }
+                                        { isOpen && <span className="w-full ms-2">Logout</span> }
                                     </Button>
                                 </Card>
                             </TooltipTrigger>

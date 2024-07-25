@@ -76,9 +76,9 @@ const CourseButton: FC<CourseButtonProps> = ({
     return (
 
         userCourse && userCourse.completion_status === "in-progress" ?
-            <Button className="w-full" asChild>
+            <Button className="w-full" onClick={ (): void => setIsPending(true) } asChild>
                 <Link href={ `/courses/${course.id}/${course.lessons[userCourse.progress].id}` } className={ `flex justify-end ${className}` }>
-                    Continue
+                    { isPending ? <Spinner /> : "Continue" }
                 </Link>
             </Button>
             :
@@ -94,9 +94,7 @@ const CourseButton: FC<CourseButtonProps> = ({
                         navigateToFirstLesson();
                     });
             } }>
-                { isPending ?
-                    <Spinner /> : "Start course"
-                }
+                { isPending ? <Spinner /> : "Start course" }
             </Button>
 
     );
