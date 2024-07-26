@@ -45,44 +45,44 @@ const chartConfig = {
 
 export function ActivityChart() {
     return (
-        <div className="grid min-w-[400px] w-full">
-            <div className="w-full">
-                <ChartContainer config={ chartConfig }>
-                    <BarChart accessibilityLayer data={ chartData }>
-                        <CartesianGrid vertical={ false } />
-                        <XAxis
-                            dataKey="day"
-                            tickLine={ false }
-                            tickMargin={ 10 }
-                            axisLine={ false }
-                            tickFormatter={ (value) =>
-                                chartConfig[value as keyof typeof chartConfig]?.label
-                            }
-                        />
-                        <ChartTooltip
-                            cursor={ false }
-                            content={ <ChartTooltipContent hideLabel /> }
-                        />
-                        <Bar
-                            dataKey="lessons"
-                            strokeWidth={ 2 }
-                            radius={ 8 }
-                            activeIndex={ 4 }
-                            activeBar={ ({ ...props }) => {
-                                return (
-                                    <Rectangle
-                                        { ...props }
-                                        fillOpacity={ 0.8 }
-                                        stroke={ props.payload.fill }
-                                        strokeDasharray={ 4 }
-                                        strokeDashoffset={ 4 }
-                                    />
-                                );
-                            } }
-                        />
-                    </BarChart>
-                </ChartContainer>
-            </div>
+
+        <div className="w-full grid min-w-[280px]">
+            <ChartContainer config={ chartConfig }>
+                <BarChart accessibilityLayer data={ chartData }>
+                    <CartesianGrid vertical={ false } />
+                    <XAxis
+                        dataKey="day"
+                        tickLine={ false }
+                        tickMargin={ 10 }
+                        axisLine={ false }
+                        tickFormatter={ (value) =>
+                            chartConfig[value as keyof typeof chartConfig]?.label
+                        }
+                    />
+                    <ChartTooltip
+                        cursor={ false }
+                        content={ <ChartTooltipContent hideLabel /> }
+                    />
+                    <Bar
+                        dataKey="lessons"
+                        strokeWidth={ 2 }
+                        radius={ 8 }
+                        activeIndex={ 4 }
+                        activeBar={ ({ ...props }) => {
+                            return (
+                                <Rectangle
+                                    { ...props }
+                                    fillOpacity={ 0.8 }
+                                    stroke={ props.payload.fill }
+                                    strokeDasharray={ 4 }
+                                    strokeDashoffset={ 4 }
+                                />
+                            );
+                        } }
+                    />
+                </BarChart>
+            </ChartContainer>
         </div>
+
     );
 }

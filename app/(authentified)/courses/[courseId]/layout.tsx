@@ -51,35 +51,37 @@ export default async function CourseShowLayout({
     return (
 
         <CourseProvider course={ course }>
-            <GlobalBreadcrumb courses={ courses } />
-            <div className="grid md:flex gap-4 lg:gap-6 grid-cols-1 rounded-lg mt-6">
-                <div className="hidden md:flex flex-col w-1/4 min-w-[250px]">
-                    <div className="sticky top-6 h-fit">
-                        <Suspense fallback={
-                            <>
-                                <Card className="h-fit border-primary border">
-                                    <CardHeader className="flex justify-center items-center rounded h-fit">
-                                        <Skeleton className="h-24 w-full" />
-                                    </CardHeader>
-                                </Card>
-                                <div className="px-6 mt-6 top-6 space-y-6 w-full">
-                                    <Separator />
-                                    <ul className="space-y-2 px-4">
-                                        { Array.from({ length: 7 }).map((_: unknown, index: number): React.JSX.Element => (
-                                            <li key={ index }>
-                                                <Skeleton className="h-10 w-full" />
-                                            </li>
-                                        )) }
-                                    </ul>
-                                </div>
-                            </>
-                        }>
-                            <CourseContentMenu course={ course } />
-                        </Suspense>
+            <div className="pt-24 md:pt-6">
+                <GlobalBreadcrumb courses={ courses } />
+                <div className="grid md:flex gap-4 lg:gap-6 grid-cols-1 rounded-lg mt-6">
+                    <div className="hidden md:flex flex-col w-1/4 min-w-[250px]">
+                        <div className="sticky top-6 h-fit">
+                            <Suspense fallback={
+                                <>
+                                    <Card className="h-fit border-primary border">
+                                        <CardHeader className="flex justify-center items-center rounded h-fit">
+                                            <Skeleton className="h-24 w-full" />
+                                        </CardHeader>
+                                    </Card>
+                                    <div className="px-6 mt-6 top-6 space-y-6 w-full">
+                                        <Separator />
+                                        <ul className="space-y-2 px-4">
+                                            { Array.from({ length: 7 }).map((_: unknown, index: number): React.JSX.Element => (
+                                                <li key={ index }>
+                                                    <Skeleton className="h-10 w-full" />
+                                                </li>
+                                            )) }
+                                        </ul>
+                                    </div>
+                                </>
+                            }>
+                                <CourseContentMenu course={ course } />
+                            </Suspense>
+                        </div>
                     </div>
-                </div>
-                <div className="md:w-3/4">
-                    { children }
+                    <div className="md:w-3/4">
+                        { children }
+                    </div>
                 </div>
             </div>
         </CourseProvider>

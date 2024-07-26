@@ -1,4 +1,5 @@
 import React from 'react';
+import * as icons from 'lucide-react';
 import MainMenu from '@/_components/MainMenu/MainMenu';
 import ProfileSidebar from '@/_components/ProfileSidebar/ProfileSidebar';
 import FAQ from '@/_components/FAQ/FAQ';
@@ -11,6 +12,12 @@ import UserProvider from '@/_contexts/UserProvider';
 import { getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
 import { getData } from '@/_lib/data';
+import {
+    Sheet,
+    SheetContent,
+    SheetTrigger
+} from '@/_components/ui/sheet';
+import MobileHeader from '@/_components/MobileHeader/MobileHeader';
 
 /**
  * Renders the layout for authenticated users.
@@ -47,16 +54,21 @@ export default async function AuthentifiedLayout({
 
         <div className="flex justify-between">
             <UserProvider user={ user }>
-                <MainMenu />
+                <MobileHeader />
+                <div className="hidden md:flex md:justify-between">
+                    <MainMenu />
+                </div>
                 <ScrollArea className="max-h-screen w-full">
-                    <div className="p-6">
+                    <div className="px-2 sm:px-6">
                         { children }
                     </div>
                     <FAQ />
                     <Footer />
                     <ScrollBar />
                 </ScrollArea>
-                <ProfileSidebar />
+                <div className="hidden md:block">
+                    <ProfileSidebar />
+                </div>
             </UserProvider>
         </div>
 

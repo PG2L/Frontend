@@ -20,19 +20,13 @@ import {
     getSortedRowModel,
     useReactTable,
 } from "@tanstack/react-table";
-
-import { Button } from "@/_components/ui/button";
-import { Input } from "@/_components/ui/input";
 import {
     Table,
     TableBody,
     TableCell,
-    TableHead,
-    TableHeader,
     TableRow,
 } from "@/_components/ui/table";
 import { Progress } from "@/_components/ui/progress";
-import { Label } from "@/_components/ui/label";
 import { UserContext } from "@/_contexts/UserProvider";
 
 interface LastAchievementsProps { }
@@ -76,18 +70,6 @@ export default function LastAchievements({ }: LastAchievementsProps): React.JSX.
             cell: ({ row }: CellContext<UserAchievement, unknown>): React.JSX.Element => <div>{ row.original.achievement.description }</div>,
         },
         {
-            accessorKey: "progress",
-            cell: ({ row }: CellContext<UserAchievement, unknown>): React.JSX.Element => {
-
-                return (
-                    <>
-                        <p className="w-full text-muted-foreground text-center">{ `${row.getValue('progress')}/${row.original.achievement.criteria.amount}` }</p>
-                        <Progress value={ 100 } className="mt-2 justify-self-center" />
-                    </>
-                );
-            },
-        },
-        {
             accessorKey: "points_gain",
             cell: ({ row }: CellContext<UserAchievement, unknown>): React.JSX.Element => {
 
@@ -120,7 +102,7 @@ export default function LastAchievements({ }: LastAchievementsProps): React.JSX.
                         return (
                             <TableRow key={ row.id }>
                                 { row.getVisibleCells().map((cell: Cell<UserAchievement, unknown>): React.JSX.Element => (
-                                    <TableCell key={ cell.id } className={ cell.column.id === "points_gain" ? "w-[20%]" : "w-[25%]" }>
+                                    <TableCell key={ cell.id }>
                                         { flexRender(
                                             cell.column.columnDef.cell,
                                             cell.getContext()
@@ -132,8 +114,8 @@ export default function LastAchievements({ }: LastAchievementsProps): React.JSX.
                     })
                 ) : (
                     <TableRow>
-                        <TableCell colSpan={ columns.length } className="h-24 text-center">
-                            You haven't completed any achievement.
+                        <TableCell colSpan={ columns.length } className="h-24 text-center text-base">
+                            You haven't completed any achievement yet.
                         </TableCell>
                     </TableRow>
                 ) }

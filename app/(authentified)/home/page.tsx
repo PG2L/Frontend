@@ -29,31 +29,31 @@ export default async function Page(): Promise<React.JSX.Element> {
 
     return (
 
-        <div className="space-y-6">
+        <div className="space-y-6 pt-24 md:pt-6">
             <div className="grid gap-4 [&_p>span]:font-medium">
                 <p className="text-xl">Welcome back, <span className="text-3xl"> Nakkarst!</span></p>
-                <p>You already have completed <span className="text-primary"> 50% of your daily goals !</span></p>
+                <p className="text-wrap">You already have completed <span className="text-primary"> 50% of your daily goals !</span></p>
             </div>
             <ResumeLesson />
-            <div className="flex flex-wrap w-full gap-6">
-                <Card className="grow min-w-[450px]">
-                    <CardHeader>
-                        <h2 className="text-2xl mb-2">Activity</h2>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="flex gap-6 items-center">
-                            <Calendar mode="single" />
-                            <ActivityChart />
-                        </div>
-                    </CardContent>
-                </Card>
-                <Card className="grow min-w-[250px]">
+            <div className="grid md:flex flex-wrap w-full gap-6 [&_>div]:h-fit [&_>div]:grow">
+                <Card className="">
                     <CardHeader>
                         <h2 className="text-2xl mb-2">Progression</h2>
                     </CardHeader>
                     <LevelDisplayer />
                 </Card>
-                <Card className="min-w-[800px] grow">
+                <Card className="">
+                    <CardHeader>
+                        <h2 className="text-2xl mb-2">Activity</h2>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="grid lg:flex gap-6 items-center w-full grid-cols-1">
+                            <ActivityChart />
+                            <Calendar mode="single" />
+                        </div>
+                    </CardContent>
+                </Card>
+                <Card className="">
                     <CardHeader>
                         <h2 className="text-2xl mb-2">Last earned achievements</h2>
                     </CardHeader>

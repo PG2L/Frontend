@@ -18,7 +18,7 @@ export default async function Page(): Promise<React.JSX.Element> {
 
     return (
 
-        <div className="space-y-6">
+        <div className="space-y-6 pt-24 md:pt-6">
             <h1 className="text-xl font-medium text-center text-foreground">Courses</h1>
             <div className="space-y-2">
                 <p>Welcome to the Courses Page of our Web Development E-Learning Platform! Whether you&apos;re just starting your journey into web development or looking to enhance your existing skills, you&apos;ve come to the right place. Our comprehensive collection of courses covers everything from the basics of HTML, CSS, and JavaScript to advanced topics like React, Node.js, and full-stack development.</p>
@@ -26,7 +26,7 @@ export default async function Page(): Promise<React.JSX.Element> {
                 </p>
                 <p>Navigate through our catalog to find courses tailored to your skill level and interests. Whether you aim to build responsive websites, dynamic web applications, or scalable back-end services, our platform supports your growth every step of the way. Start learning today and join a community of developers making an impact in the digital world.</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-between gap-4 lg:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-between gap-4 lg:gap-6">
                 <Suspense fallback={
                     Array.from({ length: 12 }).map((_: unknown, index: number): React.JSX.Element => (
                         <Skeleton key={ index } className="w-full rounded-lg h-72" />

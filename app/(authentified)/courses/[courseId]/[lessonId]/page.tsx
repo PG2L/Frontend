@@ -68,7 +68,7 @@ export default async function Page({
                     </CardHeader>
                     <CardContent className="flex justify-between items-center">
                         <div>
-                            <div className="flex items-end font-medium">
+                            <div className="flex items-center font-medium">
                                 <p>{ lesson.lesson_number }</p>
                                 <icons.Dot className="size-6 text-primary" />
                                 <h1>{ lesson.title }</h1>
@@ -88,31 +88,31 @@ export default async function Page({
                                 <Badge>+100 000 xp</Badge>
                             </div>
                         </div>
-                        <div className="flex flex-col h-full text-nowrap gap-2 items-end justify-end [&_div]:flex [&_div]:gap-2">
+                        <div className="flex flex-col h-full text-nowrap gap-2 items-center justify-end [&_div]:flex [&_div]:gap-2">
                             <div>
                                 { lesson.points_gain?.toString() }
-                                <icons.LucideStar strokeWidth={ 1 } color="#1461cc" />
+                                <icons.LucideStar strokeWidth={ 1 } className="text-primary" />
                             </div>
                             <div>
                                 { lesson.exp_gain?.toString() }
-                                <icons.LucideMedal strokeWidth={ 1 } color="#1461cc" />
+                                <icons.LucideMedal strokeWidth={ 1 } className="text-primary" />
                             </div>
                         </div>
                     </CardContent>
-                    <CardFooter className="flex items-end gap-6 [&_div]:flex [&_div]:gap-2 [&_div>span]:text-muted-foreground">
+                    <CardFooter className="flex items-center gap-6 [&_div]:flex [&_div]:gap-2 [&_div>span]:text-muted-foreground [&_div]:items-center">
                         <div>
-                            <icons.BookUser strokeWidth={ 1 } color="#1461cc" />
+                            <icons.BookUser strokeWidth={ 1 } className="text-primary" />
                             <span>7 000+ students</span>
                         </div>
                         <div>
-                            <icons.Clock strokeWidth={ 1 } color="#1461cc" />
+                            <icons.Clock strokeWidth={ 1 } className="text-primary" />
                             <span>30 min</span>
                         </div>
                     </CardFooter>
                 </Card>
                 <Card className="md:hidden">
                     <CardHeader>
-                        <Collapsible className=" font-medium">
+                        <Collapsible className="font-medium">
                             <CollapsibleTrigger asChild>
                                 <div className="flex items-center justify-between">
                                     <h2 className=" font-medium">Related lessons</h2>

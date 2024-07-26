@@ -137,8 +137,8 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
 
         <>
             <div className={
-                `flex flex-col bg-card border-r left-0 top-0 h-screen justify-between py-6 ` +
-                `${isOpen ? 'px-6' : 'px-2'}` // Conditional padding based on isOpen state
+                `flex flex-col bg-card border-r left-0 top-0 h-screen justify-between py-6 px-6 ` +
+                `${!isOpen && 'md:px-2'}` // Conditional padding based on isOpen state
             }>
                 <div className="w-full text-center">
                     <Link href="/">
@@ -165,8 +165,9 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                                                         `hover:text-foreground hover:fill-foreground ` + // Hover classes: text and fill color on hover
                                                         `${active && "active fill-foreground text-foreground"}` // Active state classes: additional styles for active state
                                                     }
-                                                    asChild>
-                                                    <Link href={ item.link } className="w-full">
+                                                    asChild
+                                                >
+                                                    <Link href={ item.link } className="w-full flex gap-2 text-start justify-start">
                                                         <div>
                                                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 48 48">
                                                                 <path className={ `${active ? "opacity-100" : "opacity-0"}` } d={ item.filledIcon }></path>
@@ -174,6 +175,7 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                                                             </svg>
                                                         </div>
                                                         { isOpen && <span className="w-full ms-2">{ item.title }</span> }
+                                                        <span className="md:hidden">{ item.title }</span>
                                                     </Link>
                                                 </Button>
                                             </TooltipTrigger>
@@ -192,11 +194,12 @@ const MainMenu: FC<MainMenuProps> = (): React.JSX.Element => {
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <Card className="bg-background">
-                                    <Button variant="ghost" onClick={ logout } className="w-full text-start fill-muted-foreground hover:fill-foreground text-muted-foreground hover:text-foreground">
+                                    <Button variant="ghost" onClick={ logout } className="w-full text-start fill-muted-foreground hover:fill-foreground text-muted-foreground hover:text-foreground [&_span]:last:ms-2 [&_span]:last:w-full">
                                         <div>
                                             { logoutButton }
                                         </div>
-                                        { isOpen && <span className="w-full ms-2">Logout</span> }
+                                        { isOpen && <span>Logout</span> }
+                                        <span className="md:hidden">Logout</span>
                                     </Button>
                                 </Card>
                             </TooltipTrigger>

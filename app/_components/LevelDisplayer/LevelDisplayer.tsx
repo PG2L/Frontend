@@ -10,30 +10,42 @@ import {
     RadialBarChart,
 } from "recharts";
 import {
-    Card,
     CardContent,
-    CardDescription,
     CardFooter,
-    CardHeader,
-    CardTitle,
 } from "@/_components/ui/card";
 import { ChartConfig, ChartContainer } from "@/_components/ui/chart";
 import { UserContext } from "@/_contexts/UserProvider";
 import { getLevelByExp } from "@/_lib/levels";
 
-export function LevelDisplayer() {
+export function LevelDisplayer(): React.JSX.Element {
 
     const user: User = React.useContext(UserContext) as User;
 
     const [level, exp] = getLevelByExp(user.total_exp);
 
-    const progress = Math.round((exp / level.expToNext) * 360);
+    const progress: number = Math.round((exp / level.expToNext) * 360);
 
-    const chartData = [
-        { level: level.level, exp: exp, fill: "var(--color-level)" },
-    ];
+    const chartData: {
+        level: number;
+        exp: number;
+        fill: string;
+    }[] = [
+            {
+                level: level.level,
+                exp: exp,
+                fill: "var(--color-level)"
+            },
+        ];
 
-    const chartConfig = {
+    const chartConfig: {
+        exp: {
+            label: string;
+        };
+        level: {
+            label: string;
+            color: string;
+        };
+    } = {
         exp: {
             label: "Exp",
         },
@@ -106,9 +118,11 @@ export function LevelDisplayer() {
                     </RadialBarChart>
                 </ChartContainer>
             </CardContent>
-            <p className="text-center flex text-xl w-full items-center justify-center gap-2 ms-4">
-                { exp } / { level.expToNext } <icons.Medal className="size-8 text-primary" strokeWidth={ 1 } />
-            </p>
+            <CardFooter>
+                <p className="text-center flex text-xl w-full items-center justify-center gap-2 ms-10">
+                    { exp } / { level.expToNext } <icons.Medal className="size-8 text-primary max-w-[32px]" strokeWidth={ 1 } />
+                </p>
+            </CardFooter>
         </>
     );
 }
